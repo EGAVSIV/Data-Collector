@@ -103,8 +103,7 @@ jobs:
           TV_USERNAME: ${{ secrets.TV_USERNAME }}
           TV_PASSWORD: ${{ secrets.TV_PASSWORD }}
         run: |
-          python download_data.py
-
+          python data_collector.py
 
       # ==========================================
       # STEP 6 - Delete Log Files
