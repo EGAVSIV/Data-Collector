@@ -1,15 +1,3 @@
-altair==4.2.2
-tradingview-datafeed
-pyarrow
-numpy
 pandas
-scipy
-matplotlib
-requests
-openpyxl
-streamlit==1.31.1
-ta-lib
-ta-lib
-plotly
-tabulate
+git+https://github.com/rongardF/tvdatafeed.git
 tradingview-datafeed
