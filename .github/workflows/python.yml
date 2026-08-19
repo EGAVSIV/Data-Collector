@@ -145,28 +145,57 @@ jobs:
           git push
 
       # ==========================================
-      # STEP 9 - Push Updated Data to stock-scan Repo
+      # STEP 9 - Push Updated Data to Multiple Repos
       # ==========================================
-      - name: Push Data to Secondary Repo (stock-scan)
+      - name: Push Data to Target Repositories
         if: steps.git-check.outputs.changes == 'true'
         env:
           PAT_TOKEN: ${{ secrets.DATA_PUSH_PAT }}
+          GITHUB_OWNER: "EGAVSIV"
         run: |
-          # 1. Clone stock-scan repository using PAT authentication
-          git clone https://x-access-token:${PAT_TOKEN}@github.com/EGAVSIV/stock-scan.git target_repo
-          
-          # 2. Copy updated stock data folders to the secondary repo folder
-          cp -r stockdata_D stockdata_W stockdata_M stockdata_15 stockdata_1H target_repo/
-          
-          # 3. Commit and push from target repo context
-          cd target_repo
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
-          
-          # Only commit if changes exist
-          if ! git diff --cached --quiet; then
-            git commit -m "Sync stock data from Data-Collector $(date '+%Y-%m-%d %H:%M:%S UTC')"
-            git push
-          fi
+          # Define array of target repositories
+          TARGET_REPOS=(
+            "stock-scan"
+            "MULTIS"
+            "Stock_Scanner_With_ASTA_Parameters"
+            "GEOTRADER"
+            "SECSEA"
+          )
+
+          # Configure global git identity once
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Save the root repository path
+          ROOT_DIR=$(pwd)
+
+          # Loop through each target repository
+          for REPO in "${TARGET_REPOS[@]}"; do
+            echo "=========================================="
+            echo "Processing repository: ${REPO}"
+            echo "=========================================="
+
+            # Clean up target directory if it already exists from a prior iteration
+            rm -rf target_repo
+
+            # 1. Clone target repository
+            git clone "https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_OWNER}/${REPO}.git" target_repo
+
+            # 2. Copy folder data into target repo
+            cp -r stockdata_D stockdata_W stockdata_M stockdata_15 stockdata_1H target_repo/
+
+            # 3. Commit and push inside target_repo context
+            cd target_repo
+            git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
+
+            if ! git diff --cached --quiet; then
+              git commit -m "Sync stock data from Data-Collector $(date '+%Y-%m-%d %H:%M:%S UTC')"
+              git push
+              echo "Successfully pushed updates to ${REPO}."
+            else
+              echo "No changes detected for ${REPO}. Skipping push."
+            fi
+
+            # Return to root folder for next iteration
+            cd "$ROOT_DIR"
+          done
