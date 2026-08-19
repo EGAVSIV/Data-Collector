@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:POWERINDIA",
-        "open":18540.0,
-        "high":18620.0,
-        "low":18535.0,
-        "close":18595.0,
-        "volume":1090.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:POWERINDIA",
-        "open":18580.0,
-        "high":18740.0,
-        "low":18575.0,
-        "close":18675.0,
-        "volume":4036.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:POWERINDIA",
         "open":18680.0,
@@ -35970,7 +35952,7 @@
         "high":33835.0,
         "low":33700.0,
         "close":33800.0,
-        "volume":5955.0
+        "volume":6818.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35978,25 @@
         "open":33665.0,
         "high":33685.0,
         "low":33640.0,
-        "close":33645.0,
-        "volume":693.0
+        "close":33655.0,
+        "volume":1474.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:POWERINDIA",
+        "open":33655.0,
+        "high":33665.0,
+        "low":33545.0,
+        "close":33545.0,
+        "volume":4788.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:POWERINDIA",
+        "open":33550.0,
+        "high":33610.0,
+        "low":33515.0,
+        "close":33540.0,
+        "volume":4394.0
     }
 ]

@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:SBICARD",
-        "open":879.95,
-        "high":880.5,
-        "low":878.1,
-        "close":879.7,
-        "volume":85911.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:SBICARD",
-        "open":879.25,
-        "high":880.55,
-        "low":878.55,
-        "close":878.55,
-        "volume":101563.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:SBICARD",
         "open":878.6,
@@ -35970,7 +35952,7 @@
         "high":619.0,
         "low":617.75,
         "close":618.6,
-        "volume":18171.0
+        "volume":25700.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-19T08:30:00.000",
         "symbol":"NSE:SBICARD",
         "open":622.55,
-        "high":623.3,
+        "high":623.6,
         "low":622.15,
-        "close":622.7,
-        "volume":31556.0
+        "close":623.1,
+        "volume":50977.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:SBICARD",
+        "open":623.2,
+        "high":624.0,
+        "low":620.95,
+        "close":624.0,
+        "volume":70316.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:SBICARD",
+        "open":624.0,
+        "high":625.5,
+        "low":623.25,
+        "close":623.6,
+        "volume":84910.0
     }
 ]

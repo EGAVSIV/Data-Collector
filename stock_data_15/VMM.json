@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:VMM",
-        "open":136.96,
-        "high":136.99,
-        "low":136.75,
-        "close":136.9,
-        "volume":71721.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:VMM",
-        "open":136.9,
-        "high":137.15,
-        "low":136.76,
-        "close":136.8,
-        "volume":93546.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:VMM",
         "open":136.79,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:VMM",
         "open":103.25,
         "high":103.35,
-        "low":103.18,
-        "close":103.18,
-        "volume":55543.0
+        "low":103.15,
+        "close":103.2,
+        "volume":127416.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:VMM",
+        "open":103.2,
+        "high":103.2,
+        "low":102.95,
+        "close":103.04,
+        "volume":172594.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:VMM",
+        "open":103.05,
+        "high":103.62,
+        "low":103.0,
+        "close":103.29,
+        "volume":170227.0
     }
 ]

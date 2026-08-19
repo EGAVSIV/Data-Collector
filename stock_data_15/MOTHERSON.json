@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:MOTHERSON",
-        "open":119.45,
-        "high":119.64,
-        "low":119.3,
-        "close":119.5,
-        "volume":652916.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:MOTHERSON",
-        "open":119.52,
-        "high":119.78,
-        "low":119.37,
-        "close":119.45,
-        "volume":474170.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:MOTHERSON",
         "open":119.48,
@@ -35996,7 +35978,25 @@
         "open":170.56,
         "high":170.69,
         "low":170.3,
-        "close":170.58,
-        "volume":146388.0
+        "close":170.57,
+        "volume":263690.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:MOTHERSON",
+        "open":170.56,
+        "high":170.59,
+        "low":170.08,
+        "close":170.25,
+        "volume":170115.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:MOTHERSON",
+        "open":170.25,
+        "high":170.72,
+        "low":170.2,
+        "close":170.22,
+        "volume":253467.0
     }
 ]

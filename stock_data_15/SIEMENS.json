@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3125.0,
-        "high":3126.7,
-        "low":3122.3,
-        "close":3125.1,
-        "volume":1708.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3124.7,
-        "high":3129.5,
-        "low":3123.0,
-        "close":3125.9,
-        "volume":4645.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:SIEMENS",
         "open":3126.1,
@@ -35970,7 +35952,7 @@
         "high":3908.8,
         "low":3902.8,
         "close":3904.6,
-        "volume":2712.0
+        "volume":2867.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:SIEMENS",
         "open":3904.0,
         "high":3905.4,
-        "low":3902.0,
-        "close":3902.0,
-        "volume":1057.0
+        "low":3900.0,
+        "close":3901.0,
+        "volume":4373.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":3901.1,
+        "high":3904.7,
+        "low":3893.0,
+        "close":3902.2,
+        "volume":13391.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":3902.2,
+        "high":3908.6,
+        "low":3894.7,
+        "close":3898.0,
+        "volume":3301.0
     }
 ]

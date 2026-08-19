@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:IDFCFIRSTB",
-        "open":84.89,
-        "high":84.99,
-        "low":84.83,
-        "close":84.87,
-        "volume":167073.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:IDFCFIRSTB",
-        "open":84.86,
-        "high":84.87,
-        "low":84.77,
-        "close":84.78,
-        "volume":214861.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:IDFCFIRSTB",
         "open":84.8,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-19T08:30:00.000",
         "symbol":"NSE:IDFCFIRSTB",
         "open":85.2,
-        "high":85.29,
+        "high":85.32,
         "low":85.15,
-        "close":85.22,
-        "volume":116735.0
+        "close":85.28,
+        "volume":282102.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:IDFCFIRSTB",
+        "open":85.26,
+        "high":85.34,
+        "low":85.14,
+        "close":85.21,
+        "volume":229180.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:IDFCFIRSTB",
+        "open":85.21,
+        "high":85.48,
+        "low":85.21,
+        "close":85.41,
+        "volume":227187.0
     }
 ]

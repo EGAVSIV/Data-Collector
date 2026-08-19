@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:TORNTPHARM",
-        "open":3810.5,
-        "high":3811.9,
-        "low":3806.1,
-        "close":3807.0,
-        "volume":1482.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:TORNTPHARM",
-        "open":3808.7,
-        "high":3811.2,
-        "low":3806.4,
-        "close":3806.7,
-        "volume":1117.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:TORNTPHARM",
         "open":3807.1,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-19T08:30:00.000",
         "symbol":"NSE:TORNTPHARM",
         "open":4996.0,
-        "high":4999.5,
+        "high":5002.0,
         "low":4992.5,
-        "close":4997.5,
-        "volume":12489.0
+        "close":5001.0,
+        "volume":23268.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:TORNTPHARM",
+        "open":5001.0,
+        "high":5018.0,
+        "low":5000.0,
+        "close":5016.0,
+        "volume":24252.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:TORNTPHARM",
+        "open":5016.0,
+        "high":5026.5,
+        "low":5016.0,
+        "close":5026.5,
+        "volume":27100.0
     }
 ]

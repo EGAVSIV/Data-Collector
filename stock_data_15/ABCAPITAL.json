@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T05:45:00.000",
-        "symbol":"NSE:ABCAPITAL",
-        "open":353.8,
-        "high":354.0,
-        "low":351.85,
-        "close":352.0,
-        "volume":138888.0
-    },
-    {
-        "datetime":"2025-12-24T06:00:00.000",
-        "symbol":"NSE:ABCAPITAL",
-        "open":352.0,
-        "high":352.05,
-        "low":351.3,
-        "close":351.55,
-        "volume":85553.0
-    },
-    {
         "datetime":"2025-12-24T06:15:00.000",
         "symbol":"NSE:ABCAPITAL",
         "open":351.5,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:ABCAPITAL",
         "open":397.4,
         "high":397.6,
-        "low":397.05,
-        "close":397.1,
-        "volume":74460.0
+        "low":397.0,
+        "close":397.0,
+        "volume":116820.0
+    },
+    {
+        "datetime":"2026-08-19T08:45:00.000",
+        "symbol":"NSE:ABCAPITAL",
+        "open":397.1,
+        "high":397.15,
+        "low":396.65,
+        "close":397.05,
+        "volume":136777.0
+    },
+    {
+        "datetime":"2026-08-19T09:00:00.000",
+        "symbol":"NSE:ABCAPITAL",
+        "open":397.15,
+        "high":398.4,
+        "low":397.0,
+        "close":397.2,
+        "volume":91491.0
     }
 ]
