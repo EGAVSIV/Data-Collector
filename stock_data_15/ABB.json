@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:ABB",
-        "open":5215.0,
-        "high":5255.0,
-        "low":5204.0,
-        "close":5250.0,
-        "volume":12922.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:ABB",
-        "open":5252.5,
-        "high":5266.0,
-        "low":5248.5,
-        "close":5262.5,
-        "volume":14067.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:ABB",
-        "open":5262.5,
-        "high":5263.5,
-        "low":5242.0,
-        "close":5245.0,
-        "volume":5043.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:ABB",
-        "open":5245.0,
-        "high":5246.0,
-        "low":5230.0,
-        "close":5237.0,
-        "volume":4263.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:ABB",
         "open":5239.0,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T06:30:00.000",
         "symbol":"NSE:ABB",
         "open":7466.0,
-        "high":7467.0,
+        "high":7482.5,
         "low":7452.0,
-        "close":7455.5,
-        "volume":2736.0
+        "close":7482.5,
+        "volume":5399.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:ABB",
+        "open":7480.0,
+        "high":7486.0,
+        "low":7453.5,
+        "close":7460.0,
+        "volume":4317.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:ABB",
+        "open":7456.5,
+        "high":7461.0,
+        "low":7443.5,
+        "close":7457.0,
+        "volume":6345.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:ABB",
+        "open":7454.0,
+        "high":7456.5,
+        "low":7446.5,
+        "close":7451.0,
+        "volume":3583.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:ABB",
+        "open":7449.0,
+        "high":7466.5,
+        "low":7449.0,
+        "close":7461.5,
+        "volume":1868.0
     }
 ]

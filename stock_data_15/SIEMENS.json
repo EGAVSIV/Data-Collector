@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3134.2,
-        "high":3137.1,
-        "low":3110.0,
-        "close":3136.0,
-        "volume":13143.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3134.3,
-        "high":3136.1,
-        "low":3122.1,
-        "close":3126.0,
-        "volume":6653.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3124.8,
-        "high":3127.3,
-        "low":3117.3,
-        "close":3121.1,
-        "volume":6772.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3120.7,
-        "high":3129.8,
-        "low":3116.1,
-        "close":3127.6,
-        "volume":5130.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:SIEMENS",
         "open":3128.2,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T06:30:00.000",
         "symbol":"NSE:SIEMENS",
         "open":3915.5,
-        "high":3917.3,
+        "high":3919.4,
         "low":3908.2,
-        "close":3909.8,
-        "volume":2889.0
+        "close":3919.4,
+        "volume":3739.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":3917.2,
+        "high":3920.0,
+        "low":3905.0,
+        "close":3906.9,
+        "volume":1780.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":3906.9,
+        "high":3916.8,
+        "low":3900.0,
+        "close":3908.5,
+        "volume":13637.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":3908.5,
+        "high":3911.3,
+        "low":3905.7,
+        "close":3908.6,
+        "volume":1193.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":3909.8,
+        "high":3911.8,
+        "low":3907.0,
+        "close":3910.2,
+        "volume":480.0
     }
 ]

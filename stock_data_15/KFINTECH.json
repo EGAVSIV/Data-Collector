@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1098.3,
-        "high":1109.5,
-        "low":1093.2,
-        "close":1108.7,
-        "volume":70234.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1109.2,
-        "high":1113.9,
-        "low":1104.1,
-        "close":1110.2,
-        "volume":55228.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1110.1,
-        "high":1110.5,
-        "low":1106.2,
-        "close":1107.2,
-        "volume":40630.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1107.1,
-        "high":1110.3,
-        "low":1105.1,
-        "close":1106.1,
-        "volume":41047.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:KFINTECH",
         "open":1105.8,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T06:30:00.000",
         "symbol":"NSE:KFINTECH",
         "open":951.95,
-        "high":953.5,
+        "high":955.95,
         "low":949.55,
-        "close":953.05,
-        "volume":21140.0
+        "close":952.7,
+        "volume":38757.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":952.75,
+        "high":953.5,
+        "low":951.5,
+        "close":952.9,
+        "volume":17677.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":952.6,
+        "high":953.0,
+        "low":950.15,
+        "close":951.1,
+        "volume":14977.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":951.55,
+        "high":951.55,
+        "low":948.9,
+        "close":949.85,
+        "volume":9030.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":949.85,
+        "high":951.7,
+        "low":949.5,
+        "close":951.2,
+        "volume":11697.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6500.0,
-        "high":6539.0,
-        "low":6486.5,
-        "close":6523.0,
-        "volume":14626.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6524.0,
-        "high":6536.0,
-        "low":6521.0,
-        "close":6532.0,
-        "volume":5004.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6535.5,
-        "high":6566.0,
-        "low":6528.0,
-        "close":6566.0,
-        "volume":12997.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6565.0,
-        "high":6569.0,
-        "low":6555.0,
-        "close":6557.5,
-        "volume":14328.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:DIVISLAB",
         "open":6557.5,
@@ -35996,7 +35960,43 @@
         "open":8515.0,
         "high":8540.0,
         "low":8514.5,
-        "close":8537.5,
-        "volume":10831.0
+        "close":8539.0,
+        "volume":20331.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8539.0,
+        "high":8539.5,
+        "low":8524.5,
+        "close":8531.5,
+        "volume":3369.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8531.5,
+        "high":8531.5,
+        "low":8516.5,
+        "close":8522.5,
+        "volume":2955.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8520.0,
+        "high":8528.0,
+        "low":8512.0,
+        "close":8516.5,
+        "volume":5376.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8515.0,
+        "high":8524.5,
+        "low":8515.0,
+        "close":8524.5,
+        "volume":1031.0
     }
 ]

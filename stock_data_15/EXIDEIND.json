@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T06:45:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":370.5,
-        "high":370.75,
-        "low":370.05,
-        "close":370.75,
-        "volume":6196.0
-    },
-    {
-        "datetime":"2025-12-24T07:00:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":370.6,
-        "high":370.75,
-        "low":370.0,
-        "close":370.0,
-        "volume":8825.0
-    },
-    {
-        "datetime":"2025-12-24T07:15:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":370.15,
-        "high":370.35,
-        "low":370.0,
-        "close":370.05,
-        "volume":13764.0
-    },
-    {
-        "datetime":"2025-12-24T07:30:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":370.1,
-        "high":370.25,
-        "low":369.9,
-        "close":370.25,
-        "volume":32497.0
-    },
-    {
         "datetime":"2025-12-24T07:45:00.000",
         "symbol":"NSE:EXIDEIND",
         "open":370.2,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:EXIDEIND",
         "open":463.0,
         "high":465.0,
-        "low":463.0,
-        "close":464.3,
-        "volume":36057.0
+        "low":462.9,
+        "close":463.0,
+        "volume":47438.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":462.95,
+        "high":463.0,
+        "low":460.95,
+        "close":461.4,
+        "volume":65973.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":461.4,
+        "high":461.6,
+        "low":460.55,
+        "close":460.95,
+        "volume":32972.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":460.8,
+        "high":461.05,
+        "low":460.2,
+        "close":460.7,
+        "volume":38117.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":460.7,
+        "high":461.5,
+        "low":460.6,
+        "close":461.3,
+        "volume":13641.0
     }
 ]

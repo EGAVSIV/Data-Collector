@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":355.95,
-        "high":358.2,
-        "low":355.0,
-        "close":357.9,
-        "volume":712406.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":358.0,
-        "high":358.0,
-        "low":356.65,
-        "close":357.2,
-        "volume":253291.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":357.0,
-        "high":357.2,
-        "low":355.3,
-        "close":355.55,
-        "volume":137747.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":355.65,
-        "high":355.8,
-        "low":354.45,
-        "close":354.8,
-        "volume":176264.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:RECLTD",
         "open":354.7,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:RECLTD",
         "open":340.15,
         "high":340.35,
-        "low":339.0,
+        "low":338.75,
+        "close":339.05,
+        "volume":346119.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.05,
+        "high":339.15,
+        "low":338.7,
+        "close":338.95,
+        "volume":142657.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":338.95,
+        "high":340.0,
+        "low":338.85,
         "close":339.25,
-        "volume":166408.0
+        "volume":312754.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.4,
+        "high":339.7,
+        "low":339.1,
+        "close":339.55,
+        "volume":61802.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.55,
+        "high":339.65,
+        "low":339.2,
+        "close":339.6,
+        "volume":18559.0
     }
 ]

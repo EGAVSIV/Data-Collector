@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-25T03:45:00.000",
-        "symbol":"NSE:NYKAA",
-        "open":175.3,
-        "high":178.4,
-        "low":175.3,
-        "close":176.5,
-        "volume":494522.0
-    },
-    {
         "datetime":"2024-04-25T04:45:00.000",
         "symbol":"NSE:NYKAA",
         "open":176.5,
@@ -35996,7 +35987,16 @@
         "open":324.4,
         "high":326.15,
         "low":323.7,
-        "close":325.6,
-        "volume":193768.0
+        "close":325.55,
+        "volume":201299.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:NYKAA",
+        "open":325.55,
+        "high":327.15,
+        "low":325.5,
+        "close":326.85,
+        "volume":1190261.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:IRFC",
-        "open":122.5,
-        "high":123.84,
-        "low":121.74,
-        "close":123.59,
-        "volume":6452147.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:IRFC",
-        "open":123.59,
-        "high":123.64,
-        "low":122.15,
-        "close":122.35,
-        "volume":3455282.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:IRFC",
-        "open":122.41,
-        "high":122.53,
-        "low":120.54,
-        "close":120.88,
-        "volume":3680800.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:IRFC",
-        "open":120.85,
-        "high":121.59,
-        "low":120.74,
-        "close":121.34,
-        "volume":1645976.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:IRFC",
         "open":121.29,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:IRFC",
         "open":85.65,
         "high":85.69,
-        "low":85.54,
-        "close":85.55,
-        "volume":101794.0
+        "low":85.48,
+        "close":85.5,
+        "volume":160967.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:IRFC",
+        "open":85.51,
+        "high":85.66,
+        "low":85.45,
+        "close":85.62,
+        "volume":110086.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:IRFC",
+        "open":85.66,
+        "high":85.66,
+        "low":85.52,
+        "close":85.65,
+        "volume":124132.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:IRFC",
+        "open":85.64,
+        "high":85.64,
+        "low":85.55,
+        "close":85.6,
+        "volume":68288.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:IRFC",
+        "open":85.6,
+        "high":85.7,
+        "low":85.6,
+        "close":85.66,
+        "volume":72084.0
     }
 ]

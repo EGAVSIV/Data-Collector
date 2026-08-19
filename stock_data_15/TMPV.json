@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T03:45:00.000",
-        "symbol":"NSE:TMPV",
-        "open":364.7,
-        "high":364.9,
-        "low":362.0,
-        "close":362.4,
-        "volume":1255570.0
-    },
-    {
-        "datetime":"2025-12-24T04:00:00.000",
-        "symbol":"NSE:TMPV",
-        "open":362.3,
-        "high":362.35,
-        "low":360.4,
-        "close":361.0,
-        "volume":767860.0
-    },
-    {
-        "datetime":"2025-12-24T04:15:00.000",
-        "symbol":"NSE:TMPV",
-        "open":361.2,
-        "high":361.2,
-        "low":360.25,
-        "close":360.5,
-        "volume":364957.0
-    },
-    {
-        "datetime":"2025-12-24T04:30:00.000",
-        "symbol":"NSE:TMPV",
-        "open":360.55,
-        "high":360.9,
-        "low":360.1,
-        "close":360.5,
-        "volume":372449.0
-    },
-    {
         "datetime":"2025-12-24T04:45:00.000",
         "symbol":"NSE:TMPV",
         "open":360.55,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:TMPV",
         "open":323.1,
         "high":323.1,
-        "low":322.15,
-        "close":322.15,
-        "volume":92623.0
+        "low":322.0,
+        "close":322.0,
+        "volume":114824.0
+    },
+    {
+        "datetime":"2026-08-19T06:45:00.000",
+        "symbol":"NSE:TMPV",
+        "open":322.0,
+        "high":323.7,
+        "low":321.9,
+        "close":323.3,
+        "volume":342702.0
+    },
+    {
+        "datetime":"2026-08-19T07:00:00.000",
+        "symbol":"NSE:TMPV",
+        "open":323.3,
+        "high":323.45,
+        "low":322.65,
+        "close":322.75,
+        "volume":59141.0
+    },
+    {
+        "datetime":"2026-08-19T07:15:00.000",
+        "symbol":"NSE:TMPV",
+        "open":322.75,
+        "high":323.3,
+        "low":322.4,
+        "close":323.05,
+        "volume":164779.0
+    },
+    {
+        "datetime":"2026-08-19T07:30:00.000",
+        "symbol":"NSE:TMPV",
+        "open":323.15,
+        "high":323.95,
+        "low":323.0,
+        "close":323.2,
+        "volume":201882.0
     }
 ]
