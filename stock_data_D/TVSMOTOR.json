@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-22T03:45:00.000",
-        "symbol":"NSE:TVSMOTOR",
-        "open":48.625,
-        "high":49.7249985,
-        "low":48.299999,
-        "close":49.200001,
-        "volume":1474974.0
-    },
-    {
         "datetime":"2010-06-23T03:45:00.000",
         "symbol":"NSE:TVSMOTOR",
         "open":48.5250015,
@@ -35998,5 +35989,14 @@
         "low":4341.2,
         "close":4356.8,
         "volume":444890.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:TVSMOTOR",
+        "open":4380.3,
+        "high":4394.9,
+        "low":4362.1,
+        "close":4368.0,
+        "volume":67399.0
     }
 ]

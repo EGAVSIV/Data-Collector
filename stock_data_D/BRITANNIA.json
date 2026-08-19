@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-22T03:45:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":186.8,
-        "high":186.8,
-        "low":182.6,
-        "close":185.23,
-        "volume":12140.0
-    },
-    {
         "datetime":"2010-06-23T03:45:00.000",
         "symbol":"NSE:BRITANNIA",
         "open":185.5,
@@ -35998,5 +35989,14 @@
         "low":5490.0,
         "close":5495.0,
         "volume":281420.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5495.0,
+        "high":5539.0,
+        "low":5480.0,
+        "close":5524.5,
+        "volume":16148.0
     }
 ]

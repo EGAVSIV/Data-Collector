@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-22T03:45:00.000",
-        "symbol":"NSE:HDFCBANK",
-        "open":99.75,
-        "high":100.0,
-        "low":99.1225,
-        "close":99.3525,
-        "volume":8524880.0
-    },
-    {
         "datetime":"2010-06-23T03:45:00.000",
         "symbol":"NSE:HDFCBANK",
         "open":99.235,
@@ -35998,5 +35989,14 @@
         "low":723.0,
         "close":723.0,
         "volume":17916507.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:HDFCBANK",
+        "open":724.0,
+        "high":725.4,
+        "low":718.1,
+        "close":718.55,
+        "volume":4878769.0
     }
 ]

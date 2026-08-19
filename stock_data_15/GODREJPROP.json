@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:00:00.000",
-        "symbol":"NSE:GODREJPROP",
-        "open":2022.3,
-        "high":2024.3,
-        "low":2021.3,
-        "close":2021.7,
-        "volume":6415.0
-    },
-    {
-        "datetime":"2025-12-23T07:15:00.000",
-        "symbol":"NSE:GODREJPROP",
-        "open":2021.0,
-        "high":2021.5,
-        "low":2018.0,
-        "close":2018.0,
-        "volume":8334.0
-    },
-    {
         "datetime":"2025-12-23T07:30:00.000",
         "symbol":"NSE:GODREJPROP",
         "open":2018.3,
@@ -35998,5 +35980,23 @@
         "low":2007.8,
         "close":2010.0,
         "volume":56016.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:GODREJPROP",
+        "open":1998.6,
+        "high":2005.5,
+        "low":1974.3,
+        "close":1978.0,
+        "volume":78248.0
+    },
+    {
+        "datetime":"2026-08-19T04:00:00.000",
+        "symbol":"NSE:GODREJPROP",
+        "open":1977.9,
+        "high":1981.2,
+        "low":1970.0,
+        "close":1980.0,
+        "volume":31536.0
     }
 ]

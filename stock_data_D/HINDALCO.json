@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-22T03:45:00.000",
-        "symbol":"NSE:HINDALCO",
-        "open":153.0,
-        "high":153.35001,
-        "low":149.75,
-        "close":151.64999,
-        "volume":12104604.0
-    },
-    {
         "datetime":"2010-06-23T03:45:00.000",
         "symbol":"NSE:HINDALCO",
         "open":148.89999,
@@ -35998,5 +35989,14 @@
         "low":1038.0,
         "close":1041.6,
         "volume":2525385.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:HINDALCO",
+        "open":1030.6,
+        "high":1032.5,
+        "low":1025.55,
+        "close":1027.4,
+        "volume":312902.0
     }
 ]

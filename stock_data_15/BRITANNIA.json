@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:00:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6061.0,
-        "high":6063.5,
-        "low":6048.5,
-        "close":6054.0,
-        "volume":4481.0
-    },
-    {
-        "datetime":"2025-12-23T07:15:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6054.0,
-        "high":6057.0,
-        "low":6041.0,
-        "close":6042.0,
-        "volume":5729.0
-    },
-    {
-        "datetime":"2025-12-23T07:30:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6042.0,
-        "high":6047.5,
-        "low":6033.5,
-        "close":6041.0,
-        "volume":10328.0
-    },
-    {
         "datetime":"2025-12-23T07:45:00.000",
         "symbol":"NSE:BRITANNIA",
         "open":6040.0,
@@ -35998,5 +35971,32 @@
         "low":5490.0,
         "close":5496.0,
         "volume":40120.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5490.5,
+        "high":5539.0,
+        "low":5480.0,
+        "close":5521.0,
+        "volume":10627.0
+    },
+    {
+        "datetime":"2026-08-19T04:00:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5522.0,
+        "high":5539.0,
+        "low":5518.5,
+        "close":5539.0,
+        "volume":6418.0
+    },
+    {
+        "datetime":"2026-08-19T04:15:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5535.0,
+        "high":5541.0,
+        "low":5535.0,
+        "close":5540.5,
+        "volume":637.0
     }
 ]

@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-24T07:45:00.000",
-        "symbol":"NSE:ASTRAL",
-        "open":1972.35,
-        "high":1977.0,
-        "low":1971.0,
-        "close":1976.8,
-        "volume":12292.0
-    },
-    {
         "datetime":"2024-04-24T08:45:00.000",
         "symbol":"NSE:ASTRAL",
         "open":1976.0,
@@ -35998,5 +35989,14 @@
         "low":1520.3,
         "close":1525.9,
         "volume":43082.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:ASTRAL",
+        "open":1529.0,
+        "high":1539.1,
+        "low":1516.2,
+        "close":1522.0,
+        "volume":58103.0
     }
 ]

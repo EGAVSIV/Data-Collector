@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-22T03:45:00.000",
-        "symbol":"NSE:JSWSTEEL",
-        "open":108.8,
-        "high":109.3,
-        "low":106.735,
-        "close":107.07,
-        "volume":11250390.0
-    },
-    {
         "datetime":"2010-06-23T03:45:00.000",
         "symbol":"NSE:JSWSTEEL",
         "open":106.5,
@@ -35998,5 +35989,14 @@
         "low":1265.0,
         "close":1267.6,
         "volume":719017.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:JSWSTEEL",
+        "open":1273.7,
+        "high":1273.7,
+        "low":1262.1,
+        "close":1263.2,
+        "volume":97603.0
     }
 ]

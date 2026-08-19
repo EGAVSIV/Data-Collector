@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:00:00.000",
-        "symbol":"NSE:CANBK",
-        "open":150.09,
-        "high":150.21,
-        "low":150.03,
-        "close":150.17,
-        "volume":163176.0
-    },
-    {
-        "datetime":"2025-12-23T07:15:00.000",
-        "symbol":"NSE:CANBK",
-        "open":150.18,
-        "high":150.44,
-        "low":150.18,
-        "close":150.4,
-        "volume":267574.0
-    },
-    {
-        "datetime":"2025-12-23T07:30:00.000",
-        "symbol":"NSE:CANBK",
-        "open":150.4,
-        "high":150.47,
-        "low":150.32,
-        "close":150.39,
-        "volume":234526.0
-    },
-    {
         "datetime":"2025-12-23T07:45:00.000",
         "symbol":"NSE:CANBK",
         "open":150.34,
@@ -35998,5 +35971,32 @@
         "low":129.1,
         "close":129.37,
         "volume":956136.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:CANBK",
+        "open":128.78,
+        "high":129.38,
+        "low":128.4,
+        "close":128.68,
+        "volume":704310.0
+    },
+    {
+        "datetime":"2026-08-19T04:00:00.000",
+        "symbol":"NSE:CANBK",
+        "open":128.68,
+        "high":128.85,
+        "low":128.48,
+        "close":128.74,
+        "volume":715379.0
+    },
+    {
+        "datetime":"2026-08-19T04:15:00.000",
+        "symbol":"NSE:CANBK",
+        "open":128.76,
+        "high":128.76,
+        "low":128.63,
+        "close":128.63,
+        "volume":23244.0
     }
 ]

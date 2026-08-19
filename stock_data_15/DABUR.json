@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:00:00.000",
-        "symbol":"NSE:DABUR",
-        "open":493.4,
-        "high":493.7,
-        "low":493.0,
-        "close":493.0,
-        "volume":11313.0
-    },
-    {
-        "datetime":"2025-12-23T07:15:00.000",
-        "symbol":"NSE:DABUR",
-        "open":493.15,
-        "high":493.15,
-        "low":492.75,
-        "close":492.8,
-        "volume":9495.0
-    },
-    {
-        "datetime":"2025-12-23T07:30:00.000",
-        "symbol":"NSE:DABUR",
-        "open":492.95,
-        "high":493.1,
-        "low":492.75,
-        "close":492.8,
-        "volume":11272.0
-    },
-    {
         "datetime":"2025-12-23T07:45:00.000",
         "symbol":"NSE:DABUR",
         "open":492.9,
@@ -35998,5 +35971,32 @@
         "low":402.1,
         "close":402.85,
         "volume":244947.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:DABUR",
+        "open":403.0,
+        "high":403.0,
+        "low":400.9,
+        "close":401.3,
+        "volume":89853.0
+    },
+    {
+        "datetime":"2026-08-19T04:00:00.000",
+        "symbol":"NSE:DABUR",
+        "open":401.3,
+        "high":401.8,
+        "low":400.7,
+        "close":401.7,
+        "volume":52712.0
+    },
+    {
+        "datetime":"2026-08-19T04:15:00.000",
+        "symbol":"NSE:DABUR",
+        "open":401.7,
+        "high":401.8,
+        "low":401.7,
+        "close":401.75,
+        "volume":686.0
     }
 ]

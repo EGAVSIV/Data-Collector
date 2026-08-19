@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-22T03:45:00.000",
-        "symbol":"NSE:GLENMARK",
-        "open":269.54999,
-        "high":274.79999,
-        "low":267.0,
-        "close":273.45001,
-        "volume":589108.0
-    },
-    {
         "datetime":"2010-06-23T03:45:00.000",
         "symbol":"NSE:GLENMARK",
         "open":276.0,
@@ -35998,5 +35989,14 @@
         "low":2305.0,
         "close":2305.0,
         "volume":379551.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:GLENMARK",
+        "open":2301.0,
+        "high":2313.9,
+        "low":2261.1,
+        "close":2261.1,
+        "volume":115770.0
     }
 ]

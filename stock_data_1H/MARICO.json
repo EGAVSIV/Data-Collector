@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-24T07:45:00.000",
-        "symbol":"NSE:MARICO",
-        "open":510.25,
-        "high":511.0,
-        "low":509.6,
-        "close":510.2,
-        "volume":46670.0
-    },
-    {
         "datetime":"2024-04-24T08:45:00.000",
         "symbol":"NSE:MARICO",
         "open":510.3,
@@ -35998,5 +35989,14 @@
         "low":842.2,
         "close":844.2,
         "volume":146148.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:MARICO",
+        "open":843.0,
+        "high":854.6,
+        "low":840.35,
+        "close":852.45,
+        "volume":224623.0
     }
 ]

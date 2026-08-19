@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:00:00.000",
-        "symbol":"NSE:BANDHANBNK",
-        "open":150.3,
-        "high":150.3,
-        "low":150.06,
-        "close":150.1,
-        "volume":62030.0
-    },
-    {
-        "datetime":"2025-12-23T07:15:00.000",
-        "symbol":"NSE:BANDHANBNK",
-        "open":150.06,
-        "high":150.11,
-        "low":149.81,
-        "close":149.87,
-        "volume":75552.0
-    },
-    {
-        "datetime":"2025-12-23T07:30:00.000",
-        "symbol":"NSE:BANDHANBNK",
-        "open":149.88,
-        "high":150.02,
-        "low":149.79,
-        "close":149.84,
-        "volume":63969.0
-    },
-    {
         "datetime":"2025-12-23T07:45:00.000",
         "symbol":"NSE:BANDHANBNK",
         "open":149.9,
@@ -35998,5 +35971,32 @@
         "low":170.21,
         "close":170.5,
         "volume":927650.0
+    },
+    {
+        "datetime":"2026-08-19T03:45:00.000",
+        "symbol":"NSE:BANDHANBNK",
+        "open":170.52,
+        "high":170.89,
+        "low":168.12,
+        "close":168.8,
+        "volume":635492.0
+    },
+    {
+        "datetime":"2026-08-19T04:00:00.000",
+        "symbol":"NSE:BANDHANBNK",
+        "open":168.8,
+        "high":168.99,
+        "low":168.34,
+        "close":168.67,
+        "volume":310030.0
+    },
+    {
+        "datetime":"2026-08-19T04:15:00.000",
+        "symbol":"NSE:BANDHANBNK",
+        "open":168.63,
+        "high":168.8,
+        "low":168.6,
+        "close":168.8,
+        "volume":6773.0
     }
 ]
