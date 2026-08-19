@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T09:00:00.000",
-        "symbol":"NSE:LAURUSLABS",
-        "open":1066.3,
-        "high":1066.8,
-        "low":1064.9,
-        "close":1064.9,
-        "volume":16853.0
-    },
-    {
-        "datetime":"2025-12-23T09:15:00.000",
-        "symbol":"NSE:LAURUSLABS",
-        "open":1065.4,
-        "high":1068.5,
-        "low":1064.0,
-        "close":1068.5,
-        "volume":35471.0
-    },
-    {
         "datetime":"2025-12-23T09:30:00.000",
         "symbol":"NSE:LAURUSLABS",
         "open":1068.8,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-19T05:30:00.000",
         "symbol":"NSE:LAURUSLABS",
         "open":1794.2,
-        "high":1794.2,
-        "low":1793.3,
-        "close":1793.3,
-        "volume":1645.0
+        "high":1798.7,
+        "low":1793.0,
+        "close":1798.3,
+        "volume":41317.0
+    },
+    {
+        "datetime":"2026-08-19T05:45:00.000",
+        "symbol":"NSE:LAURUSLABS",
+        "open":1798.3,
+        "high":1799.6,
+        "low":1795.2,
+        "close":1796.1,
+        "volume":34776.0
+    },
+    {
+        "datetime":"2026-08-19T06:00:00.000",
+        "symbol":"NSE:LAURUSLABS",
+        "open":1796.2,
+        "high":1796.2,
+        "low":1796.1,
+        "close":1796.1,
+        "volume":341.0
     }
 ]

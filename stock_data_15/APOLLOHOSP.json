@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T09:00:00.000",
-        "symbol":"NSE:APOLLOHOSP",
-        "open":7080.5,
-        "high":7084.0,
-        "low":7064.0,
-        "close":7064.0,
-        "volume":33549.0
-    },
-    {
-        "datetime":"2025-12-23T09:15:00.000",
-        "symbol":"NSE:APOLLOHOSP",
-        "open":7062.5,
-        "high":7078.5,
-        "low":7062.5,
-        "close":7078.0,
-        "volume":19790.0
-    },
-    {
         "datetime":"2025-12-23T09:30:00.000",
         "symbol":"NSE:APOLLOHOSP",
         "open":7078.0,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:APOLLOHOSP",
         "open":8835.5,
         "high":8835.5,
-        "low":8817.0,
-        "close":8821.5,
-        "volume":1708.0
+        "low":8812.5,
+        "close":8820.0,
+        "volume":4882.0
+    },
+    {
+        "datetime":"2026-08-19T05:45:00.000",
+        "symbol":"NSE:APOLLOHOSP",
+        "open":8820.0,
+        "high":8821.5,
+        "low":8816.0,
+        "close":8817.5,
+        "volume":5836.0
+    },
+    {
+        "datetime":"2026-08-19T06:00:00.000",
+        "symbol":"NSE:APOLLOHOSP",
+        "open":8817.0,
+        "high":8817.0,
+        "low":8811.5,
+        "close":8815.0,
+        "volume":164.0
     }
 ]
