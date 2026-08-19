@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:45:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1517.5,
-        "high":1519.9,
-        "low":1517.5,
-        "close":1518.0,
-        "volume":10362.0
-    },
-    {
         "datetime":"2025-12-23T08:00:00.000",
         "symbol":"NSE:CDSL",
         "open":1518.0,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-19T04:15:00.000",
         "symbol":"NSE:CDSL",
         "open":1339.5,
-        "high":1340.0,
-        "low":1339.0,
-        "close":1339.4,
-        "volume":765.0
+        "high":1343.5,
+        "low":1338.0,
+        "close":1339.6,
+        "volume":23375.0
+    },
+    {
+        "datetime":"2026-08-19T04:30:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1339.6,
+        "high":1344.0,
+        "low":1339.4,
+        "close":1343.7,
+        "volume":12418.0
     }
 ]

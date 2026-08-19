@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:45:00.000",
-        "symbol":"NSE:HYUNDAI",
-        "open":2308.2,
-        "high":2309.8,
-        "low":2306.6,
-        "close":2306.9,
-        "volume":3452.0
-    },
-    {
         "datetime":"2025-12-23T08:00:00.000",
         "symbol":"NSE:HYUNDAI",
         "open":2306.9,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-19T04:15:00.000",
         "symbol":"NSE:HYUNDAI",
         "open":2170.0,
-        "high":2170.0,
-        "low":2169.0,
-        "close":2169.0,
-        "volume":120.0
+        "high":2185.0,
+        "low":2167.0,
+        "close":2185.0,
+        "volume":69566.0
+    },
+    {
+        "datetime":"2026-08-19T04:30:00.000",
+        "symbol":"NSE:HYUNDAI",
+        "open":2185.2,
+        "high":2186.0,
+        "low":2180.3,
+        "close":2183.0,
+        "volume":17196.0
     }
 ]

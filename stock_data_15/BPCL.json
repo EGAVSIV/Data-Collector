@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T07:45:00.000",
-        "symbol":"NSE:BPCL",
-        "open":370.9,
-        "high":371.0,
-        "low":370.6,
-        "close":370.8,
-        "volume":43760.0
-    },
-    {
         "datetime":"2025-12-23T08:00:00.000",
         "symbol":"NSE:BPCL",
         "open":370.8,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:BPCL",
         "open":308.75,
         "high":308.8,
-        "low":308.55,
-        "close":308.7,
-        "volume":10027.0
+        "low":308.0,
+        "close":308.3,
+        "volume":103259.0
+    },
+    {
+        "datetime":"2026-08-19T04:30:00.000",
+        "symbol":"NSE:BPCL",
+        "open":308.35,
+        "high":308.6,
+        "low":308.15,
+        "close":308.45,
+        "volume":36169.0
     }
 ]
