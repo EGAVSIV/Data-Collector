@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-25T04:45:00.000",
-        "symbol":"NSE:JUBLFOOD",
-        "open":441.8,
-        "high":441.8,
-        "low":439.0,
-        "close":439.8,
-        "volume":103423.0
-    },
-    {
         "datetime":"2024-04-25T05:45:00.000",
         "symbol":"NSE:JUBLFOOD",
         "open":439.85,
@@ -35996,7 +35987,16 @@
         "open":499.2,
         "high":499.2,
         "low":497.1,
-        "close":497.3,
-        "volume":79431.0
+        "close":497.15,
+        "volume":83298.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:JUBLFOOD",
+        "open":497.15,
+        "high":499.25,
+        "low":496.0,
+        "close":498.45,
+        "volume":98989.0
     }
 ]

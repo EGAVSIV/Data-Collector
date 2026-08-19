@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T04:45:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":354.7,
-        "high":355.8,
-        "low":354.65,
-        "close":355.75,
-        "volume":110273.0
-    },
-    {
-        "datetime":"2025-12-24T05:00:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":355.85,
-        "high":356.6,
-        "low":355.7,
-        "close":356.25,
-        "volume":72100.0
-    },
-    {
-        "datetime":"2025-12-24T05:15:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":356.35,
-        "high":356.6,
-        "low":356.2,
-        "close":356.45,
-        "volume":68559.0
-    },
-    {
-        "datetime":"2025-12-24T05:30:00.000",
-        "symbol":"NSE:RECLTD",
-        "open":356.55,
-        "high":357.0,
-        "low":356.2,
-        "close":357.0,
-        "volume":44334.0
-    },
-    {
         "datetime":"2025-12-24T05:45:00.000",
         "symbol":"NSE:RECLTD",
         "open":356.95,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T07:30:00.000",
         "symbol":"NSE:RECLTD",
         "open":339.55,
+        "high":339.75,
+        "low":339.05,
+        "close":339.45,
+        "volume":59842.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.3,
         "high":339.65,
-        "low":339.2,
-        "close":339.6,
-        "volume":18559.0
+        "low":339.1,
+        "close":339.25,
+        "volume":81010.0
+    },
+    {
+        "datetime":"2026-08-19T08:00:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.25,
+        "high":339.55,
+        "low":339.0,
+        "close":339.45,
+        "volume":125844.0
+    },
+    {
+        "datetime":"2026-08-19T08:15:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.4,
+        "high":339.6,
+        "low":339.0,
+        "close":339.25,
+        "volume":110407.0
+    },
+    {
+        "datetime":"2026-08-19T08:30:00.000",
+        "symbol":"NSE:RECLTD",
+        "open":339.15,
+        "high":339.3,
+        "low":339.05,
+        "close":339.2,
+        "volume":27860.0
     }
 ]

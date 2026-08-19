@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T04:45:00.000",
-        "symbol":"NSE:NTPC",
-        "open":325.45,
-        "high":325.45,
-        "low":324.7,
-        "close":325.4,
-        "volume":67271.0
-    },
-    {
-        "datetime":"2025-12-24T05:00:00.000",
-        "symbol":"NSE:NTPC",
-        "open":325.4,
-        "high":325.65,
-        "low":325.15,
-        "close":325.2,
-        "volume":88241.0
-    },
-    {
-        "datetime":"2025-12-24T05:15:00.000",
-        "symbol":"NSE:NTPC",
-        "open":325.3,
-        "high":325.35,
-        "low":324.65,
-        "close":324.8,
-        "volume":93245.0
-    },
-    {
-        "datetime":"2025-12-24T05:30:00.000",
-        "symbol":"NSE:NTPC",
-        "open":325.0,
-        "high":325.1,
-        "low":324.3,
-        "close":325.05,
-        "volume":63843.0
-    },
-    {
         "datetime":"2025-12-24T05:45:00.000",
         "symbol":"NSE:NTPC",
         "open":325.1,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:NTPC",
         "open":336.5,
         "high":336.7,
-        "low":336.3,
-        "close":336.55,
-        "volume":42068.0
+        "low":336.0,
+        "close":336.05,
+        "volume":75598.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:NTPC",
+        "open":336.05,
+        "high":336.25,
+        "low":335.25,
+        "close":335.3,
+        "volume":102408.0
+    },
+    {
+        "datetime":"2026-08-19T08:00:00.000",
+        "symbol":"NSE:NTPC",
+        "open":335.3,
+        "high":335.6,
+        "low":334.25,
+        "close":334.55,
+        "volume":328045.0
+    },
+    {
+        "datetime":"2026-08-19T08:15:00.000",
+        "symbol":"NSE:NTPC",
+        "open":334.55,
+        "high":334.65,
+        "low":334.3,
+        "close":334.3,
+        "volume":84542.0
+    },
+    {
+        "datetime":"2026-08-19T08:30:00.000",
+        "symbol":"NSE:NTPC",
+        "open":334.3,
+        "high":334.35,
+        "low":334.05,
+        "close":334.2,
+        "volume":49701.0
     }
 ]

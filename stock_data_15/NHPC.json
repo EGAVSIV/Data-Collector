@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T04:45:00.000",
-        "symbol":"NSE:NHPC",
-        "open":78.32,
-        "high":78.46,
-        "low":78.25,
-        "close":78.45,
-        "volume":149707.0
-    },
-    {
-        "datetime":"2025-12-24T05:00:00.000",
-        "symbol":"NSE:NHPC",
-        "open":78.44,
-        "high":78.45,
-        "low":78.28,
-        "close":78.3,
-        "volume":76780.0
-    },
-    {
-        "datetime":"2025-12-24T05:15:00.000",
-        "symbol":"NSE:NHPC",
-        "open":78.33,
-        "high":78.39,
-        "low":78.28,
-        "close":78.38,
-        "volume":67413.0
-    },
-    {
-        "datetime":"2025-12-24T05:30:00.000",
-        "symbol":"NSE:NHPC",
-        "open":78.41,
-        "high":78.44,
-        "low":78.33,
-        "close":78.33,
-        "volume":61080.0
-    },
-    {
         "datetime":"2025-12-24T05:45:00.000",
         "symbol":"NSE:NHPC",
         "open":78.35,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:NHPC",
         "open":76.02,
         "high":76.07,
-        "low":76.01,
-        "close":76.05,
-        "volume":22413.0
+        "low":75.94,
+        "close":75.97,
+        "volume":103561.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:NHPC",
+        "open":75.97,
+        "high":76.07,
+        "low":75.9,
+        "close":76.01,
+        "volume":232081.0
+    },
+    {
+        "datetime":"2026-08-19T08:00:00.000",
+        "symbol":"NSE:NHPC",
+        "open":76.03,
+        "high":76.13,
+        "low":75.94,
+        "close":75.94,
+        "volume":620264.0
+    },
+    {
+        "datetime":"2026-08-19T08:15:00.000",
+        "symbol":"NSE:NHPC",
+        "open":75.95,
+        "high":76.03,
+        "low":75.91,
+        "close":75.93,
+        "volume":142365.0
+    },
+    {
+        "datetime":"2026-08-19T08:30:00.000",
+        "symbol":"NSE:NHPC",
+        "open":75.97,
+        "high":76.06,
+        "low":75.92,
+        "close":75.99,
+        "volume":140332.0
     }
 ]

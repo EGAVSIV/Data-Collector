@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-25T09:45:00.000",
-        "symbol":"NSE:NUVAMA",
-        "open":1089.9,
-        "high":1093.98,
-        "low":1086.0,
-        "close":1087.05,
-        "volume":20815.0
-    },
-    {
         "datetime":"2024-04-26T03:45:00.000",
         "symbol":"NSE:NUVAMA",
         "open":1090.68,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:NUVAMA",
         "open":1706.5,
         "high":1717.0,
-        "low":1703.0,
-        "close":1707.4,
-        "volume":27552.0
+        "low":1701.9,
+        "close":1703.4,
+        "volume":31623.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:NUVAMA",
+        "open":1702.7,
+        "high":1723.3,
+        "low":1700.0,
+        "close":1721.1,
+        "volume":53056.0
     }
 ]

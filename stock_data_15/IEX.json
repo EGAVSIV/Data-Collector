@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T04:45:00.000",
-        "symbol":"NSE:IEX",
-        "open":141.86,
-        "high":141.95,
-        "low":141.65,
-        "close":141.9,
-        "volume":116162.0
-    },
-    {
-        "datetime":"2025-12-24T05:00:00.000",
-        "symbol":"NSE:IEX",
-        "open":141.89,
-        "high":141.93,
-        "low":141.53,
-        "close":141.61,
-        "volume":63465.0
-    },
-    {
-        "datetime":"2025-12-24T05:15:00.000",
-        "symbol":"NSE:IEX",
-        "open":141.61,
-        "high":141.83,
-        "low":141.51,
-        "close":141.73,
-        "volume":63158.0
-    },
-    {
-        "datetime":"2025-12-24T05:30:00.000",
-        "symbol":"NSE:IEX",
-        "open":141.8,
-        "high":141.83,
-        "low":141.4,
-        "close":141.66,
-        "volume":51567.0
-    },
-    {
         "datetime":"2025-12-24T05:45:00.000",
         "symbol":"NSE:IEX",
         "open":141.69,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:IEX",
         "open":123.47,
         "high":123.53,
-        "low":123.38,
-        "close":123.46,
-        "volume":32219.0
+        "low":123.02,
+        "close":123.02,
+        "volume":90396.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.02,
+        "high":123.41,
+        "low":122.92,
+        "close":123.28,
+        "volume":125562.0
+    },
+    {
+        "datetime":"2026-08-19T08:00:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.28,
+        "high":123.6,
+        "low":123.27,
+        "close":123.53,
+        "volume":113672.0
+    },
+    {
+        "datetime":"2026-08-19T08:15:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.54,
+        "high":123.58,
+        "low":123.4,
+        "close":123.53,
+        "volume":83545.0
+    },
+    {
+        "datetime":"2026-08-19T08:30:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.51,
+        "high":123.6,
+        "low":123.44,
+        "close":123.5,
+        "volume":11599.0
     }
 ]

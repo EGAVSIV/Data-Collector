@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-25T04:45:00.000",
-        "symbol":"NSE:LODHA",
-        "open":1229.1,
-        "high":1229.8,
-        "low":1201.05,
-        "close":1204.25,
-        "volume":179094.0
-    },
-    {
         "datetime":"2024-04-25T05:45:00.000",
         "symbol":"NSE:LODHA",
         "open":1206.25,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:LODHA",
         "open":1204.0,
         "high":1207.4,
-        "low":1202.3,
-        "close":1202.9,
-        "volume":94997.0
+        "low":1200.6,
+        "close":1201.7,
+        "volume":98752.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:LODHA",
+        "open":1200.9,
+        "high":1203.8,
+        "low":1199.0,
+        "close":1202.1,
+        "volume":91756.0
     }
 ]

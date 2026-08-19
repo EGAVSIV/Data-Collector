@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T04:45:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":152.22,
-        "high":152.43,
-        "low":152.12,
-        "close":152.3,
-        "volume":107580.0
-    },
-    {
-        "datetime":"2025-12-24T05:00:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":152.31,
-        "high":152.75,
-        "low":152.28,
-        "close":152.5,
-        "volume":113642.0
-    },
-    {
-        "datetime":"2025-12-24T05:15:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":152.49,
-        "high":152.5,
-        "low":151.84,
-        "close":151.9,
-        "volume":310948.0
-    },
-    {
-        "datetime":"2025-12-24T05:30:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":151.8,
-        "high":151.99,
-        "low":151.67,
-        "close":151.91,
-        "volume":155315.0
-    },
-    {
         "datetime":"2025-12-24T05:45:00.000",
         "symbol":"NSE:UNIONBANK",
         "open":151.91,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:UNIONBANK",
         "open":185.49,
         "high":185.8,
+        "low":185.4,
+        "close":185.41,
+        "volume":125034.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":185.41,
+        "high":185.74,
         "low":185.41,
-        "close":185.58,
-        "volume":56574.0
+        "close":185.74,
+        "volume":48936.0
+    },
+    {
+        "datetime":"2026-08-19T08:00:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":185.74,
+        "high":185.98,
+        "low":185.58,
+        "close":185.94,
+        "volume":135091.0
+    },
+    {
+        "datetime":"2026-08-19T08:15:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":185.94,
+        "high":186.0,
+        "low":185.61,
+        "close":185.63,
+        "volume":123880.0
+    },
+    {
+        "datetime":"2026-08-19T08:30:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":185.66,
+        "high":185.8,
+        "low":185.6,
+        "close":185.79,
+        "volume":111451.0
     }
 ]

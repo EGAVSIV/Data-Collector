@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T04:45:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":311.5,
-        "high":311.9,
-        "low":310.2,
-        "close":310.3,
-        "volume":215269.0
-    },
-    {
-        "datetime":"2025-12-24T05:00:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":310.85,
-        "high":310.9,
-        "low":309.7,
-        "close":310.0,
-        "volume":186752.0
-    },
-    {
-        "datetime":"2025-12-24T05:15:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":309.95,
-        "high":310.05,
-        "low":308.55,
-        "close":309.2,
-        "volume":333187.0
-    },
-    {
-        "datetime":"2025-12-24T05:30:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":309.2,
-        "high":309.25,
-        "low":308.1,
-        "close":308.3,
-        "volume":179105.0
-    },
-    {
         "datetime":"2025-12-24T05:45:00.000",
         "symbol":"NSE:RBLBANK",
         "open":308.3,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:RBLBANK",
         "open":379.75,
         "high":380.7,
-        "low":379.15,
+        "low":378.55,
+        "close":378.55,
+        "volume":225945.0
+    },
+    {
+        "datetime":"2026-08-19T07:45:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":378.65,
+        "high":379.0,
+        "low":378.3,
+        "close":378.9,
+        "volume":22066.0
+    },
+    {
+        "datetime":"2026-08-19T08:00:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":378.9,
+        "high":379.55,
+        "low":378.7,
         "close":379.25,
-        "volume":124966.0
+        "volume":96688.0
+    },
+    {
+        "datetime":"2026-08-19T08:15:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":379.1,
+        "high":380.1,
+        "low":379.0,
+        "close":379.6,
+        "volume":51794.0
+    },
+    {
+        "datetime":"2026-08-19T08:30:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":379.75,
+        "high":380.5,
+        "low":379.5,
+        "close":380.3,
+        "volume":17818.0
     }
 ]
