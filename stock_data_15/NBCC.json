@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:NBCC",
-        "open":116.55,
-        "high":116.75,
-        "low":116.5,
-        "close":116.53,
-        "volume":97119.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:NBCC",
-        "open":116.53,
-        "high":116.79,
-        "low":116.5,
-        "close":116.7,
-        "volume":99040.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:NBCC",
-        "open":116.75,
-        "high":116.79,
-        "low":116.5,
-        "close":116.65,
-        "volume":132958.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:NBCC",
-        "open":116.6,
-        "high":116.75,
-        "low":116.2,
-        "close":116.22,
-        "volume":95992.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:NBCC",
         "open":116.22,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:NBCC",
         "open":87.51,
-        "high":87.63,
+        "high":87.68,
         "low":87.42,
+        "close":87.64,
+        "volume":180283.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:NBCC",
+        "open":87.61,
+        "high":87.65,
+        "low":87.5,
+        "close":87.54,
+        "volume":161411.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:NBCC",
+        "open":87.55,
+        "high":87.6,
+        "low":87.42,
+        "close":87.5,
+        "volume":120283.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:NBCC",
+        "open":87.5,
+        "high":87.57,
+        "low":87.32,
         "close":87.55,
-        "volume":80685.0
+        "volume":156350.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:NBCC",
+        "open":87.54,
+        "high":87.56,
+        "low":87.52,
+        "close":87.56,
+        "volume":2623.0
     }
 ]

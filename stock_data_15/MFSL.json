@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1695.4,
-        "high":1695.4,
-        "low":1693.2,
-        "close":1693.9,
-        "volume":4450.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1693.9,
-        "high":1696.5,
-        "low":1693.1,
-        "close":1696.4,
-        "volume":5037.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1696.2,
-        "high":1697.5,
-        "low":1693.5,
-        "close":1695.2,
-        "volume":4988.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1695.2,
-        "high":1696.6,
-        "low":1694.1,
-        "close":1694.1,
-        "volume":6254.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:MFSL",
         "open":1694.7,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:MFSL",
         "open":1561.6,
-        "high":1570.1,
+        "high":1572.3,
         "low":1560.1,
-        "close":1569.6,
-        "volume":6136.0
+        "close":1565.4,
+        "volume":10210.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1565.3,
+        "high":1567.5,
+        "low":1562.6,
+        "close":1563.1,
+        "volume":5528.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1563.0,
+        "high":1563.1,
+        "low":1558.1,
+        "close":1559.0,
+        "volume":14936.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1559.0,
+        "high":1561.2,
+        "low":1559.0,
+        "close":1559.6,
+        "volume":4138.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1559.1,
+        "high":1559.5,
+        "low":1559.0,
+        "close":1559.2,
+        "volume":319.0
     }
 ]

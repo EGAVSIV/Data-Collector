@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1518.0,
-        "high":1518.3,
-        "low":1517.0,
-        "close":1517.0,
-        "volume":8365.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1517.0,
-        "high":1519.2,
-        "low":1516.9,
-        "close":1517.7,
-        "volume":10877.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1518.5,
-        "high":1519.2,
-        "low":1517.5,
-        "close":1518.8,
-        "volume":7063.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1518.9,
-        "high":1519.6,
-        "low":1516.0,
-        "close":1516.1,
-        "volume":24537.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:CDSL",
         "open":1516.2,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:CDSL",
         "open":1339.6,
-        "high":1344.0,
+        "high":1345.0,
         "low":1339.4,
-        "close":1343.7,
-        "volume":12418.0
+        "close":1344.0,
+        "volume":36162.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1343.5,
+        "high":1343.9,
+        "low":1338.5,
+        "close":1339.2,
+        "volume":26458.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1339.3,
+        "high":1339.3,
+        "low":1337.3,
+        "close":1339.1,
+        "volume":13765.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1338.6,
+        "high":1340.8,
+        "low":1335.4,
+        "close":1340.6,
+        "volume":23604.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1339.8,
+        "high":1340.4,
+        "low":1339.5,
+        "close":1339.7,
+        "volume":348.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:SRF",
-        "open":3113.7,
-        "high":3114.0,
-        "low":3108.8,
-        "close":3110.6,
-        "volume":3786.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:SRF",
-        "open":3110.6,
-        "high":3110.6,
-        "low":3107.3,
-        "close":3110.0,
-        "volume":9648.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:SRF",
-        "open":3110.0,
-        "high":3110.7,
-        "low":3108.0,
-        "close":3110.0,
-        "volume":5806.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:SRF",
-        "open":3110.0,
-        "high":3117.0,
-        "low":3109.9,
-        "close":3112.5,
-        "volume":7450.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:SRF",
         "open":3112.6,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:SRF",
         "open":2597.4,
         "high":2602.2,
-        "low":2596.0,
+        "low":2593.2,
+        "close":2593.3,
+        "volume":18538.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:SRF",
+        "open":2593.3,
+        "high":2597.9,
+        "low":2591.7,
+        "close":2595.0,
+        "volume":18179.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:SRF",
+        "open":2595.0,
+        "high":2597.5,
+        "low":2593.3,
         "close":2596.2,
-        "volume":9772.0
+        "volume":17624.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:SRF",
+        "open":2595.9,
+        "high":2599.0,
+        "low":2591.6,
+        "close":2591.9,
+        "volume":16248.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:SRF",
+        "open":2591.2,
+        "high":2592.0,
+        "low":2590.6,
+        "close":2590.8,
+        "volume":2106.0
     }
 ]

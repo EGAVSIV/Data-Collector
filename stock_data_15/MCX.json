@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:MCX",
-        "open":2169.2,
-        "high":2172.6,
-        "low":2168.6,
-        "close":2171.6,
-        "volume":35500.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:MCX",
-        "open":2171.0,
-        "high":2177.4,
-        "low":2170.8,
-        "close":2177.4,
-        "volume":68290.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:MCX",
-        "open":2176.6,
-        "high":2177.0,
-        "low":2169.0,
-        "close":2171.0,
-        "volume":54160.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:MCX",
-        "open":2171.0,
-        "high":2171.6,
-        "low":2166.6,
-        "close":2168.2,
-        "volume":43985.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:MCX",
         "open":2168.0,
@@ -35996,7 +35960,43 @@
         "open":3015.0,
         "high":3044.0,
         "low":3013.8,
-        "close":3037.0,
-        "volume":91802.0
+        "close":3026.9,
+        "volume":168189.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:MCX",
+        "open":3027.7,
+        "high":3034.2,
+        "low":3023.1,
+        "close":3027.1,
+        "volume":97917.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:MCX",
+        "open":3027.0,
+        "high":3027.8,
+        "low":2990.0,
+        "close":3002.2,
+        "volume":262171.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:MCX",
+        "open":3002.0,
+        "high":3022.2,
+        "low":2998.4,
+        "close":3017.8,
+        "volume":106768.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:MCX",
+        "open":3015.0,
+        "high":3016.7,
+        "low":3011.2,
+        "close":3012.2,
+        "volume":7900.0
     }
 ]

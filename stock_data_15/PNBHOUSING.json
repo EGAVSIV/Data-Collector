@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:PNBHOUSING",
-        "open":939.4,
-        "high":939.55,
-        "low":937.6,
-        "close":937.8,
-        "volume":6000.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:PNBHOUSING",
-        "open":937.8,
-        "high":939.0,
-        "low":937.1,
-        "close":937.9,
-        "volume":11312.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:PNBHOUSING",
-        "open":937.9,
-        "high":939.0,
-        "low":937.05,
-        "close":937.95,
-        "volume":5865.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:PNBHOUSING",
-        "open":937.9,
-        "high":937.95,
-        "low":933.4,
-        "close":934.85,
-        "volume":27072.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:PNBHOUSING",
         "open":934.85,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:PNBHOUSING",
         "open":1148.5,
-        "high":1148.7,
+        "high":1152.0,
         "low":1146.4,
-        "close":1147.3,
-        "volume":8027.0
+        "close":1149.8,
+        "volume":21983.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:PNBHOUSING",
+        "open":1148.9,
+        "high":1149.8,
+        "low":1146.5,
+        "close":1147.8,
+        "volume":16788.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:PNBHOUSING",
+        "open":1147.8,
+        "high":1159.7,
+        "low":1147.0,
+        "close":1152.5,
+        "volume":532395.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:PNBHOUSING",
+        "open":1152.3,
+        "high":1155.8,
+        "low":1151.5,
+        "close":1154.0,
+        "volume":19467.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:PNBHOUSING",
+        "open":1153.5,
+        "high":1153.5,
+        "low":1153.4,
+        "close":1153.4,
+        "volume":75.0
     }
 ]

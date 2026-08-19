@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-24T08:45:00.000",
-        "symbol":"NSE:SUZLON",
-        "open":41.75,
-        "high":41.95,
-        "low":41.5,
-        "close":41.95,
-        "volume":5113576.0
-    },
-    {
         "datetime":"2024-04-24T09:45:00.000",
         "symbol":"NSE:SUZLON",
         "open":41.95,
@@ -35996,7 +35987,16 @@
         "open":47.68,
         "high":47.76,
         "low":46.94,
-        "close":47.21,
-        "volume":12112065.0
+        "close":47.13,
+        "volume":12486647.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:SUZLON",
+        "open":47.13,
+        "high":47.21,
+        "low":46.82,
+        "close":47.02,
+        "volume":5923478.0
     }
 ]

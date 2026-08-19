@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-24T08:45:00.000",
-        "symbol":"NSE:ASIANPAINT",
-        "open":2866.4,
-        "high":2870.95,
-        "low":2860.0,
-        "close":2870.65,
-        "volume":225582.0
-    },
-    {
         "datetime":"2024-04-24T09:45:00.000",
         "symbol":"NSE:ASIANPAINT",
         "open":2870.05,
@@ -35996,7 +35987,16 @@
         "open":2625.0,
         "high":2634.9,
         "low":2607.7,
-        "close":2623.8,
-        "volume":96451.0
+        "close":2615.3,
+        "volume":113595.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:ASIANPAINT",
+        "open":2615.3,
+        "high":2616.0,
+        "low":2610.1,
+        "close":2610.1,
+        "volume":93191.0
     }
 ]

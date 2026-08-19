@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:SBILIFE",
-        "open":2029.0,
-        "high":2029.6,
-        "low":2025.0,
-        "close":2025.1,
-        "volume":14664.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:SBILIFE",
-        "open":2025.5,
-        "high":2029.9,
-        "low":2025.2,
-        "close":2028.5,
-        "volume":12434.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:SBILIFE",
-        "open":2029.1,
-        "high":2029.3,
-        "low":2026.0,
-        "close":2029.0,
-        "volume":20424.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:SBILIFE",
-        "open":2029.0,
-        "high":2030.0,
-        "low":2026.2,
-        "close":2027.8,
-        "volume":18991.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:SBILIFE",
         "open":2027.8,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:SBILIFE",
         "open":1753.7,
-        "high":1754.5,
+        "high":1757.3,
         "low":1752.6,
-        "close":1754.2,
-        "volume":13623.0
+        "close":1756.3,
+        "volume":32801.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:SBILIFE",
+        "open":1756.3,
+        "high":1758.0,
+        "low":1755.4,
+        "close":1755.9,
+        "volume":32014.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:SBILIFE",
+        "open":1755.8,
+        "high":1755.8,
+        "low":1747.6,
+        "close":1749.8,
+        "volume":50964.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:SBILIFE",
+        "open":1749.3,
+        "high":1750.4,
+        "low":1746.9,
+        "close":1748.0,
+        "volume":37224.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:SBILIFE",
+        "open":1748.0,
+        "high":1748.4,
+        "low":1747.6,
+        "close":1748.1,
+        "volume":1713.0
     }
 ]

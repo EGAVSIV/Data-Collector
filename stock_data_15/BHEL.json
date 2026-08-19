@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:BHEL",
-        "open":283.0,
-        "high":283.0,
-        "low":282.75,
-        "close":282.8,
-        "volume":71373.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:BHEL",
-        "open":282.9,
-        "high":283.55,
-        "low":282.75,
-        "close":283.55,
-        "volume":148163.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:BHEL",
-        "open":283.55,
-        "high":283.55,
-        "low":282.7,
-        "close":282.9,
-        "volume":337258.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:BHEL",
-        "open":282.95,
-        "high":283.0,
-        "low":282.65,
-        "close":282.85,
-        "volume":79980.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:BHEL",
         "open":282.85,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:BHEL",
         "open":416.4,
-        "high":417.2,
+        "high":417.55,
         "low":415.95,
+        "close":417.4,
+        "volume":213184.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:BHEL",
+        "open":417.5,
+        "high":418.4,
+        "low":416.0,
+        "close":418.05,
+        "volume":206163.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:BHEL",
+        "open":417.95,
+        "high":418.1,
+        "low":416.35,
+        "close":417.5,
+        "volume":219733.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:BHEL",
+        "open":417.55,
+        "high":417.6,
+        "low":416.05,
         "close":417.2,
-        "volume":123465.0
+        "volume":161516.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:BHEL",
+        "open":417.05,
+        "high":417.5,
+        "low":417.05,
+        "close":417.05,
+        "volume":11557.0
     }
 ]

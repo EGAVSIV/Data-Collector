@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:GAIL",
-        "open":172.24,
-        "high":172.29,
-        "low":172.15,
-        "close":172.15,
-        "volume":38810.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:GAIL",
-        "open":172.15,
-        "high":172.2,
-        "low":172.0,
-        "close":172.11,
-        "volume":47173.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:GAIL",
-        "open":172.11,
-        "high":172.22,
-        "low":172.07,
-        "close":172.1,
-        "volume":48194.0
-    },
-    {
         "datetime":"2025-12-23T08:45:00.000",
         "symbol":"NSE:GAIL",
         "open":172.09,
@@ -35996,7 +35969,34 @@
         "open":172.43,
         "high":172.55,
         "low":172.33,
-        "close":172.45,
-        "volume":22208.0
+        "close":172.49,
+        "volume":63831.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:GAIL",
+        "open":172.49,
+        "high":172.49,
+        "low":171.73,
+        "close":171.79,
+        "volume":164834.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:GAIL",
+        "open":171.87,
+        "high":172.18,
+        "low":171.61,
+        "close":172.08,
+        "volume":135536.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:GAIL",
+        "open":172.07,
+        "high":172.18,
+        "low":172.0,
+        "close":172.11,
+        "volume":31062.0
     }
 ]

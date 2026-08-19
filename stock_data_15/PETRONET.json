@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":279.65,
-        "high":279.8,
-        "low":279.5,
-        "close":279.8,
-        "volume":39840.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":279.8,
-        "high":279.85,
-        "low":279.75,
-        "close":279.75,
-        "volume":23931.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":279.8,
-        "high":279.85,
-        "low":279.35,
-        "close":279.35,
-        "volume":51930.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":279.45,
-        "high":279.45,
-        "low":278.55,
-        "close":278.6,
-        "volume":53953.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:PETRONET",
         "open":278.6,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-19T04:30:00.000",
         "symbol":"NSE:PETRONET",
         "open":290.25,
-        "high":290.8,
+        "high":290.9,
         "low":289.9,
-        "close":290.55,
-        "volume":108713.0
+        "close":290.1,
+        "volume":241475.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":290.25,
+        "high":290.4,
+        "low":289.1,
+        "close":289.85,
+        "volume":240554.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":289.85,
+        "high":290.7,
+        "low":289.2,
+        "close":290.4,
+        "volume":270450.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":290.4,
+        "high":290.55,
+        "low":289.65,
+        "close":290.0,
+        "volume":117628.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":290.0,
+        "high":290.0,
+        "low":289.8,
+        "close":289.8,
+        "volume":907.0
     }
 ]

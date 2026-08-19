@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T08:00:00.000",
-        "symbol":"NSE:SAIL",
-        "open":132.8,
-        "high":132.86,
-        "low":132.7,
-        "close":132.7,
-        "volume":68498.0
-    },
-    {
-        "datetime":"2025-12-23T08:15:00.000",
-        "symbol":"NSE:SAIL",
-        "open":132.7,
-        "high":132.81,
-        "low":132.65,
-        "close":132.73,
-        "volume":91240.0
-    },
-    {
-        "datetime":"2025-12-23T08:30:00.000",
-        "symbol":"NSE:SAIL",
-        "open":132.77,
-        "high":132.84,
-        "low":132.61,
-        "close":132.67,
-        "volume":106478.0
-    },
-    {
-        "datetime":"2025-12-23T08:45:00.000",
-        "symbol":"NSE:SAIL",
-        "open":132.67,
-        "high":132.8,
-        "low":132.49,
-        "close":132.52,
-        "volume":131740.0
-    },
-    {
         "datetime":"2025-12-23T09:00:00.000",
         "symbol":"NSE:SAIL",
         "open":132.58,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:SAIL",
         "open":171.34,
         "high":171.41,
-        "low":170.3,
-        "close":170.3,
-        "volume":172215.0
+        "low":170.09,
+        "close":170.62,
+        "volume":337389.0
+    },
+    {
+        "datetime":"2026-08-19T04:45:00.000",
+        "symbol":"NSE:SAIL",
+        "open":170.62,
+        "high":173.18,
+        "low":170.54,
+        "close":173.06,
+        "volume":992822.0
+    },
+    {
+        "datetime":"2026-08-19T05:00:00.000",
+        "symbol":"NSE:SAIL",
+        "open":172.95,
+        "high":173.1,
+        "low":171.0,
+        "close":171.2,
+        "volume":1111695.0
+    },
+    {
+        "datetime":"2026-08-19T05:15:00.000",
+        "symbol":"NSE:SAIL",
+        "open":171.18,
+        "high":171.65,
+        "low":170.81,
+        "close":171.6,
+        "volume":704193.0
+    },
+    {
+        "datetime":"2026-08-19T05:30:00.000",
+        "symbol":"NSE:SAIL",
+        "open":171.56,
+        "high":171.59,
+        "low":171.46,
+        "close":171.53,
+        "volume":5528.0
     }
 ]
