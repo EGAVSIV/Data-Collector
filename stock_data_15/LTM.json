@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T06:15:00.000",
-        "symbol":"NSE:LTM",
-        "open":6211.0,
-        "high":6227.0,
-        "low":6202.0,
-        "close":6221.0,
-        "volume":28935.0
-    },
-    {
-        "datetime":"2025-12-24T06:30:00.000",
-        "symbol":"NSE:LTM",
-        "open":6219.0,
-        "high":6220.0,
-        "low":6206.0,
-        "close":6210.0,
-        "volume":4705.0
-    },
-    {
         "datetime":"2025-12-24T06:45:00.000",
         "symbol":"NSE:LTM",
         "open":6208.5,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:LTM",
         "open":4553.7,
         "high":4561.6,
-        "low":4550.1,
-        "close":4551.6,
-        "volume":8556.0
+        "low":4546.5,
+        "close":4549.0,
+        "volume":10719.0
+    },
+    {
+        "datetime":"2026-08-19T09:15:00.000",
+        "symbol":"NSE:LTM",
+        "open":4549.0,
+        "high":4553.3,
+        "low":4544.1,
+        "close":4546.7,
+        "volume":19130.0
+    },
+    {
+        "datetime":"2026-08-19T09:30:00.000",
+        "symbol":"NSE:LTM",
+        "open":4546.7,
+        "high":4554.7,
+        "low":4525.4,
+        "close":4549.5,
+        "volume":43772.0
     }
 ]

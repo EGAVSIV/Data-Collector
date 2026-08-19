@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T06:15:00.000",
-        "symbol":"NSE:ADANIGREEN",
-        "open":1019.7,
-        "high":1022.0,
-        "low":1019.1,
-        "close":1022.0,
-        "volume":20649.0
-    },
-    {
-        "datetime":"2025-12-24T06:30:00.000",
-        "symbol":"NSE:ADANIGREEN",
-        "open":1021.9,
-        "high":1022.5,
-        "low":1019.9,
-        "close":1020.2,
-        "volume":16067.0
-    },
-    {
         "datetime":"2025-12-24T06:45:00.000",
         "symbol":"NSE:ADANIGREEN",
         "open":1020.2,
@@ -35952,7 +35934,7 @@
         "high":1289.8,
         "low":1287.4,
         "close":1287.6,
-        "volume":13968.0
+        "volume":13343.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35978,25 @@
         "open":1291.2,
         "high":1297.7,
         "low":1291.2,
-        "close":1292.3,
-        "volume":55136.0
+        "close":1292.0,
+        "volume":58563.0
+    },
+    {
+        "datetime":"2026-08-19T09:15:00.000",
+        "symbol":"NSE:ADANIGREEN",
+        "open":1292.7,
+        "high":1293.0,
+        "low":1291.2,
+        "close":1291.4,
+        "volume":30165.0
+    },
+    {
+        "datetime":"2026-08-19T09:30:00.000",
+        "symbol":"NSE:ADANIGREEN",
+        "open":1291.2,
+        "high":1292.0,
+        "low":1289.7,
+        "close":1290.7,
+        "volume":129466.0
     }
 ]
