@@ -13,11 +13,11 @@ tv = TvDatafeed(USERNAME, PASSWORD)
 # Timeframes → Folder Mapping
 # ==============================
 TIMEFRAMES = {
-    "D":  (Interval.in_daily,   "stock_data_D"),
-    "W":  (Interval.in_weekly,  "stock_data_W"),
-    "M":  (Interval.in_monthly, "stock_data_M"),
-    "15": (Interval.in_15_minute, "stock_data_15"),
-    "1H": (Interval.in_1_hour,  "stock_data_1H"),
+    "D":  (Interval.in_daily,   "stockdata_D"),
+    "W":  (Interval.in_weekly,  "stockdata_W"),
+    "M":  (Interval.in_monthly, "stockdata_M"),
+    "15": (Interval.in_15_minute, "stockdata_15"),
+    "1H": (Interval.in_1_hour,  "stockdata_1H"),
 }
 
 BARS = 4000
