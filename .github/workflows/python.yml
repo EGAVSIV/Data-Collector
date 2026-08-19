@@ -124,7 +124,7 @@ jobs:
       - name: Check for Changes
         id: git-check
         run: |
-          if [[ -n "$(git status --porcelain stock_data_D stock_data_W stock_data_M stock_data_15 stock_data_1H)" ]]; then
+          if [[ -n "$(git status --porcelain stockdata_D stockdata_W stockdata_M stockdata_15 stockdata_1H)" ]]; then
             echo "changes=true" >> "$GITHUB_OUTPUT"
           else
             echo "changes=false" >> "$GITHUB_OUTPUT"
@@ -140,7 +140,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add stock_data_D/ stock_data_W/ stock_data_M/ stock_data_15/ stock_data_1H/
+          git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
           git commit -m "Auto update stock data $(date '+%Y-%m-%d %H:%M:%S UTC')"
           git push
 
@@ -156,14 +156,14 @@ jobs:
           git clone https://x-access-token:${PAT_TOKEN}@github.com/EGAVSIV/stock-scan.git target_repo
           
           # 2. Copy updated stock data folders to the secondary repo folder
-          cp -r stock_data_D stock_data_W stock_data_M stock_data_15 stock_data_1H target_repo/
+          cp -r stockdata_D stockdata_W stockdata_M stockdata_15 stockdata_1H target_repo/
           
           # 3. Commit and push from target repo context
           cd target_repo
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          git add stock_data_D/ stock_data_W/ stock_data_M/ stock_data_15/ stock_data_1H/
+          git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
           
           # Only commit if changes exist
           if ! git diff --cached --quiet; then
