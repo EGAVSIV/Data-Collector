@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T09:15:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7795.5,
-        "high":7808.0,
-        "low":7783.0,
-        "close":7800.5,
-        "volume":2786.0
-    },
-    {
-        "datetime":"2025-12-23T09:30:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7805.0,
-        "high":7832.5,
-        "low":7800.5,
-        "close":7820.0,
-        "volume":12207.0
-    },
-    {
-        "datetime":"2025-12-23T09:45:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7822.0,
-        "high":7825.0,
-        "low":7815.0,
-        "close":7820.0,
-        "volume":6601.0
-    },
-    {
         "datetime":"2025-12-24T03:45:00.000",
         "symbol":"NSE:OFSS",
         "open":7820.0,
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-19T05:45:00.000",
         "symbol":"NSE:OFSS",
         "open":11697.0,
-        "high":11745.0,
+        "high":11747.0,
         "low":11696.0,
-        "close":11744.0,
-        "volume":11470.0
+        "close":11741.0,
+        "volume":12105.0
+    },
+    {
+        "datetime":"2026-08-19T06:00:00.000",
+        "symbol":"NSE:OFSS",
+        "open":11737.0,
+        "high":11745.0,
+        "low":11722.0,
+        "close":11729.0,
+        "volume":4141.0
+    },
+    {
+        "datetime":"2026-08-19T06:15:00.000",
+        "symbol":"NSE:OFSS",
+        "open":11729.0,
+        "high":11739.0,
+        "low":11725.0,
+        "close":11734.0,
+        "volume":3063.0
+    },
+    {
+        "datetime":"2026-08-19T06:30:00.000",
+        "symbol":"NSE:OFSS",
+        "open":11734.0,
+        "high":11738.0,
+        "low":11725.0,
+        "close":11737.0,
+        "volume":2068.0
     }
 ]

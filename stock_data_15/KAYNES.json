@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-23T09:30:00.000",
-        "symbol":"NSE:KAYNES",
-        "open":4137.0,
-        "high":4145.0,
-        "low":4135.5,
-        "close":4141.0,
-        "volume":45757.0
-    },
-    {
-        "datetime":"2025-12-23T09:45:00.000",
-        "symbol":"NSE:KAYNES",
-        "open":4142.0,
-        "high":4144.5,
-        "low":4136.0,
-        "close":4138.0,
-        "volume":70379.0
-    },
-    {
         "datetime":"2025-12-24T03:45:00.000",
         "symbol":"NSE:KAYNES",
         "open":4150.0,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-19T06:00:00.000",
         "symbol":"NSE:KAYNES",
         "open":3753.0,
-        "high":3753.0,
-        "low":3748.1,
-        "close":3748.3,
-        "volume":1912.0
+        "high":3773.8,
+        "low":3733.7,
+        "close":3735.0,
+        "volume":98010.0
+    },
+    {
+        "datetime":"2026-08-19T06:15:00.000",
+        "symbol":"NSE:KAYNES",
+        "open":3735.0,
+        "high":3744.8,
+        "low":3733.8,
+        "close":3738.8,
+        "volume":23213.0
+    },
+    {
+        "datetime":"2026-08-19T06:30:00.000",
+        "symbol":"NSE:KAYNES",
+        "open":3738.3,
+        "high":3803.0,
+        "low":3726.0,
+        "close":3793.7,
+        "volume":148288.0
     }
 ]
