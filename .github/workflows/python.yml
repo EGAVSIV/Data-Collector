@@ -131,23 +131,42 @@ jobs:
           fi
 
 
+     # ==========================================
+      # STEP 8 - Commit & Push to Current Repo
       # ==========================================
-      # STEP 8 - Commit Updated JSON Data
-      # ==========================================
-
-      - name: Commit and Push Stock Data
+      - name: Commit and Push to Local Repo
         if: steps.git-check.outputs.changes == 'true'
         run: |
-
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add stock_data_D/
-          git add stock_data_W/
-          git add stock_data_M/
-          git add stock_data_15/
-          git add stock_data_1H/
-
+          git add stock_data_D/ stock_data_W/ stock_data_M/ stock_data_15/ stock_data_1H/
           git commit -m "Auto update stock data $(date '+%Y-%m-%d %H:%M:%S UTC')"
-
           git push
+
+      # ==========================================
+      # STEP 9 - Push Updated Data to stock-scan Repo
+      # ==========================================
+      - name: Push Data to Secondary Repo (stock-scan)
+        if: steps.git-check.outputs.changes == 'true'
+        env:
+          PAT_TOKEN: ${{ secrets.DATA_PUSH_PAT }}
+        run: |
+          # 1. Clone stock-scan repository using PAT authentication
+          git clone https://x-access-token:${PAT_TOKEN}@github.com/EGAVSIV/stock-scan.git target_repo
+          
+          # 2. Copy updated stock data folders to the secondary repo folder
+          cp -r stock_data_D stock_data_W stock_data_M stock_data_15 stock_data_1H target_repo/
+          
+          # 3. Commit and push from target repo context
+          cd target_repo
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          git add stock_data_D/ stock_data_W/ stock_data_M/ stock_data_15/ stock_data_1H/
+          
+          # Only commit if changes exist
+          if ! git diff --cached --quiet; then
+            git commit -m "Sync stock data from Data-Collector $(date '+%Y-%m-%d %H:%M:%S UTC')"
+            git push
+          fi
