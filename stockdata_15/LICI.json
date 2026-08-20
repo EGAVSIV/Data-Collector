@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T09:30:00.000",
-        "symbol":"NSE:LICI",
-        "open":427.5,
-        "high":427.525,
-        "low":426.35,
-        "close":426.35,
-        "volume":168544.0
-    },
-    {
-        "datetime":"2025-12-24T09:45:00.000",
-        "symbol":"NSE:LICI",
-        "open":426.3,
-        "high":426.65,
-        "low":425.75,
-        "close":425.85,
-        "volume":84484.0
-    },
-    {
-        "datetime":"2025-12-26T03:45:00.000",
-        "symbol":"NSE:LICI",
-        "open":425.675,
-        "high":425.7,
-        "low":424.05,
-        "close":424.8,
-        "volume":76408.0
-    },
-    {
         "datetime":"2025-12-26T04:00:00.000",
         "symbol":"NSE:LICI",
         "open":424.625,
@@ -35832,10 +35805,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:LICI",
         "open":413.0,
-        "high":413.45,
+        "high":413.5,
         "low":412.55,
         "close":413.45,
-        "volume":94189.0
+        "volume":140044.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T06:15:00.000",
         "symbol":"NSE:LICI",
         "open":420.6,
-        "high":420.9,
+        "high":421.75,
         "low":419.95,
-        "close":420.05,
-        "volume":223778.0
+        "close":421.5,
+        "volume":479806.0
+    },
+    {
+        "datetime":"2026-08-20T06:30:00.000",
+        "symbol":"NSE:LICI",
+        "open":421.5,
+        "high":422.9,
+        "low":421.3,
+        "close":421.75,
+        "volume":947718.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:LICI",
+        "open":421.7,
+        "high":422.3,
+        "low":421.15,
+        "close":421.3,
+        "volume":350324.0
+    },
+    {
+        "datetime":"2026-08-20T07:00:00.000",
+        "symbol":"NSE:LICI",
+        "open":421.25,
+        "high":421.35,
+        "low":421.0,
+        "close":421.05,
+        "volume":550691.0
     }
 ]

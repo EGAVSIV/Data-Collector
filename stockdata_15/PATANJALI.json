@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T09:30:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":550.1,
-        "high":551.2,
-        "low":545.05,
-        "close":545.85,
-        "volume":200905.0
-    },
-    {
-        "datetime":"2025-12-24T09:45:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":545.85,
-        "high":547.5,
-        "low":545.0,
-        "close":545.9,
-        "volume":115156.0
-    },
-    {
-        "datetime":"2025-12-26T03:45:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":545.8,
-        "high":549.8,
-        "low":544.35,
-        "close":548.15,
-        "volume":82884.0
-    },
-    {
         "datetime":"2025-12-26T04:00:00.000",
         "symbol":"NSE:PATANJALI",
         "open":548.15,
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:PATANJALI",
         "open":352.5,
         "high":352.7,
-        "low":352.25,
-        "close":352.5,
-        "volume":15164.0
+        "low":351.6,
+        "close":351.95,
+        "volume":60723.0
+    },
+    {
+        "datetime":"2026-08-20T06:30:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":351.95,
+        "high":351.95,
+        "low":351.5,
+        "close":351.65,
+        "volume":26261.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":351.65,
+        "high":352.2,
+        "low":351.65,
+        "close":351.95,
+        "volume":22822.0
+    },
+    {
+        "datetime":"2026-08-20T07:00:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":351.95,
+        "high":351.95,
+        "low":350.8,
+        "close":351.7,
+        "volume":68178.0
     }
 ]

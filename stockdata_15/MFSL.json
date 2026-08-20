@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T09:30:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1683.4,
-        "high":1684.0,
-        "low":1677.0,
-        "close":1677.6,
-        "volume":18179.0
-    },
-    {
-        "datetime":"2025-12-24T09:45:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1677.8,
-        "high":1680.9,
-        "low":1674.3,
-        "close":1674.4,
-        "volume":29349.0
-    },
-    {
-        "datetime":"2025-12-26T03:45:00.000",
-        "symbol":"NSE:MFSL",
-        "open":1670.1,
-        "high":1680.0,
-        "low":1665.7,
-        "close":1676.5,
-        "volume":7847.0
-    },
-    {
         "datetime":"2025-12-26T04:00:00.000",
         "symbol":"NSE:MFSL",
         "open":1676.7,
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:MFSL",
         "open":1576.9,
         "high":1577.3,
-        "low":1575.6,
-        "close":1576.7,
-        "volume":3801.0
+        "low":1574.4,
+        "close":1575.2,
+        "volume":34147.0
+    },
+    {
+        "datetime":"2026-08-20T06:30:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1575.2,
+        "high":1575.3,
+        "low":1568.7,
+        "close":1573.5,
+        "volume":33562.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1573.5,
+        "high":1578.5,
+        "low":1571.1,
+        "close":1578.4,
+        "volume":8466.0
+    },
+    {
+        "datetime":"2026-08-20T07:00:00.000",
+        "symbol":"NSE:MFSL",
+        "open":1578.1,
+        "high":1578.5,
+        "low":1576.7,
+        "close":1577.7,
+        "volume":2944.0
     }
 ]

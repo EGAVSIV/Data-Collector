@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-25T09:45:00.000",
-        "symbol":"NSE:TATACONSUM",
-        "open":1093.2993744,
-        "high":1096.0655952,
-        "low":1089.4958208,
-        "close":1091.5210896,
-        "volume":441615.65121627
-    },
-    {
         "datetime":"2024-04-26T03:45:00.000",
         "symbol":"NSE:TATACONSUM",
         "open":1097.596896,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:TATACONSUM",
         "open":1067.6,
         "high":1071.0,
-        "low":1066.0,
-        "close":1068.9,
-        "volume":113583.0
+        "low":1065.8,
+        "close":1066.3,
+        "volume":138755.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:TATACONSUM",
+        "open":1066.2,
+        "high":1067.8,
+        "low":1063.2,
+        "close":1067.6,
+        "volume":84540.0
     }
 ]

@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-25T09:45:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":149.7,
-        "high":150.75,
-        "low":149.65,
-        "close":150.15,
-        "volume":2046928.0
-    },
-    {
         "datetime":"2024-04-26T03:45:00.000",
         "symbol":"NSE:UNIONBANK",
         "open":150.7,
@@ -35996,7 +35987,16 @@
         "open":187.5,
         "high":187.6,
         "low":187.25,
-        "close":187.39,
-        "volume":394247.0
+        "close":187.43,
+        "volume":527052.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":187.43,
+        "high":187.49,
+        "low":186.9,
+        "close":187.0,
+        "volume":402291.0
     }
 ]

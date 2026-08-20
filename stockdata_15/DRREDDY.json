@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T09:30:00.000",
-        "symbol":"NSE:DRREDDY",
-        "open":1268.7,
-        "high":1268.7,
-        "low":1265.0,
-        "close":1265.1,
-        "volume":117982.0
-    },
-    {
-        "datetime":"2025-12-24T09:45:00.000",
-        "symbol":"NSE:DRREDDY",
-        "open":1265.0,
-        "high":1268.0,
-        "low":1265.0,
-        "close":1267.1,
-        "volume":139072.0
-    },
-    {
-        "datetime":"2025-12-26T03:45:00.000",
-        "symbol":"NSE:DRREDDY",
-        "open":1268.0,
-        "high":1275.0,
-        "low":1267.8,
-        "close":1271.5,
-        "volume":26741.0
-    },
-    {
         "datetime":"2025-12-26T04:00:00.000",
         "symbol":"NSE:DRREDDY",
         "open":1271.2,
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T06:15:00.000",
         "symbol":"NSE:DRREDDY",
         "open":1175.0,
-        "high":1175.9,
+        "high":1177.3,
         "low":1174.1,
-        "close":1174.2,
-        "volume":22849.0
+        "close":1177.0,
+        "volume":34106.0
+    },
+    {
+        "datetime":"2026-08-20T06:30:00.000",
+        "symbol":"NSE:DRREDDY",
+        "open":1176.8,
+        "high":1178.4,
+        "low":1176.2,
+        "close":1178.1,
+        "volume":25809.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:DRREDDY",
+        "open":1177.9,
+        "high":1181.5,
+        "low":1177.1,
+        "close":1177.6,
+        "volume":57118.0
+    },
+    {
+        "datetime":"2026-08-20T07:00:00.000",
+        "symbol":"NSE:DRREDDY",
+        "open":1177.5,
+        "high":1179.1,
+        "low":1177.3,
+        "close":1178.2,
+        "volume":13361.0
     }
 ]

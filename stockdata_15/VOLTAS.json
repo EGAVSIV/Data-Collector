@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-24T09:30:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1395.5,
-        "high":1397.7,
-        "low":1392.4,
-        "close":1397.0,
-        "volume":17997.0
-    },
-    {
-        "datetime":"2025-12-24T09:45:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1397.2,
-        "high":1397.6,
-        "low":1390.2,
-        "close":1391.4,
-        "volume":30605.0
-    },
-    {
-        "datetime":"2025-12-26T03:45:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1390.6,
-        "high":1412.4,
-        "low":1386.1,
-        "close":1409.0,
-        "volume":30789.0
-    },
-    {
         "datetime":"2025-12-26T04:00:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1409.8,
@@ -35832,10 +35805,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1221.5,
-        "high":1225.7,
+        "high":1225.1,
         "low":1221.1,
         "close":1225.0,
-        "volume":18950.0
+        "volume":9268.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T06:15:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1219.0,
-        "high":1224.0,
+        "high":1225.0,
         "low":1218.0,
-        "close":1222.2,
-        "volume":214251.0
+        "close":1224.8,
+        "volume":224958.0
+    },
+    {
+        "datetime":"2026-08-20T06:30:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1224.9,
+        "high":1227.0,
+        "low":1221.1,
+        "close":1226.2,
+        "volume":29642.0
+    },
+    {
+        "datetime":"2026-08-20T06:45:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1227.0,
+        "high":1228.1,
+        "low":1222.9,
+        "close":1224.2,
+        "volume":28570.0
+    },
+    {
+        "datetime":"2026-08-20T07:00:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1225.9,
+        "high":1228.8,
+        "low":1225.0,
+        "close":1227.9,
+        "volume":112455.0
     }
 ]
