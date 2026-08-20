@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:45:00.000",
-        "symbol":"NSE:BHARTIARTL",
-        "open":2111.3,
-        "high":2112.0,
-        "low":2107.5,
-        "close":2108.4,
-        "volume":29386.0
-    },
-    {
-        "datetime":"2025-12-26T05:00:00.000",
-        "symbol":"NSE:BHARTIARTL",
-        "open":2108.8,
-        "high":2111.1,
-        "low":2105.1,
-        "close":2110.1,
-        "volume":29559.0
-    },
-    {
-        "datetime":"2025-12-26T05:15:00.000",
-        "symbol":"NSE:BHARTIARTL",
-        "open":2110.1,
-        "high":2111.0,
-        "low":2106.5,
-        "close":2107.9,
-        "volume":30503.0
-    },
-    {
         "datetime":"2025-12-26T05:30:00.000",
         "symbol":"NSE:BHARTIARTL",
         "open":2107.6,
@@ -35779,9 +35752,9 @@
         "symbol":"NSE:BHARTIARTL",
         "open":1927.9,
         "high":1929.4,
-        "low":1927.2,
+        "low":1927.3,
         "close":1927.4,
-        "volume":126649.0
+        "volume":110692.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T07:45:00.000",
         "symbol":"NSE:BHARTIARTL",
         "open":1946.8,
-        "high":1947.4,
+        "high":1947.9,
         "low":1945.0,
-        "close":1947.2,
-        "volume":27701.0
+        "close":1947.8,
+        "volume":51874.0
+    },
+    {
+        "datetime":"2026-08-20T08:00:00.000",
+        "symbol":"NSE:BHARTIARTL",
+        "open":1947.9,
+        "high":1952.0,
+        "low":1947.8,
+        "close":1949.7,
+        "volume":162776.0
+    },
+    {
+        "datetime":"2026-08-20T08:15:00.000",
+        "symbol":"NSE:BHARTIARTL",
+        "open":1949.7,
+        "high":1952.2,
+        "low":1946.4,
+        "close":1946.4,
+        "volume":177059.0
+    },
+    {
+        "datetime":"2026-08-20T08:30:00.000",
+        "symbol":"NSE:BHARTIARTL",
+        "open":1946.7,
+        "high":1947.5,
+        "low":1946.0,
+        "close":1947.0,
+        "volume":47056.0
     }
 ]

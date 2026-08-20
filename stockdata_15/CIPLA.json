@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:45:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1508.1,
-        "high":1509.2,
-        "low":1506.1,
-        "close":1506.2,
-        "volume":56221.0
-    },
-    {
-        "datetime":"2025-12-26T05:00:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1506.8,
-        "high":1506.8,
-        "low":1506.1,
-        "close":1506.1,
-        "volume":27781.0
-    },
-    {
-        "datetime":"2025-12-26T05:15:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1506.5,
-        "high":1506.7,
-        "low":1503.4,
-        "close":1505.1,
-        "volume":14083.0
-    },
-    {
         "datetime":"2025-12-26T05:30:00.000",
         "symbol":"NSE:CIPLA",
         "open":1506.0,
@@ -35778,10 +35751,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:CIPLA",
         "open":1418.6,
-        "high":1419.0,
+        "high":1419.5,
         "low":1417.6,
         "close":1419.0,
-        "volume":8650.0
+        "volume":12864.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T07:45:00.000",
         "symbol":"NSE:CIPLA",
         "open":1435.7,
-        "high":1435.9,
-        "low":1435.0,
-        "close":1435.5,
-        "volume":2201.0
+        "high":1436.6,
+        "low":1434.5,
+        "close":1434.7,
+        "volume":8447.0
+    },
+    {
+        "datetime":"2026-08-20T08:00:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1435.0,
+        "high":1437.5,
+        "low":1434.5,
+        "close":1437.1,
+        "volume":14910.0
+    },
+    {
+        "datetime":"2026-08-20T08:15:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1437.1,
+        "high":1439.4,
+        "low":1437.0,
+        "close":1437.1,
+        "volume":17961.0
+    },
+    {
+        "datetime":"2026-08-20T08:30:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1437.0,
+        "high":1437.6,
+        "low":1436.4,
+        "close":1436.9,
+        "volume":2523.0
     }
 ]

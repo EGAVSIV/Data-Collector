@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:45:00.000",
-        "symbol":"NSE:AUROPHARMA",
-        "open":1211.2,
-        "high":1212.9,
-        "low":1210.6,
-        "close":1212.0,
-        "volume":2450.0
-    },
-    {
-        "datetime":"2025-12-26T05:00:00.000",
-        "symbol":"NSE:AUROPHARMA",
-        "open":1212.2,
-        "high":1213.7,
-        "low":1212.0,
-        "close":1212.4,
-        "volume":2543.0
-    },
-    {
-        "datetime":"2025-12-26T05:15:00.000",
-        "symbol":"NSE:AUROPHARMA",
-        "open":1212.4,
-        "high":1212.8,
-        "low":1211.5,
-        "close":1212.3,
-        "volume":6401.0
-    },
-    {
         "datetime":"2025-12-26T05:30:00.000",
         "symbol":"NSE:AUROPHARMA",
         "open":1212.8,
@@ -35779,9 +35752,9 @@
         "symbol":"NSE:AUROPHARMA",
         "open":1620.0,
         "high":1620.5,
-        "low":1618.1,
+        "low":1618.3,
         "close":1618.3,
-        "volume":14175.0
+        "volume":11532.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35969,34 @@
         "open":1615.0,
         "high":1616.1,
         "low":1613.8,
-        "close":1614.1,
-        "volume":13998.0
+        "close":1614.3,
+        "volume":17929.0
+    },
+    {
+        "datetime":"2026-08-20T08:00:00.000",
+        "symbol":"NSE:AUROPHARMA",
+        "open":1614.3,
+        "high":1614.4,
+        "low":1609.8,
+        "close":1610.0,
+        "volume":34592.0
+    },
+    {
+        "datetime":"2026-08-20T08:15:00.000",
+        "symbol":"NSE:AUROPHARMA",
+        "open":1610.0,
+        "high":1611.1,
+        "low":1607.5,
+        "close":1607.6,
+        "volume":47588.0
+    },
+    {
+        "datetime":"2026-08-20T08:30:00.000",
+        "symbol":"NSE:AUROPHARMA",
+        "open":1607.5,
+        "high":1607.8,
+        "low":1602.5,
+        "close":1604.4,
+        "volume":51256.0
     }
 ]
