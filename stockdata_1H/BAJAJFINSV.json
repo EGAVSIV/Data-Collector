@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T03:45:00.000",
-        "symbol":"NSE:BAJAJFINSV",
-        "open":1602.4,
-        "high":1619.5,
-        "low":1588.35,
-        "close":1604.3,
-        "volume":1254343.0
-    },
-    {
         "datetime":"2024-04-26T04:45:00.000",
         "symbol":"NSE:BAJAJFINSV",
         "open":1605.0,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-20T06:45:00.000",
         "symbol":"NSE:BAJAJFINSV",
         "open":2017.9,
-        "high":2021.1,
-        "low":2016.7,
-        "close":2021.1,
-        "volume":12538.0
+        "high":2022.0,
+        "low":2016.1,
+        "close":2017.9,
+        "volume":69991.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:BAJAJFINSV",
+        "open":2018.5,
+        "high":2019.7,
+        "low":2016.3,
+        "close":2016.5,
+        "volume":3385.0
     }
 ]

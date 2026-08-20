@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:00:00.000",
-        "symbol":"NSE:PIDILITIND",
-        "open":1456.0,
-        "high":1456.9,
-        "low":1452.2,
-        "close":1452.7,
-        "volume":3140.0
-    },
-    {
-        "datetime":"2025-12-26T04:15:00.000",
-        "symbol":"NSE:PIDILITIND",
-        "open":1451.9,
-        "high":1453.0,
-        "low":1449.2,
-        "close":1452.3,
-        "volume":5364.0
-    },
-    {
-        "datetime":"2025-12-26T04:30:00.000",
-        "symbol":"NSE:PIDILITIND",
-        "open":1452.3,
-        "high":1453.8,
-        "low":1449.4,
-        "close":1450.8,
-        "volume":2964.0
-    },
-    {
         "datetime":"2025-12-26T04:45:00.000",
         "symbol":"NSE:PIDILITIND",
         "open":1450.2,
@@ -35805,10 +35778,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:PIDILITIND",
         "open":1656.6,
-        "high":1657.8,
+        "high":1657.0,
         "low":1655.5,
         "close":1656.7,
-        "volume":13253.0
+        "volume":10198.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:PIDILITIND",
         "open":1654.2,
         "high":1654.8,
-        "low":1650.8,
-        "close":1650.8,
-        "volume":5888.0
+        "low":1650.6,
+        "close":1652.2,
+        "volume":8320.0
+    },
+    {
+        "datetime":"2026-08-20T07:15:00.000",
+        "symbol":"NSE:PIDILITIND",
+        "open":1652.9,
+        "high":1654.2,
+        "low":1652.0,
+        "close":1653.4,
+        "volume":8666.0
+    },
+    {
+        "datetime":"2026-08-20T07:30:00.000",
+        "symbol":"NSE:PIDILITIND",
+        "open":1653.9,
+        "high":1661.5,
+        "low":1653.4,
+        "close":1660.4,
+        "volume":15853.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:PIDILITIND",
+        "open":1659.9,
+        "high":1660.4,
+        "low":1659.0,
+        "close":1659.3,
+        "volume":1854.0
     }
 ]

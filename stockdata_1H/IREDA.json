@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T03:45:00.000",
-        "symbol":"NSE:IREDA",
-        "open":168.7,
-        "high":168.7,
-        "low":166.8,
-        "close":167.6,
-        "volume":3979494.0
-    },
-    {
         "datetime":"2024-04-26T04:45:00.000",
         "symbol":"NSE:IREDA",
         "open":167.6,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-20T06:45:00.000",
         "symbol":"NSE:IREDA",
         "open":115.14,
-        "high":115.45,
+        "high":115.8,
         "low":115.02,
-        "close":115.24,
-        "volume":107847.0
+        "close":115.52,
+        "volume":380991.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:IREDA",
+        "open":115.46,
+        "high":115.65,
+        "low":115.45,
+        "close":115.65,
+        "volume":27045.0
     }
 ]

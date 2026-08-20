@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T03:45:00.000",
-        "symbol":"NSE:MAZDOCK",
-        "open":1233.0,
-        "high":1262.4,
-        "low":1228.525,
-        "close":1242.05,
-        "volume":2787726.0
-    },
-    {
         "datetime":"2024-04-26T04:45:00.000",
         "symbol":"NSE:MAZDOCK",
         "open":1242.0,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:MAZDOCK",
         "open":2573.7,
         "high":2579.9,
-        "low":2572.3,
-        "close":2576.0,
-        "volume":16846.0
+        "low":2572.0,
+        "close":2572.8,
+        "volume":40199.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:MAZDOCK",
+        "open":2572.5,
+        "high":2573.5,
+        "low":2570.0,
+        "close":2570.0,
+        "volume":3826.0
     }
 ]

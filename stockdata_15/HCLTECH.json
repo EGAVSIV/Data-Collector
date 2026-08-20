@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:00:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1671.9,
-        "high":1672.9,
-        "low":1665.1,
-        "close":1667.1,
-        "volume":30412.0
-    },
-    {
-        "datetime":"2025-12-26T04:15:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1667.4,
-        "high":1672.9,
-        "low":1667.4,
-        "close":1667.8,
-        "volume":35033.0
-    },
-    {
-        "datetime":"2025-12-26T04:30:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1668.0,
-        "high":1668.0,
-        "low":1665.7,
-        "close":1667.0,
-        "volume":23114.0
-    },
-    {
         "datetime":"2025-12-26T04:45:00.000",
         "symbol":"NSE:HCLTECH",
         "open":1666.0,
@@ -35996,7 +35969,34 @@
         "open":1326.5,
         "high":1327.0,
         "low":1322.0,
-        "close":1322.7,
-        "volume":63157.0
+        "close":1323.1,
+        "volume":150301.0
+    },
+    {
+        "datetime":"2026-08-20T07:15:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1323.1,
+        "high":1325.5,
+        "low":1321.7,
+        "close":1322.4,
+        "volume":113126.0
+    },
+    {
+        "datetime":"2026-08-20T07:30:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1322.5,
+        "high":1322.9,
+        "low":1320.5,
+        "close":1322.0,
+        "volume":44276.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1322.4,
+        "high":1323.2,
+        "low":1321.6,
+        "close":1323.1,
+        "volume":20983.0
     }
 ]

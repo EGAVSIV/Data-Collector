@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T07:15:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27420.8,
-        "high":27431.15,
-        "low":27408.1,
-        "close":27429.8,
-        "volume":1457768.0
-    },
-    {
-        "datetime":"2025-12-26T07:30:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27426.1,
-        "high":27442.25,
-        "low":27423.05,
-        "close":27439.45,
-        "volume":1382928.0
-    },
-    {
-        "datetime":"2025-12-26T07:45:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27439.2,
-        "high":27451.2,
-        "low":27434.75,
-        "close":27440.85,
-        "volume":1986294.0
-    },
-    {
         "datetime":"2025-12-26T08:00:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":27440.55,
@@ -35798,8 +35771,8 @@
         "open":25961.5,
         "high":25974.25,
         "low":25955.3,
-        "close":25964.05,
-        "volume":1886305.0
+        "close":25965.2,
+        "volume":1935844.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T07:00:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":26232.15,
-        "high":26234.75,
+        "high":26240.95,
         "low":26219.8,
-        "close":26226.2,
-        "volume":2276499.0
+        "close":26227.35,
+        "volume":3441591.0
+    },
+    {
+        "datetime":"2026-08-20T07:15:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26228.55,
+        "high":26279.3,
+        "low":26224.95,
+        "close":26247.35,
+        "volume":5670221.0
+    },
+    {
+        "datetime":"2026-08-20T07:30:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26247.5,
+        "high":26256.0,
+        "low":26232.6,
+        "close":26247.05,
+        "volume":3848013.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26246.9,
+        "high":26256.0,
+        "low":26241.25,
+        "close":26246.35,
+        "volume":1377964.0
     }
 ]

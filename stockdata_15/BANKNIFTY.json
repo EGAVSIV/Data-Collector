@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T07:15:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":59000.0,
-        "high":59020.9,
-        "low":58976.35,
-        "close":59020.25,
-        "volume":2364878.0
-    },
-    {
-        "datetime":"2025-12-26T07:30:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":59014.1,
-        "high":59036.3,
-        "low":59001.4,
-        "close":59034.15,
-        "volume":1650100.0
-    },
-    {
-        "datetime":"2025-12-26T07:45:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":59033.25,
-        "high":59065.0,
-        "low":59024.75,
-        "close":59047.55,
-        "volume":1590944.0
-    },
-    {
         "datetime":"2025-12-26T08:00:00.000",
         "symbol":"NSE:BANKNIFTY",
         "open":59046.9,
@@ -35798,8 +35771,8 @@
         "open":57064.35,
         "high":57078.5,
         "low":57037.55,
-        "close":57066.2,
-        "volume":2241995.0
+        "close":57068.4,
+        "volume":2309822.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T07:00:00.000",
         "symbol":"NSE:BANKNIFTY",
         "open":57570.35,
-        "high":57572.3,
+        "high":57590.3,
         "low":57538.55,
-        "close":57549.3,
-        "volume":3085625.0
+        "close":57580.2,
+        "volume":4621709.0
+    },
+    {
+        "datetime":"2026-08-20T07:15:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57583.65,
+        "high":57680.55,
+        "low":57572.9,
+        "close":57656.7,
+        "volume":7177603.0
+    },
+    {
+        "datetime":"2026-08-20T07:30:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57656.6,
+        "high":57671.05,
+        "low":57627.85,
+        "close":57646.25,
+        "volume":4239001.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57645.85,
+        "high":57657.0,
+        "low":57622.15,
+        "close":57629.5,
+        "volume":1678209.0
     }
 ]

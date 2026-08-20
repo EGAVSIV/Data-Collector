@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:00:00.000",
-        "symbol":"NSE:APLAPOLLO",
-        "open":1865.9,
-        "high":1869.0,
-        "low":1860.0,
-        "close":1862.8,
-        "volume":39087.0
-    },
-    {
-        "datetime":"2025-12-26T04:15:00.000",
-        "symbol":"NSE:APLAPOLLO",
-        "open":1862.3,
-        "high":1865.0,
-        "low":1860.3,
-        "close":1862.8,
-        "volume":7580.0
-    },
-    {
-        "datetime":"2025-12-26T04:30:00.000",
-        "symbol":"NSE:APLAPOLLO",
-        "open":1862.2,
-        "high":1865.1,
-        "low":1861.2,
-        "close":1863.3,
-        "volume":4679.0
-    },
-    {
         "datetime":"2025-12-26T04:45:00.000",
         "symbol":"NSE:APLAPOLLO",
         "open":1863.4,
@@ -35808,7 +35781,7 @@
         "high":2106.0,
         "low":2103.6,
         "close":2104.6,
-        "volume":8402.0
+        "volume":9790.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:APLAPOLLO",
         "open":2142.5,
         "high":2145.6,
-        "low":2142.0,
-        "close":2142.1,
-        "volume":5864.0
+        "low":2135.6,
+        "close":2136.9,
+        "volume":14551.0
+    },
+    {
+        "datetime":"2026-08-20T07:15:00.000",
+        "symbol":"NSE:APLAPOLLO",
+        "open":2136.9,
+        "high":2141.6,
+        "low":2134.3,
+        "close":2139.3,
+        "volume":12122.0
+    },
+    {
+        "datetime":"2026-08-20T07:30:00.000",
+        "symbol":"NSE:APLAPOLLO",
+        "open":2140.2,
+        "high":2141.8,
+        "low":2138.5,
+        "close":2141.2,
+        "volume":11846.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:APLAPOLLO",
+        "open":2141.2,
+        "high":2144.0,
+        "low":2139.7,
+        "close":2140.1,
+        "volume":6796.0
     }
 ]

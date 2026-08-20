@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T04:00:00.000",
-        "symbol":"NSE:INDUSINDBK",
-        "open":844.15,
-        "high":852.6,
-        "low":842.1,
-        "close":851.6,
-        "volume":191570.0
-    },
-    {
-        "datetime":"2025-12-26T04:15:00.000",
-        "symbol":"NSE:INDUSINDBK",
-        "open":851.0,
-        "high":857.9,
-        "low":851.0,
-        "close":855.6,
-        "volume":220995.0
-    },
-    {
-        "datetime":"2025-12-26T04:30:00.000",
-        "symbol":"NSE:INDUSINDBK",
-        "open":855.6,
-        "high":858.9,
-        "low":852.8,
-        "close":853.35,
-        "volume":492989.0
-    },
-    {
         "datetime":"2025-12-26T04:45:00.000",
         "symbol":"NSE:INDUSINDBK",
         "open":853.25,
@@ -35808,7 +35781,7 @@
         "high":1010.7,
         "low":1008.5,
         "close":1010.5,
-        "volume":17669.0
+        "volume":14955.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T07:00:00.000",
         "symbol":"NSE:INDUSINDBK",
         "open":1006.1,
-        "high":1006.8,
+        "high":1007.3,
         "low":1005.7,
-        "close":1006.6,
-        "volume":6680.0
+        "close":1006.5,
+        "volume":11422.0
+    },
+    {
+        "datetime":"2026-08-20T07:15:00.000",
+        "symbol":"NSE:INDUSINDBK",
+        "open":1006.5,
+        "high":1007.4,
+        "low":1006.4,
+        "close":1007.1,
+        "volume":18680.0
+    },
+    {
+        "datetime":"2026-08-20T07:30:00.000",
+        "symbol":"NSE:INDUSINDBK",
+        "open":1006.6,
+        "high":1008.5,
+        "low":1006.6,
+        "close":1007.4,
+        "volume":14175.0
+    },
+    {
+        "datetime":"2026-08-20T07:45:00.000",
+        "symbol":"NSE:INDUSINDBK",
+        "open":1006.8,
+        "high":1007.4,
+        "low":1006.3,
+        "close":1006.3,
+        "volume":1634.0
     }
 ]
