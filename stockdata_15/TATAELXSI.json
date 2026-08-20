@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T06:15:00.000",
-        "symbol":"NSE:TATAELXSI",
-        "open":5359.0,
-        "high":5364.5,
-        "low":5353.0,
-        "close":5364.5,
-        "volume":2782.0
-    },
-    {
         "datetime":"2025-12-26T06:30:00.000",
         "symbol":"NSE:TATAELXSI",
         "open":5364.5,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-20T09:15:00.000",
         "symbol":"NSE:TATAELXSI",
         "open":3691.5,
-        "high":3693.1,
-        "low":3691.4,
-        "close":3692.8,
-        "volume":300.0
+        "high":3694.0,
+        "low":3685.6,
+        "close":3685.6,
+        "volume":5878.0
+    },
+    {
+        "datetime":"2026-08-20T09:30:00.000",
+        "symbol":"NSE:TATAELXSI",
+        "open":3686.9,
+        "high":3689.9,
+        "low":3670.0,
+        "close":3681.0,
+        "volume":17362.0
     }
 ]
