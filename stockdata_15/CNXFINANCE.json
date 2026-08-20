@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T08:45:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27424.0,
-        "high":27430.7,
-        "low":27391.85,
-        "close":27404.1,
-        "volume":2226644.0
-    },
-    {
-        "datetime":"2025-12-26T09:00:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27407.8,
-        "high":27410.55,
-        "low":27394.4,
-        "close":27403.25,
-        "volume":1591831.0
-    },
-    {
-        "datetime":"2025-12-26T09:15:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27402.25,
-        "high":27429.55,
-        "low":27397.7,
-        "close":27427.55,
-        "volume":2358098.0
-    },
-    {
         "datetime":"2025-12-26T09:30:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":27429.1,
@@ -35744,8 +35717,8 @@
         "open":25961.5,
         "high":25974.25,
         "low":25955.3,
-        "close":25964.05,
-        "volume":1886305.0
+        "close":25965.2,
+        "volume":1935844.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T08:30:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":26206.9,
-        "high":26211.8,
+        "high":26216.5,
         "low":26199.75,
-        "close":26206.25,
-        "volume":1350375.0
+        "close":26209.15,
+        "volume":2916366.0
+    },
+    {
+        "datetime":"2026-08-20T08:45:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26208.3,
+        "high":26212.2,
+        "low":26187.05,
+        "close":26210.65,
+        "volume":3646726.0
+    },
+    {
+        "datetime":"2026-08-20T09:00:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26209.75,
+        "high":26231.85,
+        "low":26203.9,
+        "close":26221.2,
+        "volume":3272921.0
+    },
+    {
+        "datetime":"2026-08-20T09:15:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26221.7,
+        "high":26224.0,
+        "low":26214.0,
+        "close":26216.05,
+        "volume":352605.0
     }
 ]

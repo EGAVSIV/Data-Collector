@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T08:45:00.000",
-        "symbol":"NSE:CNXMIDCAP",
-        "open":60461.1,
-        "high":60462.95,
-        "low":60349.55,
-        "close":60366.05,
-        "volume":20304110.0
-    },
-    {
-        "datetime":"2025-12-26T09:00:00.000",
-        "symbol":"NSE:CNXMIDCAP",
-        "open":60366.5,
-        "high":60370.9,
-        "low":60291.4,
-        "close":60307.15,
-        "volume":26717959.0
-    },
-    {
-        "datetime":"2025-12-26T09:15:00.000",
-        "symbol":"NSE:CNXMIDCAP",
-        "open":60307.2,
-        "high":60385.7,
-        "low":60259.6,
-        "close":60385.3,
-        "volume":37821221.0
-    },
-    {
         "datetime":"2025-12-26T09:30:00.000",
         "symbol":"NSE:CNXMIDCAP",
         "open":60386.75,
@@ -35744,8 +35717,8 @@
         "open":63354.6,
         "high":63372.05,
         "low":63332.8,
-        "close":63363.7,
-        "volume":14597251.0
+        "close":63364.5,
+        "volume":14797017.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-20T08:30:00.000",
         "symbol":"NSE:CNXMIDCAP",
         "open":63799.45,
-        "high":63801.5,
+        "high":63816.35,
         "low":63780.75,
-        "close":63798.25,
-        "volume":5244776.0
+        "close":63809.85,
+        "volume":10693390.0
+    },
+    {
+        "datetime":"2026-08-20T08:45:00.000",
+        "symbol":"NSE:CNXMIDCAP",
+        "open":63810.55,
+        "high":63819.4,
+        "low":63758.2,
+        "close":63814.8,
+        "volume":12703581.0
+    },
+    {
+        "datetime":"2026-08-20T09:00:00.000",
+        "symbol":"NSE:CNXMIDCAP",
+        "open":63816.9,
+        "high":63816.9,
+        "low":63750.25,
+        "close":63752.95,
+        "volume":18413599.0
+    },
+    {
+        "datetime":"2026-08-20T09:15:00.000",
+        "symbol":"NSE:CNXMIDCAP",
+        "open":63752.05,
+        "high":63753.35,
+        "low":63729.05,
+        "close":63732.3,
+        "volume":2046307.0
     }
 ]
