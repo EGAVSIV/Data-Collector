@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T06:30:00.000",
-        "symbol":"NSE:INDHOTEL",
-        "open":740.8,
-        "high":741.15,
-        "low":740.45,
-        "close":740.65,
-        "volume":13756.0
-    },
-    {
-        "datetime":"2025-12-26T06:45:00.000",
-        "symbol":"NSE:INDHOTEL",
-        "open":740.9,
-        "high":741.5,
-        "low":740.45,
-        "close":740.5,
-        "volume":26174.0
-    },
-    {
-        "datetime":"2025-12-26T07:00:00.000",
-        "symbol":"NSE:INDHOTEL",
-        "open":740.5,
-        "high":740.85,
-        "low":737.2,
-        "close":737.2,
-        "volume":94338.0
-    },
-    {
         "datetime":"2025-12-26T07:15:00.000",
         "symbol":"NSE:INDHOTEL",
         "open":737.2,
@@ -35979,7 +35952,7 @@
         "high":733.1,
         "low":731.35,
         "close":732.2,
-        "volume":122278.0
+        "volume":121623.0
     },
     {
         "datetime":"2026-08-20T09:15:00.000",
@@ -35998,5 +35971,32 @@
         "low":729.95,
         "close":732.6,
         "volume":238032.0
+    },
+    {
+        "datetime":"2026-08-21T03:45:00.000",
+        "symbol":"NSE:INDHOTEL",
+        "open":733.6,
+        "high":735.5,
+        "low":730.05,
+        "close":731.7,
+        "volume":87563.0
+    },
+    {
+        "datetime":"2026-08-21T04:00:00.000",
+        "symbol":"NSE:INDHOTEL",
+        "open":731.7,
+        "high":731.85,
+        "low":728.0,
+        "close":728.0,
+        "volume":41707.0
+    },
+    {
+        "datetime":"2026-08-21T04:15:00.000",
+        "symbol":"NSE:INDHOTEL",
+        "open":728.0,
+        "high":728.9,
+        "low":727.8,
+        "close":727.8,
+        "volume":17709.0
     }
 ]

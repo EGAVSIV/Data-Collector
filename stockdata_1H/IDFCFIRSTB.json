@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T05:45:00.000",
-        "symbol":"NSE:IDFCFIRSTB",
-        "open":84.0,
-        "high":84.1,
-        "low":83.9,
-        "close":84.0,
-        "volume":1963844.0
-    },
-    {
         "datetime":"2024-04-26T06:45:00.000",
         "symbol":"NSE:IDFCFIRSTB",
         "open":84.0,
@@ -35998,5 +35989,14 @@
         "low":85.83,
         "close":86.0,
         "volume":2963860.0
+    },
+    {
+        "datetime":"2026-08-21T03:45:00.000",
+        "symbol":"NSE:IDFCFIRSTB",
+        "open":85.83,
+        "high":85.99,
+        "low":85.59,
+        "close":85.7,
+        "volume":1337987.0
     }
 ]
