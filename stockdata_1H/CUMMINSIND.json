@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T03:45:00.000",
-        "symbol":"NSE:CUMMINSIND",
-        "open":3250.0,
-        "high":3297.8,
-        "low":3248.0,
-        "close":3258.4,
-        "volume":62195.0
-    },
-    {
         "datetime":"2024-04-29T04:45:00.000",
         "symbol":"NSE:CUMMINSIND",
         "open":3258.4,
@@ -35996,7 +35987,16 @@
         "open":5121.0,
         "high":5128.0,
         "low":5112.5,
-        "close":5122.0,
-        "volume":86575.0
+        "close":5118.5,
+        "volume":87816.0
+    },
+    {
+        "datetime":"2026-08-21T08:45:00.000",
+        "symbol":"NSE:CUMMINSIND",
+        "open":5118.0,
+        "high":5123.5,
+        "low":5096.5,
+        "close":5096.5,
+        "volume":130797.0
     }
 ]
