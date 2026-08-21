@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T09:15:00.000",
-        "symbol":"NSE:EICHERMOT",
-        "open":7316.0,
-        "high":7324.0,
-        "low":7310.5,
-        "close":7323.0,
-        "volume":8459.0
-    },
-    {
-        "datetime":"2025-12-26T09:30:00.000",
-        "symbol":"NSE:EICHERMOT",
-        "open":7324.0,
-        "high":7327.0,
-        "low":7313.5,
-        "close":7320.0,
-        "volume":15532.0
-    },
-    {
-        "datetime":"2025-12-26T09:45:00.000",
-        "symbol":"NSE:EICHERMOT",
-        "open":7320.0,
-        "high":7336.5,
-        "low":7318.0,
-        "close":7330.0,
-        "volume":13693.0
-    },
-    {
         "datetime":"2025-12-29T03:45:00.000",
         "symbol":"NSE:EICHERMOT",
         "open":7324.0,
@@ -35617,9 +35590,9 @@
         "symbol":"NSE:EICHERMOT",
         "open":8025.0,
         "high":8025.0,
-        "low":8010.0,
+        "low":8011.0,
         "close":8016.0,
-        "volume":8289.0
+        "volume":6326.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-21T06:15:00.000",
         "symbol":"NSE:EICHERMOT",
         "open":7990.0,
-        "high":8001.5,
+        "high":8002.0,
         "low":7988.5,
-        "close":7997.0,
-        "volume":5602.0
+        "close":8000.0,
+        "volume":9243.0
+    },
+    {
+        "datetime":"2026-08-21T06:30:00.000",
+        "symbol":"NSE:EICHERMOT",
+        "open":8000.0,
+        "high":8001.5,
+        "low":7985.0,
+        "close":7993.5,
+        "volume":16199.0
+    },
+    {
+        "datetime":"2026-08-21T06:45:00.000",
+        "symbol":"NSE:EICHERMOT",
+        "open":7994.5,
+        "high":8010.0,
+        "low":7989.5,
+        "close":8005.5,
+        "volume":13825.0
+    },
+    {
+        "datetime":"2026-08-21T07:00:00.000",
+        "symbol":"NSE:EICHERMOT",
+        "open":8005.0,
+        "high":8008.5,
+        "low":8004.5,
+        "close":8004.5,
+        "volume":616.0
     }
 ]

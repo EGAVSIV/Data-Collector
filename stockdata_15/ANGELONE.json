@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-26T09:15:00.000",
-        "symbol":"NSE:ANGELONE",
-        "open":249.64,
-        "high":249.91,
-        "low":249.6,
-        "close":249.9,
-        "volume":254520.0
-    },
-    {
-        "datetime":"2025-12-26T09:30:00.000",
-        "symbol":"NSE:ANGELONE",
-        "open":249.9,
-        "high":249.9,
-        "low":249.5,
-        "close":249.65,
-        "volume":183710.0
-    },
-    {
-        "datetime":"2025-12-26T09:45:00.000",
-        "symbol":"NSE:ANGELONE",
-        "open":249.55,
-        "high":249.86,
-        "low":248.97,
-        "close":249.37,
-        "volume":320780.0
-    },
-    {
         "datetime":"2025-12-29T03:45:00.000",
         "symbol":"NSE:ANGELONE",
         "open":249.37,
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:ANGELONE",
         "open":289.5,
         "high":289.75,
-        "low":289.3,
-        "close":289.55,
-        "volume":50492.0
+        "low":289.15,
+        "close":289.3,
+        "volume":58568.0
+    },
+    {
+        "datetime":"2026-08-21T06:30:00.000",
+        "symbol":"NSE:ANGELONE",
+        "open":289.35,
+        "high":289.7,
+        "low":288.55,
+        "close":288.55,
+        "volume":366772.0
+    },
+    {
+        "datetime":"2026-08-21T06:45:00.000",
+        "symbol":"NSE:ANGELONE",
+        "open":288.65,
+        "high":288.7,
+        "low":287.55,
+        "close":288.35,
+        "volume":110081.0
+    },
+    {
+        "datetime":"2026-08-21T07:00:00.000",
+        "symbol":"NSE:ANGELONE",
+        "open":288.35,
+        "high":288.4,
+        "low":287.9,
+        "close":288.0,
+        "volume":11673.0
     }
 ]
