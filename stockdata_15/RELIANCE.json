@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T04:15:00.000",
-        "symbol":"NSE:RELIANCE",
-        "open":1557.4,
-        "high":1557.7,
-        "low":1553.6,
-        "close":1553.7,
-        "volume":192752.0
-    },
-    {
-        "datetime":"2025-12-29T04:30:00.000",
-        "symbol":"NSE:RELIANCE",
-        "open":1553.2,
-        "high":1554.4,
-        "low":1551.4,
-        "close":1551.4,
-        "volume":226489.0
-    },
-    {
-        "datetime":"2025-12-29T04:45:00.000",
-        "symbol":"NSE:RELIANCE",
-        "open":1551.5,
-        "high":1552.8,
-        "low":1549.5,
-        "close":1551.6,
-        "volume":151078.0
-    },
-    {
-        "datetime":"2025-12-29T05:00:00.000",
-        "symbol":"NSE:RELIANCE",
-        "open":1551.6,
-        "high":1552.0,
-        "low":1547.8,
-        "close":1548.0,
-        "volume":135500.0
-    },
-    {
         "datetime":"2025-12-29T05:15:00.000",
         "symbol":"NSE:RELIANCE",
         "open":1548.0,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:RELIANCE",
         "open":1311.4,
         "high":1312.4,
-        "low":1310.7,
+        "low":1310.2,
+        "close":1310.2,
+        "volume":115086.0
+    },
+    {
+        "datetime":"2026-08-21T07:45:00.000",
+        "symbol":"NSE:RELIANCE",
+        "open":1310.5,
+        "high":1311.6,
+        "low":1310.1,
         "close":1311.0,
-        "volume":103446.0
+        "volume":181637.0
+    },
+    {
+        "datetime":"2026-08-21T08:00:00.000",
+        "symbol":"NSE:RELIANCE",
+        "open":1311.0,
+        "high":1311.0,
+        "low":1310.3,
+        "close":1310.5,
+        "volume":187579.0
+    },
+    {
+        "datetime":"2026-08-21T08:15:00.000",
+        "symbol":"NSE:RELIANCE",
+        "open":1310.5,
+        "high":1310.8,
+        "low":1309.4,
+        "close":1309.4,
+        "volume":235143.0
+    },
+    {
+        "datetime":"2026-08-21T08:30:00.000",
+        "symbol":"NSE:RELIANCE",
+        "open":1309.4,
+        "high":1310.3,
+        "low":1308.0,
+        "close":1308.3,
+        "volume":105150.0
     }
 ]
