@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T09:45:00.000",
-        "symbol":"NSE:HAVELLS",
-        "open":1635.65,
-        "high":1643.5,
-        "low":1635.6,
-        "close":1641.05,
-        "volume":201985.0
-    },
-    {
         "datetime":"2024-04-29T03:45:00.000",
         "symbol":"NSE:HAVELLS",
         "open":1657.45,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-21T06:45:00.000",
         "symbol":"NSE:HAVELLS",
         "open":1266.1,
-        "high":1266.4,
-        "low":1264.8,
-        "close":1265.9,
-        "volume":6579.0
+        "high":1268.2,
+        "low":1263.5,
+        "close":1267.3,
+        "volume":105698.0
+    },
+    {
+        "datetime":"2026-08-21T07:45:00.000",
+        "symbol":"NSE:HAVELLS",
+        "open":1267.4,
+        "high":1267.4,
+        "low":1265.8,
+        "close":1266.7,
+        "volume":881.0
     }
 ]

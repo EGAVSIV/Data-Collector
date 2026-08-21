@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T09:45:00.000",
-        "symbol":"NSE:BAJFINANCE",
-        "open":673.195,
-        "high":674.2,
-        "low":672.175,
-        "close":672.995,
-        "volume":4113310.0
-    },
-    {
         "datetime":"2024-04-29T03:45:00.000",
         "symbol":"NSE:BAJFINANCE",
         "open":675.36,
@@ -35961,7 +35952,7 @@
         "high":1100.3,
         "low":1094.1,
         "close":1097.0,
-        "volume":1344231.0
+        "volume":1344248.0
     },
     {
         "datetime":"2026-08-21T03:45:00.000",
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:BAJFINANCE",
         "open":1093.9,
         "high":1097.5,
-        "low":1093.7,
-        "close":1096.0,
-        "volume":112090.0
+        "low":1092.6,
+        "close":1092.6,
+        "volume":242295.0
+    },
+    {
+        "datetime":"2026-08-21T07:45:00.000",
+        "symbol":"NSE:BAJFINANCE",
+        "open":1092.7,
+        "high":1092.7,
+        "low":1092.6,
+        "close":1092.7,
+        "volume":4749.0
     }
 ]

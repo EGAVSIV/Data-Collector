@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T09:45:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":35192.1,
-        "high":35274.0,
-        "low":35150.0,
-        "close":35268.5,
-        "volume":1023.0
-    },
-    {
         "datetime":"2024-04-29T03:45:00.000",
         "symbol":"NSE:PAGEIND",
         "open":35310.0,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:PAGEIND",
         "open":35500.0,
         "high":35530.0,
-        "low":35495.0,
-        "close":35505.0,
-        "volume":119.0
+        "low":35420.0,
+        "close":35455.0,
+        "volume":667.0
+    },
+    {
+        "datetime":"2026-08-21T07:45:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35440.0,
+        "high":35450.0,
+        "low":35435.0,
+        "close":35450.0,
+        "volume":18.0
     }
 ]
