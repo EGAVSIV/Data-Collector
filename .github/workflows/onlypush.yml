@@ -1,0 +1,82 @@
+name: Push Stock Data to Target Repositories
+
+on:
+  # Manual Run Button
+  workflow_dispatch:
+
+  # Optional: Automatically trigger whenever stock folders are modified in main branch
+  push:
+    branches:
+      - main
+    paths:
+      - 'stockdata_D/**'
+      - 'stockdata_W/**'
+      - 'stockdata_M/**'
+      - 'stockdata_15/**'
+      - 'stockdata_1H/**'
+
+permissions:
+  contents: read
+
+jobs:
+  push-to-targets:
+    name: Sync Stock Data Folders
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ==========================================
+      # STEP 1 - Checkout Data-Collector Repo
+      # ==========================================
+      - name: Checkout Source Repository
+        uses: actions/checkout@v4
+
+      # ==========================================
+      # STEP 2 - Push Folders to Target Repos
+      # ==========================================
+      - name: Push Data to Target Repositories
+        env:
+          PAT_TOKEN: ${{ secrets.DATA_PUSH_PAT }}
+          GITHUB_OWNER: "EGAVSIV"
+        run: |
+          TARGET_REPOS=(
+            "stock-scan"
+            "MULTIS"
+            "Stock_Scanner_With_ASTA_Parameters"
+            "GEOTRADER"
+            "SECSEA"
+            "Fib-Retracement"
+          )
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          ROOT_DIR=$(pwd)
+
+          for REPO in "${TARGET_REPOS[@]}"; do
+            echo "=========================================="
+            echo "Processing repository: ${REPO}"
+            echo "=========================================="
+
+            rm -rf target_repo
+
+            # 1. Clone target repo using PAT token
+            git clone "https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_OWNER}/${REPO}.git" target_repo
+
+            # 2. Copy stock data folders into target repo root
+            cp -r stockdata_D stockdata_W stockdata_M stockdata_15 stockdata_1H target_repo/
+
+            # 3. Check diff and commit
+            cd target_repo
+            git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
+
+            if ! git diff --cached --quiet; then
+              git commit -m "Manual/Auto Sync stock data from Data-Collector $(date '+%Y-%m-%d %H:%M:%S UTC')"
+              git push
+              echo "Successfully pushed updates to ${REPO}."
+            else
+              echo "No changes detected for ${REPO}. Skipping push."
+            fi
+
+            cd "$ROOT_DIR"
+          done
