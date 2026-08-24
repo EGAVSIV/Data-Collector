@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T09:45:00.000",
-        "symbol":"NSE:CNXMIDCAP",
-        "open":51117.6,
-        "high":51131.25,
-        "low":51090.3,
-        "close":51126.4,
-        "volume":132867499.0
-    },
-    {
         "datetime":"2024-05-03T03:45:00.000",
         "symbol":"NSE:CNXMIDCAP",
         "open":51292.45,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-24T06:45:00.000",
         "symbol":"NSE:CNXMIDCAP",
         "open":63771.8,
-        "high":63772.05,
-        "low":63754.8,
-        "close":63759.1,
-        "volume":7670160.0
+        "high":63793.1,
+        "low":63702.2,
+        "close":63731.55,
+        "volume":81194574.0
+    },
+    {
+        "datetime":"2026-08-24T07:45:00.000",
+        "symbol":"NSE:CNXMIDCAP",
+        "open":63734.3,
+        "high":63777.75,
+        "low":63732.9,
+        "close":63734.6,
+        "volume":24209984.0
     }
 ]

@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T08:45:00.000",
-        "symbol":"NSE:SAIL",
-        "open":165.3,
-        "high":166.1,
-        "low":164.35,
-        "close":164.8,
-        "volume":4088169.0
-    },
-    {
         "datetime":"2024-04-29T09:45:00.000",
         "symbol":"NSE:SAIL",
         "open":164.85,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-24T06:45:00.000",
         "symbol":"NSE:SAIL",
         "open":179.75,
-        "high":179.95,
+        "high":180.79,
         "low":179.58,
-        "close":179.95,
-        "volume":179361.0
+        "close":180.66,
+        "volume":3898450.0
+    },
+    {
+        "datetime":"2026-08-24T07:45:00.000",
+        "symbol":"NSE:SAIL",
+        "open":180.66,
+        "high":180.75,
+        "low":179.5,
+        "close":179.51,
+        "volume":1019594.0
     }
 ]

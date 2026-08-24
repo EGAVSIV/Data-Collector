@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T08:45:00.000",
-        "symbol":"NSE:FORTIS",
-        "open":441.7,
-        "high":443.7,
-        "low":441.0,
-        "close":442.95,
-        "volume":67386.0
-    },
-    {
         "datetime":"2024-04-29T09:45:00.000",
         "symbol":"NSE:FORTIS",
         "open":442.95,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:FORTIS",
         "open":912.5,
         "high":912.5,
-        "low":911.55,
-        "close":911.55,
-        "volume":535.0
+        "low":910.0,
+        "close":911.4,
+        "volume":59500.0
+    },
+    {
+        "datetime":"2026-08-24T07:45:00.000",
+        "symbol":"NSE:FORTIS",
+        "open":911.0,
+        "high":911.85,
+        "low":911.0,
+        "close":911.85,
+        "volume":2677.0
     }
 ]

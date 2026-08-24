@@ -1,50 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T09:30:00.000",
-        "symbol":"NSE:MANAPPURAM",
-        "open":311.95,
-        "high":312.1,
-        "low":311.0,
-        "close":311.1,
-        "volume":86094.0
-    },
-    {
-        "datetime":"2025-12-29T09:45:00.000",
-        "symbol":"NSE:MANAPPURAM",
-        "open":311.25,
-        "high":311.25,
-        "low":309.45,
-        "close":310.0,
-        "volume":189012.0
-    },
-    {
-        "datetime":"2025-12-30T03:45:00.000",
-        "symbol":"NSE:MANAPPURAM",
-        "open":310.75,
-        "high":311.1,
-        "low":307.6,
-        "close":309.1,
-        "volume":207552.0
-    },
-    {
-        "datetime":"2025-12-30T04:00:00.000",
-        "symbol":"NSE:MANAPPURAM",
-        "open":309.25,
-        "high":309.95,
-        "low":308.75,
-        "close":309.6,
-        "volume":86279.0
-    },
-    {
-        "datetime":"2025-12-30T04:15:00.000",
-        "symbol":"NSE:MANAPPURAM",
-        "open":309.5,
-        "high":310.0,
-        "low":308.9,
-        "close":309.85,
-        "volume":53854.0
-    },
-    {
         "datetime":"2025-12-30T04:30:00.000",
         "symbol":"NSE:MANAPPURAM",
         "open":309.85,
@@ -35383,9 +35338,9 @@
         "symbol":"NSE:MANAPPURAM",
         "open":338.5,
         "high":338.75,
-        "low":337.1,
+        "low":337.0,
         "close":337.1,
-        "volume":117220.0
+        "volume":147142.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35949,54 @@
         "datetime":"2026-08-24T06:45:00.000",
         "symbol":"NSE:MANAPPURAM",
         "open":366.2,
+        "high":366.6,
+        "low":366.0,
+        "close":366.15,
+        "volume":164928.0
+    },
+    {
+        "datetime":"2026-08-24T07:00:00.000",
+        "symbol":"NSE:MANAPPURAM",
+        "open":366.2,
+        "high":366.6,
+        "low":366.0,
+        "close":366.4,
+        "volume":119815.0
+    },
+    {
+        "datetime":"2026-08-24T07:15:00.000",
+        "symbol":"NSE:MANAPPURAM",
+        "open":366.6,
+        "high":366.9,
+        "low":366.35,
+        "close":366.7,
+        "volume":104971.0
+    },
+    {
+        "datetime":"2026-08-24T07:30:00.000",
+        "symbol":"NSE:MANAPPURAM",
+        "open":366.85,
+        "high":366.9,
+        "low":366.1,
+        "close":366.55,
+        "volume":137301.0
+    },
+    {
+        "datetime":"2026-08-24T07:45:00.000",
+        "symbol":"NSE:MANAPPURAM",
+        "open":366.4,
+        "high":367.0,
+        "low":365.9,
+        "close":366.1,
+        "volume":165615.0
+    },
+    {
+        "datetime":"2026-08-24T08:00:00.000",
+        "symbol":"NSE:MANAPPURAM",
+        "open":366.2,
         "high":366.25,
         "low":366.0,
-        "close":366.25,
-        "volume":58048.0
+        "close":366.15,
+        "volume":24555.0
     }
 ]

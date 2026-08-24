@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T08:45:00.000",
-        "symbol":"NSE:MUTHOOTFIN",
-        "open":1695.1,
-        "high":1703.5,
-        "low":1693.4,
-        "close":1699.65,
-        "volume":114671.0
-    },
-    {
         "datetime":"2024-04-29T09:45:00.000",
         "symbol":"NSE:MUTHOOTFIN",
         "open":1699.65,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-24T06:45:00.000",
         "symbol":"NSE:MUTHOOTFIN",
         "open":3177.9,
-        "high":3182.0,
-        "low":3177.6,
-        "close":3180.5,
-        "volume":20790.0
+        "high":3204.0,
+        "low":3171.7,
+        "close":3198.7,
+        "volume":413952.0
+    },
+    {
+        "datetime":"2026-08-24T07:45:00.000",
+        "symbol":"NSE:MUTHOOTFIN",
+        "open":3198.7,
+        "high":3200.5,
+        "low":3194.2,
+        "close":3198.5,
+        "volume":66921.0
     }
 ]
