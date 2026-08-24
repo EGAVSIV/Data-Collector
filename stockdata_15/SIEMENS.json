@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T08:30:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3069.9,
-        "high":3071.2,
-        "low":3067.0,
-        "close":3067.0,
-        "volume":1981.0
-    },
-    {
-        "datetime":"2025-12-29T08:45:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3067.1,
-        "high":3069.3,
-        "low":3066.0,
-        "close":3066.5,
-        "volume":1647.0
-    },
-    {
-        "datetime":"2025-12-29T09:00:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3066.1,
-        "high":3068.4,
-        "low":3060.2,
-        "close":3060.4,
-        "volume":2676.0
-    },
-    {
-        "datetime":"2025-12-29T09:15:00.000",
-        "symbol":"NSE:SIEMENS",
-        "open":3060.3,
-        "high":3076.8,
-        "low":3059.0,
-        "close":3063.3,
-        "volume":14351.0
-    },
-    {
         "datetime":"2025-12-29T09:30:00.000",
         "symbol":"NSE:SIEMENS",
         "open":3063.3,
@@ -35996,7 +35960,43 @@
         "open":4064.5,
         "high":4077.0,
         "low":4058.0,
-        "close":4072.5,
-        "volume":21126.0
+        "close":4065.0,
+        "volume":26655.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":4066.5,
+        "high":4067.3,
+        "low":4058.5,
+        "close":4060.3,
+        "volume":25360.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":4062.3,
+        "high":4069.1,
+        "low":4054.8,
+        "close":4060.3,
+        "volume":20781.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":4061.9,
+        "high":4063.2,
+        "low":4043.0,
+        "close":4044.0,
+        "volume":26982.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:SIEMENS",
+        "open":4045.8,
+        "high":4052.0,
+        "low":4044.0,
+        "close":4051.0,
+        "volume":7333.0
     }
 ]

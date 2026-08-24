@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T08:30:00.000",
-        "symbol":"NSE:GRASIM",
-        "open":2848.0,
-        "high":2850.0,
-        "low":2842.9,
-        "close":2845.0,
-        "volume":32363.0
-    },
-    {
-        "datetime":"2025-12-29T08:45:00.000",
-        "symbol":"NSE:GRASIM",
-        "open":2846.3,
-        "high":2847.5,
-        "low":2841.7,
-        "close":2842.5,
-        "volume":18606.0
-    },
-    {
-        "datetime":"2025-12-29T09:00:00.000",
-        "symbol":"NSE:GRASIM",
-        "open":2842.5,
-        "high":2842.5,
-        "low":2836.0,
-        "close":2838.1,
-        "volume":13104.0
-    },
-    {
-        "datetime":"2025-12-29T09:15:00.000",
-        "symbol":"NSE:GRASIM",
-        "open":2838.1,
-        "high":2840.9,
-        "low":2836.9,
-        "close":2840.0,
-        "volume":31964.0
-    },
-    {
         "datetime":"2025-12-29T09:30:00.000",
         "symbol":"NSE:GRASIM",
         "open":2840.0,
@@ -35421,7 +35385,7 @@
         "high":3255.4,
         "low":3246.7,
         "close":3250.9,
-        "volume":44758.0
+        "volume":55070.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35960,43 @@
         "open":3292.3,
         "high":3294.0,
         "low":3285.2,
-        "close":3286.1,
-        "volume":14364.0
+        "close":3286.9,
+        "volume":15713.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:GRASIM",
+        "open":3286.2,
+        "high":3287.0,
+        "low":3284.3,
+        "close":3285.8,
+        "volume":23650.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:GRASIM",
+        "open":3285.8,
+        "high":3293.0,
+        "low":3284.3,
+        "close":3293.0,
+        "volume":40632.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:GRASIM",
+        "open":3292.9,
+        "high":3294.8,
+        "low":3283.2,
+        "close":3285.3,
+        "volume":72270.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:GRASIM",
+        "open":3285.3,
+        "high":3286.0,
+        "low":3283.5,
+        "close":3283.8,
+        "volume":7499.0
     }
 ]

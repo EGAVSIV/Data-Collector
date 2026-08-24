@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T08:30:00.000",
-        "symbol":"NSE:ASTRAL",
-        "open":1372.7,
-        "high":1375.9,
-        "low":1369.1,
-        "close":1369.1,
-        "volume":30917.0
-    },
-    {
-        "datetime":"2025-12-29T08:45:00.000",
-        "symbol":"NSE:ASTRAL",
-        "open":1369.1,
-        "high":1373.8,
-        "low":1368.7,
-        "close":1371.2,
-        "volume":7088.0
-    },
-    {
-        "datetime":"2025-12-29T09:00:00.000",
-        "symbol":"NSE:ASTRAL",
-        "open":1371.8,
-        "high":1373.9,
-        "low":1369.5,
-        "close":1371.0,
-        "volume":7337.0
-    },
-    {
-        "datetime":"2025-12-29T09:15:00.000",
-        "symbol":"NSE:ASTRAL",
-        "open":1371.0,
-        "high":1371.3,
-        "low":1366.4,
-        "close":1370.7,
-        "volume":10184.0
-    },
-    {
         "datetime":"2025-12-29T09:30:00.000",
         "symbol":"NSE:ASTRAL",
         "open":1370.7,
@@ -35421,7 +35385,7 @@
         "high":1533.7,
         "low":1530.6,
         "close":1532.7,
-        "volume":4777.0
+        "volume":2862.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35960,43 @@
         "open":1527.5,
         "high":1527.8,
         "low":1524.1,
-        "close":1525.7,
-        "volume":10502.0
+        "close":1525.3,
+        "volume":12051.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:ASTRAL",
+        "open":1526.1,
+        "high":1530.9,
+        "low":1525.4,
+        "close":1528.4,
+        "volume":7119.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:ASTRAL",
+        "open":1528.7,
+        "high":1529.8,
+        "low":1527.0,
+        "close":1528.0,
+        "volume":17039.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:ASTRAL",
+        "open":1528.3,
+        "high":1533.1,
+        "low":1528.0,
+        "close":1530.7,
+        "volume":13112.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:ASTRAL",
+        "open":1530.7,
+        "high":1531.6,
+        "low":1530.1,
+        "close":1530.5,
+        "volume":1356.0
     }
 ]

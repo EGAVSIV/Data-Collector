@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T08:30:00.000",
-        "symbol":"NSE:SBIN",
-        "open":965.85,
-        "high":967.35,
-        "low":965.5,
-        "close":965.95,
-        "volume":296404.0
-    },
-    {
-        "datetime":"2025-12-29T08:45:00.000",
-        "symbol":"NSE:SBIN",
-        "open":965.9,
-        "high":968.0,
-        "low":965.0,
-        "close":967.65,
-        "volume":473501.0
-    },
-    {
-        "datetime":"2025-12-29T09:00:00.000",
-        "symbol":"NSE:SBIN",
-        "open":967.5,
-        "high":967.7,
-        "low":965.9,
-        "close":966.75,
-        "volume":383333.0
-    },
-    {
-        "datetime":"2025-12-29T09:15:00.000",
-        "symbol":"NSE:SBIN",
-        "open":967.0,
-        "high":967.0,
-        "low":964.8,
-        "close":965.0,
-        "volume":626650.0
-    },
-    {
         "datetime":"2025-12-29T09:30:00.000",
         "symbol":"NSE:SBIN",
         "open":965.0,
@@ -35421,7 +35385,7 @@
         "high":1050.3,
         "low":1048.4,
         "close":1049.2,
-        "volume":141176.0
+        "volume":92125.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35960,43 @@
         "open":1036.3,
         "high":1036.8,
         "low":1035.3,
-        "close":1035.9,
-        "volume":188243.0
+        "close":1036.0,
+        "volume":270107.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1036.0,
+        "high":1036.0,
+        "low":1033.1,
+        "close":1035.4,
+        "volume":673621.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1035.2,
+        "high":1036.8,
+        "low":1034.5,
+        "close":1034.8,
+        "volume":382054.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1034.8,
+        "high":1035.7,
+        "low":1034.6,
+        "close":1035.0,
+        "volume":89145.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1034.9,
+        "high":1035.0,
+        "low":1034.3,
+        "close":1034.5,
+        "volume":29012.0
     }
 ]

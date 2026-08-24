@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T08:30:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1636.3,
-        "high":1637.0,
-        "low":1631.7,
-        "close":1632.0,
-        "volume":81097.0
-    },
-    {
-        "datetime":"2025-12-29T08:45:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1632.2,
-        "high":1636.3,
-        "low":1630.1,
-        "close":1633.6,
-        "volume":96943.0
-    },
-    {
-        "datetime":"2025-12-29T09:00:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1633.5,
-        "high":1634.0,
-        "low":1627.2,
-        "close":1628.1,
-        "volume":29752.0
-    },
-    {
-        "datetime":"2025-12-29T09:15:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1628.1,
-        "high":1628.9,
-        "low":1625.4,
-        "close":1628.1,
-        "volume":55034.0
-    },
-    {
         "datetime":"2025-12-29T09:30:00.000",
         "symbol":"NSE:HCLTECH",
         "open":1628.6,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:HCLTECH",
         "open":1319.6,
         "high":1322.9,
+        "low":1317.7,
+        "close":1317.8,
+        "volume":27264.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1318.3,
+        "high":1318.6,
+        "low":1315.1,
+        "close":1315.1,
+        "volume":18454.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1315.7,
+        "high":1317.3,
+        "low":1315.3,
+        "close":1316.1,
+        "volume":17619.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1316.1,
+        "high":1318.5,
+        "low":1315.8,
+        "close":1318.3,
+        "volume":18105.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1318.3,
+        "high":1318.4,
         "low":1318.0,
-        "close":1318.0,
-        "volume":22503.0
+        "close":1318.2,
+        "volume":4631.0
     }
 ]

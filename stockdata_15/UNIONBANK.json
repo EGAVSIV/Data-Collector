@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T08:30:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":149.45,
-        "high":149.82,
-        "low":149.35,
-        "close":149.42,
-        "volume":315721.0
-    },
-    {
-        "datetime":"2025-12-29T08:45:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":149.41,
-        "high":149.8,
-        "low":149.18,
-        "close":149.78,
-        "volume":318421.0
-    },
-    {
-        "datetime":"2025-12-29T09:00:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":149.79,
-        "high":149.9,
-        "low":149.66,
-        "close":149.78,
-        "volume":221014.0
-    },
-    {
-        "datetime":"2025-12-29T09:15:00.000",
-        "symbol":"NSE:UNIONBANK",
-        "open":149.78,
-        "high":149.83,
-        "low":149.2,
-        "close":149.58,
-        "volume":209208.0
-    },
-    {
         "datetime":"2025-12-29T09:30:00.000",
         "symbol":"NSE:UNIONBANK",
         "open":149.59,
@@ -35421,7 +35385,7 @@
         "high":185.74,
         "low":185.41,
         "close":185.74,
-        "volume":63572.0
+        "volume":48936.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35996,7 +35960,43 @@
         "open":182.4,
         "high":182.45,
         "low":182.02,
-        "close":182.07,
-        "volume":96146.0
+        "close":182.2,
+        "volume":108336.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":182.22,
+        "high":182.83,
+        "low":182.06,
+        "close":182.79,
+        "volume":157593.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":182.73,
+        "high":183.32,
+        "low":182.73,
+        "close":183.0,
+        "volume":98639.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":183.01,
+        "high":183.32,
+        "low":182.75,
+        "close":182.89,
+        "volume":390214.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:UNIONBANK",
+        "open":182.89,
+        "high":182.9,
+        "low":182.65,
+        "close":182.71,
+        "volume":28122.0
     }
 ]

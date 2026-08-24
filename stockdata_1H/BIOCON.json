@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T07:45:00.000",
-        "symbol":"NSE:BIOCON",
-        "open":306.45,
-        "high":309.25,
-        "low":305.85,
-        "close":306.8,
-        "volume":1244641.0
-    },
-    {
         "datetime":"2024-04-29T08:45:00.000",
         "symbol":"NSE:BIOCON",
         "open":306.85,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:BIOCON",
         "open":410.45,
         "high":410.95,
-        "low":410.3,
-        "close":410.65,
-        "volume":68290.0
+        "low":409.15,
+        "close":409.2,
+        "volume":301791.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:BIOCON",
+        "open":409.15,
+        "high":409.6,
+        "low":409.15,
+        "close":409.6,
+        "volume":17090.0
     }
 ]

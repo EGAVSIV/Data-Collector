@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T06:00:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":359.85,
-        "high":360.2,
-        "low":359.1,
-        "close":359.15,
-        "volume":20120.0
-    },
-    {
-        "datetime":"2025-12-30T06:15:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":359.4,
-        "high":359.4,
-        "low":358.7,
-        "close":359.15,
-        "volume":27328.0
-    },
-    {
-        "datetime":"2025-12-30T06:30:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":359.1,
-        "high":359.25,
-        "low":358.8,
-        "close":358.85,
-        "volume":10632.0
-    },
-    {
-        "datetime":"2025-12-30T06:45:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":358.85,
-        "high":359.2,
-        "low":358.75,
-        "close":359.0,
-        "volume":13663.0
-    },
-    {
         "datetime":"2025-12-30T07:00:00.000",
         "symbol":"NSE:EXIDEIND",
         "open":358.8,
@@ -35996,7 +35960,43 @@
         "open":453.95,
         "high":458.5,
         "low":453.15,
-        "close":456.7,
-        "volume":317064.0
+        "close":457.8,
+        "volume":362649.0
+    },
+    {
+        "datetime":"2026-08-24T06:00:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":457.8,
+        "high":457.9,
+        "low":455.75,
+        "close":456.55,
+        "volume":66510.0
+    },
+    {
+        "datetime":"2026-08-24T06:15:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":456.55,
+        "high":457.9,
+        "low":456.55,
+        "close":456.6,
+        "volume":31973.0
+    },
+    {
+        "datetime":"2026-08-24T06:30:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":456.6,
+        "high":456.95,
+        "low":456.15,
+        "close":456.15,
+        "volume":20720.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":456.05,
+        "high":457.4,
+        "low":455.35,
+        "close":457.2,
+        "volume":21693.0
     }
 ]

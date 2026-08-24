@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T07:45:00.000",
-        "symbol":"NSE:SONACOMS",
-        "open":643.5,
-        "high":643.6,
-        "low":635.05,
-        "close":637.3,
-        "volume":234511.0
-    },
-    {
         "datetime":"2024-04-29T08:45:00.000",
         "symbol":"NSE:SONACOMS",
         "open":637.35,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-24T05:45:00.000",
         "symbol":"NSE:SONACOMS",
         "open":817.65,
-        "high":819.75,
-        "low":817.1,
-        "close":817.8,
-        "volume":47261.0
+        "high":821.7,
+        "low":817.0,
+        "close":821.0,
+        "volume":138859.0
+    },
+    {
+        "datetime":"2026-08-24T06:45:00.000",
+        "symbol":"NSE:SONACOMS",
+        "open":820.65,
+        "high":824.3,
+        "low":820.55,
+        "close":822.8,
+        "volume":59591.0
     }
 ]
