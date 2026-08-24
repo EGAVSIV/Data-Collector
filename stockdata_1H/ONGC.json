@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T09:45:00.000",
-        "symbol":"NSE:ONGC",
-        "open":283.35,
-        "high":283.6,
-        "low":282.95,
-        "close":283.5,
-        "volume":613667.0
-    },
-    {
         "datetime":"2024-04-30T03:45:00.000",
         "symbol":"NSE:ONGC",
         "open":284.2,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:ONGC",
         "open":236.15,
         "high":236.26,
-        "low":236.03,
-        "close":236.12,
-        "volume":157508.0
+        "low":235.68,
+        "close":235.85,
+        "volume":601952.0
+    },
+    {
+        "datetime":"2026-08-24T08:45:00.000",
+        "symbol":"NSE:ONGC",
+        "open":235.85,
+        "high":236.08,
+        "low":235.8,
+        "close":235.99,
+        "volume":113751.0
     }
 ]

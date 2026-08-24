@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T09:45:00.000",
-        "symbol":"NSE:UNOMINDA",
-        "open":724.75,
-        "high":732.0,
-        "low":723.2,
-        "close":730.0,
-        "volume":23589.0
-    },
-    {
         "datetime":"2024-04-30T03:45:00.000",
         "symbol":"NSE:UNOMINDA",
         "open":733.5,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-24T07:45:00.000",
         "symbol":"NSE:UNOMINDA",
         "open":1250.5,
-        "high":1251.7,
-        "low":1250.0,
-        "close":1250.9,
-        "volume":7159.0
+        "high":1252.2,
+        "low":1247.9,
+        "close":1250.3,
+        "volume":176145.0
+    },
+    {
+        "datetime":"2026-08-24T08:45:00.000",
+        "symbol":"NSE:UNOMINDA",
+        "open":1250.3,
+        "high":1250.9,
+        "low":1248.2,
+        "close":1248.6,
+        "volume":7803.0
     }
 ]

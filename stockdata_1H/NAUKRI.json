@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T09:45:00.000",
-        "symbol":"NSE:NAUKRI",
-        "open":1211.15,
-        "high":1219.0,
-        "low":1210.8,
-        "close":1218.0,
-        "volume":190720.0
-    },
-    {
         "datetime":"2024-04-30T03:45:00.000",
         "symbol":"NSE:NAUKRI",
         "open":1218.03,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-24T07:45:00.000",
         "symbol":"NSE:NAUKRI",
         "open":1345.3,
-        "high":1345.7,
-        "low":1343.6,
-        "close":1344.2,
-        "volume":15368.0
+        "high":1347.0,
+        "low":1336.7,
+        "close":1343.0,
+        "volume":309004.0
+    },
+    {
+        "datetime":"2026-08-24T08:45:00.000",
+        "symbol":"NSE:NAUKRI",
+        "open":1343.2,
+        "high":1343.8,
+        "low":1339.6,
+        "close":1340.1,
+        "volume":57900.0
     }
 ]

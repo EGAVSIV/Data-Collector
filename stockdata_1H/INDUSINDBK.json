@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T09:45:00.000",
-        "symbol":"NSE:INDUSINDBK",
-        "open":1486.75,
-        "high":1489.8,
-        "low":1485.35,
-        "close":1489.5,
-        "volume":450626.0
-    },
-    {
         "datetime":"2024-04-30T03:45:00.000",
         "symbol":"NSE:INDUSINDBK",
         "open":1497.9,
@@ -35996,7 +35987,16 @@
         "open":1012.1,
         "high":1015.7,
         "low":1012.0,
-        "close":1014.0,
-        "volume":45429.0
+        "close":1015.0,
+        "volume":169851.0
+    },
+    {
+        "datetime":"2026-08-24T08:45:00.000",
+        "symbol":"NSE:INDUSINDBK",
+        "open":1015.0,
+        "high":1015.0,
+        "low":1011.1,
+        "close":1013.0,
+        "volume":99454.0
     }
 ]
