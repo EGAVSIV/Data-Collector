@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T05:15:00.000",
-        "symbol":"NSE:ASIANPAINT",
-        "open":2778.5,
-        "high":2782.2,
-        "low":2775.5,
-        "close":2781.9,
-        "volume":106535.0
-    },
-    {
-        "datetime":"2025-12-30T05:30:00.000",
-        "symbol":"NSE:ASIANPAINT",
-        "open":2781.9,
-        "high":2783.6,
-        "low":2775.6,
-        "close":2780.0,
-        "volume":98787.0
-    },
-    {
-        "datetime":"2025-12-30T05:45:00.000",
-        "symbol":"NSE:ASIANPAINT",
-        "open":2780.0,
-        "high":2783.3,
-        "low":2776.1,
-        "close":2781.0,
-        "volume":86980.0
-    },
-    {
         "datetime":"2025-12-30T06:00:00.000",
         "symbol":"NSE:ASIANPAINT",
         "open":2781.0,
@@ -35311,9 +35284,9 @@
         "symbol":"NSE:ASIANPAINT",
         "open":2603.1,
         "high":2606.5,
-        "low":2601.3,
+        "low":2601.0,
         "close":2601.4,
-        "volume":27322.0
+        "volume":33254.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-24T08:45:00.000",
         "symbol":"NSE:ASIANPAINT",
         "open":2624.6,
-        "high":2629.0,
+        "high":2629.4,
         "low":2624.3,
-        "close":2628.7,
-        "volume":19264.0
+        "close":2628.1,
+        "volume":20982.0
+    },
+    {
+        "datetime":"2026-08-24T09:00:00.000",
+        "symbol":"NSE:ASIANPAINT",
+        "open":2627.7,
+        "high":2630.0,
+        "low":2627.2,
+        "close":2629.8,
+        "volume":16036.0
+    },
+    {
+        "datetime":"2026-08-24T09:15:00.000",
+        "symbol":"NSE:ASIANPAINT",
+        "open":2629.7,
+        "high":2631.7,
+        "low":2629.4,
+        "close":2630.2,
+        "volume":18420.0
+    },
+    {
+        "datetime":"2026-08-24T09:30:00.000",
+        "symbol":"NSE:ASIANPAINT",
+        "open":2630.1,
+        "high":2630.4,
+        "low":2627.0,
+        "close":2630.0,
+        "volume":39145.0
     }
 ]

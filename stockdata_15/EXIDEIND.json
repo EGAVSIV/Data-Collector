@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:00:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":359.55,
-        "high":359.65,
-        "low":359.0,
-        "close":359.2,
-        "volume":13390.0
-    },
-    {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":359.2,
-        "high":359.55,
-        "low":359.0,
-        "close":359.0,
-        "volume":20908.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":358.9,
-        "high":359.0,
-        "low":357.3,
-        "close":357.75,
-        "volume":126448.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":357.75,
-        "high":357.9,
-        "low":357.3,
-        "close":357.9,
-        "volume":84310.0
-    },
-    {
         "datetime":"2025-12-31T03:45:00.000",
         "symbol":"NSE:EXIDEIND",
         "open":358.25,
@@ -35996,7 +35960,43 @@
         "open":454.2,
         "high":454.85,
         "low":453.95,
-        "close":454.6,
-        "volume":14215.0
+        "close":454.45,
+        "volume":25501.0
+    },
+    {
+        "datetime":"2026-08-24T09:00:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":454.5,
+        "high":454.95,
+        "low":453.7,
+        "close":453.7,
+        "volume":41895.0
+    },
+    {
+        "datetime":"2026-08-24T09:15:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":453.7,
+        "high":454.95,
+        "low":453.5,
+        "close":453.6,
+        "volume":76759.0
+    },
+    {
+        "datetime":"2026-08-24T09:30:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":453.65,
+        "high":454.35,
+        "low":452.25,
+        "close":453.95,
+        "volume":155080.0
+    },
+    {
+        "datetime":"2026-08-24T09:45:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":454.15,
+        "high":454.25,
+        "low":453.05,
+        "close":453.5,
+        "volume":7154.0
     }
 ]
