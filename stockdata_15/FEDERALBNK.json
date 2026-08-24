@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:FEDERALBNK",
-        "open":261.45,
-        "high":261.85,
-        "low":261.4,
-        "close":261.8,
-        "volume":25983.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:FEDERALBNK",
-        "open":261.8,
-        "high":262.0,
-        "low":261.6,
-        "close":261.8,
-        "volume":58742.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:FEDERALBNK",
-        "open":261.8,
-        "high":261.8,
-        "low":261.45,
-        "close":261.75,
-        "volume":40855.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:FEDERALBNK",
-        "open":261.75,
-        "high":262.1,
-        "low":261.75,
-        "close":262.0,
-        "volume":102715.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:FEDERALBNK",
         "open":262.0,
@@ -35998,5 +35962,41 @@
         "low":358.75,
         "close":359.5,
         "volume":497473.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:FEDERALBNK",
+        "open":360.0,
+        "high":360.25,
+        "low":358.6,
+        "close":360.0,
+        "volume":131447.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:FEDERALBNK",
+        "open":360.15,
+        "high":360.25,
+        "low":359.35,
+        "close":360.15,
+        "volume":80803.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:FEDERALBNK",
+        "open":360.15,
+        "high":360.55,
+        "low":359.55,
+        "close":359.7,
+        "volume":106189.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:FEDERALBNK",
+        "open":359.7,
+        "high":361.0,
+        "low":359.6,
+        "close":360.25,
+        "volume":66067.0
     }
 ]

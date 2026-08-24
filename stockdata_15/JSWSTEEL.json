@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:JSWSTEEL",
-        "open":1106.8,
-        "high":1110.6,
-        "low":1105.8,
-        "close":1110.5,
-        "volume":114314.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:JSWSTEEL",
-        "open":1110.3,
-        "high":1111.0,
-        "low":1105.2,
-        "close":1105.9,
-        "volume":247684.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:JSWSTEEL",
-        "open":1106.0,
-        "high":1106.2,
-        "low":1097.3,
-        "close":1100.3,
-        "volume":174609.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:JSWSTEEL",
-        "open":1099.4,
-        "high":1101.3,
-        "low":1098.1,
-        "close":1101.1,
-        "volume":32496.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:JSWSTEEL",
         "open":1101.1,
@@ -35998,5 +35962,41 @@
         "low":1287.7,
         "close":1290.2,
         "volume":274724.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:JSWSTEEL",
+        "open":1300.0,
+        "high":1304.8,
+        "low":1295.3,
+        "close":1299.9,
+        "volume":194375.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:JSWSTEEL",
+        "open":1300.1,
+        "high":1300.5,
+        "low":1295.5,
+        "close":1300.1,
+        "volume":46940.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:JSWSTEEL",
+        "open":1300.3,
+        "high":1305.0,
+        "low":1299.9,
+        "close":1302.6,
+        "volume":84019.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:JSWSTEEL",
+        "open":1302.8,
+        "high":1302.8,
+        "low":1300.7,
+        "close":1300.7,
+        "volume":1920.0
     }
 ]

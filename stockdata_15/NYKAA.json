@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:NYKAA",
-        "open":259.0,
-        "high":259.45,
-        "low":259.0,
-        "close":259.3,
-        "volume":33126.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:NYKAA",
-        "open":259.35,
-        "high":259.35,
-        "low":258.95,
-        "close":259.15,
-        "volume":55581.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:NYKAA",
-        "open":259.1,
-        "high":259.45,
-        "low":259.0,
-        "close":259.15,
-        "volume":156109.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:NYKAA",
-        "open":259.2,
-        "high":259.2,
-        "low":258.7,
-        "close":258.75,
-        "volume":76947.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:NYKAA",
         "open":258.75,
@@ -35502,7 +35466,7 @@
         "high":327.35,
         "low":326.4,
         "close":326.7,
-        "volume":332197.0
+        "volume":259734.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":333.15,
         "close":334.5,
         "volume":723135.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:NYKAA",
+        "open":332.0,
+        "high":332.5,
+        "low":330.25,
+        "close":331.35,
+        "volume":257254.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:NYKAA",
+        "open":331.25,
+        "high":333.0,
+        "low":330.85,
+        "close":332.4,
+        "volume":81012.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:NYKAA",
+        "open":332.45,
+        "high":332.55,
+        "low":331.5,
+        "close":332.4,
+        "volume":75817.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:NYKAA",
+        "open":332.55,
+        "high":332.55,
+        "low":332.35,
+        "close":332.35,
+        "volume":173.0
     }
 ]

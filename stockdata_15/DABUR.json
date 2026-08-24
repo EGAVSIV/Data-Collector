@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:DABUR",
-        "open":487.9,
-        "high":488.3,
-        "low":487.6,
-        "close":488.0,
-        "volume":9475.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:DABUR",
-        "open":488.0,
-        "high":488.9,
-        "low":487.6,
-        "close":488.2,
-        "volume":28649.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:DABUR",
-        "open":488.0,
-        "high":490.1,
-        "low":488.0,
-        "close":489.1,
-        "volume":281087.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:DABUR",
-        "open":489.1,
-        "high":489.45,
-        "low":488.0,
-        "close":488.2,
-        "volume":21844.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:DABUR",
         "open":488.2,
@@ -35502,7 +35466,7 @@
         "high":400.75,
         "low":400.15,
         "close":400.4,
-        "volume":22664.0
+        "volume":25096.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":398.55,
         "close":399.1,
         "volume":58861.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:DABUR",
+        "open":399.4,
+        "high":400.55,
+        "low":398.65,
+        "close":399.85,
+        "volume":62408.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:DABUR",
+        "open":399.8,
+        "high":400.0,
+        "low":399.1,
+        "close":399.55,
+        "volume":33434.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:DABUR",
+        "open":399.55,
+        "high":399.85,
+        "low":399.2,
+        "close":399.4,
+        "volume":42047.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:DABUR",
+        "open":399.4,
+        "high":399.5,
+        "low":399.4,
+        "close":399.5,
+        "volume":1146.0
     }
 ]

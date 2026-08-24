@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T03:45:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27347.15,
-        "high":27385.95,
-        "low":27301.05,
-        "close":27305.95,
-        "volume":5623722.0
-    },
-    {
-        "datetime":"2025-12-30T04:00:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27305.9,
-        "high":27336.05,
-        "low":27297.8,
-        "close":27331.6,
-        "volume":3235876.0
-    },
-    {
-        "datetime":"2025-12-30T04:15:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27332.15,
-        "high":27348.8,
-        "low":27289.35,
-        "close":27327.65,
-        "volume":2087757.0
-    },
-    {
-        "datetime":"2025-12-30T04:30:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27327.6,
-        "high":27340.9,
-        "low":27300.65,
-        "close":27329.8,
-        "volume":2626559.0
-    },
-    {
         "datetime":"2025-12-30T04:45:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":27329.85,
@@ -35998,5 +35962,41 @@
         "low":26261.0,
         "close":26261.0,
         "volume":10804.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26271.85,
+        "high":26361.65,
+        "low":26264.55,
+        "close":26331.3,
+        "volume":6869121.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26333.35,
+        "high":26335.2,
+        "low":26305.9,
+        "close":26319.0,
+        "volume":3870253.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26318.65,
+        "high":26324.15,
+        "low":26278.4,
+        "close":26285.15,
+        "volume":4044322.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26288.8,
+        "high":26298.7,
+        "low":26286.5,
+        "close":26296.55,
+        "volume":427678.0
     }
 ]

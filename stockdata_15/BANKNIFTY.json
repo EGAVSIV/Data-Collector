@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T03:45:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":58904.6,
-        "high":58961.45,
-        "low":58746.0,
-        "close":58757.95,
-        "volume":8047035.0
-    },
-    {
-        "datetime":"2025-12-30T04:00:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":58757.85,
-        "high":58855.3,
-        "low":58737.6,
-        "close":58844.75,
-        "volume":3641523.0
-    },
-    {
-        "datetime":"2025-12-30T04:15:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":58844.55,
-        "high":58892.95,
-        "low":58767.85,
-        "close":58858.3,
-        "volume":3554260.0
-    },
-    {
-        "datetime":"2025-12-30T04:30:00.000",
-        "symbol":"NSE:BANKNIFTY",
-        "open":58858.75,
-        "high":58964.35,
-        "low":58831.85,
-        "close":58944.65,
-        "volume":5973823.0
-    },
-    {
         "datetime":"2025-12-30T04:45:00.000",
         "symbol":"NSE:BANKNIFTY",
         "open":58943.05,
@@ -35998,5 +35962,41 @@
         "low":57761.95,
         "close":57761.95,
         "volume":53772.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57835.0,
+        "high":57873.75,
+        "low":57774.25,
+        "close":57796.3,
+        "volume":11295325.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57802.65,
+        "high":57805.15,
+        "low":57726.6,
+        "close":57743.7,
+        "volume":5165710.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57743.55,
+        "high":57753.95,
+        "low":57671.3,
+        "close":57685.95,
+        "volume":5803882.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:BANKNIFTY",
+        "open":57693.2,
+        "high":57730.95,
+        "low":57689.3,
+        "close":57728.1,
+        "volume":608244.0
     }
 ]

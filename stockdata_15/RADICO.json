@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:RADICO",
-        "open":3234.3,
-        "high":3235.4,
-        "low":3230.0,
-        "close":3231.9,
-        "volume":4876.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:RADICO",
-        "open":3233.6,
-        "high":3233.6,
-        "low":3224.3,
-        "close":3228.8,
-        "volume":3882.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:RADICO",
-        "open":3228.7,
-        "high":3230.0,
-        "low":3223.0,
-        "close":3225.0,
-        "volume":3365.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:RADICO",
-        "open":3227.7,
-        "high":3229.8,
-        "low":3223.8,
-        "close":3226.9,
-        "volume":1925.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:RADICO",
         "open":3226.9,
@@ -35502,7 +35466,7 @@
         "high":4659.5,
         "low":4633.0,
         "close":4642.0,
-        "volume":17661.0
+        "volume":20213.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":4626.5,
         "close":4636.0,
         "volume":17533.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:RADICO",
+        "open":4631.8,
+        "high":4634.9,
+        "low":4599.3,
+        "close":4602.5,
+        "volume":11926.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:RADICO",
+        "open":4604.6,
+        "high":4607.9,
+        "low":4591.0,
+        "close":4607.6,
+        "volume":8819.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:RADICO",
+        "open":4605.8,
+        "high":4609.9,
+        "low":4600.5,
+        "close":4605.0,
+        "volume":7975.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:RADICO",
+        "open":4603.8,
+        "high":4607.4,
+        "low":4603.8,
+        "close":4606.6,
+        "volume":501.0
     }
 ]

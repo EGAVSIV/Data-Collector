@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":173.85,
-        "high":174.0,
-        "low":173.7,
-        "close":173.7,
-        "volume":235848.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":173.8,
-        "high":173.9,
-        "low":173.61,
-        "close":173.62,
-        "volume":210656.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":173.72,
-        "high":173.95,
-        "low":173.38,
-        "close":173.85,
-        "volume":789697.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":173.92,
-        "high":174.19,
-        "low":173.78,
-        "close":174.03,
-        "volume":204465.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:ASHOKLEY",
         "open":174.04,
@@ -35763,7 +35727,7 @@
         "high":173.86,
         "low":173.47,
         "close":173.59,
-        "volume":180396.0
+        "volume":180436.0
     },
     {
         "datetime":"2026-08-20T09:15:00.000",
@@ -35998,5 +35962,41 @@
         "low":172.75,
         "close":173.0,
         "volume":608466.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":173.5,
+        "high":173.59,
+        "low":172.11,
+        "close":172.23,
+        "volume":1070768.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":172.19,
+        "high":172.19,
+        "low":171.82,
+        "close":172.17,
+        "volume":570381.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":172.11,
+        "high":172.84,
+        "low":172.11,
+        "close":172.77,
+        "volume":420289.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":172.8,
+        "high":172.97,
+        "low":172.73,
+        "close":172.97,
+        "volume":98838.0
     }
 ]

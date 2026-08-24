@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":36215.0,
-        "high":36265.0,
-        "low":36200.0,
-        "close":36260.0,
-        "volume":284.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":36240.0,
-        "high":36265.0,
-        "low":36205.0,
-        "close":36240.0,
-        "volume":172.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":36240.0,
-        "high":36300.0,
-        "low":36240.0,
-        "close":36280.0,
-        "volume":141.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":36280.0,
-        "high":36295.0,
-        "low":36220.0,
-        "close":36240.0,
-        "volume":396.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:PAGEIND",
         "open":36240.0,
@@ -35502,7 +35466,7 @@
         "high":35715.0,
         "low":35670.0,
         "close":35680.0,
-        "volume":680.0
+        "volume":539.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":35600.0,
         "close":35600.0,
         "volume":3033.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35480.0,
+        "high":35650.0,
+        "low":35480.0,
+        "close":35550.0,
+        "volume":949.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35540.0,
+        "high":35700.0,
+        "low":35500.0,
+        "close":35500.0,
+        "volume":482.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35500.0,
+        "high":35560.0,
+        "low":35440.0,
+        "close":35440.0,
+        "volume":415.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35440.0,
+        "high":35450.0,
+        "low":35440.0,
+        "close":35450.0,
+        "volume":2.0
     }
 ]

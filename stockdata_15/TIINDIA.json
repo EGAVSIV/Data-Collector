@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:TIINDIA",
-        "open":2581.6,
-        "high":2596.0,
-        "low":2580.0,
-        "close":2583.6,
-        "volume":7866.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:TIINDIA",
-        "open":2583.6,
-        "high":2584.1,
-        "low":2581.6,
-        "close":2583.0,
-        "volume":1311.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:TIINDIA",
-        "open":2582.0,
-        "high":2583.3,
-        "low":2577.6,
-        "close":2579.0,
-        "volume":1689.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:TIINDIA",
-        "open":2579.0,
-        "high":2580.1,
-        "low":2577.4,
-        "close":2579.9,
-        "volume":1649.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:TIINDIA",
         "open":2579.9,
@@ -35502,7 +35466,7 @@
         "high":2963.1,
         "low":2953.0,
         "close":2959.9,
-        "volume":13930.0
+        "volume":14926.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":2843.9,
         "close":2885.9,
         "volume":51579.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:TIINDIA",
+        "open":2878.4,
+        "high":2879.9,
+        "low":2845.8,
+        "close":2860.8,
+        "volume":16982.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:TIINDIA",
+        "open":2860.6,
+        "high":2877.8,
+        "low":2855.5,
+        "close":2874.6,
+        "volume":8888.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:TIINDIA",
+        "open":2873.2,
+        "high":2875.0,
+        "low":2865.0,
+        "close":2865.9,
+        "volume":4523.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:TIINDIA",
+        "open":2865.0,
+        "high":2865.9,
+        "low":2865.0,
+        "close":2865.0,
+        "volume":1638.0
     }
 ]

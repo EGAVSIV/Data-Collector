@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-29T06:15:00.000",
-        "symbol":"NSE:SUZLON",
-        "open":53.11,
-        "high":53.24,
-        "low":53.11,
-        "close":53.14,
-        "volume":945804.0
-    },
-    {
-        "datetime":"2025-12-29T06:30:00.000",
-        "symbol":"NSE:SUZLON",
-        "open":53.12,
-        "high":53.16,
-        "low":52.95,
-        "close":52.97,
-        "volume":1650762.0
-    },
-    {
-        "datetime":"2025-12-29T06:45:00.000",
-        "symbol":"NSE:SUZLON",
-        "open":52.97,
-        "high":53.06,
-        "low":52.91,
-        "close":52.93,
-        "volume":1181919.0
-    },
-    {
-        "datetime":"2025-12-29T07:00:00.000",
-        "symbol":"NSE:SUZLON",
-        "open":52.93,
-        "high":52.98,
-        "low":52.83,
-        "close":52.91,
-        "volume":1103137.0
-    },
-    {
         "datetime":"2025-12-29T07:15:00.000",
         "symbol":"NSE:SUZLON",
         "open":52.9,
@@ -35502,7 +35466,7 @@
         "high":47.18,
         "low":47.05,
         "close":47.15,
-        "volume":1033918.0
+        "volume":1194105.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":46.6,
         "close":46.69,
         "volume":4893855.0
+    },
+    {
+        "datetime":"2026-08-24T03:45:00.000",
+        "symbol":"NSE:SUZLON",
+        "open":46.87,
+        "high":47.06,
+        "low":46.77,
+        "close":46.87,
+        "volume":4563253.0
+    },
+    {
+        "datetime":"2026-08-24T04:00:00.000",
+        "symbol":"NSE:SUZLON",
+        "open":46.88,
+        "high":46.89,
+        "low":46.76,
+        "close":46.8,
+        "volume":1654163.0
+    },
+    {
+        "datetime":"2026-08-24T04:15:00.000",
+        "symbol":"NSE:SUZLON",
+        "open":46.82,
+        "high":46.87,
+        "low":46.72,
+        "close":46.78,
+        "volume":1762559.0
+    },
+    {
+        "datetime":"2026-08-24T04:30:00.000",
+        "symbol":"NSE:SUZLON",
+        "open":46.78,
+        "high":46.79,
+        "low":46.77,
+        "close":46.78,
+        "volume":140160.0
     }
 ]
