@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-29T05:45:00.000",
-        "symbol":"NSE:BLUESTARCO",
-        "open":1462.6,
-        "high":1472.0,
-        "low":1461.65,
-        "close":1470.25,
-        "volume":12957.0
-    },
-    {
         "datetime":"2024-04-29T06:45:00.000",
         "symbol":"NSE:BLUESTARCO",
         "open":1470.05,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:BLUESTARCO",
         "open":1514.7,
         "high":1514.7,
-        "low":1501.8,
-        "close":1502.8,
-        "volume":32093.0
+        "low":1499.8,
+        "close":1501.8,
+        "volume":42767.0
+    },
+    {
+        "datetime":"2026-08-24T04:45:00.000",
+        "symbol":"NSE:BLUESTARCO",
+        "open":1502.6,
+        "high":1510.1,
+        "low":1501.1,
+        "close":1510.1,
+        "volume":15575.0
     }
 ]
