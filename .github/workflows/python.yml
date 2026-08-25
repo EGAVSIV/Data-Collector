@@ -1,13 +1,8 @@
 name: Fetch TradingView Stock Data
 
 on:
-
-  # Manual Run Button
-  workflow_dispatch:
-
   # Scheduled Runs
   schedule:
-
     # ==========================================
     # IST = UTC + 5:30
     #
@@ -131,9 +126,10 @@ jobs:
           fi
 
 
-     # ==========================================
-      # STEP 8 - Commit & Push to Current Repo
       # ==========================================
+      # STEP 8 - Commit & Push to Current (Local) Repo Only
+      # ==========================================
+
       - name: Commit and Push to Local Repo
         if: steps.git-check.outputs.changes == 'true'
         run: |
@@ -143,59 +139,3 @@ jobs:
           git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
           git commit -m "Auto update stock data $(date '+%Y-%m-%d %H:%M:%S UTC')"
           git push
-
-      # ==========================================
-      # STEP 9 - Push Updated Data to Multiple Repos
-      # ==========================================
-      - name: Push Data to Target Repositories
-        if: steps.git-check.outputs.changes == 'true'
-        env:
-          PAT_TOKEN: ${{ secrets.DATA_PUSH_PAT }}
-          GITHUB_OWNER: "EGAVSIV"
-        run: |
-          # Define array of target repositories
-          TARGET_REPOS=(
-            "stock-scan"
-            "MULTIS"
-            "Stock_Scanner_With_ASTA_Parameters"
-            "GEOTRADER"
-            "SECSEA"
-          )
-
-          # Configure global git identity once
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # Save the root repository path
-          ROOT_DIR=$(pwd)
-
-          # Loop through each target repository
-          for REPO in "${TARGET_REPOS[@]}"; do
-            echo "=========================================="
-            echo "Processing repository: ${REPO}"
-            echo "=========================================="
-
-            # Clean up target directory if it already exists from a prior iteration
-            rm -rf target_repo
-
-            # 1. Clone target repository
-            git clone "https://x-access-token:${PAT_TOKEN}@github.com/${GITHUB_OWNER}/${REPO}.git" target_repo
-
-            # 2. Copy folder data into target repo
-            cp -r stockdata_D stockdata_W stockdata_M stockdata_15 stockdata_1H target_repo/
-
-            # 3. Commit and push inside target_repo context
-            cd target_repo
-            git add stockdata_D/ stockdata_W/ stockdata_M/ stockdata_15/ stockdata_1H/
-
-            if ! git diff --cached --quiet; then
-              git commit -m "Sync stock data from Data-Collector $(date '+%Y-%m-%d %H:%M:%S UTC')"
-              git push
-              echo "Successfully pushed updates to ${REPO}."
-            else
-              echo "No changes detected for ${REPO}. Skipping push."
-            fi
-
-            # Return to root folder for next iteration
-            cd "$ROOT_DIR"
-          done
