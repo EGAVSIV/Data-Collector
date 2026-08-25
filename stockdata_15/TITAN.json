@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:TITAN",
-        "open":3982.0,
-        "high":3986.0,
-        "low":3980.3,
-        "close":3981.9,
-        "volume":57925.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:TITAN",
-        "open":3980.0,
-        "high":3980.9,
-        "low":3970.1,
-        "close":3974.9,
-        "volume":287385.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:TITAN",
-        "open":3974.5,
-        "high":3977.7,
-        "low":3963.8,
-        "close":3973.0,
-        "volume":217359.0
-    },
-    {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:TITAN",
-        "open":3984.0,
-        "high":4010.0,
-        "low":3975.1,
-        "close":4008.9,
-        "volume":29411.0
-    },
-    {
         "datetime":"2025-12-31T04:00:00.000",
         "symbol":"NSE:TITAN",
         "open":4008.9,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-25T06:45:00.000",
         "symbol":"NSE:TITAN",
         "open":5063.2,
-        "high":5068.4,
+        "high":5071.8,
         "low":5061.8,
-        "close":5068.4,
-        "volume":1922.0
+        "close":5068.6,
+        "volume":6621.0
+    },
+    {
+        "datetime":"2026-08-25T07:00:00.000",
+        "symbol":"NSE:TITAN",
+        "open":5065.0,
+        "high":5072.2,
+        "low":5065.0,
+        "close":5066.5,
+        "volume":5825.0
+    },
+    {
+        "datetime":"2026-08-25T07:15:00.000",
+        "symbol":"NSE:TITAN",
+        "open":5065.2,
+        "high":5071.7,
+        "low":5064.1,
+        "close":5070.3,
+        "volume":7974.0
+    },
+    {
+        "datetime":"2026-08-25T07:30:00.000",
+        "symbol":"NSE:TITAN",
+        "open":5071.3,
+        "high":5071.9,
+        "low":5063.9,
+        "close":5066.0,
+        "volume":12150.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:TITAN",
+        "open":5064.8,
+        "high":5066.6,
+        "low":5063.2,
+        "close":5064.5,
+        "volume":1183.0
     }
 ]

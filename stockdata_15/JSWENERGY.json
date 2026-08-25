@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:JSWENERGY",
-        "open":471.0,
-        "high":471.05,
-        "low":469.55,
-        "close":470.45,
-        "volume":20698.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:JSWENERGY",
-        "open":470.55,
-        "high":471.0,
-        "low":469.1,
-        "close":469.9,
-        "volume":100232.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:JSWENERGY",
-        "open":469.6,
-        "high":470.0,
-        "low":468.0,
-        "close":469.9,
-        "volume":101699.0
-    },
-    {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:JSWENERGY",
-        "open":470.45,
-        "high":476.2,
-        "low":469.95,
-        "close":475.45,
-        "volume":91539.0
-    },
-    {
         "datetime":"2025-12-31T04:00:00.000",
         "symbol":"NSE:JSWENERGY",
         "open":475.25,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:JSWENERGY",
         "open":540.55,
         "high":541.3,
+        "low":540.4,
+        "close":540.95,
+        "volume":29871.0
+    },
+    {
+        "datetime":"2026-08-25T07:00:00.000",
+        "symbol":"NSE:JSWENERGY",
+        "open":541.0,
+        "high":541.5,
         "low":540.5,
+        "close":540.8,
+        "volume":26456.0
+    },
+    {
+        "datetime":"2026-08-25T07:15:00.000",
+        "symbol":"NSE:JSWENERGY",
+        "open":540.85,
+        "high":541.35,
+        "low":540.65,
         "close":541.0,
-        "volume":13042.0
+        "volume":33382.0
+    },
+    {
+        "datetime":"2026-08-25T07:30:00.000",
+        "symbol":"NSE:JSWENERGY",
+        "open":541.15,
+        "high":541.15,
+        "low":539.35,
+        "close":540.2,
+        "volume":37180.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:JSWENERGY",
+        "open":540.25,
+        "high":540.4,
+        "low":540.2,
+        "close":540.3,
+        "volume":1092.0
     }
 ]

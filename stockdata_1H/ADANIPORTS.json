@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-30T07:45:00.000",
-        "symbol":"NSE:ADANIPORTS",
-        "open":1325.65,
-        "high":1330.65,
-        "low":1325.55,
-        "close":1328.5,
-        "volume":162261.0
-    },
-    {
         "datetime":"2024-04-30T08:45:00.000",
         "symbol":"NSE:ADANIPORTS",
         "open":1328.55,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-25T06:45:00.000",
         "symbol":"NSE:ADANIPORTS",
         "open":1682.3,
-        "high":1683.0,
-        "low":1682.2,
-        "close":1682.6,
-        "volume":10307.0
+        "high":1685.4,
+        "low":1681.1,
+        "close":1681.1,
+        "volume":78586.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:ADANIPORTS",
+        "open":1682.4,
+        "high":1682.4,
+        "low":1681.6,
+        "close":1682.4,
+        "volume":6783.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":280.95,
-        "high":281.1,
-        "low":280.05,
-        "close":280.45,
-        "volume":120444.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":280.35,
-        "high":280.45,
-        "low":279.45,
-        "close":279.8,
-        "volume":493318.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":279.7,
-        "high":280.1,
-        "low":279.3,
-        "close":279.9,
-        "volume":480662.0
-    },
-    {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":280.4,
-        "high":281.45,
-        "low":279.6,
-        "close":281.0,
-        "volume":48020.0
-    },
-    {
         "datetime":"2025-12-31T04:00:00.000",
         "symbol":"NSE:PETRONET",
         "open":280.85,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:PETRONET",
         "open":294.3,
         "high":294.5,
-        "low":294.2,
+        "low":294.15,
         "close":294.2,
-        "volume":9116.0
+        "volume":17986.0
+    },
+    {
+        "datetime":"2026-08-25T07:00:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":294.35,
+        "high":294.4,
+        "low":294.05,
+        "close":294.25,
+        "volume":25306.0
+    },
+    {
+        "datetime":"2026-08-25T07:15:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":294.1,
+        "high":294.35,
+        "low":293.85,
+        "close":294.0,
+        "volume":34989.0
+    },
+    {
+        "datetime":"2026-08-25T07:30:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":293.9,
+        "high":294.05,
+        "low":293.75,
+        "close":294.0,
+        "volume":36994.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":294.0,
+        "high":294.05,
+        "low":293.95,
+        "close":294.0,
+        "volume":5157.0
     }
 ]

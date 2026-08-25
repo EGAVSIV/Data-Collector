@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:PFC",
-        "open":349.25,
-        "high":349.7,
-        "low":348.75,
-        "close":349.7,
-        "volume":296324.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:PFC",
-        "open":349.7,
-        "high":349.7,
-        "low":348.9,
-        "close":349.3,
-        "volume":393464.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:PFC",
-        "open":349.3,
-        "high":349.7,
-        "low":349.1,
-        "close":349.7,
-        "volume":338548.0
-    },
-    {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:PFC",
-        "open":351.45,
-        "high":354.5,
-        "low":351.2,
-        "close":354.3,
-        "volume":496684.0
-    },
-    {
         "datetime":"2025-12-31T04:00:00.000",
         "symbol":"NSE:PFC",
         "open":353.95,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:PFC",
         "open":362.9,
         "high":363.1,
-        "low":362.8,
+        "low":362.6,
+        "close":362.7,
+        "volume":245545.0
+    },
+    {
+        "datetime":"2026-08-25T07:00:00.000",
+        "symbol":"NSE:PFC",
+        "open":362.65,
+        "high":362.85,
+        "low":362.25,
+        "close":362.5,
+        "volume":220337.0
+    },
+    {
+        "datetime":"2026-08-25T07:15:00.000",
+        "symbol":"NSE:PFC",
+        "open":362.45,
+        "high":363.0,
+        "low":362.1,
+        "close":362.95,
+        "volume":180430.0
+    },
+    {
+        "datetime":"2026-08-25T07:30:00.000",
+        "symbol":"NSE:PFC",
+        "open":362.95,
+        "high":363.35,
+        "low":362.65,
         "close":362.9,
-        "volume":124817.0
+        "volume":228274.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:PFC",
+        "open":362.85,
+        "high":362.85,
+        "low":362.85,
+        "close":362.85,
+        "volume":9384.0
     }
 ]

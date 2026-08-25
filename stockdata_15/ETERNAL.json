@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:ETERNAL",
-        "open":276.1,
-        "high":276.45,
-        "low":275.75,
-        "close":276.1,
-        "volume":1189525.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:ETERNAL",
-        "open":276.2,
-        "high":277.5,
-        "low":276.2,
-        "close":277.3,
-        "volume":7558326.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:ETERNAL",
-        "open":277.2,
-        "high":277.5,
-        "low":276.4,
-        "close":276.6,
-        "volume":7139109.0
-    },
-    {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:ETERNAL",
-        "open":276.3,
-        "high":277.35,
-        "low":275.9,
-        "close":276.35,
-        "volume":2528322.0
-    },
-    {
         "datetime":"2025-12-31T04:00:00.000",
         "symbol":"NSE:ETERNAL",
         "open":276.2,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:ETERNAL",
         "open":329.65,
         "high":330.3,
-        "low":329.55,
-        "close":329.75,
-        "volume":415931.0
+        "low":329.25,
+        "close":329.25,
+        "volume":682544.0
+    },
+    {
+        "datetime":"2026-08-25T07:00:00.000",
+        "symbol":"NSE:ETERNAL",
+        "open":329.25,
+        "high":329.65,
+        "low":328.75,
+        "close":329.3,
+        "volume":1110316.0
+    },
+    {
+        "datetime":"2026-08-25T07:15:00.000",
+        "symbol":"NSE:ETERNAL",
+        "open":329.25,
+        "high":329.6,
+        "low":328.85,
+        "close":329.45,
+        "volume":903552.0
+    },
+    {
+        "datetime":"2026-08-25T07:30:00.000",
+        "symbol":"NSE:ETERNAL",
+        "open":329.4,
+        "high":329.4,
+        "low":328.9,
+        "close":329.0,
+        "volume":303297.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:ETERNAL",
+        "open":329.05,
+        "high":329.25,
+        "low":329.0,
+        "close":329.2,
+        "volume":46011.0
     }
 ]

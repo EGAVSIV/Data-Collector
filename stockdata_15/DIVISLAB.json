@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T09:15:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6355.5,
-        "high":6355.5,
-        "low":6319.5,
-        "close":6334.5,
-        "volume":97703.0
-    },
-    {
-        "datetime":"2025-12-30T09:30:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6334.5,
-        "high":6374.5,
-        "low":6320.5,
-        "close":6355.0,
-        "volume":701001.0
-    },
-    {
-        "datetime":"2025-12-30T09:45:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6354.0,
-        "high":6500.0,
-        "low":6351.0,
-        "close":6480.5,
-        "volume":536445.0
-    },
-    {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:DIVISLAB",
-        "open":6449.0,
-        "high":6471.0,
-        "low":6417.5,
-        "close":6459.5,
-        "volume":20331.0
-    },
-    {
         "datetime":"2025-12-31T04:00:00.000",
         "symbol":"NSE:DIVISLAB",
         "open":6459.5,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-25T06:45:00.000",
         "symbol":"NSE:DIVISLAB",
         "open":8605.0,
-        "high":8606.0,
+        "high":8610.0,
         "low":8594.0,
+        "close":8600.5,
+        "volume":20977.0
+    },
+    {
+        "datetime":"2026-08-25T07:00:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8600.5,
+        "high":8607.5,
+        "low":8593.0,
         "close":8600.0,
-        "volume":8902.0
+        "volume":11913.0
+    },
+    {
+        "datetime":"2026-08-25T07:15:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8600.0,
+        "high":8606.5,
+        "low":8592.5,
+        "close":8606.0,
+        "volume":12388.0
+    },
+    {
+        "datetime":"2026-08-25T07:30:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8606.0,
+        "high":8609.5,
+        "low":8595.0,
+        "close":8596.0,
+        "volume":7340.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:DIVISLAB",
+        "open":8599.5,
+        "high":8599.5,
+        "low":8594.5,
+        "close":8594.5,
+        "volume":2375.0
     }
 ]

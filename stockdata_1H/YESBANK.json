@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-30T07:45:00.000",
-        "symbol":"NSE:YESBANK",
-        "open":26.4,
-        "high":26.6,
-        "low":26.35,
-        "close":26.5,
-        "volume":14281358.0
-    },
-    {
         "datetime":"2024-04-30T08:45:00.000",
         "symbol":"NSE:YESBANK",
         "open":26.45,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:YESBANK",
         "open":22.5,
         "high":22.52,
-        "low":22.48,
-        "close":22.5,
-        "volume":879353.0
+        "low":22.43,
+        "close":22.45,
+        "volume":7795408.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:YESBANK",
+        "open":22.45,
+        "high":22.45,
+        "low":22.42,
+        "close":22.43,
+        "volume":121564.0
     }
 ]
