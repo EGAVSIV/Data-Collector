@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T03:45:00.000",
-        "symbol":"NSE:FORTIS",
-        "open":879.45,
-        "high":880.95,
-        "low":875.3,
-        "close":880.3,
-        "volume":22860.0
-    },
-    {
-        "datetime":"2025-12-31T04:00:00.000",
-        "symbol":"NSE:FORTIS",
-        "open":880.1,
-        "high":881.0,
-        "low":876.65,
-        "close":876.65,
-        "volume":11654.0
-    },
-    {
-        "datetime":"2025-12-31T04:15:00.000",
-        "symbol":"NSE:FORTIS",
-        "open":876.65,
-        "high":879.15,
-        "low":876.2,
-        "close":878.0,
-        "volume":16062.0
-    },
-    {
-        "datetime":"2025-12-31T04:30:00.000",
-        "symbol":"NSE:FORTIS",
-        "open":878.55,
-        "high":879.15,
-        "low":877.0,
-        "close":878.75,
-        "volume":20250.0
-    },
-    {
         "datetime":"2025-12-31T04:45:00.000",
         "symbol":"NSE:FORTIS",
         "open":879.25,
@@ -35142,7 +35106,7 @@
         "high":912.75,
         "low":911.65,
         "close":912.05,
-        "volume":31320.0
+        "volume":39257.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35962,41 @@
         "low":909.45,
         "close":910.0,
         "volume":665296.0
+    },
+    {
+        "datetime":"2026-08-25T07:45:00.000",
+        "symbol":"NSE:FORTIS",
+        "open":910.0,
+        "high":911.4,
+        "low":910.0,
+        "close":911.0,
+        "volume":13825.0
+    },
+    {
+        "datetime":"2026-08-25T08:00:00.000",
+        "symbol":"NSE:FORTIS",
+        "open":911.05,
+        "high":914.0,
+        "low":910.75,
+        "close":913.4,
+        "volume":17905.0
+    },
+    {
+        "datetime":"2026-08-25T08:15:00.000",
+        "symbol":"NSE:FORTIS",
+        "open":913.4,
+        "high":915.25,
+        "low":912.65,
+        "close":913.15,
+        "volume":20484.0
+    },
+    {
+        "datetime":"2026-08-25T08:30:00.000",
+        "symbol":"NSE:FORTIS",
+        "open":914.5,
+        "high":914.75,
+        "low":913.3,
+        "close":914.35,
+        "volume":9459.0
     }
 ]

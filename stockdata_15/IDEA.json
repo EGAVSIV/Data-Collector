@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T04:00:00.000",
-        "symbol":"NSE:IDEA",
-        "open":12.22,
-        "high":12.26,
-        "low":12.14,
-        "close":12.15,
-        "volume":45811679.0
-    },
-    {
-        "datetime":"2025-12-31T04:15:00.000",
-        "symbol":"NSE:IDEA",
-        "open":12.14,
-        "high":12.25,
-        "low":12.14,
-        "close":12.22,
-        "volume":34147183.0
-    },
-    {
-        "datetime":"2025-12-31T04:30:00.000",
-        "symbol":"NSE:IDEA",
-        "open":12.23,
-        "high":12.24,
-        "low":12.17,
-        "close":12.19,
-        "volume":21918973.0
-    },
-    {
         "datetime":"2025-12-31T04:45:00.000",
         "symbol":"NSE:IDEA",
         "open":12.19,
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-25T07:45:00.000",
         "symbol":"NSE:IDEA",
         "open":15.04,
-        "high":15.04,
-        "low":15.03,
-        "close":15.03,
-        "volume":516344.0
+        "high":15.06,
+        "low":15.01,
+        "close":15.06,
+        "volume":16362588.0
+    },
+    {
+        "datetime":"2026-08-25T08:00:00.000",
+        "symbol":"NSE:IDEA",
+        "open":15.06,
+        "high":15.15,
+        "low":15.05,
+        "close":15.12,
+        "volume":43233814.0
+    },
+    {
+        "datetime":"2026-08-25T08:15:00.000",
+        "symbol":"NSE:IDEA",
+        "open":15.13,
+        "high":15.14,
+        "low":15.08,
+        "close":15.12,
+        "volume":29555065.0
+    },
+    {
+        "datetime":"2026-08-25T08:30:00.000",
+        "symbol":"NSE:IDEA",
+        "open":15.12,
+        "high":15.15,
+        "low":15.07,
+        "close":15.14,
+        "volume":28430730.0
     }
 ]

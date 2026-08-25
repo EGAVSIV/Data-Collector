@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T04:00:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1448.3,
-        "high":1452.8,
-        "low":1447.2,
-        "close":1448.3,
-        "volume":69570.0
-    },
-    {
-        "datetime":"2025-12-31T04:15:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1448.5,
-        "high":1450.0,
-        "low":1446.1,
-        "close":1446.1,
-        "volume":42889.0
-    },
-    {
-        "datetime":"2025-12-31T04:30:00.000",
-        "symbol":"NSE:CDSL",
-        "open":1446.4,
-        "high":1448.0,
-        "low":1442.2,
-        "close":1447.0,
-        "volume":46976.0
-    },
-    {
         "datetime":"2025-12-31T04:45:00.000",
         "symbol":"NSE:CDSL",
         "open":1447.0,
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-25T07:45:00.000",
         "symbol":"NSE:CDSL",
         "open":1382.7,
-        "high":1382.8,
-        "low":1381.7,
-        "close":1382.7,
-        "volume":1800.0
+        "high":1383.0,
+        "low":1381.0,
+        "close":1381.5,
+        "volume":11273.0
+    },
+    {
+        "datetime":"2026-08-25T08:00:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1381.5,
+        "high":1382.2,
+        "low":1380.7,
+        "close":1381.1,
+        "volume":10714.0
+    },
+    {
+        "datetime":"2026-08-25T08:15:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1381.0,
+        "high":1384.4,
+        "low":1379.6,
+        "close":1382.0,
+        "volume":29060.0
+    },
+    {
+        "datetime":"2026-08-25T08:30:00.000",
+        "symbol":"NSE:CDSL",
+        "open":1382.5,
+        "high":1383.0,
+        "low":1380.5,
+        "close":1380.7,
+        "volume":11468.0
     }
 ]

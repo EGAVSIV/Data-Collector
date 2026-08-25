@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-30T08:45:00.000",
-        "symbol":"NSE:MPHASIS",
-        "open":2339.3,
-        "high":2340.95,
-        "low":2308.05,
-        "close":2314.65,
-        "volume":104118.0
-    },
-    {
         "datetime":"2024-04-30T09:45:00.000",
         "symbol":"NSE:MPHASIS",
         "open":2313.3,
@@ -35781,7 +35772,7 @@
         "high":2419.0,
         "low":2410.4,
         "close":2416.2,
-        "volume":48638.0
+        "volume":47135.0
     },
     {
         "datetime":"2026-08-19T08:45:00.000",
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-25T07:45:00.000",
         "symbol":"NSE:MPHASIS",
         "open":2404.2,
-        "high":2404.2,
-        "low":2404.2,
-        "close":2404.2,
-        "volume":16.0
+        "high":2412.2,
+        "low":2400.8,
+        "close":2410.4,
+        "volume":5109.0
+    },
+    {
+        "datetime":"2026-08-25T08:45:00.000",
+        "symbol":"NSE:MPHASIS",
+        "open":2409.0,
+        "high":2410.6,
+        "low":2409.0,
+        "close":2410.6,
+        "volume":115.0
     }
 ]

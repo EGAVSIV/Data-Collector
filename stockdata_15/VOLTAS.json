@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T04:00:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1350.0,
-        "high":1353.0,
-        "low":1345.4,
-        "close":1345.4,
-        "volume":13704.0
-    },
-    {
-        "datetime":"2025-12-31T04:15:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1344.7,
-        "high":1349.1,
-        "low":1343.7,
-        "close":1348.3,
-        "volume":7384.0
-    },
-    {
-        "datetime":"2025-12-31T04:30:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1348.9,
-        "high":1352.5,
-        "low":1345.1,
-        "close":1352.4,
-        "volume":10465.0
-    },
-    {
-        "datetime":"2025-12-31T04:45:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1353.0,
-        "high":1355.9,
-        "low":1352.1,
-        "close":1355.8,
-        "volume":18898.0
-    },
-    {
         "datetime":"2025-12-31T05:00:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1356.4,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-25T07:45:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1231.7,
-        "high":1232.3,
-        "low":1231.7,
-        "close":1232.3,
-        "volume":475.0
+        "high":1232.5,
+        "low":1231.2,
+        "close":1232.1,
+        "volume":3969.0
+    },
+    {
+        "datetime":"2026-08-25T08:00:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1232.1,
+        "high":1235.5,
+        "low":1232.1,
+        "close":1235.0,
+        "volume":46079.0
+    },
+    {
+        "datetime":"2026-08-25T08:15:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1235.1,
+        "high":1237.4,
+        "low":1235.1,
+        "close":1236.5,
+        "volume":7801.0
+    },
+    {
+        "datetime":"2026-08-25T08:30:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1236.5,
+        "high":1236.5,
+        "low":1235.2,
+        "close":1235.2,
+        "volume":2675.0
+    },
+    {
+        "datetime":"2026-08-25T08:45:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1235.5,
+        "high":1235.9,
+        "low":1235.0,
+        "close":1235.7,
+        "volume":1802.0
     }
 ]
