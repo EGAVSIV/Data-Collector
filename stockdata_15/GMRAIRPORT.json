@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T08:45:00.000",
-        "symbol":"NSE:GMRAIRPORT",
-        "open":102.77,
-        "high":102.78,
-        "low":102.58,
-        "close":102.61,
-        "volume":1362731.0
-    },
-    {
-        "datetime":"2025-12-30T09:00:00.000",
-        "symbol":"NSE:GMRAIRPORT",
-        "open":102.64,
-        "high":103.15,
-        "low":102.56,
-        "close":103.09,
-        "volume":1994783.0
-    },
-    {
         "datetime":"2025-12-30T09:15:00.000",
         "symbol":"NSE:GMRAIRPORT",
         "open":103.09,
@@ -35996,7 +35978,25 @@
         "open":98.36,
         "high":98.36,
         "low":98.22,
+        "close":98.3,
+        "volume":137839.0
+    },
+    {
+        "datetime":"2026-08-25T06:30:00.000",
+        "symbol":"NSE:GMRAIRPORT",
+        "open":98.39,
+        "high":98.39,
+        "low":98.19,
+        "close":98.26,
+        "volume":206985.0
+    },
+    {
+        "datetime":"2026-08-25T06:45:00.000",
+        "symbol":"NSE:GMRAIRPORT",
+        "open":98.26,
+        "high":98.34,
+        "low":98.22,
         "close":98.25,
-        "volume":88411.0
+        "volume":69265.0
     }
 ]

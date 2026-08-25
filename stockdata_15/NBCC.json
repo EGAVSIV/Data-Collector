@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T08:45:00.000",
-        "symbol":"NSE:NBCC",
-        "open":121.98,
-        "high":122.41,
-        "low":121.92,
-        "close":122.21,
-        "volume":378184.0
-    },
-    {
-        "datetime":"2025-12-30T09:00:00.000",
-        "symbol":"NSE:NBCC",
-        "open":122.21,
-        "high":122.47,
-        "low":122.02,
-        "close":122.07,
-        "volume":282873.0
-    },
-    {
         "datetime":"2025-12-30T09:15:00.000",
         "symbol":"NSE:NBCC",
         "open":122.07,
@@ -35996,7 +35978,25 @@
         "open":88.58,
         "high":88.59,
         "low":88.29,
-        "close":88.51,
-        "volume":135341.0
+        "close":88.5,
+        "volume":152474.0
+    },
+    {
+        "datetime":"2026-08-25T06:30:00.000",
+        "symbol":"NSE:NBCC",
+        "open":88.5,
+        "high":88.54,
+        "low":88.4,
+        "close":88.52,
+        "volume":51776.0
+    },
+    {
+        "datetime":"2026-08-25T06:45:00.000",
+        "symbol":"NSE:NBCC",
+        "open":88.52,
+        "high":88.6,
+        "low":88.5,
+        "close":88.5,
+        "volume":21040.0
     }
 ]

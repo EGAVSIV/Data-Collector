@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T08:45:00.000",
-        "symbol":"NSE:CROMPTON",
-        "open":252.45,
-        "high":252.75,
-        "low":252.1,
-        "close":252.1,
-        "volume":107205.0
-    },
-    {
-        "datetime":"2025-12-30T09:00:00.000",
-        "symbol":"NSE:CROMPTON",
-        "open":252.2,
-        "high":252.55,
-        "low":251.95,
-        "close":252.05,
-        "volume":80778.0
-    },
-    {
         "datetime":"2025-12-30T09:15:00.000",
         "symbol":"NSE:CROMPTON",
         "open":252.0,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:CROMPTON",
         "open":242.8,
         "high":243.0,
-        "low":242.55,
+        "low":242.5,
         "close":242.8,
-        "volume":68089.0
+        "volume":104890.0
+    },
+    {
+        "datetime":"2026-08-25T06:30:00.000",
+        "symbol":"NSE:CROMPTON",
+        "open":242.7,
+        "high":242.85,
+        "low":241.4,
+        "close":241.75,
+        "volume":145799.0
+    },
+    {
+        "datetime":"2026-08-25T06:45:00.000",
+        "symbol":"NSE:CROMPTON",
+        "open":241.75,
+        "high":242.35,
+        "low":241.7,
+        "close":242.15,
+        "volume":35318.0
     }
 ]
