@@ -1,6 +1,9 @@
 name: Fetch TradingView Stock Data
 
 on:
+  # Manual Run Trigger
+  workflow_dispatch:
+
   # Scheduled Runs
   schedule:
     # ==========================================
