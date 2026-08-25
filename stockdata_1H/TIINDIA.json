@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-30T05:45:00.000",
-        "symbol":"NSE:TIINDIA",
-        "open":3700.55,
-        "high":3723.65,
-        "low":3700.4,
-        "close":3719.8,
-        "volume":13660.0
-    },
-    {
         "datetime":"2024-04-30T06:45:00.000",
         "symbol":"NSE:TIINDIA",
         "open":3719.8,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-25T04:45:00.000",
         "symbol":"NSE:TIINDIA",
         "open":2850.6,
-        "high":2880.0,
+        "high":2883.1,
         "low":2847.8,
-        "close":2877.0,
-        "volume":15537.0
+        "close":2882.8,
+        "volume":16005.0
+    },
+    {
+        "datetime":"2026-08-25T05:45:00.000",
+        "symbol":"NSE:TIINDIA",
+        "open":2881.8,
+        "high":2893.9,
+        "low":2876.6,
+        "close":2880.8,
+        "volume":17523.0
     }
 ]

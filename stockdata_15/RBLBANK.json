@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T08:00:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":307.7,
-        "high":308.7,
-        "low":307.5,
-        "close":308.25,
-        "volume":153198.0
-    },
-    {
-        "datetime":"2025-12-30T08:15:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":308.25,
-        "high":309.45,
-        "low":308.15,
-        "close":309.35,
-        "volume":271745.0
-    },
-    {
-        "datetime":"2025-12-30T08:30:00.000",
-        "symbol":"NSE:RBLBANK",
-        "open":309.5,
-        "high":309.65,
-        "low":309.0,
-        "close":309.6,
-        "volume":208285.0
-    },
-    {
         "datetime":"2025-12-30T08:45:00.000",
         "symbol":"NSE:RBLBANK",
         "open":309.6,
@@ -35996,7 +35969,34 @@
         "open":385.9,
         "high":386.25,
         "low":385.45,
-        "close":385.6,
-        "volume":13375.0
+        "close":386.1,
+        "volume":40959.0
+    },
+    {
+        "datetime":"2026-08-25T05:45:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":386.1,
+        "high":386.4,
+        "low":385.4,
+        "close":385.9,
+        "volume":22790.0
+    },
+    {
+        "datetime":"2026-08-25T06:00:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":385.8,
+        "high":386.35,
+        "low":385.5,
+        "close":385.65,
+        "volume":29189.0
+    },
+    {
+        "datetime":"2026-08-25T06:15:00.000",
+        "symbol":"NSE:RBLBANK",
+        "open":385.65,
+        "high":385.65,
+        "low":384.7,
+        "close":385.2,
+        "volume":59467.0
     }
 ]

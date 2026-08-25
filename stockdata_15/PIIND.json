@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T08:00:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3196.7,
-        "high":3198.0,
-        "low":3196.5,
-        "close":3197.5,
-        "volume":2124.0
-    },
-    {
-        "datetime":"2025-12-30T08:15:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3197.5,
-        "high":3198.0,
-        "low":3196.7,
-        "close":3197.3,
-        "volume":2764.0
-    },
-    {
-        "datetime":"2025-12-30T08:30:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3197.0,
-        "high":3198.0,
-        "low":3196.0,
-        "close":3197.7,
-        "volume":2862.0
-    },
-    {
         "datetime":"2025-12-30T08:45:00.000",
         "symbol":"NSE:PIIND",
         "open":3196.7,
@@ -35211,10 +35184,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:PIIND",
         "open":2506.5,
-        "high":2508.9,
-        "low":2503.4,
+        "high":2508.4,
+        "low":2504.1,
         "close":2506.2,
-        "volume":6246.0
+        "volume":1319.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-25T05:30:00.000",
         "symbol":"NSE:PIIND",
         "open":2471.4,
-        "high":2472.5,
+        "high":2473.3,
         "low":2468.3,
-        "close":2472.5,
-        "volume":874.0
+        "close":2473.3,
+        "volume":1849.0
+    },
+    {
+        "datetime":"2026-08-25T05:45:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2472.2,
+        "high":2472.9,
+        "low":2466.0,
+        "close":2468.1,
+        "volume":3799.0
+    },
+    {
+        "datetime":"2026-08-25T06:00:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2466.5,
+        "high":2468.8,
+        "low":2463.0,
+        "close":2466.9,
+        "volume":4543.0
+    },
+    {
+        "datetime":"2026-08-25T06:15:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2466.6,
+        "high":2468.1,
+        "low":2465.0,
+        "close":2465.6,
+        "volume":527.0
     }
 ]

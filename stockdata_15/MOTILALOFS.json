@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-30T08:00:00.000",
-        "symbol":"NSE:MOTILALOFS",
-        "open":838.4,
-        "high":840.95,
-        "low":838.0,
-        "close":839.2,
-        "volume":54313.0
-    },
-    {
-        "datetime":"2025-12-30T08:15:00.000",
-        "symbol":"NSE:MOTILALOFS",
-        "open":839.2,
-        "high":842.35,
-        "low":837.45,
-        "close":842.35,
-        "volume":54335.0
-    },
-    {
-        "datetime":"2025-12-30T08:30:00.000",
-        "symbol":"NSE:MOTILALOFS",
-        "open":842.3,
-        "high":847.5,
-        "low":842.3,
-        "close":844.4,
-        "volume":48280.0
-    },
-    {
         "datetime":"2025-12-30T08:45:00.000",
         "symbol":"NSE:MOTILALOFS",
         "open":844.05,
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:MOTILALOFS",
         "open":1006.3,
         "high":1007.5,
-        "low":1006.0,
-        "close":1006.85,
-        "volume":9700.0
+        "low":1005.35,
+        "close":1006.5,
+        "volume":15856.0
+    },
+    {
+        "datetime":"2026-08-25T05:45:00.000",
+        "symbol":"NSE:MOTILALOFS",
+        "open":1006.5,
+        "high":1006.85,
+        "low":1000.8,
+        "close":1001.25,
+        "volume":35270.0
+    },
+    {
+        "datetime":"2026-08-25T06:00:00.000",
+        "symbol":"NSE:MOTILALOFS",
+        "open":1001.45,
+        "high":1002.5,
+        "low":1000.65,
+        "close":1000.85,
+        "volume":23029.0
+    },
+    {
+        "datetime":"2026-08-25T06:15:00.000",
+        "symbol":"NSE:MOTILALOFS",
+        "open":1001.3,
+        "high":1003.55,
+        "low":1000.85,
+        "close":1003.4,
+        "volume":17901.0
     }
 ]
