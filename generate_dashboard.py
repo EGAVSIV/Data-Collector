@@ -19,7 +19,11 @@ TF_PAIRS = [
     ('W', 'M', 'Weekly -> Monthly')
 ]
 
-# Market Bias Reference Dictionary for Tab 2
+# Divergence lookback window & split point (older half vs recent half)
+DIVERGENCE_LOOKBACK = 30
+DIVERGENCE_SPLIT = 15
+
+# Market Bias Reference Dictionary for Tab 1 guide
 MARKET_BIAS_GUIDE = [
     {"Market Bias": "Strong Bullish", "Interpretation": "Strong Momentum Continuation: Full bullish alignment. HTF and LTF are accelerating in uptrend territory. High-probability trend-following entry."},
     {"Market Bias": "Bullish Reversal", "Interpretation": "Early Momentum Re-Ignition: HTF is strong above zero; LTF crosses positive from deep oversold. Excellent low-risk buy setup on a bottoming LTF bar."},
@@ -39,25 +43,34 @@ MARKET_BIAS_GUIDE = [
     {"Market Bias": "Strong Bearish", "Interpretation": "Maximum Downward Alignment: HTF and LTF accelerating down below zero. Strong bearish momentum. Avoid long trades; stay short or in cash."}
 ]
 
+# Divergence Type Reference Dictionary for Tab 3 guide
+DIVERGENCE_GUIDE = [
+    {"Divergence Type": "Regular Bullish Divergence", "Interpretation": "Price makes a lower low while MACD makes a higher low. Downside momentum is fading — classic reversal warning at the end of a downtrend."},
+    {"Divergence Type": "Regular Bearish Divergence", "Interpretation": "Price makes a higher high while MACD makes a lower high. Upside momentum is fading — classic reversal warning at the end of an uptrend."},
+    {"Divergence Type": "Hidden Bullish Divergence", "Interpretation": "Price makes a higher low while MACD makes a lower low. Confirms trend continuation — a healthy pullback inside an existing uptrend rather than a reversal."},
+    {"Divergence Type": "Hidden Bearish Divergence", "Interpretation": "Price makes a lower high while MACD makes a higher high. Confirms trend continuation — a healthy relief bounce inside an existing downtrend rather than a reversal."}
+]
+
 # --- Technical Indicator Functions ---
 def calculate_indicators(df, fast=12, slow=26, signal=9, rsi_period=14):
     if df.empty or len(df) < slow + signal:
         return None
-    
+
+    # Ensure dataframe is sorted by timestamp/date
     if 'datetime' in df.columns:
         df = df.sort_values('datetime')
     elif 'date' in df.columns:
         df = df.sort_values('date')
 
     close = df['close']
-    
-    # MACD Calculation
+
+    # 1. MACD Calculation
     ema_fast = close.ewm(span=fast, adjust=False).mean()
     ema_slow = close.ewm(span=slow, adjust=False).mean()
     macd_line = ema_fast - ema_slow
     signal_line = macd_line.ewm(span=signal, adjust=False).mean()
-    
-    # RSI (14) Calculation
+
+    # 2. RSI (14) Calculation
     delta = close.diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=rsi_period).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=rsi_period).mean()
@@ -72,10 +85,10 @@ def calculate_indicators(df, fast=12, slow=26, signal=9, rsi_period=14):
 def get_macd_state(macd_val, signal_val):
     if pd.isna(macd_val) or pd.isna(signal_val):
         return None, "N/A"
-    
+
     is_pco = macd_val > signal_val
     is_above_zero = macd_val > 0
-    
+
     if is_pco and is_above_zero:
         return 1, "PCO > 0"
     elif is_pco and not is_above_zero:
@@ -88,26 +101,27 @@ def get_macd_state(macd_val, signal_val):
 def map_transition(ltf_prev, ltf_curr, htf_curr):
     if None in (ltf_prev, ltf_curr, htf_curr):
         return None
-    
-    if htf_curr == 1:
+
+    # 16 Condition Mapping Logic
+    if htf_curr == 1:  # HTF: PCO > 0
         if ltf_prev == 3 and ltf_curr == 1: return "Strong Bullish"
         if ltf_prev == 4 and ltf_curr == 2: return "Bullish Reversal"
         if ltf_prev == 1 and ltf_curr == 3: return "Bullish Pullback"
         if ltf_prev == 2 and ltf_curr == 4: return "Deep Pullback"
-        
-    elif htf_curr == 2:
+
+    elif htf_curr == 2:  # HTF: PCO < 0
         if ltf_prev == 3 and ltf_curr == 1: return "Dip Buy / Reversal"
         if ltf_prev == 4 and ltf_curr == 2: return "Oversold Accumulation"
         if ltf_prev == 1 and ltf_curr == 3: return "Neutral / Consolidating"
         if ltf_prev == 2 and ltf_curr == 4: return "Complex Reversal Failure"
-        
-    elif htf_curr == 3:
+
+    elif htf_curr == 3:  # HTF: NC > 0
         if ltf_prev == 3 and ltf_curr == 1: return "Counter-Trend Buy"
         if ltf_prev == 4 and ltf_curr == 2: return "Early Recovery Attempt"
         if ltf_prev == 1 and ltf_curr == 3: return "Correction in Progress"
         if ltf_prev == 2 and ltf_curr == 4: return "Accelerating Correction"
-        
-    elif htf_curr == 4:
+
+    elif htf_curr == 4:  # HTF: NC < 0
         if ltf_prev == 3 and ltf_curr == 1: return "Aggressive Counter-Trend"
         if ltf_prev == 4 and ltf_curr == 2: return "Weak Oversold Bounce"
         if ltf_prev == 1 and ltf_curr == 3: return "Bearish Continuation"
@@ -115,62 +129,73 @@ def map_transition(ltf_prev, ltf_curr, htf_curr):
 
     return None
 
-# --- Divergence Detection Logic ---
-def detect_divergence(df, lookback=30):
-    if df is None or len(df) < lookback:
-        return "No Divergence"
-    
+def detect_divergence(df, lookback=DIVERGENCE_LOOKBACK, split=DIVERGENCE_SPLIT):
+    """
+    Classifies MACD-vs-price divergence into one of 4 types by comparing the
+    older half of the lookback window against the most recent half:
+
+      - Regular Bullish Divergence : price lower low   + MACD higher low   (reversal, end of downtrend)
+      - Hidden Bullish Divergence  : price higher low  + MACD lower low    (continuation, inside uptrend)
+      - Regular Bearish Divergence : price higher high + MACD lower high  (reversal, end of uptrend)
+      - Hidden Bearish Divergence  : price lower high  + MACD higher high (continuation, inside downtrend)
+
+    Returns None if there isn't enough data or no condition is met.
+    """
+    if df is None or 'macd' not in df.columns or len(df) < lookback:
+        return None
+
     macd = df['macd']
-    lows = df['low'] if 'low' in df.columns else df['close']
-    highs = df['high'] if 'high' in df.columns else df['close']
-    
-    p_low1 = lows.iloc[-lookback:-15].min()
-    p_low2 = lows.iloc[-15:].min()
-    m_low1 = macd.iloc[-lookback:-15].min()
-    m_low2 = macd.iloc[-15:].min()
+    older_slice = slice(-lookback, -split)
+    recent_slice = slice(-split, None)
 
-    p_high1 = highs.iloc[-lookback:-15].max()
-    p_high2 = highs.iloc[-15:].max()
-    m_high1 = macd.iloc[-lookback:-15].max()
-    m_high2 = macd.iloc[-15:].max()
+    price_low1 = df["low"].iloc[older_slice].min()
+    price_low2 = df["low"].iloc[recent_slice].min()
+    macd_low1 = macd.iloc[older_slice].min()
+    macd_low2 = macd.iloc[recent_slice].min()
 
-    # Normal Divergence (ND)
-    if p_low2 < p_low1 and m_low2 > m_low1:
-        return "Bullish ND"
-    if p_high2 > p_high1 and m_high2 < m_high1:
-        return "Bearish ND"
+    price_high1 = df["high"].iloc[older_slice].max()
+    price_high2 = df["high"].iloc[recent_slice].max()
+    macd_high1 = macd.iloc[older_slice].max()
+    macd_high2 = macd.iloc[recent_slice].max()
 
-    # Reverse Divergence (RD)
-    if p_low2 > p_low1 and m_low2 < m_low1:
-        return "Bullish RD"
-    if p_high2 < p_high1 and m_high2 > m_high1:
-        return "Bearish RD"
+    if any(pd.isna(v) for v in [price_low1, price_low2, macd_low1, macd_low2,
+                                 price_high1, price_high2, macd_high1, macd_high2]):
+        return None
 
-    return "No Divergence"
+    # Bullish checks (based on swing lows) take priority
+    if price_low2 < price_low1 and macd_low2 > macd_low1:
+        return "Regular Bullish Divergence"
+    if price_low2 > price_low1 and macd_low2 < macd_low1:
+        return "Hidden Bullish Divergence"
 
-def get_setup_category(divergence_type):
-    if "Bullish" in divergence_type:
-        return "Bullish"
-    elif "Bearish" in divergence_type:
-        return "Bearish"
-    return "Neutral"
+    # Bearish checks (based on swing highs)
+    if price_high2 > price_high1 and macd_high2 < macd_high1:
+        return "Regular Bearish Divergence"
+    if price_high2 < price_high1 and macd_high2 > macd_high1:
+        return "Hidden Bearish Divergence"
 
-# --- Main Processing Pipeline ---
+    return None
+
+# --- Main Data Processing Pipeline ---
 def process_stock_data():
-    tab1_results = []
-    tab3_results = []
-    
+    """
+    Returns (macd_results, divergence_results):
+      macd_results       -> Tab 1 (Stock Screener) rows
+      divergence_results -> Tab 2 (Divergence Scanner) rows
+    """
+    macd_results = []
+    divergence_results = []
+
     sample_folder = TF_FOLDERS['D']
     if not os.path.exists(sample_folder):
-        print(f"Directory {sample_folder} not found. Returning empty dataset.")
+        print(f"Directory {sample_folder} not found. Please check paths.")
         return [], []
 
     symbols = [f.replace('.json', '') for f in os.listdir(sample_folder) if f.endswith('.json')]
-    
+
     for symbol in symbols:
         tf_data = {}
-        tf_dfs = {}
-        
+
         for tf, folder in TF_FOLDERS.items():
             file_path = os.path.join(folder, f"{symbol}.json")
             if os.path.exists(file_path):
@@ -179,36 +204,37 @@ def process_stock_data():
                         raw_data = json.load(f)
                         df = pd.DataFrame(raw_data)
                         df = calculate_indicators(df)
-                        
+
                         if df is not None and len(df) >= 2:
                             macd = df['macd']
                             sig = df['signal']
                             rsi = df['rsi']
-                            
+
                             prev_num, prev_txt = get_macd_state(macd.iloc[-2], sig.iloc[-2])
                             curr_num, curr_txt = get_macd_state(macd.iloc[-1], sig.iloc[-1])
-                            
+                            divergence_txt = detect_divergence(df)
+
                             tf_data[tf] = {
                                 'prev_num': prev_num,
                                 'curr_num': curr_num,
                                 'macd_state_txt': curr_txt,
+                                'divergence': divergence_txt,
                                 'rsi': round(float(rsi.iloc[-1]), 2) if pd.notna(rsi.iloc[-1]) else "N/A",
                                 'close': float(df['close'].iloc[-1])
                             }
-                            tf_dfs[tf] = df
-                except Exception as e:
+                except Exception:
                     continue
-        
+
         # Process TF Pairs
         for ltf_key, htf_key, pair_label in TF_PAIRS:
             if ltf_key in tf_data and htf_key in tf_data:
                 ltf_info = tf_data[ltf_key]
                 htf_info = tf_data[htf_key]
-                
-                # Tab 1 Logic
+
+                # --- MACD transition (Tab 1) ---
                 condition = map_transition(ltf_info['prev_num'], ltf_info['curr_num'], htf_info['curr_num'])
                 if condition:
-                    tab1_results.append({
+                    macd_results.append({
                         'symbol': symbol,
                         'pair': pair_label,
                         'close': ltf_info['close'],
@@ -219,272 +245,290 @@ def process_stock_data():
                         'condition': condition
                     })
 
-                # Tab 3 Divergence Logic
-                ltf_df = tf_dfs.get(ltf_key)
-                divergence = detect_divergence(ltf_df)
-                category = get_setup_category(divergence)
+                # --- Divergence (Tab 2) ---
+                ltf_div = ltf_info['divergence']
+                htf_div = htf_info['divergence']
+                if ltf_div or htf_div:
+                    # LTF divergence is the actionable trigger; fall back to HTF if LTF has none
+                    div_type = ltf_div or htf_div
+                    divergence_results.append({
+                        'symbol': symbol,
+                        'pair': pair_label,
+                        'close': ltf_info['close'],
+                        'htf_divergence': htf_div or "",
+                        'ltf_divergence': ltf_div or "",
+                        'htf_rsi': htf_info['rsi'],
+                        'ltf_rsi': ltf_info['rsi'],
+                        'type': div_type
+                    })
 
-                tab3_results.append({
-                    'symbol': symbol,
-                    'pair': pair_label,
-                    'close': ltf_info['close'],
-                    'htf_state': htf_info['macd_state_txt'],
-                    'ltf_state': ltf_info['macd_state_txt'],
-                    'htf_rsi': htf_info['rsi'],
-                    'ltf_rsi': ltf_info['rsi'],
-                    'divergence': divergence,
-                    'category': category
-                })
-                    
-    return tab1_results, tab3_results
+    return macd_results, divergence_results
 
-def build_html_dashboard(tab1_data, tab3_data):
-    json_tab1 = json.dumps(tab1_data)
-    json_tab3 = json.dumps(tab3_data)
+# --- Generate Embedded HTML Dashboard ---
+def build_html_dashboard(macd_results, divergence_results, date_str):
+    json_data = json.dumps(macd_results)
+    div_json_data = json.dumps(divergence_results)
     guide_json_data = json.dumps(MARKET_BIAS_GUIDE)
-    
-    with open('index.html', 'w') as f:
-        f.write(get_html_string(json_tab1, guide_json_data, json_tab3))
-    print("Successfully generated index.html dashboard with Tab 1, Tab 2, and Tab 3!")
+    div_guide_json_data = json.dumps(DIVERGENCE_GUIDE)
 
-def get_html_string(json_tab1, guide_json_data, json_tab3):
-    return f"""<!DOCTYPE html>
+    html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MACD Master Multi-Timeframe Dashboard</title>
+    <title>MACD Master // Multi-Timeframe Scanner // RaoSab.in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {{
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f8fafc;
-            --border-color: #334155;
+            --bg-void:#060a14;
+            --bg-deep:#0b1120;
+            --panel-glass: rgba(17,25,45,0.72);
+            --border: rgba(255,255,255,0.08);
+            --border-bright: rgba(0,229,255,0.35);
+            --cyan:#00e5ff;
+            --cyan-soft: rgba(0,229,255,0.15);
+            --magenta:#ff3d81;
+            --amber:#ffb703;
+            --green:#00ffa3;
+            --green-soft: rgba(0,255,163,0.14);
+            --red:#ff4d5e;
+            --red-soft: rgba(255,77,94,0.14);
+            --amber-soft: rgba(255,183,3,0.14);
+            --text-main:#eef2ff;
+            --text-dim:#8892b0;
+            --text-faint:#5b6584;
+            --font-display:'Sora', sans-serif;
+            --font-body:'Inter', sans-serif;
+            --font-mono:'JetBrains Mono', monospace;
         }}
-
+        * {{ box-sizing: border-box; }}
         body {{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
+            margin:0; min-height:100vh; font-family: var(--font-body); color: var(--text-main);
+            background:
+              radial-gradient(ellipse 1200px 600px at 15% -10%, rgba(0,229,255,0.10), transparent 60%),
+              radial-gradient(ellipse 1000px 700px at 110% 10%, rgba(255,61,129,0.10), transparent 55%),
+              radial-gradient(ellipse 900px 900px at 50% 120%, rgba(0,255,163,0.06), transparent 60%),
+              var(--bg-void);
+            padding: 20px 20px 60px; position: relative;
         }}
-
-        .container {{
-            max-width: 1300px;
-            margin: 0 auto;
+        body::before {{
+            content:""; position: fixed; inset:0; pointer-events:none;
+            background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: radial-gradient(ellipse 1200px 700px at 50% 0%, black, transparent 75%);
+            z-index:0;
         }}
-
+        .container {{ max-width: 1340px; margin: 0 auto; position: relative; z-index:1; }}
+        .brand-bar {{ display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 16px; margin-bottom: 6px; }}
+        .brand-logo {{ display:flex; align-items:center; gap:9px; text-decoration:none; }}
+        .brand-mark {{
+            width:26px; height:26px; border-radius:7px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            display:flex; align-items:center; justify-content:center;
+            font-family: var(--font-display); font-weight:800; font-size:13px; color:#060a14;
+        }}
+        .brand-name {{ font-family: var(--font-display); font-weight:700; font-size: 15px; letter-spacing: 0.5px; color: var(--text-main); }}
+        .brand-name span {{ color: var(--cyan); }}
+        .brand-tag {{ font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); letter-spacing: 1px; }}
         header {{
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 15px;
+            display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px;
+            margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--border);
         }}
-
+        .brand-eyebrow {{
+            display:flex; align-items:center; gap:8px; font-family: var(--font-mono); font-size: 11px;
+            letter-spacing: 2.5px; color: var(--cyan); text-transform: uppercase; margin-bottom: 10px;
+        }}
+        .pulse-dot {{
+            width:8px; height:8px; border-radius:50%; background: var(--green);
+            box-shadow: 0 0 0 0 rgba(0,255,163,0.7); animation: pulse 2s infinite;
+        }}
+        @keyframes pulse {{
+            0%{{ box-shadow: 0 0 0 0 rgba(0,255,163,0.55);}}
+            70%{{ box-shadow: 0 0 0 8px rgba(0,255,163,0);}}
+            100%{{ box-shadow: 0 0 0 0 rgba(0,255,163,0);}}
+        }}
         h1 {{
-            color: var(--accent);
-            margin: 0 0 10px 0;
-            font-size: 26px;
+            font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 3.4vw, 42px);
+            line-height:1.05; margin:0; letter-spacing: -0.5px;
+            background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 55%, var(--magenta) 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
         }}
-
-        .tab-buttons {{
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+        .subtitle {{ font-family: var(--font-body); color: var(--text-dim); margin: 10px 0 0; font-size: 14.5px; max-width: 540px; }}
+        .header-stats {{ display:flex; gap:10px; flex-wrap:wrap; }}
+        .mini-stat {{
+            font-family: var(--font-mono); background: var(--panel-glass); border: 1px solid var(--border);
+            border-radius: 10px; padding: 10px 16px; text-align:right; min-width: 108px; backdrop-filter: blur(6px);
+            cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
         }}
-
+        .mini-stat:hover {{ transform: translateY(-2px); border-color: var(--border-bright); box-shadow: 0 8px 24px -10px rgba(0,229,255,0.35); }}
+        .mini-stat .k {{ display:block; font-size:10px; letter-spacing:1.5px; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px;}}
+        .mini-stat .v {{ display:block; font-size:17px; font-weight:700; }}
+        .mini-stat.up .v {{ color: var(--green); }}
+        .mini-stat.down .v {{ color: var(--red); }}
+        .mini-stat.flat .v {{ color: var(--amber); }}
+        .mini-stat .hint {{ display:block; font-size:9px; color: var(--text-faint); margin-top:3px; letter-spacing: 0.5px; }}
+        .tab-buttons {{ display:flex; gap:6px; margin-bottom: 22px; position: relative; flex-wrap: wrap; }}
         .tab-btn {{
-            padding: 12px 24px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: #94a3b8;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.2s ease-in-out;
+            font-family: var(--font-display); padding: 13px 26px; font-weight: 700; font-size: 14px;
+            letter-spacing: 0.3px; cursor: pointer; border: 1px solid var(--border); border-bottom: none;
+            background: var(--panel-glass); color: var(--text-dim); border-radius: 10px 10px 0 0;
+            transition: all 0.25s cubic-bezier(.4,0,.2,1); position: relative; backdrop-filter: blur(6px);
         }}
-
+        .tab-btn:hover {{ color: var(--text-main); background: rgba(0,229,255,0.06); }}
         .tab-btn.active {{
-            background: var(--accent);
-            color: #0f172a;
-            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(0,229,255,0.16), rgba(0,229,255,0.03));
+            color: var(--cyan); border-color: var(--border-bright); box-shadow: 0 -2px 18px rgba(0,229,255,0.18);
         }}
-
-        .tab-content {{
-            display: none;
-        }}
-
-        .tab-content.active {{
-            display: block;
-        }}
-
+        .tab-btn.active::after {{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background: linear-gradient(90deg, var(--cyan), var(--magenta)); }}
+        .tab-content {{ display:none; animation: fadeUp 0.35s ease; }}
+        .tab-content.active {{ display:block; }}
+        @keyframes fadeUp {{ from{{ opacity:0; transform: translateY(6px);}} to{{ opacity:1; transform: translateY(0);}} }}
         .controls {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px;
+            background: linear-gradient(155deg, var(--panel-glass), rgba(15,23,42,0.4)); border: 1px solid var(--border);
+            padding: 22px; border-radius: 14px; margin-bottom: 22px; backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
         }}
-
-        .control-group {{
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }}
-
+        .control-group {{ display:flex; flex-direction:column; gap:9px; }}
         label {{
-            font-weight: 600;
-            font-size: 14px;
-            color: #94a3b8;
+            font-family: var(--font-mono); font-weight:600; font-size: 11px; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--cyan); display:flex; align-items:center; gap:8px;
         }}
-
+        label::before {{ content:""; width:5px; height:5px; border-radius:50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }}
         select {{
-            padding: 10px 14px;
-            background: #0f172a;
-            color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 15px;
-            outline: none;
-            cursor: pointer;
+            padding: 12px 14px; background: var(--bg-deep); color: var(--text-main); border: 1px solid var(--border);
+            border-radius: 8px; font-family: var(--font-mono); font-size: 14px; font-weight:500; outline: none; cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300e5ff' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
         }}
-
-        select:focus {{
-            border-color: var(--accent);
-        }}
-
+        select:focus {{ border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-soft); }}
         .stats-badge {{
-            display: inline-block;
-            background: #0284c7;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 20px;
+            display:inline-flex; align-items:center; gap:10px;
+            background: linear-gradient(120deg, rgba(0,229,255,0.18), rgba(255,61,129,0.12));
+            border: 1px solid var(--border-bright); color: var(--text-main); padding: 12px 22px; border-radius: 10px;
+            font-family: var(--font-display); font-weight: 700; font-size: 15px; margin-bottom: 20px;
+            box-shadow: 0 0 24px rgba(0,229,255,0.12);
         }}
-
-        .summary-cards {{
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
+        .stats-badge::before {{ content:"◆"; color: var(--cyan); font-size: 12px; }}
+        .stats-badge .count-num {{ font-family: var(--font-mono); color: var(--cyan); font-size: 17px; }}
+        .table-wrap {{
+            background: var(--panel-glass); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+            backdrop-filter: blur(10px); box-shadow: 0 14px 40px -16px rgba(0,0,0,0.7);
         }}
-
-        .card {{
-            flex: 1;
-            padding: 15px 20px;
-            border-radius: 8px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: transform 0.2s, border-color 0.2s;
-        }}
-
-        .card:hover {{
-            transform: translateY(-2px);
-            border-color: var(--accent);
-        }}
-
-        .card.active {{
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-        }}
-
-        .card-title {{
-            font-size: 14px;
-            font-weight: 600;
-            color: #94a3b8;
-        }}
-
-        .card-count {{
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 5px;
-        }}
-
-        .card-bullish .card-count {{ color: #4ade80; }}
-        .card-bearish .card-count {{ color: #fca5a5; }}
-        .card-neutral .card-count {{ color: #fde047; }}
-
-        table {{
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        }}
-
-        th, td {{
-            padding: 12px 16px;
-            text-align: left;
-        }}
-
+        table {{ width: 100%; border-collapse: collapse; }}
+        th, td {{ padding: 14px 18px; text-align: left; }}
         th {{
-            background-color: #334155;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
+            background: linear-gradient(180deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02)); color: var(--cyan);
+            font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; font-size: 11px;
+            letter-spacing: 1px; border-bottom: 1px solid var(--border-bright); white-space: nowrap;
         }}
-
-        tr {{
-            border-bottom: 1px solid var(--border-color);
+        td {{ font-family: var(--font-mono); font-size: 13.5px; color: var(--text-main); }}
+        tbody tr {{ border-bottom: 1px solid var(--border); transition: background 0.15s ease; }}
+        tbody tr:hover {{ background: linear-gradient(90deg, rgba(0,229,255,0.06), rgba(255,61,129,0.03)); }}
+        tbody tr:last-child {{ border-bottom: none; }}
+        .sym {{ font-family: var(--font-display); font-weight: 700; color: #ffffff; letter-spacing: 0.3px; }}
+        .pair-chip {{ display:inline-block; font-size: 11px; padding: 3px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); color: var(--text-dim); border: 1px solid var(--border); }}
+        .badge {{ display:inline-block; padding: 5px 12px; border-radius: 20px; font-family: var(--font-body); font-size: 11.5px; font-weight: 700; letter-spacing: 0.2px; border: 1px solid transparent; white-space: nowrap; }}
+        .bullish {{ background: var(--green-soft); color: var(--green); border-color: rgba(0,255,163,0.35); box-shadow: 0 0 12px rgba(0,255,163,0.12); }}
+        .bearish {{ background: var(--red-soft); color: var(--red); border-color: rgba(255,77,94,0.35); box-shadow: 0 0 12px rgba(255,77,94,0.12); }}
+        .neutral {{ background: var(--amber-soft); color: var(--amber); border-color: rgba(255,183,3,0.35); box-shadow: 0 0 12px rgba(255,183,3,0.12); }}
+        .empty-row td {{ text-align:center; color: var(--text-faint); padding: 50px 20px; font-family: var(--font-body); font-size: 14px; }}
+        .guide-intro {{ font-family: var(--font-display); font-weight: 800; font-size: 24px; margin: 0 0 6px; color: var(--text-main); }}
+        .guide-sub {{ color: var(--text-dim); font-size: 13.5px; margin: 0 0 20px; }}
+        .guide-table td:first-child {{ width: 230px; }}
+        .guide-table td:last-child {{ font-family: var(--font-body); color: var(--text-dim); line-height: 1.6; font-size: 13.5px; }}
+        .section-gap {{ margin-top: 36px; }}
+        footer {{ text-align:center; color: var(--text-faint); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; margin-top: 34px; text-transform: uppercase; }}
+        footer a {{ color: var(--cyan); text-decoration:none; }}
+        footer a:hover {{ text-decoration:underline; }}
+        .modal-overlay {{ display:none; position: fixed; inset:0; background: rgba(3,6,14,0.78); backdrop-filter: blur(4px); z-index: 50; align-items: center; justify-content: center; padding: 24px; }}
+        .modal-overlay.active {{ display:flex; }}
+        .modal-panel {{
+            width: 100%; max-width: 1100px; max-height: 82vh; background: linear-gradient(155deg, #0d1526, #0a0f1d);
+            border: 1px solid var(--border-bright); border-radius: 16px;
+            box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 40px rgba(0,229,255,0.08);
+            display:flex; flex-direction:column; overflow:hidden; animation: modalIn 0.25s ease;
         }}
-
-        tr:hover {{
-            background-color: #26334d;
+        @keyframes modalIn {{ from{{ opacity:0; transform: translateY(14px) scale(0.98);}} to{{ opacity:1; transform: translateY(0) scale(1);}} }}
+        .modal-header {{ display:flex; align-items:center; justify-content:space-between; padding: 18px 24px; border-bottom: 1px solid var(--border); }}
+        .modal-title {{ font-family: var(--font-display); font-weight: 800; font-size: 19px; display:flex; align-items:center; gap:10px; }}
+        .modal-title .badge {{ font-size: 12px; }}
+        .modal-close {{
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-dim);
+            width: 34px; height: 34px; border-radius: 9px; cursor:pointer; font-size: 16px; font-family: var(--font-mono);
+            transition: all 0.15s ease;
         }}
-
-        .badge {{
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
+        .modal-close:hover {{ color: var(--red); border-color: rgba(255,77,94,0.4); background: rgba(255,77,94,0.08); }}
+        .modal-body {{ overflow-y: auto; padding: 0; }}
+        .modal-body table th {{ position: sticky; top:0; z-index:2; }}
+        .modal-body::-webkit-scrollbar {{ width:8px; }}
+        .modal-body::-webkit-scrollbar-thumb {{ background: rgba(0,229,255,0.25); border-radius: 8px; }}
+        .modal-body::-webkit-scrollbar-track {{ background: transparent; }}
+        @media (max-width: 640px) {{
+            .controls {{ grid-template-columns: 1fr; }}
+            th, td {{ padding: 10px 12px; font-size: 12px; }}
+            .tab-btn {{ padding: 11px 16px; font-size: 12.5px; }}
         }}
-
-        .bullish {{ background: #166534; color: #4ade80; }}
-        .bearish {{ background: #991b1b; color: #fca5a5; }}
-        .neutral {{ background: #854d0e; color: #fde047; }}
     </style>
 </head>
 <body>
 
 <div class="container">
+
+    <div class="brand-bar">
+        <a class="brand-logo" href="https://www.raosab.in" target="_blank" rel="noopener">
+            <span class="brand-mark">RS</span>
+            <span class="brand-name">RAO<span>SAB</span>.IN</span>
+        </a>
+        <span class="brand-tag">Technical Scanner Suite</span>
+    </div>
+
     <header>
-        <h1>MACD Multi-Timeframe Scanner Dashboard</h1>
-        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States, RSI & Divergence calculations across 4 Timeframe Pairs</p>
+        <div>
+            <div class="brand-eyebrow"><span class="pulse-dot"></span> LIVE SCAN &middot; MULTI-TIMEFRAME ENGINE</div>
+            <h1>MACD Master Dashboard</h1>
+            <p class="subtitle">Automated transition detection, MACD state mapping, RSI(14) correlation &amp; divergence scanning across four timeframe pairs.</p>
+        </div>
+        <div class="header-stats">
+            <div class="mini-stat up" onclick="openBiasModal('bullish')">
+                <span class="k">Bullish Setups</span><span class="v" id="statBull">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat down" onclick="openBiasModal('bearish')">
+                <span class="k">Bearish Setups</span><span class="v" id="statBear">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat flat" onclick="openBiasModal('neutral')">
+                <span class="k">Neutral</span><span class="v" id="statNeutral">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+        </div>
     </header>
 
-    <!-- TAB NAVIGATION -->
     <div class="tab-buttons">
-        <button class="tab-btn active" onclick="switchTab('tabScreener')">Stock Screener</button>
-        <button class="tab-btn" onclick="switchTab('tabGuide')">Market Bias Guide (Tab 2)</button>
-        <button class="tab-btn" onclick="switchTab('tabDivergence')">Divergence Scanner (Tab 3)</button>
+        <button class="tab-btn active" onclick="switchTab('tabScreener')">&#9889; Stock Screener</button>
+        <button class="tab-btn" onclick="switchTab('tabDivergence')">&#127760; Divergence Scanner</button>
+        <button class="tab-btn" onclick="switchTab('tabGuide')">&#128214; Market Bias Guide</button>
     </div>
 
     <!-- TAB 1: SCREENER -->
     <div id="tabScreener" class="tab-content active">
         <div class="controls">
             <div class="control-group">
-                <label for="pairSelect">1. Select Timeframe Pair (LTF -> HTF)</label>
+                <label for="pairSelect">Timeframe Pair (LTF &rarr; HTF)</label>
                 <select id="pairSelect" onchange="filterData()">
-                    <option value="15m -> 1h">15m -> 1h</option>
-                    <option value="1h -> Daily">1h -> Daily</option>
-                    <option value="Daily -> Weekly">Daily -> Weekly</option>
-                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
+                    <option value="15m -> 1h">15m &rarr; 1h</option>
+                    <option value="1h -> Daily">1h &rarr; Daily</option>
+                    <option value="Daily -> Weekly">Daily &rarr; Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly &rarr; Monthly</option>
                 </select>
             </div>
-
             <div class="control-group">
-                <label for="conditionSelect">2. Select MACD Transition Condition</label>
+                <label for="conditionSelect">MACD Transition Condition</label>
                 <select id="conditionSelect" onchange="filterData()">
                     <option value="Strong Bullish">Strong Bullish</option>
                     <option value="Bullish Reversal">Bullish Reversal</option>
@@ -506,102 +550,115 @@ def get_html_string(json_tab1, guide_json_data, json_tab3):
             </div>
         </div>
 
-        <div class="stats-badge" id="countBadge">Matching Stocks: 0</div>
+        <div class="stats-badge">Matching Stocks: <span class="count-num" id="countBadge">0</span></div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Symbol</th>
-                    <th>Timeframe Pair</th>
-                    <th>Close Price</th>
-                    <th>HTF MACD State</th>
-                    <th>LTF MACD State</th>
-                    <th>HTF RSI (14)</th>
-                    <th>LTF RSI (14)</th>
-                    <th>Market Bias</th>
-                </tr>
-            </thead>
-            <tbody id="stockTableBody">
-            </tbody>
-        </table>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Timeframe Pair</th><th>Close Price</th><th>HTF MACD State</th>
+                        <th>LTF MACD State</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th><th>Market Bias</th>
+                    </tr>
+                </thead>
+                <tbody id="stockTableBody"></tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- TAB 2: MARKET BIAS GUIDE -->
-    <div id="tabGuide" class="tab-content">
-        <h2 style="color: var(--accent); margin-top: 0;">Market Bias & Practical Interpretation Reference</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 25%;">Market Bias</th>
-                    <th style="width: 75%;">Practical Trading Interpretation</th>
-                </tr>
-            </thead>
-            <tbody id="guideTableBody">
-            </tbody>
-        </table>
-    </div>
-
-    <!-- TAB 3: DIVERGENCE SCANNER -->
+    <!-- TAB 2: DIVERGENCE SCANNER -->
     <div id="tabDivergence" class="tab-content">
-        <div class="controls" style="grid-template-columns: 1fr;">
+        <div class="controls">
             <div class="control-group">
-                <label for="divPairSelect">Select Timeframe Pair</label>
+                <label for="divPairSelect">Timeframe Pair (LTF &rarr; HTF)</label>
                 <select id="divPairSelect" onchange="filterDivergenceData()">
-                    <option value="ALL">All Pairs</option>
-                    <option value="15m -> 1h">15m -> 1h</option>
-                    <option value="1h -> Daily">1h -> Daily</option>
-                    <option value="Daily -> Weekly">Daily -> Weekly</option>
-                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
+                    <option value="15m -> 1h">15m &rarr; 1h</option>
+                    <option value="1h -> Daily">1h &rarr; Daily</option>
+                    <option value="Daily -> Weekly">Daily &rarr; Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly &rarr; Monthly</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="divTypeSelect">Divergence Type</label>
+                <select id="divTypeSelect" onchange="filterDivergenceData()">
+                    <option value="Regular Bullish Divergence">Regular Bullish Divergence</option>
+                    <option value="Regular Bearish Divergence">Regular Bearish Divergence</option>
+                    <option value="Hidden Bullish Divergence">Hidden Bullish Divergence</option>
+                    <option value="Hidden Bearish Divergence">Hidden Bearish Divergence</option>
                 </select>
             </div>
         </div>
 
-        <div class="summary-cards">
-            <div class="card card-bullish active" id="cardBullish" onclick="setDivergenceCategory('Bullish')">
-                <div class="card-title">Bullish Setups (RD/ND)</div>
-                <div class="card-count" id="countBullish">0</div>
-            </div>
-            <div class="card card-bearish" id="cardBearish" onclick="setDivergenceCategory('Bearish')">
-                <div class="card-title">Bearish Setups (RD/ND)</div>
-                <div class="card-count" id="countBearish">0</div>
-            </div>
-            <div class="card card-neutral" id="cardNeutral" onclick="setDivergenceCategory('Neutral')">
-                <div class="card-title">Neutral / No Divergence</div>
-                <div class="card-count" id="countNeutral">0</div>
-            </div>
-        </div>
+        <div class="stats-badge">Matching Stocks: <span class="count-num" id="divCountBadge">0</span></div>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Symbol</th>
-                    <th>Timeframe Pair</th>
-                    <th>Close Price</th>
-                    <th>Setup Style (Divergence)</th>
-                    <th>HTF MACD State</th>
-                    <th>LTF MACD State</th>
-                    <th>HTF RSI (14)</th>
-                    <th>LTF RSI (14)</th>
-                </tr>
-            </thead>
-            <tbody id="divergenceTableBody">
-            </tbody>
-        </table>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Timeframe Pair</th><th>Close Price</th><th>HTF Divergence</th>
+                        <th>LTF Divergence</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th><th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="divTableBody"></tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- TAB 3: MARKET BIAS GUIDE -->
+    <div id="tabGuide" class="tab-content">
+        <p class="guide-intro">Market Bias Reference</p>
+        <p class="guide-sub">Practical trading interpretation for every MACD transition condition tracked by the scanner.</p>
+        <div class="table-wrap">
+            <table class="guide-table">
+                <thead><tr><th style="width:25%;">Market Bias</th><th style="width:75%;">Practical Trading Interpretation</th></tr></thead>
+                <tbody id="guideTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="section-gap">
+            <p class="guide-intro" style="font-size:20px;">Divergence Types Reference</p>
+            <p class="guide-sub">How the 4 divergence types are read across the LTF / HTF pair.</p>
+            <div class="table-wrap">
+                <table class="guide-table">
+                    <thead><tr><th style="width:25%;">Divergence Type</th><th style="width:75%;">Practical Trading Interpretation</th></tr></thead>
+                    <tbody id="divGuideTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>MACD Master &middot; Multi-Timeframe Scanner &middot; {date_str} &middot; Powered by <a href="https://www.raosab.in" target="_blank" rel="noopener">RaoSab.in</a></footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="biasModal" onclick="if(event.target===this) closeBiasModal()">
+    <div class="modal-panel">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle"></div>
+            <button class="modal-close" onclick="closeBiasModal()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Setup / Condition</th><th>Timeframe Pair</th><th>HTF MACD State</th>
+                        <th>LTF MACD State</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th>
+                    </tr>
+                </thead>
+                <tbody id="modalTableBody"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
-    const stockData = {json_tab1};
+    const stockData = {json_data};
     const guideData = {guide_json_data};
-    const divergenceData = {json_tab3};
-
-    let selectedDivCategory = 'Bullish';
+    const divergenceData = {div_json_data};
+    const divGuideData = {div_guide_json_data};
 
     function switchTab(tabId) {{
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
     }}
@@ -615,82 +672,114 @@ def get_html_string(json_tab1, guide_json_data, json_tab3):
         return 'neutral';
     }}
 
+    function getDivBadgeClass(type) {{
+        return type.includes('Bullish') ? 'bullish' : type.includes('Bearish') ? 'bearish' : 'neutral';
+    }}
+
+    function rsiColor(v) {{
+        return v > 60 ? '#00ffa3' : v < 40 ? '#ff4d5e' : '#ffb703';
+    }}
+
+    function updateHeaderStats() {{
+        let bull = 0, bear = 0, neu = 0;
+        stockData.forEach(item => {{
+            const cls = getBadgeClass(item.condition);
+            if (cls === 'bullish') bull++;
+            else if (cls === 'bearish') bear++;
+            else neu++;
+        }});
+        document.getElementById('statBull').innerText = bull;
+        document.getElementById('statBear').innerText = bear;
+        document.getElementById('statNeutral').innerText = neu;
+    }}
+
+    function openBiasModal(type) {{
+        const labels = {{ bullish: 'Bullish Setups', bearish: 'Bearish Setups', neutral: 'Neutral Setups' }};
+        const matches = stockData.filter(item => getBadgeClass(item.condition) === type);
+
+        document.getElementById('modalTitle').innerHTML =
+            `${{labels[type]}} <span class="badge ${{type}}">${{matches.length}} Stocks</span>`;
+
+        const body = document.getElementById('modalTableBody');
+        body.innerHTML = '';
+
+        if (matches.length === 0) {{
+            body.innerHTML = `<tr class="empty-row"><td colspan="7">No stocks currently in this category.</td></tr>`;
+        }} else {{
+            matches.sort((a, b) => a.symbol.localeCompare(b.symbol)).forEach(row => {{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="sym">${{row.symbol}}</td>
+                    <td><span class="badge ${{type}}">${{row.condition}}</span></td>
+                    <td><span class="pair-chip">${{row.pair}}</span></td>
+                    <td style="color:#cbd5e1;">${{row.htf_state}}</td>
+                    <td style="color:#cbd5e1;">${{row.ltf_state}}</td>
+                    <td style="font-weight:700; color:${{rsiColor(row.htf_rsi)}};">${{row.htf_rsi}}</td>
+                    <td style="font-weight:700; color:${{rsiColor(row.ltf_rsi)}};">${{row.ltf_rsi}}</td>
+                `;
+                body.appendChild(tr);
+            }});
+        }}
+        document.getElementById('biasModal').classList.add('active');
+    }}
+
+    function closeBiasModal() {{
+        document.getElementById('biasModal').classList.remove('active');
+    }}
+
+    document.addEventListener('keydown', (e) => {{ if (e.key === 'Escape') closeBiasModal(); }});
+
     function filterData() {{
         const selectedPair = document.getElementById('pairSelect').value;
         const selectedCondition = document.getElementById('conditionSelect').value;
         const tableBody = document.getElementById('stockTableBody');
-
         const filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
-
-        document.getElementById('countBadge').innerText = `Matching Stocks: ${{filtered.length}}`;
+        document.getElementById('countBadge').innerText = filtered.length;
         tableBody.innerHTML = '';
-
         if (filtered.length === 0) {{
-            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching this pair & condition.</td></tr>`;
+            tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No stocks matching this pair &amp; condition.</td></tr>`;
             return;
         }}
-
         filtered.forEach(row => {{
             const badgeClass = getBadgeClass(row.condition);
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td style="font-weight: bold; color: var(--accent);">${{row.symbol}}</td>
-                <td>${{row.pair}}</td>
+                <td class="sym">${{row.symbol}}</td>
+                <td><span class="pair-chip">${{row.pair}}</span></td>
                 <td>${{row.close !== undefined ? row.close.toFixed(2) : 'N/A'}}</td>
-                <td style="color: #cbd5e1;">${{row.htf_state}}</td>
-                <td style="color: #cbd5e1;">${{row.ltf_state}}</td>
-                <td style="font-weight: bold; color: ${{row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.htf_rsi}}</td>
-                <td style="font-weight: bold; color: ${{row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.ltf_rsi}}</td>
+                <td style="color:#cbd5e1;">${{row.htf_state}}</td>
+                <td style="color:#cbd5e1;">${{row.ltf_state}}</td>
+                <td style="font-weight:700; color:${{rsiColor(row.htf_rsi)}};">${{row.htf_rsi}}</td>
+                <td style="font-weight:700; color:${{rsiColor(row.ltf_rsi)}};">${{row.ltf_rsi}}</td>
                 <td><span class="badge ${{badgeClass}}">${{row.condition}}</span></td>
             `;
             tableBody.appendChild(tr);
         }});
     }}
 
-    function setDivergenceCategory(cat) {{
-        selectedDivCategory = cat;
-        document.querySelectorAll('.summary-cards .card').forEach(c => c.classList.remove('active'));
-        document.getElementById('card' + cat).classList.add('active');
-        filterDivergenceData();
-    }}
-
     function filterDivergenceData() {{
         const selectedPair = document.getElementById('divPairSelect').value;
-        const tableBody = document.getElementById('divergenceTableBody');
-
-        let filteredByPair = divergenceData;
-        if (selectedPair !== 'ALL') {{
-            filteredByPair = divergenceData.filter(item => item.pair === selectedPair);
-        }}
-
-        const countBullish = filteredByPair.filter(i => i.category === 'Bullish').length;
-        const countBearish = filteredByPair.filter(i => i.category === 'Bearish').length;
-        const countNeutral = filteredByPair.filter(i => i.category === 'Neutral').length;
-
-        document.getElementById('countBullish').innerText = countBullish;
-        document.getElementById('countBearish').innerText = countBearish;
-        document.getElementById('countNeutral').innerText = countNeutral;
-
-        const filtered = filteredByPair.filter(item => item.category === selectedDivCategory);
-
+        const selectedType = document.getElementById('divTypeSelect').value;
+        const tableBody = document.getElementById('divTableBody');
+        const filtered = divergenceData.filter(item => item.pair === selectedPair && item.type === selectedType);
+        document.getElementById('divCountBadge').innerText = filtered.length;
         tableBody.innerHTML = '';
         if (filtered.length === 0) {{
-            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching current filters.</td></tr>`;
+            tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No divergence matching this pair &amp; type.</td></tr>`;
             return;
         }}
-
         filtered.forEach(row => {{
-            const badgeClass = getBadgeClass(row.divergence);
+            const badgeClass = getDivBadgeClass(row.type);
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td style="font-weight: bold; color: var(--accent);">${{row.symbol}}</td>
-                <td>${{row.pair}}</td>
+                <td class="sym">${{row.symbol}}</td>
+                <td><span class="pair-chip">${{row.pair}}</span></td>
                 <td>${{row.close !== undefined ? row.close.toFixed(2) : 'N/A'}}</td>
-                <td><span class="badge ${{badgeClass}}">${{row.divergence}}</span></td>
-                <td style="color: #cbd5e1;">${{row.htf_state}}</td>
-                <td style="color: #cbd5e1;">${{row.ltf_state}}</td>
-                <td style="font-weight: bold; color: ${{row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.htf_rsi}}</td>
-                <td style="font-weight: bold; color: ${{row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.ltf_rsi}}</td>
+                <td style="color:#cbd5e1;">${{row.htf_divergence || '&mdash;'}}</td>
+                <td style="color:#cbd5e1;">${{row.ltf_divergence || '&mdash;'}}</td>
+                <td style="font-weight:700; color:${{rsiColor(row.htf_rsi)}};">${{row.htf_rsi}}</td>
+                <td style="font-weight:700; color:${{rsiColor(row.ltf_rsi)}};">${{row.ltf_rsi}}</td>
+                <td><span class="badge ${{badgeClass}}">${{row.type}}</span></td>
             `;
             tableBody.appendChild(tr);
         }});
@@ -702,24 +791,38 @@ def get_html_string(json_tab1, guide_json_data, json_tab3):
         guideData.forEach(row => {{
             const badgeClass = getBadgeClass(row['Market Bias']);
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><span class="badge ${{badgeClass}}">${{row['Market Bias']}}</span></td>
-                <td style="color: #cbd5e1; line-height: 1.5;">${{row['Interpretation']}}</td>
-            `;
+            tr.innerHTML = `<td><span class="badge ${{badgeClass}}">${{row['Market Bias']}}</span></td><td>${{row['Interpretation']}}</td>`;
             guideBody.appendChild(tr);
+        }});
+
+        const divGuideBody = document.getElementById('divGuideTableBody');
+        divGuideBody.innerHTML = '';
+        divGuideData.forEach(row => {{
+            const badgeClass = getDivBadgeClass(row['Divergence Type']);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><span class="badge ${{badgeClass}}">${{row['Divergence Type']}}</span></td><td>${{row['Interpretation']}}</td>`;
+            divGuideBody.appendChild(tr);
         }});
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
         filterData();
-        populateGuide();
         filterDivergenceData();
+        populateGuide();
+        updateHeaderStats();
     }});
 </script>
 
 </body>
-</html>"""
+</html>
+"""
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    print(f"Successfully generated index.html dashboard with {len(macd_results)} screener rows "
+          f"and {len(divergence_results)} divergence rows (Tab 1, Tab 2 & Tab 3)!")
 
 if __name__ == '__main__':
-    tab1_data, tab3_data = process_stock_data()
-    build_html_dashboard(tab1_data, tab3_data)
+    import datetime
+    date_str = datetime.datetime.now().strftime("%d %b %Y")
+    macd_data, div_data = process_stock_data()
+    build_html_dashboard(macd_data, div_data, date_str)
