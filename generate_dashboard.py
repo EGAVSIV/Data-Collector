@@ -19,10 +19,30 @@ TF_PAIRS = [
     ('W', 'M', 'Weekly -> Monthly')
 ]
 
+# Market Bias Reference Dictionary for Tab 2
+MARKET_BIAS_GUIDE = [
+    {"Market Bias": "Strong Bullish", "Interpretation": "Strong Momentum Continuation: Full bullish alignment. HTF and LTF are accelerating in uptrend territory. High-probability trend-following entry."},
+    {"Market Bias": "Bullish Reversal", "Interpretation": "Early Momentum Re-Ignition: HTF is strong above zero; LTF crosses positive from deep oversold. Excellent low-risk buy setup on a bottoming LTF bar."},
+    {"Market Bias": "Bullish Pullback", "Interpretation": "Healthy Dip / Profit-Taking: HTF remains strong above zero while LTF experiences a minor pullback. Look for LTF reversal signals to buy the dip."},
+    {"Market Bias": "Deep Pullback", "Interpretation": "Intermediate Support Test: LTF drops below zero into correction mode while HTF stays bullish. Wait for LTF to stabilize before taking long positions."},
+    {"Market Bias": "Dip Buy / Reversal", "Interpretation": "HTF Bottoming Buy: HTF is turning positive below zero (macro bottom); LTF fires an early bullish entry. Great risk-to-reward long setup."},
+    {"Market Bias": "Oversold Accumulation", "Interpretation": "Dual Reversal Setup: Both timeframes crossing positive below zero. Indicates long-term base building; ideal for long-term swing positioning."},
+    {"Market Bias": "Neutral / Consolidating", "Interpretation": "Mixed Recovery: HTF trying to turn up, but LTF is fading above zero. Expect choppy, sideways consolidation. Avoid aggressive trades."},
+    {"Market Bias": "Complex Reversal Failure", "Interpretation": "Failing Base: HTF recovery attempt losing steam as LTF breaks negative under zero. Stand aside or trade tight ranges."},
+    {"Market Bias": "Counter-Trend Buy", "Interpretation": "HTF Pullback Re-Entry: HTF taking profits above zero; LTF turns positive. Offers a quick scalp or swing buy in line with broader trend support."},
+    {"Market Bias": "Early Recovery Attempt", "Interpretation": "Consolidation Bounce: HTF in upper-level cooling phase while LTF attempts a low-level bounce. Moderate probability setup; trade with smaller size."},
+    {"Market Bias": "Correction in Progress", "Interpretation": "Upper-Level Pullback: Both HTF and LTF taking profits above zero. Price is actively retracing; do not buy until LTF turns positive."},
+    {"Market Bias": "Accelerating Correction", "Interpretation": "Deeper Retracement: HTF negative above zero; LTF breaks down under zero. Support levels being tested; wait for LTF reversal."},
+    {"Market Bias": "Aggressive Counter-Trend", "Interpretation": "Relief Rally Scalp: HTF in strong downtrend; LTF triggers a short-term buy. High-risk bounce trade; keep profit targets tight."},
+    {"Market Bias": "Weak Oversold Bounce", "Interpretation": "Failing Bottom: HTF strongly bearish; LTF attempts a low-level bounce. High failure rate for longs; watch out for bear traps."},
+    {"Market Bias": "Bearish Continuation", "Interpretation": "Bear Market Rally Fading: LTF turns negative above zero inside an active HTF downtrend. High-probability Short Entry / Sell Signal."},
+    {"Market Bias": "Strong Bearish", "Interpretation": "Maximum Downward Alignment: HTF and LTF accelerating down below zero. Strong bearish momentum. Avoid long trades; stay short or in cash."}
+]
+
 # --- Technical Indicator Functions ---
-def calculate_macd(df, fast=12, slow=26, signal=9):
+def calculate_indicators(df, fast=12, slow=26, signal=9, rsi_period=14):
     if df.empty or len(df) < slow + signal:
-        return None, None
+        return None
     
     # Ensure dataframe is sorted by timestamp/date
     if 'datetime' in df.columns:
@@ -31,27 +51,40 @@ def calculate_macd(df, fast=12, slow=26, signal=9):
         df = df.sort_values('date')
 
     close = df['close']
+    
+    # 1. MACD Calculation
     ema_fast = close.ewm(span=fast, adjust=False).mean()
     ema_slow = close.ewm(span=slow, adjust=False).mean()
     macd_line = ema_fast - ema_slow
     signal_line = macd_line.ewm(span=signal, adjust=False).mean()
     
-    return macd_line, signal_line
+    # 2. RSI (14) Calculation
+    delta = close.diff()
+    gain = (delta.where(delta > 0, 0)).rolling(window=rsi_period).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=rsi_period).mean()
+    rs = gain / loss
+    rsi = 100 - (100 / (1 + rs))
+
+    df['macd'] = macd_line
+    df['signal'] = signal_line
+    df['rsi'] = rsi
+    return df
 
 def get_macd_state(macd_val, signal_val):
     if pd.isna(macd_val) or pd.isna(signal_val):
-        return None
+        return None, "N/A"
+    
     is_pco = macd_val > signal_val
     is_above_zero = macd_val > 0
     
     if is_pco and is_above_zero:
-        return 1  # PCO > 0
+        return 1, "PCO > 0"
     elif is_pco and not is_above_zero:
-        return 2  # PCO < 0
+        return 2, "PCO < 0"
     elif not is_pco and is_above_zero:
-        return 3  # NCO > 0
+        return 3, "NC > 0"
     else:
-        return 4  # NCO < 0
+        return 4, "NC < 0"
 
 def map_transition(ltf_prev, ltf_curr, htf_curr):
     if None in (ltf_prev, ltf_curr, htf_curr):
@@ -70,13 +103,13 @@ def map_transition(ltf_prev, ltf_curr, htf_curr):
         if ltf_prev == 1 and ltf_curr == 3: return "Neutral / Consolidating"
         if ltf_prev == 2 and ltf_curr == 4: return "Complex Reversal Failure"
         
-    elif htf_curr == 3: # HTF: NCO > 0
+    elif htf_curr == 3: # HTF: NC > 0
         if ltf_prev == 3 and ltf_curr == 1: return "Counter-Trend Buy"
         if ltf_prev == 4 and ltf_curr == 2: return "Early Recovery Attempt"
         if ltf_prev == 1 and ltf_curr == 3: return "Correction in Progress"
         if ltf_prev == 2 and ltf_curr == 4: return "Accelerating Correction"
         
-    elif htf_curr == 4: # HTF: NCO < 0
+    elif htf_curr == 4: # HTF: NC < 0
         if ltf_prev == 3 and ltf_curr == 1: return "Aggressive Counter-Trend"
         if ltf_prev == 4 and ltf_curr == 2: return "Weak Oversold Bounce"
         if ltf_prev == 1 and ltf_curr == 3: return "Bearish Continuation"
@@ -88,7 +121,6 @@ def map_transition(ltf_prev, ltf_curr, htf_curr):
 def process_stock_data():
     results = []
     
-    # List all unique symbols across JSON files
     sample_folder = TF_FOLDERS['D']
     if not os.path.exists(sample_folder):
         print(f"Directory {sample_folder} not found. Please check paths.")
@@ -99,7 +131,6 @@ def process_stock_data():
     for symbol in symbols:
         tf_data = {}
         
-        # Load JSON data for each timeframe
         for tf, folder in TF_FOLDERS.items():
             file_path = os.path.join(folder, f"{symbol}.json")
             if os.path.exists(file_path):
@@ -107,14 +138,22 @@ def process_stock_data():
                     with open(file_path, 'r') as f:
                         raw_data = json.load(f)
                         df = pd.DataFrame(raw_data)
-                        macd, sig = calculate_macd(df)
-                        if macd is not None and len(macd) >= 2:
-                            prev_state = get_macd_state(macd.iloc[-2], sig.iloc[-2])
-                            curr_state = get_macd_state(macd.iloc[-1], sig.iloc[-1])
+                        df = calculate_indicators(df)
+                        
+                        if df is not None and len(df) >= 2:
+                            macd = df['macd']
+                            sig = df['signal']
+                            rsi = df['rsi']
+                            
+                            prev_num, prev_txt = get_macd_state(macd.iloc[-2], sig.iloc[-2])
+                            curr_num, curr_txt = get_macd_state(macd.iloc[-1], sig.iloc[-1])
+                            
                             tf_data[tf] = {
-                                'prev': prev_state,
-                                'curr': curr_state,
-                                'close': df['close'].iloc[-1]
+                                'prev_num': prev_num,
+                                'curr_num': curr_num,
+                                'macd_state_txt': curr_txt,
+                                'rsi': round(float(rsi.iloc[-1]), 2) if pd.notna(rsi.iloc[-1]) else "N/A",
+                                'close': float(df['close'].iloc[-1])
                             }
                 except Exception as e:
                     continue
@@ -125,13 +164,17 @@ def process_stock_data():
                 ltf_info = tf_data[ltf_key]
                 htf_info = tf_data[htf_key]
                 
-                condition = map_transition(ltf_info['prev'], ltf_info['curr'], htf_info['curr'])
+                condition = map_transition(ltf_info['prev_num'], ltf_info['curr_num'], htf_info['curr_num'])
                 if condition:
                     results.append({
                         'symbol': symbol,
                         'pair': pair_label,
-                        'condition': condition,
-                        'close': ltf_info['close']
+                        'close': ltf_info['close'],
+                        'htf_state': htf_info['macd_state_txt'],
+                        'ltf_state': ltf_info['macd_state_txt'],
+                        'htf_rsi': htf_info['rsi'],
+                        'ltf_rsi': ltf_info['rsi'],
+                        'condition': condition
                     })
                     
     return results
@@ -139,6 +182,7 @@ def process_stock_data():
 # --- Generate Embedded HTML Dashboard ---
 def build_html_dashboard(results):
     json_data = json.dumps(results)
+    guide_json_data = json.dumps(MARKET_BIAS_GUIDE)
     
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -164,7 +208,7 @@ def build_html_dashboard(results):
         }}
 
         .container {{
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }}
 
@@ -178,6 +222,39 @@ def build_html_dashboard(results):
             color: var(--accent);
             margin: 0 0 10px 0;
             font-size: 26px;
+        }}
+
+        /* TAB BUTTON NAVIGATION */
+        .tab-buttons {{
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }}
+
+        .tab-btn {{
+            padding: 12px 24px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: #94a3b8;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.2s ease-in-out;
+        }}
+
+        .tab-btn.active {{
+            background: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+        }}
+
+        .tab-content {{
+            display: none;
+        }}
+
+        .tab-content.active {{
+            display: block;
         }}
 
         .controls {{
@@ -222,10 +299,10 @@ def build_html_dashboard(results):
             display: inline-block;
             background: #0284c7;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 20px;
         }}
 
@@ -239,7 +316,7 @@ def build_html_dashboard(results):
         }}
 
         th, td {{
-            padding: 14px 18px;
+            padding: 12px 16px;
             text-align: left;
         }}
 
@@ -248,7 +325,7 @@ def build_html_dashboard(results):
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 0.5px;
         }}
 
@@ -278,61 +355,99 @@ def build_html_dashboard(results):
 <div class="container">
     <header>
         <h1>MACD Multi-Timeframe Scanner Dashboard</h1>
-        <p style="color: #94a3b8; margin: 0;">Automated transition & condition filter across 4 Timeframe Pairs</p>
+        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States & RSI calculations across 4 Timeframe Pairs</p>
     </header>
 
-    <div class="controls">
-        <div class="control-group">
-            <label for="pairSelect">1. Select Timeframe Pair (LTF -> HTF)</label>
-            <select id="pairSelect" onchange="filterData()">
-                <option value="15m -> 1h">15m -> 1h</option>
-                <option value="1h -> Daily">1h -> Daily</option>
-                <option value="Daily -> Weekly">Daily -> Weekly</option>
-                <option value="Weekly -> Monthly">Weekly -> Monthly</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <label for="conditionSelect">2. Select MACD Transition Condition</label>
-            <select id="conditionSelect" onchange="filterData()">
-                <option value="Strong Bullish">Strong Bullish</option>
-                <option value="Bullish Reversal">Bullish Reversal</option>
-                <option value="Bullish Pullback">Bullish Pullback</option>
-                <option value="Deep Pullback">Deep Pullback</option>
-                <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
-                <option value="Oversold Accumulation">Oversold Accumulation</option>
-                <option value="Neutral / Consolidating">Neutral / Consolidating</option>
-                <option value="Complex Reversal Failure">Complex Reversal Failure</option>
-                <option value="Counter-Trend Buy">Counter-Trend Buy</option>
-                <option value="Early Recovery Attempt">Early Recovery Attempt</option>
-                <option value="Correction in Progress">Correction in Progress</option>
-                <option value="Accelerating Correction">Accelerating Correction</option>
-                <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
-                <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
-                <option value="Bearish Continuation">Bearish Continuation</option>
-                <option value="Strong Bearish">Strong Bearish</option>
-            </select>
-        </div>
+    <!-- TAB NAVIGATION -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('tabScreener')">Stock Screener</button>
+        <button class="tab-btn" onclick="switchTab('tabGuide')">Market Bias Guide (Tab 2)</button>
     </div>
 
-    <div class="stats-badge" id="countBadge">Matching Stocks: 0</div>
+    <!-- TAB 1: SCREENER -->
+    <div id="tabScreener" class="tab-content active">
+        <div class="controls">
+            <div class="control-group">
+                <label for="pairSelect">1. Select Timeframe Pair (LTF -> HTF)</label>
+                <select id="pairSelect" onchange="filterData()">
+                    <option value="15m -> 1h">15m -> 1h</option>
+                    <option value="1h -> Daily">1h -> Daily</option>
+                    <option value="Daily -> Weekly">Daily -> Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
+                </select>
+            </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Timeframe Pair</th>
-                <th>Condition / Interpretation</th>
-                <th>Last Close Price</th>
-            </tr>
-        </thead>
-        <tbody id="stockTableBody">
-        </tbody>
-    </table>
+            <div class="control-group">
+                <label for="conditionSelect">2. Select MACD Transition Condition</label>
+                <select id="conditionSelect" onchange="filterData()">
+                    <option value="Strong Bullish">Strong Bullish</option>
+                    <option value="Bullish Reversal">Bullish Reversal</option>
+                    <option value="Bullish Pullback">Bullish Pullback</option>
+                    <option value="Deep Pullback">Deep Pullback</option>
+                    <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
+                    <option value="Oversold Accumulation">Oversold Accumulation</option>
+                    <option value="Neutral / Consolidating">Neutral / Consolidating</option>
+                    <option value="Complex Reversal Failure">Complex Reversal Failure</option>
+                    <option value="Counter-Trend Buy">Counter-Trend Buy</option>
+                    <option value="Early Recovery Attempt">Early Recovery Attempt</option>
+                    <option value="Correction in Progress">Correction in Progress</option>
+                    <option value="Accelerating Correction">Accelerating Correction</option>
+                    <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
+                    <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
+                    <option value="Bearish Continuation">Bearish Continuation</option>
+                    <option value="Strong Bearish">Strong Bearish</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-badge" id="countBadge">Matching Stocks: 0</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Timeframe Pair</th>
+                    <th>Close Price</th>
+                    <th>HTF MACD State</th>
+                    <th>LTF MACD State</th>
+                    <th>HTF RSI (14)</th>
+                    <th>LTF RSI (14)</th>
+                    <th>Market Bias</th>
+                </tr>
+            </thead>
+            <tbody id="stockTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: MARKET BIAS GUIDE -->
+    <div id="tabGuide" class="tab-content">
+        <h2 style="color: var(--accent); margin-top: 0;">Market Bias & Practical Interpretation Reference</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Market Bias</th>
+                    <th style="width: 75%;">Practical Trading Interpretation</th>
+                </tr>
+            </thead>
+            <tbody id="guideTableBody">
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <script>
     const stockData = {json_data};
+    const guideData = {guide_json_data};
+
+    function switchTab(tabId) {{
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }}
 
     function getBadgeClass(cond) {{
         if (cond.includes('Bullish') || cond.includes('Buy') || cond.includes('Recovery') || cond.includes('Accumulation')) {{
@@ -355,7 +470,7 @@ def build_html_dashboard(results):
         tableBody.innerHTML = '';
 
         if (filtered.length === 0) {{
-            tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching this pair & condition.</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching this pair & condition.</td></tr>`;
             return;
         }}
 
@@ -365,15 +480,36 @@ def build_html_dashboard(results):
             tr.innerHTML = `
                 <td style="font-weight: bold; color: var(--accent);">${{row.symbol}}</td>
                 <td>${{row.pair}}</td>
-                <td><span class="badge ${{badgeClass}}">${{row.condition}}</span></td>
                 <td>${{row.close !== undefined ? row.close.toFixed(2) : 'N/A'}}</td>
+                <td style="color: #cbd5e1;">${{row.htf_state}}</td>
+                <td style="color: #cbd5e1;">${{row.ltf_state}}</td>
+                <td style="font-weight: bold; color: ${{row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.htf_rsi}}</td>
+                <td style="font-weight: bold; color: ${{row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.ltf_rsi}}</td>
+                <td><span class="badge ${{badgeClass}}">${{row.condition}}</span></td>
             `;
             tableBody.appendChild(tr);
         }});
     }}
 
-    // Initial load
-    document.addEventListener('DOMContentLoaded', filterData);
+    function populateGuide() {{
+        const guideBody = document.getElementById('guideTableBody');
+        guideBody.innerHTML = '';
+        guideData.forEach(row => {{
+            const badgeClass = getBadgeClass(row['Market Bias']);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><span class="badge ${{badgeClass}}">${{row['Market Bias']}}</span></td>
+                <td style="color: #cbd5e1; line-height: 1.5;">${{row['Interpretation']}}</td>
+            `;
+            guideBody.appendChild(tr);
+        }});
+    }}
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {{
+        filterData();
+        populateGuide();
+    }});
 </script>
 
 </body>
@@ -381,7 +517,7 @@ def build_html_dashboard(results):
 """
     with open('index.html', 'w') as f:
         f.write(html_content)
-    print("Successfully generated index.html dashboard!")
+    print("Successfully generated index.html dashboard with Tab 1 & Tab 2!")
 
 if __name__ == '__main__':
     data = process_stock_data()
