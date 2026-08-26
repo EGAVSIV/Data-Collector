@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T03:45:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":97.25,
-        "high":99.8,
-        "low":97.25,
-        "close":98.2,
-        "volume":38328058.0
-    },
-    {
         "datetime":"2024-05-02T04:45:00.000",
         "symbol":"NSE:ASHOKLEY",
         "open":98.2,
@@ -35996,7 +35987,16 @@
         "open":176.75,
         "high":177.97,
         "low":175.41,
-        "close":176.45,
-        "volume":5663121.0
+        "close":176.71,
+        "volume":5725930.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":176.7,
+        "high":177.29,
+        "low":175.91,
+        "close":177.12,
+        "volume":1418532.0
     }
 ]

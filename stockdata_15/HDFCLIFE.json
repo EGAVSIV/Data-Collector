@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":750.4,
-        "high":750.5,
-        "low":748.45,
-        "close":748.8,
-        "volume":66498.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":748.6,
-        "high":749.1,
-        "low":748.0,
-        "close":749.0,
-        "volume":81503.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":749.1,
-        "high":750.4,
-        "low":748.85,
-        "close":749.9,
-        "volume":76418.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":750.15,
-        "high":751.95,
-        "low":749.35,
-        "close":750.95,
-        "volume":94726.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:HDFCLIFE",
         "open":750.95,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:HDFCLIFE",
         "open":553.0,
         "high":553.75,
+        "low":552.25,
+        "close":553.0,
+        "volume":97050.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":552.9,
+        "high":553.1,
+        "low":551.35,
+        "close":551.8,
+        "volume":99358.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":551.8,
+        "high":553.95,
+        "low":551.8,
+        "close":553.3,
+        "volume":114154.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":553.3,
+        "high":555.9,
         "low":552.7,
-        "close":552.95,
-        "volume":73728.0
+        "close":555.55,
+        "volume":265853.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":555.55,
+        "high":556.3,
+        "low":555.5,
+        "close":556.15,
+        "volume":53876.0
     }
 ]

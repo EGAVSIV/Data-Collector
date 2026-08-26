@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:IEX",
-        "open":134.8,
-        "high":134.88,
-        "low":134.66,
-        "close":134.73,
-        "volume":45786.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:IEX",
-        "open":134.73,
-        "high":134.73,
-        "low":134.56,
-        "close":134.68,
-        "volume":37682.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:IEX",
-        "open":134.69,
-        "high":134.86,
-        "low":134.55,
-        "close":134.75,
-        "volume":57107.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:IEX",
-        "open":134.73,
-        "high":134.86,
-        "low":134.39,
-        "close":134.48,
-        "volume":100532.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:IEX",
         "open":134.49,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:IEX",
         "open":124.05,
         "high":124.09,
-        "low":123.81,
-        "close":123.81,
-        "volume":30556.0
+        "low":123.7,
+        "close":123.75,
+        "volume":53586.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.7,
+        "high":123.77,
+        "low":123.1,
+        "close":123.21,
+        "volume":99654.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.27,
+        "high":123.57,
+        "low":123.2,
+        "close":123.42,
+        "volume":62548.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.37,
+        "high":123.48,
+        "low":123.34,
+        "close":123.46,
+        "volume":23916.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:IEX",
+        "open":123.46,
+        "high":123.85,
+        "low":123.4,
+        "close":123.45,
+        "volume":46077.0
     }
 ]

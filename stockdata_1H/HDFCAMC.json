@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T03:45:00.000",
-        "symbol":"NSE:HDFCAMC",
-        "open":1951.275,
-        "high":1975.05,
-        "low":1946.5,
-        "close":1957.425,
-        "volume":171986.0
-    },
-    {
         "datetime":"2024-05-02T04:45:00.000",
         "symbol":"NSE:HDFCAMC",
         "open":1956.6,
@@ -35996,7 +35987,16 @@
         "open":2690.0,
         "high":2692.3,
         "low":2674.0,
-        "close":2680.9,
-        "volume":131947.0
+        "close":2682.1,
+        "volume":135395.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:HDFCAMC",
+        "open":2682.1,
+        "high":2694.0,
+        "low":2681.1,
+        "close":2682.3,
+        "volume":68378.0
     }
 ]

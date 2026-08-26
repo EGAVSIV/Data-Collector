@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:VBL",
-        "open":488.8,
-        "high":490.3,
-        "low":488.2,
-        "close":490.3,
-        "volume":267309.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:VBL",
-        "open":490.25,
-        "high":490.9,
-        "low":490.0,
-        "close":490.0,
-        "volume":153364.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:VBL",
-        "open":490.0,
-        "high":490.0,
-        "low":488.7,
-        "close":488.95,
-        "volume":269559.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:VBL",
-        "open":488.95,
-        "high":490.1,
-        "low":488.85,
-        "close":489.5,
-        "volume":113885.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:VBL",
         "open":489.5,
@@ -35034,7 +34998,7 @@
         "high":436.0,
         "low":435.15,
         "close":435.15,
-        "volume":37990.0
+        "volume":27213.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T04:30:00.000",
         "symbol":"NSE:VBL",
         "open":429.9,
-        "high":435.3,
+        "high":435.35,
         "low":428.15,
-        "close":435.3,
-        "volume":1840941.0
+        "close":434.15,
+        "volume":3239482.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:VBL",
+        "open":434.4,
+        "high":434.45,
+        "low":429.2,
+        "close":431.2,
+        "volume":1114728.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:VBL",
+        "open":431.2,
+        "high":431.2,
+        "low":429.5,
+        "close":429.9,
+        "volume":323937.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:VBL",
+        "open":429.85,
+        "high":429.85,
+        "low":429.1,
+        "close":429.1,
+        "volume":294466.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:VBL",
+        "open":429.25,
+        "high":429.4,
+        "low":429.05,
+        "close":429.3,
+        "volume":70383.0
     }
 ]

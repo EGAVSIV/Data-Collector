@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6272.0,
-        "high":6317.0,
-        "low":6272.0,
-        "close":6315.5,
-        "volume":12711.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6313.5,
-        "high":6375.5,
-        "low":6313.5,
-        "close":6364.0,
-        "volume":15696.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6366.0,
-        "high":6379.5,
-        "low":6347.0,
-        "close":6356.0,
-        "volume":7223.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6353.5,
-        "high":6365.0,
-        "low":6351.5,
-        "close":6358.0,
-        "volume":2450.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:AMBER",
         "open":6359.0,
@@ -35996,7 +35960,43 @@
         "open":7435.0,
         "high":7440.0,
         "low":7424.0,
-        "close":7430.0,
-        "volume":1291.0
+        "close":7438.0,
+        "volume":2077.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7438.0,
+        "high":7441.5,
+        "low":7419.5,
+        "close":7441.5,
+        "volume":3900.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7436.0,
+        "high":7484.0,
+        "low":7436.0,
+        "close":7470.0,
+        "volume":14768.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7469.5,
+        "high":7497.5,
+        "low":7458.5,
+        "close":7488.5,
+        "volume":13501.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7487.0,
+        "high":7499.0,
+        "low":7466.0,
+        "close":7476.0,
+        "volume":5081.0
     }
 ]

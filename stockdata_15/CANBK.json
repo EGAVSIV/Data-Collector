@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:CANBK",
-        "open":156.05,
-        "high":156.98,
-        "low":156.0,
-        "close":156.94,
-        "volume":982866.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:CANBK",
-        "open":156.93,
-        "high":156.93,
-        "low":156.51,
-        "close":156.64,
-        "volume":561056.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:CANBK",
-        "open":156.64,
-        "high":157.14,
-        "low":156.6,
-        "close":156.97,
-        "volume":826977.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:CANBK",
-        "open":156.94,
-        "high":157.13,
-        "low":156.74,
-        "close":156.83,
-        "volume":1083172.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:CANBK",
         "open":156.86,
@@ -35034,7 +34998,7 @@
         "high":128.55,
         "low":128.4,
         "close":128.53,
-        "volume":186054.0
+        "volume":167903.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:CANBK",
         "open":130.2,
         "high":130.4,
-        "low":130.07,
-        "close":130.22,
-        "volume":415467.0
+        "low":129.93,
+        "close":129.93,
+        "volume":743622.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:CANBK",
+        "open":129.98,
+        "high":130.41,
+        "low":129.79,
+        "close":130.4,
+        "volume":786240.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:CANBK",
+        "open":130.4,
+        "high":130.41,
+        "low":130.14,
+        "close":130.17,
+        "volume":315226.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:CANBK",
+        "open":130.18,
+        "high":130.33,
+        "low":130.0,
+        "close":130.04,
+        "volume":370696.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:CANBK",
+        "open":130.04,
+        "high":130.04,
+        "low":129.9,
+        "close":129.96,
+        "volume":110765.0
     }
 ]

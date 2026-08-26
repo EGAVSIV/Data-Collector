@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:CAMS",
-        "open":739.6,
-        "high":740.9,
-        "low":739.2,
-        "close":740.3,
-        "volume":5839.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:CAMS",
-        "open":740.0,
-        "high":742.4,
-        "low":739.3,
-        "close":741.5,
-        "volume":16523.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:CAMS",
-        "open":741.5,
-        "high":742.3,
-        "low":740.2,
-        "close":741.8,
-        "volume":13807.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:CAMS",
-        "open":741.8,
-        "high":742.7,
-        "low":740.5,
-        "close":742.1,
-        "volume":11584.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:CAMS",
         "open":742.1,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T04:30:00.000",
         "symbol":"NSE:CAMS",
         "open":751.75,
-        "high":752.85,
+        "high":753.3,
         "low":750.7,
-        "close":752.6,
-        "volume":17201.0
+        "close":752.95,
+        "volume":22628.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:CAMS",
+        "open":753.0,
+        "high":753.55,
+        "low":751.05,
+        "close":752.2,
+        "volume":16935.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:CAMS",
+        "open":752.25,
+        "high":753.5,
+        "low":751.5,
+        "close":753.25,
+        "volume":17226.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:CAMS",
+        "open":753.3,
+        "high":753.5,
+        "low":752.15,
+        "close":753.1,
+        "volume":11173.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:CAMS",
+        "open":753.15,
+        "high":753.2,
+        "low":752.05,
+        "close":752.05,
+        "volume":3610.0
     }
 ]

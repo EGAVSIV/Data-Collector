@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1082.4,
-        "high":1084.8,
-        "low":1081.9,
-        "close":1083.7,
-        "volume":5318.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1083.7,
-        "high":1084.9,
-        "low":1082.4,
-        "close":1084.2,
-        "volume":16857.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1084.2,
-        "high":1087.9,
-        "low":1084.2,
-        "close":1086.5,
-        "volume":15895.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:KFINTECH",
-        "open":1086.5,
-        "high":1087.0,
-        "low":1084.3,
-        "close":1085.4,
-        "volume":8136.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:KFINTECH",
         "open":1085.4,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:KFINTECH",
         "open":960.65,
         "high":963.75,
+        "low":959.55,
+        "close":961.55,
+        "volume":124818.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":961.85,
+        "high":963.0,
+        "low":960.4,
+        "close":961.5,
+        "volume":60222.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":961.25,
+        "high":967.75,
         "low":960.0,
-        "close":960.75,
-        "volume":81981.0
+        "close":965.5,
+        "volume":40450.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":965.75,
+        "high":967.5,
+        "low":964.8,
+        "close":966.0,
+        "volume":28540.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:KFINTECH",
+        "open":966.35,
+        "high":966.85,
+        "low":964.7,
+        "close":965.45,
+        "volume":11195.0
     }
 ]

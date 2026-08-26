@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:SAIL",
-        "open":147.32,
-        "high":148.18,
-        "low":146.71,
-        "close":148.02,
-        "volume":2343727.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:SAIL",
-        "open":147.96,
-        "high":148.46,
-        "low":147.26,
-        "close":147.6,
-        "volume":1352020.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:SAIL",
-        "open":147.6,
-        "high":148.08,
-        "low":147.51,
-        "close":147.9,
-        "volume":884629.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:SAIL",
-        "open":147.9,
-        "high":148.14,
-        "low":146.9,
-        "close":146.9,
-        "volume":1460254.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:SAIL",
         "open":146.91,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:SAIL",
         "open":183.39,
         "high":183.69,
-        "low":183.36,
+        "low":183.25,
         "close":183.51,
-        "volume":309859.0
+        "volume":375784.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:SAIL",
+        "open":183.51,
+        "high":183.54,
+        "low":182.4,
+        "close":182.88,
+        "volume":628091.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:SAIL",
+        "open":182.85,
+        "high":182.85,
+        "low":182.52,
+        "close":182.58,
+        "volume":303812.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:SAIL",
+        "open":182.58,
+        "high":183.85,
+        "low":182.51,
+        "close":183.85,
+        "volume":1091427.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:SAIL",
+        "open":183.85,
+        "high":184.8,
+        "low":183.72,
+        "close":184.78,
+        "volume":357906.0
     }
 ]

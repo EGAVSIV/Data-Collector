@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7685.0,
-        "high":7689.5,
-        "low":7680.5,
-        "close":7685.0,
-        "volume":526.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7688.5,
-        "high":7698.0,
-        "low":7682.5,
-        "close":7690.0,
-        "volume":1281.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7690.0,
-        "high":7710.0,
-        "low":7682.0,
-        "close":7709.0,
-        "volume":2917.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:OFSS",
-        "open":7709.5,
-        "high":7715.0,
-        "low":7701.5,
-        "close":7708.5,
-        "volume":2065.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:OFSS",
         "open":7702.5,
@@ -35996,7 +35960,43 @@
         "open":12036.0,
         "high":12060.0,
         "low":11994.0,
-        "close":12017.0,
-        "volume":23788.0
+        "close":12031.0,
+        "volume":27131.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:OFSS",
+        "open":12027.0,
+        "high":12034.0,
+        "low":11990.0,
+        "close":11997.0,
+        "volume":14514.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:OFSS",
+        "open":11991.0,
+        "high":12015.0,
+        "low":11971.0,
+        "close":12000.0,
+        "volume":9048.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:OFSS",
+        "open":12000.0,
+        "high":12000.0,
+        "low":11885.0,
+        "close":11912.0,
+        "volume":21121.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:OFSS",
+        "open":11916.0,
+        "high":11928.0,
+        "low":11907.0,
+        "close":11927.0,
+        "volume":10739.0
     }
 ]

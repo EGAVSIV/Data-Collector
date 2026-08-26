@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":35860.0,
-        "high":35920.0,
-        "low":35850.0,
-        "close":35920.0,
-        "volume":140.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":35895.0,
-        "high":35965.0,
-        "low":35865.0,
-        "close":35950.0,
-        "volume":161.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":35950.0,
-        "high":35970.0,
-        "low":35920.0,
-        "close":35925.0,
-        "volume":358.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":35925.0,
-        "high":35940.0,
-        "low":35900.0,
-        "close":35900.0,
-        "volume":71.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:PAGEIND",
         "open":35900.0,
@@ -35996,7 +35960,43 @@
         "open":35520.0,
         "high":35540.0,
         "low":35470.0,
-        "close":35500.0,
-        "volume":350.0
+        "close":35505.0,
+        "volume":465.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35505.0,
+        "high":35520.0,
+        "low":35405.0,
+        "close":35505.0,
+        "volume":473.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35520.0,
+        "high":35590.0,
+        "low":35505.0,
+        "close":35555.0,
+        "volume":610.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35555.0,
+        "high":35580.0,
+        "low":35555.0,
+        "close":35560.0,
+        "volume":107.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35580.0,
+        "high":35580.0,
+        "low":35535.0,
+        "close":35550.0,
+        "volume":130.0
     }
 ]

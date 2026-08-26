@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:45:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3229.1,
-        "high":3229.4,
-        "low":3225.0,
-        "close":3226.2,
-        "volume":1105.0
-    },
-    {
-        "datetime":"2025-12-31T07:00:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3226.1,
-        "high":3229.9,
-        "low":3225.0,
-        "close":3229.5,
-        "volume":1494.0
-    },
-    {
-        "datetime":"2025-12-31T07:15:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3227.6,
-        "high":3232.9,
-        "low":3225.0,
-        "close":3228.6,
-        "volume":3902.0
-    },
-    {
-        "datetime":"2025-12-31T07:30:00.000",
-        "symbol":"NSE:PIIND",
-        "open":3228.9,
-        "high":3231.2,
-        "low":3225.0,
-        "close":3225.9,
-        "volume":7140.0
-    },
-    {
         "datetime":"2025-12-31T07:45:00.000",
         "symbol":"NSE:PIIND",
         "open":3225.8,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T04:30:00.000",
         "symbol":"NSE:PIIND",
         "open":2499.0,
-        "high":2518.0,
+        "high":2530.5,
         "low":2498.0,
-        "close":2517.4,
-        "volume":11177.0
+        "close":2526.0,
+        "volume":28135.0
+    },
+    {
+        "datetime":"2026-08-26T04:45:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2526.0,
+        "high":2526.5,
+        "low":2514.1,
+        "close":2518.2,
+        "volume":8871.0
+    },
+    {
+        "datetime":"2026-08-26T05:00:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2517.7,
+        "high":2523.0,
+        "low":2515.2,
+        "close":2522.2,
+        "volume":6222.0
+    },
+    {
+        "datetime":"2026-08-26T05:15:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2520.7,
+        "high":2527.9,
+        "low":2516.5,
+        "close":2527.9,
+        "volume":11679.0
+    },
+    {
+        "datetime":"2026-08-26T05:30:00.000",
+        "symbol":"NSE:PIIND",
+        "open":2527.0,
+        "high":2528.0,
+        "low":2522.0,
+        "close":2523.5,
+        "volume":3779.0
     }
 ]
