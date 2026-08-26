@@ -38,7 +38,6 @@
             font-size: 26px;
         }
 
-        /* TAB BUTTON NAVIGATION */
         .tab-buttons {
             display: flex;
             gap: 10px;
@@ -120,6 +119,48 @@
             margin-bottom: 20px;
         }
 
+        .summary-cards {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .card-count {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .card-bullish .card-count { color: #4ade80; }
+        .card-bearish .card-count { color: #fca5a5; }
+        .card-neutral .card-count { color: #fde047; }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -169,13 +210,14 @@
 <div class="container">
     <header>
         <h1>MACD Multi-Timeframe Scanner Dashboard</h1>
-        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States & RSI calculations across 4 Timeframe Pairs</p>
+        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States, RSI & Divergence calculations across 4 Timeframe Pairs</p>
     </header>
 
     <!-- TAB NAVIGATION -->
     <div class="tab-buttons">
         <button class="tab-btn active" onclick="switchTab('tabScreener')">Stock Screener</button>
         <button class="tab-btn" onclick="switchTab('tabGuide')">Market Bias Guide (Tab 2)</button>
+        <button class="tab-btn" onclick="switchTab('tabDivergence')">Divergence Scanner (Tab 3)</button>
     </div>
 
     <!-- TAB 1: SCREENER -->
@@ -249,11 +291,66 @@
         </table>
     </div>
 
+    <!-- TAB 3: DIVERGENCE SCANNER -->
+    <div id="tabDivergence" class="tab-content">
+        <div class="controls" style="grid-template-columns: 1fr;">
+            <div class="control-group">
+                <label for="divPairSelect">Select Timeframe Pair</label>
+                <select id="divPairSelect" onchange="filterDivergenceData()">
+                    <option value="ALL">All Pairs</option>
+                    <option value="15m -> 1h">15m -> 1h</option>
+                    <option value="1h -> Daily">1h -> Daily</option>
+                    <option value="Daily -> Weekly">Daily -> Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card card-bullish active" id="cardBullish" onclick="setDivergenceCategory('Bullish')">
+                <div class="card-title">Bullish Setups (RD/ND)</div>
+                <div class="card-count" id="countBullish">0</div>
+            </div>
+            <div class="card card-bearish" id="cardBearish" onclick="setDivergenceCategory('Bearish')">
+                <div class="card-title">Bearish Setups (RD/ND)</div>
+                <div class="card-count" id="countBearish">0</div>
+            </div>
+            <div class="card card-neutral" id="cardNeutral" onclick="setDivergenceCategory('Neutral')">
+                <div class="card-title">Neutral / No Divergence</div>
+                <div class="card-count" id="countNeutral">0</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Timeframe Pair</th>
+                    <th>Close Price</th>
+                    <th>Setup Style (Divergence)</th>
+                    <th>HTF MACD State</th>
+                    <th>LTF MACD State</th>
+                    <th>HTF RSI (14)</th>
+                    <th>LTF RSI (14)</th>
+                </tr>
+            </thead>
+            <tbody id="divergenceTableBody">
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <script>
-    const stockData = [{"symbol": "SHRIRAMFIN", "pair": "15m -> 1h", "close": 1121.9, "htf_state": "NC < 0", "ltf_state": "PCO < 0", "htf_rsi": 53.47, "ltf_rsi": 39.82, "condition": "Weak Oversold Bounce"}, {"symbol": "COFORGE", "pair": "Daily -> Weekly", "close": 1880.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 82.51, "ltf_rsi": 66.9, "condition": "Bullish Pullback"}, {"symbol": "SBICARD", "pair": "Daily -> Weekly", "close": 660.1, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 57.17, "ltf_rsi": 50.04, "condition": "Dip Buy / Reversal"}, {"symbol": "KALYANKJIL", "pair": "1h -> Daily", "close": 611.0, "htf_state": "NC > 0", "ltf_state": "NC > 0", "htf_rsi": 57.91, "ltf_rsi": 58.12, "condition": "Correction in Progress"}, {"symbol": "CGPOWER", "pair": "1h -> Daily", "close": 868.5, "htf_state": "PCO < 0", "ltf_state": "NC < 0", "htf_rsi": 44.97, "ltf_rsi": 49.6, "condition": "Complex Reversal Failure"}, {"symbol": "ADANIGREEN", "pair": "1h -> Daily", "close": 1308.6, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 34.9, "ltf_rsi": 54.76, "condition": "Neutral / Consolidating"}, {"symbol": "LTF", "pair": "Daily -> Weekly", "close": 322.2, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 67.69, "ltf_rsi": 54.08, "condition": "Strong Bullish"}, {"symbol": "OIL", "pair": "Daily -> Weekly", "close": 469.15, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 42.84, "ltf_rsi": 63.63, "condition": "Bullish Pullback"}, {"symbol": "MOTHERSON", "pair": "1h -> Daily", "close": 166.75, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 68.87, "ltf_rsi": 43.46, "condition": "Early Recovery Attempt"}, {"symbol": "GVT&D", "pair": "Daily -> Weekly", "close": 4340.0, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 43.12, "ltf_rsi": 48.58, "condition": "Early Recovery Attempt"}, {"symbol": "VEDL", "pair": "15m -> 1h", "close": 287.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 73.8, "ltf_rsi": 69.09, "condition": "Strong Bullish"}, {"symbol": "AUBANK", "pair": "15m -> 1h", "close": 1120.4, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 59.94, "ltf_rsi": 43.05, "condition": "Early Recovery Attempt"}, {"symbol": "RADICO", "pair": "15m -> 1h", "close": 4626.5, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 53.78, "ltf_rsi": 45.15, "condition": "Neutral / Consolidating"}, {"symbol": "SBILIFE", "pair": "Weekly -> Monthly", "close": 1768.2, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 46.42, "ltf_rsi": 41.89, "condition": "Accelerating Correction"}, {"symbol": "RELIANCE", "pair": "1h -> Daily", "close": 1302.5, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 37.17, "ltf_rsi": 46.18, "condition": "Accelerating Correction"}, {"symbol": "SHREECEM", "pair": "Weekly -> Monthly", "close": 24865.0, "htf_state": "NC < 0", "ltf_state": "NC < 0", "htf_rsi": 27.09, "ltf_rsi": 50.51, "condition": "Strong Bearish"}, {"symbol": "GLENMARK", "pair": "Weekly -> Monthly", "close": 2438.3, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 70.37, "ltf_rsi": 62.84, "condition": "Strong Bullish"}, {"symbol": "MANAPPURAM", "pair": "Daily -> Weekly", "close": 365.4, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 62.95, "ltf_rsi": 51.07, "condition": "Strong Bullish"}, {"symbol": "HINDALCO", "pair": "1h -> Daily", "close": 1056.25, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 56.5, "ltf_rsi": 57.85, "condition": "Strong Bullish"}, {"symbol": "DALBHARAT", "pair": "Daily -> Weekly", "close": 1898.0, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 62.13, "ltf_rsi": 64.1, "condition": "Dip Buy / Reversal"}, {"symbol": "JUBLFOOD", "pair": "Daily -> Weekly", "close": 499.5, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 70.35, "ltf_rsi": 62.55, "condition": "Neutral / Consolidating"}, {"symbol": "ASIANPAINT", "pair": "Weekly -> Monthly", "close": 2626.5, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 56.06, "ltf_rsi": 48.98, "condition": "Neutral / Consolidating"}, {"symbol": "HDFCAMC", "pair": "1h -> Daily", "close": 2673.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 66.77, "ltf_rsi": 75.0, "condition": "Bullish Pullback"}, {"symbol": "SRF", "pair": "15m -> 1h", "close": 2594.7, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 57.06, "ltf_rsi": 68.88, "condition": "Dip Buy / Reversal"}, {"symbol": "KEI", "pair": "15m -> 1h", "close": 5535.1, "htf_state": "PCO < 0", "ltf_state": "PCO < 0", "htf_rsi": 58.26, "ltf_rsi": 41.53, "condition": "Oversold Accumulation"}, {"symbol": "PREMIERENE", "pair": "Daily -> Weekly", "close": 1005.0, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 52.04, "ltf_rsi": 40.49, "condition": "Accelerating Correction"}, {"symbol": "LUPIN", "pair": "15m -> 1h", "close": 2197.7, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 55.57, "ltf_rsi": 62.06, "condition": "Neutral / Consolidating"}, {"symbol": "DIXON", "pair": "1h -> Daily", "close": 14735.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 60.23, "ltf_rsi": 61.0, "condition": "Bullish Pullback"}, {"symbol": "COALINDIA", "pair": "15m -> 1h", "close": 403.2, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 35.71, "ltf_rsi": 60.71, "condition": "Neutral / Consolidating"}, {"symbol": "NUVAMA", "pair": "15m -> 1h", "close": 1765.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 57.3, "ltf_rsi": 50.29, "condition": "Bullish Pullback"}, {"symbol": "ICICIGI", "pair": "1h -> Daily", "close": 1587.8, "htf_state": "PCO < 0", "ltf_state": "NC < 0", "htf_rsi": 22.05, "ltf_rsi": 33.86, "condition": "Complex Reversal Failure"}, {"symbol": "NESTLEIND", "pair": "Weekly -> Monthly", "close": 1451.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 60.92, "ltf_rsi": 53.64, "condition": "Bullish Pullback"}, {"symbol": "TCS", "pair": "15m -> 1h", "close": 2271.9, "htf_state": "NC < 0", "ltf_state": "PCO < 0", "htf_rsi": 34.34, "ltf_rsi": 38.03, "condition": "Weak Oversold Bounce"}, {"symbol": "BDL", "pair": "15m -> 1h", "close": 1361.0, "htf_state": "NC > 0", "ltf_state": "NC > 0", "htf_rsi": 54.03, "ltf_rsi": 46.74, "condition": "Correction in Progress"}, {"symbol": "BDL", "pair": "1h -> Daily", "close": 1361.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 61.31, "ltf_rsi": 54.03, "condition": "Bullish Pullback"}, {"symbol": "BOSCHLTD", "pair": "15m -> 1h", "close": 48875.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 79.49, "ltf_rsi": 67.4, "condition": "Bullish Pullback"}, {"symbol": "YESBANK", "pair": "Daily -> Weekly", "close": 22.38, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 53.45, "ltf_rsi": 42.79, "condition": "Accelerating Correction"}, {"symbol": "MARICO", "pair": "Weekly -> Monthly", "close": 833.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 63.17, "ltf_rsi": 53.08, "condition": "Bullish Pullback"}, {"symbol": "HDFCBANK", "pair": "Weekly -> Monthly", "close": 727.2, "htf_state": "NC < 0", "ltf_state": "NC < 0", "htf_rsi": 26.84, "ltf_rsi": 40.64, "condition": "Strong Bearish"}, {"symbol": "CANBK", "pair": "Weekly -> Monthly", "close": 129.45, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 55.52, "ltf_rsi": 51.67, "condition": "Early Recovery Attempt"}, {"symbol": "APOLLOHOSP", "pair": "Weekly -> Monthly", "close": 8766.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 66.74, "ltf_rsi": 63.49, "condition": "Bullish Pullback"}, {"symbol": "ALKEM", "pair": "15m -> 1h", "close": 5330.0, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 45.54, "ltf_rsi": 53.57, "condition": "Neutral / Consolidating"}, {"symbol": "LICI", "pair": "15m -> 1h", "close": 415.75, "htf_state": "NC < 0", "ltf_state": "NC < 0", "htf_rsi": 25.9, "ltf_rsi": 28.97, "condition": "Strong Bearish"}, {"symbol": "MCX", "pair": "Weekly -> Monthly", "close": 3350.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 75.86, "ltf_rsi": 52.64, "condition": "Strong Bullish"}, {"symbol": "SWIGGY", "pair": "1h -> Daily", "close": 288.0, "htf_state": "NC > 0", "ltf_state": "NC > 0", "htf_rsi": 47.44, "ltf_rsi": 61.92, "condition": "Correction in Progress"}, {"symbol": "JSWSTEEL", "pair": "Weekly -> Monthly", "close": 1341.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 69.01, "ltf_rsi": 59.89, "condition": "Strong Bullish"}, {"symbol": "ETERNAL", "pair": "Daily -> Weekly", "close": 327.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 78.34, "ltf_rsi": 61.8, "condition": "Bullish Pullback"}, {"symbol": "SUNPHARMA", "pair": "1h -> Daily", "close": 1910.2, "htf_state": "NC < 0", "ltf_state": "NC > 0", "htf_rsi": 33.11, "ltf_rsi": 43.28, "condition": "Bearish Continuation"}, {"symbol": "DRREDDY", "pair": "15m -> 1h", "close": 1185.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 47.82, "ltf_rsi": 58.13, "condition": "Bullish Pullback"}, {"symbol": "KFINTECH", "pair": "1h -> Daily", "close": 976.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 64.05, "ltf_rsi": 60.52, "condition": "Strong Bullish"}, {"symbol": "BSE", "pair": "15m -> 1h", "close": 3341.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 56.43, "ltf_rsi": 58.88, "condition": "Strong Bullish"}];
-    const guideData = [{"Market Bias": "Strong Bullish", "Interpretation": "Strong Momentum Continuation: Full bullish alignment. HTF and LTF are accelerating in uptrend territory. High-probability trend-following entry."}, {"Market Bias": "Bullish Reversal", "Interpretation": "Early Momentum Re-Ignition: HTF is strong above zero; LTF crosses positive from deep oversold. Excellent low-risk buy setup on a bottoming LTF bar."}, {"Market Bias": "Bullish Pullback", "Interpretation": "Healthy Dip / Profit-Taking: HTF remains strong above zero while LTF experiences a minor pullback. Look for LTF reversal signals to buy the dip."}, {"Market Bias": "Deep Pullback", "Interpretation": "Intermediate Support Test: LTF drops below zero into correction mode while HTF stays bullish. Wait for LTF to stabilize before taking long positions."}, {"Market Bias": "Dip Buy / Reversal", "Interpretation": "HTF Bottoming Buy: HTF is turning positive below zero (macro bottom); LTF fires an early bullish entry. Great risk-to-reward long setup."}, {"Market Bias": "Oversold Accumulation", "Interpretation": "Dual Reversal Setup: Both timeframes crossing positive below zero. Indicates long-term base building; ideal for long-term swing positioning."}, {"Market Bias": "Neutral / Consolidating", "Interpretation": "Mixed Recovery: HTF trying to turn up, but LTF is fading above zero. Expect choppy, sideways consolidation. Avoid aggressive trades."}, {"Market Bias": "Complex Reversal Failure", "Interpretation": "Failing Base: HTF recovery attempt losing steam as LTF breaks negative under zero. Stand aside or trade tight ranges."}, {"Market Bias": "Counter-Trend Buy", "Interpretation": "HTF Pullback Re-Entry: HTF taking profits above zero; LTF turns positive. Offers a quick scalp or swing buy in line with broader trend support."}, {"Market Bias": "Early Recovery Attempt", "Interpretation": "Consolidation Bounce: HTF in upper-level cooling phase while LTF attempts a low-level bounce. Moderate probability setup; trade with smaller size."}, {"Market Bias": "Correction in Progress", "Interpretation": "Upper-Level Pullback: Both HTF and LTF taking profits above zero. Price is actively retracing; do not buy until LTF turns positive."}, {"Market Bias": "Accelerating Correction", "Interpretation": "Deeper Retracement: HTF negative above zero; LTF breaks down under zero. Support levels being tested; wait for LTF reversal."}, {"Market Bias": "Aggressive Counter-Trend", "Interpretation": "Relief Rally Scalp: HTF in strong downtrend; LTF triggers a short-term buy. High-risk bounce trade; keep profit targets tight."}, {"Market Bias": "Weak Oversold Bounce", "Interpretation": "Failing Bottom: HTF strongly bearish; LTF attempts a low-level bounce. High failure rate for longs; watch out for bear traps."}, {"Market Bias": "Bearish Continuation", "Interpretation": "Bear Market Rally Fading: LTF turns negative above zero inside an active HTF downtrend. High-probability Short Entry / Sell Signal."}, {"Market Bias": "Strong Bearish", "Interpretation": "Maximum Downward Alignment: HTF and LTF accelerating down below zero. Strong bearish momentum. Avoid long trades; stay short or in cash."}];
+    const stockData = [{"symbol": "SHRIRAMFIN", "pair": "15m -> 1h", "close": 1121.9, "htf_state": "NC < 0", "ltf_state": "PCO < 0", "htf_rsi": 53.47, "ltf_rsi": 39.82, "condition": "Weak Oversold Bounce"}, {"symbol": "COFORGE", "pair": "Daily -> Weekly", "close": 1880.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 82.51, "ltf_rsi": 66.9, "condition": "Bullish Pullback"}, {"symbol": "SBICARD", "pair": "Daily -> Weekly", "close": 660.1, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 57.17, "ltf_rsi": 50.04, "condition": "Dip Buy / Reversal"}];
+    const guideData = [{"Market Bias": "Strong Bullish", "Interpretation": "Strong Momentum Continuation: Full bullish alignment. HTF and LTF are accelerating in uptrend territory. High-probability trend-following entry."}];
+    const divergenceData = [
+        {"symbol": "COFORGE", "pair": "Daily -> Weekly", "close": 1880.0, "divergence": "Bullish ND", "category": "Bullish", "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 82.51, "ltf_rsi": 66.9},
+        {"symbol": "SBICARD", "pair": "Daily -> Weekly", "close": 660.1, "divergence": "Bullish RD", "category": "Bullish", "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 57.17, "ltf_rsi": 50.04},
+        {"symbol": "SHRIRAMFIN", "pair": "15m -> 1h", "close": 1121.9, "divergence": "Bearish ND", "category": "Bearish", "htf_state": "NC < 0", "ltf_state": "PCO < 0", "htf_rsi": 53.47, "ltf_rsi": 39.82}
+    ];
+
+    let selectedDivCategory = 'Bullish';
 
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -280,7 +377,6 @@
         const filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
 
         document.getElementById('countBadge').innerText = `Matching Stocks: ${filtered.length}`;
-
         tableBody.innerHTML = '';
 
         if (filtered.length === 0) {
@@ -305,6 +401,55 @@
         });
     }
 
+    function setDivergenceCategory(cat) {
+        selectedDivCategory = cat;
+        document.querySelectorAll('.summary-cards .card').forEach(c => c.classList.remove('active'));
+        document.getElementById('card' + cat).classList.add('active');
+        filterDivergenceData();
+    }
+
+    function filterDivergenceData() {
+        const selectedPair = document.getElementById('divPairSelect').value;
+        const tableBody = document.getElementById('divergenceTableBody');
+
+        let filteredByPair = divergenceData;
+        if (selectedPair !== 'ALL') {
+            filteredByPair = divergenceData.filter(item => item.pair === selectedPair);
+        }
+
+        const countBullish = filteredByPair.filter(i => i.category === 'Bullish').length;
+        const countBearish = filteredByPair.filter(i => i.category === 'Bearish').length;
+        const countNeutral = filteredByPair.filter(i => i.category === 'Neutral').length;
+
+        document.getElementById('countBullish').innerText = countBullish;
+        document.getElementById('countBearish').innerText = countBearish;
+        document.getElementById('countNeutral').innerText = countNeutral;
+
+        const filtered = filteredByPair.filter(item => item.category === selectedDivCategory);
+
+        tableBody.innerHTML = '';
+        if (filtered.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching current filters.</td></tr>`;
+            return;
+        }
+
+        filtered.forEach(row => {
+            const badgeClass = getBadgeClass(row.divergence);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="font-weight: bold; color: var(--accent);">${row.symbol}</td>
+                <td>${row.pair}</td>
+                <td>${row.close !== undefined ? row.close.toFixed(2) : 'N/A'}</td>
+                <td><span class="badge ${badgeClass}">${row.divergence}</span></td>
+                <td style="color: #cbd5e1;">${row.htf_state}</td>
+                <td style="color: #cbd5e1;">${row.ltf_state}</td>
+                <td style="font-weight: bold; color: ${row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'};">${row.htf_rsi}</td>
+                <td style="font-weight: bold; color: ${row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'};">${row.ltf_rsi}</td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
     function populateGuide() {
         const guideBody = document.getElementById('guideTableBody');
         guideBody.innerHTML = '';
@@ -319,10 +464,10 @@
         });
     }
 
-    // Initial Load
     document.addEventListener('DOMContentLoaded', () => {
         filterData();
         populateGuide();
+        filterDivergenceData();
     });
 </script>
 
