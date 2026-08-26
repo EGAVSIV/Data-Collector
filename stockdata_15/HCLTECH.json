@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1623.1,
-        "high":1627.8,
-        "low":1622.5,
-        "close":1626.8,
-        "volume":32023.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1626.8,
-        "high":1630.0,
-        "low":1626.3,
-        "close":1629.5,
-        "volume":15012.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1629.6,
-        "high":1631.7,
-        "low":1626.1,
-        "close":1626.1,
-        "volume":42761.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:HCLTECH",
-        "open":1627.4,
-        "high":1629.6,
-        "low":1624.3,
-        "close":1628.0,
-        "volume":130726.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:HCLTECH",
         "open":1627.9,
@@ -35996,7 +35960,43 @@
         "open":1303.6,
         "high":1304.6,
         "low":1302.0,
-        "close":1304.6,
-        "volume":10464.0
+        "close":1303.3,
+        "volume":21011.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1303.3,
+        "high":1303.5,
+        "low":1301.1,
+        "close":1301.1,
+        "volume":22365.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1301.1,
+        "high":1301.6,
+        "low":1299.5,
+        "close":1299.8,
+        "volume":28428.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1299.8,
+        "high":1300.0,
+        "low":1298.6,
+        "close":1298.6,
+        "volume":23449.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:HCLTECH",
+        "open":1298.8,
+        "high":1299.2,
+        "low":1298.0,
+        "close":1298.8,
+        "volume":9747.0
     }
 ]

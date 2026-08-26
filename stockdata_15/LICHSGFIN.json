@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:LICHSGFIN",
-        "open":540.3,
-        "high":540.9,
-        "low":540.2,
-        "close":540.9,
-        "volume":6777.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:LICHSGFIN",
-        "open":540.85,
-        "high":541.55,
-        "low":540.0,
-        "close":541.35,
-        "volume":13607.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:LICHSGFIN",
-        "open":541.15,
-        "high":541.5,
-        "low":538.85,
-        "close":539.1,
-        "volume":73081.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:LICHSGFIN",
-        "open":539.1,
-        "high":539.7,
-        "low":538.4,
-        "close":539.45,
-        "volume":25513.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:LICHSGFIN",
         "open":539.15,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:LICHSGFIN",
         "open":521.3,
         "high":521.5,
-        "low":520.85,
+        "low":520.55,
+        "close":520.8,
+        "volume":94239.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:LICHSGFIN",
+        "open":520.8,
+        "high":521.5,
+        "low":519.7,
         "close":520.85,
-        "volume":63023.0
+        "volume":176893.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:LICHSGFIN",
+        "open":520.85,
+        "high":521.05,
+        "low":520.5,
+        "close":520.65,
+        "volume":187245.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:LICHSGFIN",
+        "open":520.65,
+        "high":521.4,
+        "low":517.65,
+        "close":521.1,
+        "volume":149561.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:LICHSGFIN",
+        "open":521.05,
+        "high":521.4,
+        "low":520.6,
+        "close":520.65,
+        "volume":32704.0
     }
 ]

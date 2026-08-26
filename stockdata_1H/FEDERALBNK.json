@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T05:45:00.000",
-        "symbol":"NSE:FEDERALBNK",
-        "open":167.4,
-        "high":168.1,
-        "low":166.1,
-        "close":166.7,
-        "volume":5211807.0
-    },
-    {
         "datetime":"2024-05-02T06:45:00.000",
         "symbol":"NSE:FEDERALBNK",
         "open":166.7,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:FEDERALBNK",
         "open":348.25,
         "high":348.45,
-        "low":346.8,
-        "close":347.35,
-        "volume":196296.0
+        "low":345.2,
+        "close":346.45,
+        "volume":524588.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:FEDERALBNK",
+        "open":346.6,
+        "high":346.8,
+        "low":345.35,
+        "close":346.1,
+        "volume":168693.0
     }
 ]

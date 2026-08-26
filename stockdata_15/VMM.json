@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:VMM",
-        "open":135.8,
-        "high":135.95,
-        "low":135.79,
-        "close":135.92,
-        "volume":115820.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:VMM",
-        "open":135.91,
-        "high":135.95,
-        "low":135.91,
-        "close":135.95,
-        "volume":116920.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:VMM",
-        "open":135.94,
-        "high":135.95,
-        "low":135.72,
-        "close":135.84,
-        "volume":98826.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:VMM",
-        "open":135.85,
-        "high":136.8,
-        "low":135.85,
-        "close":136.33,
-        "volume":602672.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:VMM",
         "open":136.32,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:VMM",
         "open":111.12,
         "high":111.26,
-        "low":111.06,
-        "close":111.09,
-        "volume":200448.0
+        "low":110.97,
+        "close":111.07,
+        "volume":293077.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:VMM",
+        "open":111.07,
+        "high":111.14,
+        "low":110.9,
+        "close":110.94,
+        "volume":261252.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.94,
+        "high":110.98,
+        "low":110.5,
+        "close":110.55,
+        "volume":386073.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.55,
+        "high":110.63,
+        "low":110.48,
+        "close":110.51,
+        "volume":227419.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.55,
+        "high":110.58,
+        "low":110.46,
+        "close":110.52,
+        "volume":113263.0
     }
 ]

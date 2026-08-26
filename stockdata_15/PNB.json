@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:PNB",
-        "open":123.98,
-        "high":124.06,
-        "low":123.79,
-        "close":123.79,
-        "volume":292263.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:PNB",
-        "open":123.82,
-        "high":123.93,
-        "low":123.7,
-        "close":123.84,
-        "volume":468484.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:PNB",
-        "open":123.85,
-        "high":123.92,
-        "low":123.65,
-        "close":123.71,
-        "volume":272621.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:PNB",
-        "open":123.71,
-        "high":123.82,
-        "low":123.59,
-        "close":123.59,
-        "volume":424128.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:PNB",
         "open":123.52,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T06:00:00.000",
         "symbol":"NSE:PNB",
         "open":116.58,
-        "high":116.71,
+        "high":116.95,
         "low":116.43,
-        "close":116.64,
-        "volume":113243.0
+        "close":116.9,
+        "volume":334667.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:PNB",
+        "open":116.93,
+        "high":117.0,
+        "low":116.83,
+        "close":116.88,
+        "volume":379568.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:PNB",
+        "open":116.89,
+        "high":117.05,
+        "low":116.87,
+        "close":117.0,
+        "volume":131761.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:PNB",
+        "open":117.0,
+        "high":117.03,
+        "low":116.76,
+        "close":116.85,
+        "volume":69054.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:PNB",
+        "open":116.85,
+        "high":116.9,
+        "low":116.81,
+        "close":116.85,
+        "volume":12577.0
     }
 ]

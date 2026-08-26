@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6367.5,
-        "high":6396.5,
-        "low":6367.5,
-        "close":6392.5,
-        "volume":7469.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6392.0,
-        "high":6393.0,
-        "low":6377.0,
-        "close":6379.5,
-        "volume":2728.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6375.0,
-        "high":6379.0,
-        "low":6366.0,
-        "close":6373.0,
-        "volume":4880.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:AMBER",
-        "open":6371.5,
-        "high":6376.0,
-        "low":6351.0,
-        "close":6355.0,
-        "volume":6110.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:AMBER",
         "open":6354.0,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:AMBER",
         "open":7480.0,
         "high":7480.0,
-        "low":7472.5,
-        "close":7473.0,
-        "volume":796.0
+        "low":7472.0,
+        "close":7472.0,
+        "volume":2044.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7473.0,
+        "high":7533.0,
+        "low":7472.0,
+        "close":7529.5,
+        "volume":33134.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7529.5,
+        "high":7598.5,
+        "low":7527.5,
+        "close":7574.5,
+        "volume":43161.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7573.5,
+        "high":7592.5,
+        "low":7567.0,
+        "close":7570.5,
+        "volume":17178.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7570.5,
+        "high":7573.0,
+        "low":7565.0,
+        "close":7565.5,
+        "volume":4014.0
     }
 ]

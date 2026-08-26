@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:SRF",
-        "open":3073.5,
-        "high":3076.9,
-        "low":3073.2,
-        "close":3073.3,
-        "volume":4876.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:SRF",
-        "open":3073.2,
-        "high":3073.2,
-        "low":3067.0,
-        "close":3069.0,
-        "volume":5502.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:SRF",
-        "open":3069.5,
-        "high":3074.9,
-        "low":3068.0,
-        "close":3069.7,
-        "volume":4613.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:SRF",
-        "open":3070.1,
-        "high":3076.6,
-        "low":3066.8,
-        "close":3073.2,
-        "volume":7634.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:SRF",
         "open":3074.7,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T06:00:00.000",
         "symbol":"NSE:SRF",
         "open":2579.4,
-        "high":2580.7,
+        "high":2583.3,
         "low":2578.8,
-        "close":2580.6,
-        "volume":1769.0
+        "close":2582.2,
+        "volume":2633.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:SRF",
+        "open":2582.3,
+        "high":2582.8,
+        "low":2579.3,
+        "close":2579.9,
+        "volume":1860.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:SRF",
+        "open":2579.9,
+        "high":2579.9,
+        "low":2576.9,
+        "close":2578.4,
+        "volume":1980.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:SRF",
+        "open":2578.5,
+        "high":2579.8,
+        "low":2576.8,
+        "close":2578.9,
+        "volume":1629.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:SRF",
+        "open":2578.9,
+        "high":2578.9,
+        "low":2577.2,
+        "close":2577.2,
+        "volume":529.0
     }
 ]

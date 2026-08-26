@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:AUBANK",
-        "open":999.25,
-        "high":1001.45,
-        "low":999.15,
-        "close":1000.45,
-        "volume":45769.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:AUBANK",
-        "open":1000.9,
-        "high":1001.1,
-        "low":998.7,
-        "close":999.3,
-        "volume":47342.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:AUBANK",
-        "open":998.7,
-        "high":999.6,
-        "low":998.1,
-        "close":998.8,
-        "volume":57245.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:AUBANK",
-        "open":998.9,
-        "high":1000.65,
-        "low":998.3,
-        "close":999.6,
-        "volume":56822.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:AUBANK",
         "open":999.95,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T06:00:00.000",
         "symbol":"NSE:AUBANK",
         "open":1123.8,
-        "high":1124.6,
-        "low":1123.1,
-        "close":1124.5,
-        "volume":5218.0
+        "high":1125.5,
+        "low":1121.2,
+        "close":1122.5,
+        "volume":18918.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:AUBANK",
+        "open":1122.0,
+        "high":1123.1,
+        "low":1120.3,
+        "close":1121.0,
+        "volume":17586.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:AUBANK",
+        "open":1121.0,
+        "high":1121.4,
+        "low":1118.7,
+        "close":1120.2,
+        "volume":14487.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:AUBANK",
+        "open":1121.0,
+        "high":1121.5,
+        "low":1118.9,
+        "close":1120.0,
+        "volume":9204.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:AUBANK",
+        "open":1119.4,
+        "high":1120.0,
+        "low":1118.5,
+        "close":1118.9,
+        "volume":4711.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:BAJFINANCE",
-        "open":987.3,
-        "high":987.6,
-        "low":986.0,
-        "close":987.2,
-        "volume":228573.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:BAJFINANCE",
-        "open":987.0,
-        "high":987.2,
-        "low":983.8,
-        "close":985.2,
-        "volume":267602.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:BAJFINANCE",
-        "open":985.2,
-        "high":985.6,
-        "low":984.0,
-        "close":985.1,
-        "volume":196266.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:BAJFINANCE",
-        "open":985.3,
-        "high":986.7,
-        "low":984.0,
-        "close":985.0,
-        "volume":454707.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:BAJFINANCE",
         "open":984.9,
@@ -35996,7 +35960,43 @@
         "open":1085.6,
         "high":1089.7,
         "low":1085.6,
-        "close":1089.5,
-        "volume":80092.0
+        "close":1088.8,
+        "volume":115191.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:BAJFINANCE",
+        "open":1088.8,
+        "high":1088.8,
+        "low":1086.7,
+        "close":1087.9,
+        "volume":93067.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:BAJFINANCE",
+        "open":1087.9,
+        "high":1089.7,
+        "low":1087.4,
+        "close":1089.0,
+        "volume":57956.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:BAJFINANCE",
+        "open":1088.9,
+        "high":1089.6,
+        "low":1087.1,
+        "close":1088.0,
+        "volume":42884.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:BAJFINANCE",
+        "open":1087.9,
+        "high":1088.2,
+        "low":1086.9,
+        "close":1087.9,
+        "volume":21475.0
     }
 ]

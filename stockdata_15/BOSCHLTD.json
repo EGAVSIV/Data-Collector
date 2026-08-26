@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:BOSCHLTD",
-        "open":36070.0,
-        "high":36080.0,
-        "low":36005.0,
-        "close":36015.0,
-        "volume":150.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:BOSCHLTD",
-        "open":36020.0,
-        "high":36095.0,
-        "low":36005.0,
-        "close":36075.0,
-        "volume":220.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:BOSCHLTD",
-        "open":36075.0,
-        "high":36075.0,
-        "low":36000.0,
-        "close":36000.0,
-        "volume":326.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:BOSCHLTD",
-        "open":36005.0,
-        "high":36095.0,
-        "low":36005.0,
-        "close":36070.0,
-        "volume":499.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:BOSCHLTD",
         "open":36055.0,
@@ -35996,7 +35960,43 @@
         "open":48565.0,
         "high":48595.0,
         "low":48525.0,
-        "close":48525.0,
-        "volume":77.0
+        "close":48560.0,
+        "volume":104.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:BOSCHLTD",
+        "open":48560.0,
+        "high":48590.0,
+        "low":48540.0,
+        "close":48555.0,
+        "volume":469.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:BOSCHLTD",
+        "open":48560.0,
+        "high":48560.0,
+        "low":48445.0,
+        "close":48510.0,
+        "volume":670.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:BOSCHLTD",
+        "open":48515.0,
+        "high":48590.0,
+        "low":48480.0,
+        "close":48585.0,
+        "volume":402.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:BOSCHLTD",
+        "open":48585.0,
+        "high":48725.0,
+        "low":48585.0,
+        "close":48675.0,
+        "volume":1120.0
     }
 ]

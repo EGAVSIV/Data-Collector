@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:INDIGO",
-        "open":5046.0,
-        "high":5050.0,
-        "low":5045.0,
-        "close":5047.0,
-        "volume":19980.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:INDIGO",
-        "open":5047.0,
-        "high":5054.5,
-        "low":5040.5,
-        "close":5052.0,
-        "volume":39666.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:INDIGO",
-        "open":5051.5,
-        "high":5059.5,
-        "low":5049.0,
-        "close":5055.5,
-        "volume":36624.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:INDIGO",
-        "open":5056.5,
-        "high":5063.5,
-        "low":5055.0,
-        "close":5062.0,
-        "volume":23070.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:INDIGO",
         "open":5061.0,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T06:00:00.000",
         "symbol":"NSE:INDIGO",
         "open":5256.0,
-        "high":5256.5,
+        "high":5262.0,
         "low":5245.5,
-        "close":5252.0,
-        "volume":6077.0
+        "close":5260.0,
+        "volume":16216.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:INDIGO",
+        "open":5258.5,
+        "high":5259.0,
+        "low":5250.0,
+        "close":5255.0,
+        "volume":7021.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:INDIGO",
+        "open":5255.5,
+        "high":5256.5,
+        "low":5234.5,
+        "close":5248.5,
+        "volume":87848.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:INDIGO",
+        "open":5248.0,
+        "high":5258.0,
+        "low":5247.0,
+        "close":5257.5,
+        "volume":15589.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:INDIGO",
+        "open":5256.0,
+        "high":5257.0,
+        "low":5245.5,
+        "close":5249.5,
+        "volume":5762.0
     }
 ]

@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T05:45:00.000",
-        "symbol":"NSE:AUROPHARMA",
-        "open":1155.05,
-        "high":1158.0,
-        "low":1145.75,
-        "close":1150.0,
-        "volume":121562.0
-    },
-    {
         "datetime":"2024-05-02T06:45:00.000",
         "symbol":"NSE:AUROPHARMA",
         "open":1150.0,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:AUROPHARMA",
         "open":1628.5,
         "high":1629.3,
-        "low":1621.8,
-        "close":1623.1,
-        "volume":11688.0
+        "low":1620.8,
+        "close":1624.0,
+        "volume":26317.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:AUROPHARMA",
+        "open":1624.0,
+        "high":1624.5,
+        "low":1622.8,
+        "close":1623.5,
+        "volume":9139.0
     }
 ]

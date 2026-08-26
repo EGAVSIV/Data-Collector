@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6057.0,
-        "high":6060.5,
-        "low":6036.0,
-        "close":6037.0,
-        "volume":7237.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6037.5,
-        "high":6045.0,
-        "low":6031.0,
-        "close":6033.0,
-        "volume":7980.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6033.0,
-        "high":6040.5,
-        "low":6028.0,
-        "close":6032.5,
-        "volume":11009.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:BRITANNIA",
-        "open":6032.5,
-        "high":6044.0,
-        "low":6032.0,
-        "close":6040.0,
-        "volume":9415.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:BRITANNIA",
         "open":6039.5,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T06:00:00.000",
         "symbol":"NSE:BRITANNIA",
         "open":5345.0,
-        "high":5355.0,
+        "high":5358.0,
         "low":5343.0,
-        "close":5350.0,
-        "volume":1753.0
+        "close":5357.5,
+        "volume":2876.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5356.5,
+        "high":5356.5,
+        "low":5340.0,
+        "close":5340.5,
+        "volume":2506.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5340.0,
+        "high":5342.0,
+        "low":5332.5,
+        "close":5335.5,
+        "volume":1730.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5335.5,
+        "high":5335.5,
+        "low":5330.0,
+        "close":5335.0,
+        "volume":2743.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:BRITANNIA",
+        "open":5335.0,
+        "high":5335.0,
+        "low":5329.5,
+        "close":5331.5,
+        "volume":1669.0
     }
 ]

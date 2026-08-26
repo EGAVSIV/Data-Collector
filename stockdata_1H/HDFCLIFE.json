@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T05:45:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":577.2,
-        "high":579.25,
-        "low":576.25,
-        "close":577.15,
-        "volume":593034.0
-    },
-    {
         "datetime":"2024-05-02T06:45:00.000",
         "symbol":"NSE:HDFCLIFE",
         "open":577.2,
@@ -35996,7 +35987,16 @@
         "open":558.7,
         "high":563.5,
         "low":558.7,
-        "close":561.0,
-        "volume":637500.0
+        "close":560.3,
+        "volume":1052342.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":560.3,
+        "high":560.4,
+        "low":558.65,
+        "close":559.65,
+        "volume":149402.0
     }
 ]

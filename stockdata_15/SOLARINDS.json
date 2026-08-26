@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T08:15:00.000",
-        "symbol":"NSE:SOLARINDS",
-        "open":12261.0,
-        "high":12285.0,
-        "low":12252.0,
-        "close":12263.0,
-        "volume":5461.0
-    },
-    {
-        "datetime":"2025-12-31T08:30:00.000",
-        "symbol":"NSE:SOLARINDS",
-        "open":12258.0,
-        "high":12268.0,
-        "low":12231.0,
-        "close":12240.0,
-        "volume":3633.0
-    },
-    {
-        "datetime":"2025-12-31T08:45:00.000",
-        "symbol":"NSE:SOLARINDS",
-        "open":12240.0,
-        "high":12266.0,
-        "low":12205.0,
-        "close":12249.0,
-        "volume":8078.0
-    },
-    {
-        "datetime":"2025-12-31T09:00:00.000",
-        "symbol":"NSE:SOLARINDS",
-        "open":12250.0,
-        "high":12272.0,
-        "low":12240.0,
-        "close":12259.0,
-        "volume":4237.0
-    },
-    {
         "datetime":"2025-12-31T09:15:00.000",
         "symbol":"NSE:SOLARINDS",
         "open":12265.0,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:SOLARINDS",
         "open":19964.0,
         "high":19964.0,
+        "low":19932.0,
+        "close":19956.0,
+        "volume":887.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:SOLARINDS",
+        "open":19956.0,
+        "high":19973.0,
+        "low":19940.0,
+        "close":19957.0,
+        "volume":1101.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:SOLARINDS",
+        "open":19970.0,
+        "high":20023.0,
         "low":19950.0,
-        "close":19951.0,
-        "volume":369.0
+        "close":20015.0,
+        "volume":4797.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:SOLARINDS",
+        "open":20015.0,
+        "high":20049.0,
+        "low":20003.0,
+        "close":20017.0,
+        "volume":4070.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:SOLARINDS",
+        "open":20009.0,
+        "high":20021.0,
+        "low":19995.0,
+        "close":20013.0,
+        "volume":771.0
     }
 ]

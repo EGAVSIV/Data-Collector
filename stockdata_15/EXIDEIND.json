@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T06:15:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":362.25,
-        "high":363.0,
-        "low":362.0,
-        "close":362.9,
-        "volume":11962.0
-    },
-    {
-        "datetime":"2026-01-01T06:30:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":363.0,
-        "high":363.25,
-        "low":362.35,
-        "close":362.5,
-        "volume":27124.0
-    },
-    {
-        "datetime":"2026-01-01T06:45:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":362.5,
-        "high":362.5,
-        "low":361.5,
-        "close":362.0,
-        "volume":34968.0
-    },
-    {
-        "datetime":"2026-01-01T07:00:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":361.95,
-        "high":362.05,
-        "low":361.65,
-        "close":361.7,
-        "volume":34424.0
-    },
-    {
         "datetime":"2026-01-01T07:15:00.000",
         "symbol":"NSE:EXIDEIND",
         "open":361.75,
@@ -35996,7 +35960,43 @@
         "open":445.7,
         "high":446.0,
         "low":445.5,
-        "close":446.0,
-        "volume":13949.0
+        "close":445.75,
+        "volume":19339.0
+    },
+    {
+        "datetime":"2026-08-26T06:15:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.7,
+        "high":445.8,
+        "low":445.0,
+        "close":445.1,
+        "volume":32314.0
+    },
+    {
+        "datetime":"2026-08-26T06:30:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.05,
+        "high":445.35,
+        "low":444.6,
+        "close":445.2,
+        "volume":26418.0
+    },
+    {
+        "datetime":"2026-08-26T06:45:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.2,
+        "high":445.5,
+        "low":443.65,
+        "close":445.0,
+        "volume":73857.0
+    },
+    {
+        "datetime":"2026-08-26T07:00:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.05,
+        "high":445.3,
+        "low":444.1,
+        "close":444.6,
+        "volume":11011.0
     }
 ]
