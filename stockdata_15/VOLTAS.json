@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1382.3,
-        "high":1382.6,
-        "low":1375.8,
-        "close":1377.3,
-        "volume":11865.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1376.4,
-        "high":1377.0,
-        "low":1372.2,
-        "close":1375.9,
-        "volume":11748.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1376.0,
-        "high":1376.7,
-        "low":1374.7,
-        "close":1375.4,
-        "volume":3661.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1375.4,
-        "high":1382.0,
-        "low":1375.1,
-        "close":1377.1,
-        "volume":12128.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1377.9,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1217.6,
-        "high":1218.2,
+        "high":1218.7,
         "low":1215.7,
-        "close":1216.7,
-        "volume":15432.0
+        "close":1218.3,
+        "volume":18507.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1218.8,
+        "high":1219.7,
+        "low":1217.2,
+        "close":1218.1,
+        "volume":34747.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1217.9,
+        "high":1220.3,
+        "low":1216.8,
+        "close":1219.0,
+        "volume":50661.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1218.8,
+        "high":1221.4,
+        "low":1218.6,
+        "close":1221.4,
+        "volume":54187.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1221.9,
+        "high":1222.9,
+        "low":1220.4,
+        "close":1221.5,
+        "volume":118991.0
     }
 ]

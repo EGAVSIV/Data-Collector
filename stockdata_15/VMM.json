@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:VMM",
-        "open":135.93,
-        "high":135.98,
-        "low":135.72,
-        "close":135.81,
-        "volume":32675.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:VMM",
-        "open":135.8,
-        "high":136.41,
-        "low":135.5,
-        "close":136.39,
-        "volume":102966.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:VMM",
-        "open":136.31,
-        "high":136.44,
-        "low":136.21,
-        "close":136.42,
-        "volume":49796.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:VMM",
-        "open":136.44,
-        "high":136.45,
-        "low":136.11,
-        "close":136.21,
-        "volume":31368.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:VMM",
         "open":136.21,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:VMM",
         "open":110.25,
-        "high":110.49,
+        "high":110.56,
         "low":110.23,
-        "close":110.43,
-        "volume":319109.0
+        "close":110.53,
+        "volume":364853.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.5,
+        "high":110.61,
+        "low":110.25,
+        "close":110.25,
+        "volume":234633.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.25,
+        "high":110.4,
+        "low":110.22,
+        "close":110.27,
+        "volume":232705.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.25,
+        "high":110.38,
+        "low":110.08,
+        "close":110.22,
+        "volume":569179.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:VMM",
+        "open":110.19,
+        "high":110.24,
+        "low":110.0,
+        "close":110.05,
+        "volume":620793.0
     }
 ]

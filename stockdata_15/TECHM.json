@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:TECHM",
-        "open":1598.9,
-        "high":1601.9,
-        "low":1598.9,
-        "close":1599.0,
-        "volume":11975.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:TECHM",
-        "open":1599.6,
-        "high":1604.0,
-        "low":1596.3,
-        "close":1604.0,
-        "volume":30341.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:TECHM",
-        "open":1603.3,
-        "high":1605.9,
-        "low":1602.0,
-        "close":1603.5,
-        "volume":14454.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:TECHM",
-        "open":1603.5,
-        "high":1607.5,
-        "low":1599.0,
-        "close":1599.7,
-        "volume":26882.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:TECHM",
         "open":1599.7,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:TECHM",
         "open":1567.2,
-        "high":1569.0,
+        "high":1569.5,
         "low":1565.8,
-        "close":1569.0,
-        "volume":14922.0
+        "close":1569.1,
+        "volume":19596.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:TECHM",
+        "open":1568.5,
+        "high":1574.0,
+        "low":1568.5,
+        "close":1573.0,
+        "volume":250428.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:TECHM",
+        "open":1573.0,
+        "high":1574.8,
+        "low":1572.2,
+        "close":1573.4,
+        "volume":33111.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:TECHM",
+        "open":1573.4,
+        "high":1574.5,
+        "low":1572.6,
+        "close":1574.5,
+        "volume":51292.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:TECHM",
+        "open":1574.0,
+        "high":1575.0,
+        "low":1570.0,
+        "close":1571.5,
+        "volume":199743.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:LTF",
-        "open":315.3,
-        "high":315.5,
-        "low":314.5,
-        "close":314.7,
-        "volume":59548.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:LTF",
-        "open":314.7,
-        "high":319.7,
-        "low":314.2,
-        "close":319.55,
-        "volume":486894.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:LTF",
-        "open":319.65,
-        "high":321.7,
-        "low":318.3,
-        "close":320.4,
-        "volume":531534.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:LTF",
-        "open":320.4,
-        "high":320.9,
-        "low":319.25,
-        "close":319.4,
-        "volume":271669.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:LTF",
         "open":319.1,
@@ -35995,8 +35959,44 @@
         "symbol":"NSE:LTF",
         "open":322.4,
         "high":322.6,
+        "low":322.0,
+        "close":322.15,
+        "volume":59335.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:LTF",
+        "open":322.15,
+        "high":322.2,
+        "low":321.5,
+        "close":322.0,
+        "volume":41760.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:LTF",
+        "open":322.0,
+        "high":322.25,
+        "low":321.85,
+        "close":322.0,
+        "volume":77648.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:LTF",
+        "open":322.2,
+        "high":324.15,
         "low":322.05,
-        "close":322.1,
-        "volume":52315.0
+        "close":323.45,
+        "volume":105908.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:LTF",
+        "open":323.45,
+        "high":323.45,
+        "low":322.55,
+        "close":322.65,
+        "volume":152969.0
     }
 ]

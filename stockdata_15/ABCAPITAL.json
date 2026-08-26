@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:ABCAPITAL",
-        "open":355.35,
-        "high":355.75,
-        "low":354.8,
-        "close":355.0,
-        "volume":42942.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:ABCAPITAL",
-        "open":354.85,
-        "high":356.1,
-        "low":353.7,
-        "close":355.95,
-        "volume":74495.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:ABCAPITAL",
-        "open":356.0,
-        "high":358.25,
-        "low":355.6,
-        "close":357.0,
-        "volume":184121.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:ABCAPITAL",
-        "open":357.1,
-        "high":358.0,
-        "low":356.7,
-        "close":357.15,
-        "volume":57846.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:ABCAPITAL",
         "open":357.1,
@@ -35996,7 +35960,43 @@
         "open":409.2,
         "high":410.2,
         "low":409.2,
-        "close":409.8,
-        "volume":61146.0
+        "close":409.9,
+        "volume":63664.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:ABCAPITAL",
+        "open":409.9,
+        "high":410.2,
+        "low":409.7,
+        "close":409.95,
+        "volume":38871.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:ABCAPITAL",
+        "open":409.95,
+        "high":410.3,
+        "low":409.5,
+        "close":410.3,
+        "volume":159203.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:ABCAPITAL",
+        "open":410.25,
+        "high":411.55,
+        "low":410.25,
+        "close":411.4,
+        "volume":122181.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:ABCAPITAL",
+        "open":411.4,
+        "high":411.4,
+        "low":410.2,
+        "close":410.3,
+        "volume":206474.0
     }
 ]

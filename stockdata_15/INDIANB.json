@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:INDIANB",
-        "open":841.45,
-        "high":843.8,
-        "low":840.9,
-        "close":841.65,
-        "volume":62852.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:INDIANB",
-        "open":841.65,
-        "high":842.0,
-        "low":838.3,
-        "close":842.0,
-        "volume":50315.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:INDIANB",
-        "open":842.0,
-        "high":844.0,
-        "low":841.0,
-        "close":842.1,
-        "volume":38350.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:INDIANB",
-        "open":842.0,
-        "high":842.4,
-        "low":839.15,
-        "close":839.3,
-        "volume":27823.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:INDIANB",
         "open":839.0,
@@ -35996,7 +35960,43 @@
         "open":888.1,
         "high":889.4,
         "low":887.65,
-        "close":889.0,
-        "volume":5493.0
+        "close":888.75,
+        "volume":7615.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:INDIANB",
+        "open":889.15,
+        "high":889.4,
+        "low":888.5,
+        "close":889.25,
+        "volume":11828.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:INDIANB",
+        "open":889.25,
+        "high":890.15,
+        "low":888.3,
+        "close":888.7,
+        "volume":19387.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:INDIANB",
+        "open":889.05,
+        "high":891.9,
+        "low":888.75,
+        "close":891.1,
+        "volume":45471.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:INDIANB",
+        "open":891.15,
+        "high":891.3,
+        "low":889.35,
+        "close":890.3,
+        "volume":70821.0
     }
 ]

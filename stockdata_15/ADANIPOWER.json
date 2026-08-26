@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:ADANIPOWER",
-        "open":150.76,
-        "high":153.16,
-        "low":150.55,
-        "close":151.6,
-        "volume":10593303.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:ADANIPOWER",
-        "open":151.6,
-        "high":151.92,
-        "low":149.2,
-        "close":150.15,
-        "volume":6834840.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:ADANIPOWER",
-        "open":150.15,
-        "high":151.2,
-        "low":149.8,
-        "close":150.4,
-        "volume":3418161.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:ADANIPOWER",
-        "open":150.33,
-        "high":150.7,
-        "low":149.8,
-        "close":149.88,
-        "volume":2118418.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:ADANIPOWER",
         "open":149.81,
@@ -35996,7 +35960,43 @@
         "open":208.24,
         "high":208.26,
         "low":207.6,
+        "close":208.03,
+        "volume":524456.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:ADANIPOWER",
+        "open":207.94,
+        "high":208.07,
+        "low":207.7,
         "close":207.89,
-        "volume":497586.0
+        "volume":313197.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:ADANIPOWER",
+        "open":207.89,
+        "high":207.94,
+        "low":207.72,
+        "close":207.93,
+        "volume":356678.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:ADANIPOWER",
+        "open":207.94,
+        "high":208.46,
+        "low":207.94,
+        "close":208.15,
+        "volume":808784.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:ADANIPOWER",
+        "open":208.27,
+        "high":208.35,
+        "low":207.82,
+        "close":208.01,
+        "volume":1444671.0
     }
 ]

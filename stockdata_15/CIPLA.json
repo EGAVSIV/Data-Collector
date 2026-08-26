@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1503.2,
-        "high":1504.7,
-        "low":1503.0,
-        "close":1503.8,
-        "volume":3857.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1503.8,
-        "high":1503.8,
-        "low":1501.7,
-        "close":1503.6,
-        "volume":3791.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1503.7,
-        "high":1504.2,
-        "low":1501.2,
-        "close":1502.3,
-        "volume":5140.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:CIPLA",
-        "open":1502.3,
-        "high":1504.1,
-        "low":1500.9,
-        "close":1501.9,
-        "volume":7533.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:CIPLA",
         "open":1501.9,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:CIPLA",
         "open":1411.0,
-        "high":1414.4,
+        "high":1416.0,
         "low":1409.3,
-        "close":1414.0,
-        "volume":44599.0
+        "close":1415.5,
+        "volume":69351.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1415.0,
+        "high":1416.4,
+        "low":1411.4,
+        "close":1416.0,
+        "volume":59998.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1416.0,
+        "high":1417.1,
+        "low":1414.7,
+        "close":1415.9,
+        "volume":37451.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1415.9,
+        "high":1416.2,
+        "low":1414.0,
+        "close":1415.0,
+        "volume":69326.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:CIPLA",
+        "open":1414.9,
+        "high":1415.2,
+        "low":1411.6,
+        "close":1412.0,
+        "volume":78036.0
     }
 ]

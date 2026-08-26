@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:SBIN",
-        "open":984.4,
-        "high":986.9,
-        "low":983.0,
-        "close":983.55,
-        "volume":307199.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:SBIN",
-        "open":983.7,
-        "high":985.15,
-        "low":981.75,
-        "close":985.05,
-        "volume":192609.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:SBIN",
-        "open":985.1,
-        "high":985.9,
-        "low":982.65,
-        "close":982.95,
-        "volume":135673.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:SBIN",
-        "open":983.0,
-        "high":985.0,
-        "low":982.95,
-        "close":983.5,
-        "volume":147429.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:SBIN",
         "open":983.55,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:SBIN",
         "open":1054.6,
-        "high":1055.3,
+        "high":1055.7,
         "low":1053.8,
+        "close":1055.0,
+        "volume":109801.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1055.4,
+        "high":1055.7,
+        "low":1054.1,
+        "close":1055.0,
+        "volume":124653.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1054.9,
+        "high":1055.8,
+        "low":1054.6,
         "close":1054.9,
-        "volume":94215.0
+        "volume":125660.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1054.9,
+        "high":1058.2,
+        "low":1054.6,
+        "close":1056.4,
+        "volume":506802.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:SBIN",
+        "open":1056.1,
+        "high":1056.6,
+        "low":1055.0,
+        "close":1055.9,
+        "volume":480128.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T08:45:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":363.45,
-        "high":363.5,
-        "low":363.0,
-        "close":363.15,
-        "volume":16153.0
-    },
-    {
-        "datetime":"2026-01-01T09:00:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":363.3,
-        "high":363.5,
-        "low":363.0,
-        "close":363.15,
-        "volume":8707.0
-    },
-    {
-        "datetime":"2026-01-01T09:15:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":363.05,
-        "high":363.8,
-        "low":363.0,
-        "close":363.8,
-        "volume":15604.0
-    },
-    {
-        "datetime":"2026-01-01T09:30:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":363.95,
-        "high":363.95,
-        "low":363.2,
-        "close":363.5,
-        "volume":32813.0
-    },
-    {
         "datetime":"2026-01-01T09:45:00.000",
         "symbol":"NSE:EXIDEIND",
         "open":363.25,
@@ -35996,7 +35960,43 @@
         "open":445.75,
         "high":445.95,
         "low":444.8,
-        "close":445.3,
-        "volume":64694.0
+        "close":445.5,
+        "volume":68516.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.5,
+        "high":445.75,
+        "low":444.75,
+        "close":445.05,
+        "volume":54135.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":444.75,
+        "high":445.65,
+        "low":444.7,
+        "close":445.2,
+        "volume":72362.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.2,
+        "high":446.1,
+        "low":445.2,
+        "close":445.65,
+        "volume":73421.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":445.6,
+        "high":445.6,
+        "low":442.75,
+        "close":445.0,
+        "volume":101409.0
     }
 ]

@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:GMRAIRPORT",
-        "open":104.55,
-        "high":104.74,
-        "low":104.4,
-        "close":104.41,
-        "volume":188404.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:GMRAIRPORT",
-        "open":104.44,
-        "high":104.47,
-        "low":104.0,
-        "close":104.39,
-        "volume":215737.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:GMRAIRPORT",
-        "open":104.4,
-        "high":104.6,
-        "low":104.2,
-        "close":104.3,
-        "volume":130632.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:GMRAIRPORT",
-        "open":104.3,
-        "high":104.44,
-        "low":104.13,
-        "close":104.15,
-        "volume":47480.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:GMRAIRPORT",
         "open":104.2,
@@ -35996,7 +35960,43 @@
         "open":98.99,
         "high":99.03,
         "low":98.82,
+        "close":98.92,
+        "volume":144775.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:GMRAIRPORT",
+        "open":98.94,
+        "high":99.04,
+        "low":98.9,
         "close":98.95,
-        "volume":121035.0
+        "volume":136836.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:GMRAIRPORT",
+        "open":98.95,
+        "high":99.15,
+        "low":98.9,
+        "close":99.08,
+        "volume":265807.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:GMRAIRPORT",
+        "open":99.13,
+        "high":99.35,
+        "low":99.1,
+        "close":99.34,
+        "volume":907481.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:GMRAIRPORT",
+        "open":99.38,
+        "high":99.38,
+        "low":99.12,
+        "close":99.13,
+        "volume":975818.0
     }
 ]

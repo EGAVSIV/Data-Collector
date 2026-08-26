@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:DIXON",
-        "open":12006.0,
-        "high":12025.0,
-        "low":11904.0,
-        "close":11985.0,
-        "volume":36116.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:DIXON",
-        "open":11989.0,
-        "high":11989.0,
-        "low":11900.0,
-        "close":11962.0,
-        "volume":26630.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:DIXON",
-        "open":11963.0,
-        "high":11975.0,
-        "low":11929.0,
-        "close":11946.0,
-        "volume":8351.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:DIXON",
-        "open":11945.0,
-        "high":11995.0,
-        "low":11942.0,
-        "close":11958.0,
-        "volume":10657.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:DIXON",
         "open":11955.0,
@@ -35996,7 +35960,43 @@
         "open":14760.0,
         "high":14784.0,
         "low":14720.0,
-        "close":14739.0,
-        "volume":14142.0
+        "close":14743.0,
+        "volume":16498.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:DIXON",
+        "open":14745.0,
+        "high":14746.0,
+        "low":14720.0,
+        "close":14727.0,
+        "volume":14372.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:DIXON",
+        "open":14724.0,
+        "high":14747.0,
+        "low":14723.0,
+        "close":14727.0,
+        "volume":12349.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:DIXON",
+        "open":14727.0,
+        "high":14777.0,
+        "low":14724.0,
+        "close":14768.0,
+        "volume":23334.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:DIXON",
+        "open":14768.0,
+        "high":14775.0,
+        "low":14732.0,
+        "close":14760.0,
+        "volume":28209.0
     }
 ]

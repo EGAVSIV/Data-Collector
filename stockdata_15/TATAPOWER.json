@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:TATAPOWER",
-        "open":381.35,
-        "high":381.45,
-        "low":380.15,
-        "close":380.4,
-        "volume":59327.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:TATAPOWER",
-        "open":380.45,
-        "high":380.45,
-        "low":379.0,
-        "close":380.05,
-        "volume":75754.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:TATAPOWER",
-        "open":380.1,
-        "high":380.7,
-        "low":379.6,
-        "close":380.7,
-        "volume":50854.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:TATAPOWER",
-        "open":380.55,
-        "high":380.85,
-        "low":380.15,
-        "close":380.5,
-        "volume":71152.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:TATAPOWER",
         "open":380.8,
@@ -35996,7 +35960,43 @@
         "open":364.8,
         "high":365.0,
         "low":364.5,
+        "close":365.0,
+        "volume":219166.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:TATAPOWER",
+        "open":365.0,
+        "high":365.0,
+        "low":364.4,
+        "close":364.65,
+        "volume":115870.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:TATAPOWER",
+        "open":364.65,
+        "high":364.95,
+        "low":364.2,
+        "close":364.2,
+        "volume":390436.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:TATAPOWER",
+        "open":364.25,
+        "high":365.2,
+        "low":364.2,
+        "close":364.85,
+        "volume":442210.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:TATAPOWER",
+        "open":365.0,
+        "high":365.1,
+        "low":364.5,
         "close":364.9,
-        "volume":134223.0
+        "volume":274939.0
     }
 ]

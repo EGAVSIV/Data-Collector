@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:DMART",
-        "open":3756.5,
-        "high":3756.5,
-        "low":3750.0,
-        "close":3752.0,
-        "volume":5718.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:DMART",
-        "open":3752.7,
-        "high":3753.3,
-        "low":3746.1,
-        "close":3752.0,
-        "volume":7191.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:DMART",
-        "open":3753.5,
-        "high":3757.8,
-        "low":3752.0,
-        "close":3756.8,
-        "volume":2692.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:DMART",
-        "open":3757.5,
-        "high":3758.9,
-        "low":3751.0,
-        "close":3753.7,
-        "volume":2052.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:DMART",
         "open":3752.4,
@@ -35996,7 +35960,43 @@
         "open":3832.9,
         "high":3844.0,
         "low":3770.7,
-        "close":3787.6,
-        "volume":351378.0
+        "close":3779.3,
+        "volume":371385.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:DMART",
+        "open":3779.3,
+        "high":3800.0,
+        "low":3768.9,
+        "close":3779.2,
+        "volume":235458.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:DMART",
+        "open":3778.0,
+        "high":3817.4,
+        "low":3766.3,
+        "close":3813.6,
+        "volume":304942.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:DMART",
+        "open":3814.8,
+        "high":3822.9,
+        "low":3802.6,
+        "close":3815.0,
+        "volume":174679.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:DMART",
+        "open":3813.9,
+        "high":3818.0,
+        "low":3806.1,
+        "close":3811.1,
+        "volume":153669.0
     }
 ]

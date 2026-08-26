@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:ALKEM",
-        "open":5411.5,
-        "high":5423.5,
-        "low":5400.0,
-        "close":5402.0,
-        "volume":2241.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:ALKEM",
-        "open":5401.0,
-        "high":5409.5,
-        "low":5384.0,
-        "close":5408.5,
-        "volume":4604.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:ALKEM",
-        "open":5405.0,
-        "high":5416.5,
-        "low":5395.5,
-        "close":5395.5,
-        "volume":2290.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:ALKEM",
-        "open":5399.5,
-        "high":5412.0,
-        "low":5396.0,
-        "close":5410.5,
-        "volume":1000.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:ALKEM",
         "open":5406.5,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:ALKEM",
         "open":5338.5,
-        "high":5342.5,
+        "high":5346.5,
         "low":5337.0,
-        "close":5342.5,
-        "volume":598.0
+        "close":5346.0,
+        "volume":768.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:ALKEM",
+        "open":5347.5,
+        "high":5351.0,
+        "low":5342.0,
+        "close":5345.0,
+        "volume":1158.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:ALKEM",
+        "open":5345.0,
+        "high":5359.0,
+        "low":5338.5,
+        "close":5343.5,
+        "volume":3431.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:ALKEM",
+        "open":5345.0,
+        "high":5346.5,
+        "low":5340.5,
+        "close":5342.0,
+        "volume":1663.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:ALKEM",
+        "open":5343.0,
+        "high":5343.5,
+        "low":5334.5,
+        "close":5343.0,
+        "volume":3346.0
     }
 ]

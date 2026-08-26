@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:PFC",
-        "open":358.0,
-        "high":358.65,
-        "low":356.45,
-        "close":356.9,
-        "volume":267448.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:PFC",
-        "open":356.9,
-        "high":358.0,
-        "low":356.25,
-        "close":357.9,
-        "volume":202634.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:PFC",
-        "open":357.85,
-        "high":358.4,
-        "low":357.7,
-        "close":358.0,
-        "volume":89984.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:PFC",
-        "open":358.0,
-        "high":358.95,
-        "low":357.65,
-        "close":358.95,
-        "volume":221769.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:PFC",
         "open":358.95,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:PFC",
         "open":363.7,
-        "high":364.25,
+        "high":364.3,
         "low":363.6,
-        "close":364.0,
-        "volume":114286.0
+        "close":364.2,
+        "volume":128262.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:PFC",
+        "open":364.2,
+        "high":364.4,
+        "low":364.15,
+        "close":364.2,
+        "volume":92674.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:PFC",
+        "open":364.2,
+        "high":364.65,
+        "low":364.2,
+        "close":364.5,
+        "volume":103473.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:PFC",
+        "open":364.5,
+        "high":365.65,
+        "low":364.45,
+        "close":365.05,
+        "volume":404075.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:PFC",
+        "open":365.05,
+        "high":365.15,
+        "low":364.5,
+        "close":364.65,
+        "volume":498305.0
     }
 ]

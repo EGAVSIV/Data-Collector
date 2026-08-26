@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T04:30:00.000",
-        "symbol":"NSE:NMDC",
-        "open":82.64,
-        "high":82.78,
-        "low":82.49,
-        "close":82.56,
-        "volume":502746.0
-    },
-    {
-        "datetime":"2026-01-01T04:45:00.000",
-        "symbol":"NSE:NMDC",
-        "open":82.56,
-        "high":82.56,
-        "low":82.21,
-        "close":82.5,
-        "volume":695472.0
-    },
-    {
-        "datetime":"2026-01-01T05:00:00.000",
-        "symbol":"NSE:NMDC",
-        "open":82.5,
-        "high":82.75,
-        "low":82.43,
-        "close":82.67,
-        "volume":496385.0
-    },
-    {
-        "datetime":"2026-01-01T05:15:00.000",
-        "symbol":"NSE:NMDC",
-        "open":82.67,
-        "high":82.8,
-        "low":82.62,
-        "close":82.66,
-        "volume":373538.0
-    },
-    {
         "datetime":"2026-01-01T05:30:00.000",
         "symbol":"NSE:NMDC",
         "open":82.66,
@@ -35994,9 +35958,45 @@
         "datetime":"2026-08-26T08:30:00.000",
         "symbol":"NSE:NMDC",
         "open":87.32,
-        "high":87.4,
+        "high":87.41,
         "low":87.28,
-        "close":87.32,
-        "volume":178654.0
+        "close":87.38,
+        "volume":267060.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:NMDC",
+        "open":87.37,
+        "high":87.9,
+        "low":87.37,
+        "close":87.9,
+        "volume":1585109.0
+    },
+    {
+        "datetime":"2026-08-26T09:00:00.000",
+        "symbol":"NSE:NMDC",
+        "open":87.89,
+        "high":88.36,
+        "low":87.89,
+        "close":88.16,
+        "volume":5125769.0
+    },
+    {
+        "datetime":"2026-08-26T09:15:00.000",
+        "symbol":"NSE:NMDC",
+        "open":88.15,
+        "high":88.9,
+        "low":88.11,
+        "close":88.73,
+        "volume":4172811.0
+    },
+    {
+        "datetime":"2026-08-26T09:30:00.000",
+        "symbol":"NSE:NMDC",
+        "open":88.69,
+        "high":88.78,
+        "low":88.47,
+        "close":88.49,
+        "volume":1715866.0
     }
 ]
