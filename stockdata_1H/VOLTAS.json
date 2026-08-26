@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-30T09:45:00.000",
-        "symbol":"NSE:VOLTAS",
-        "open":1475.0,
-        "high":1477.0,
-        "low":1470.2,
-        "close":1474.8,
-        "volume":186329.0
-    },
-    {
         "datetime":"2024-05-02T03:45:00.000",
         "symbol":"NSE:VOLTAS",
         "open":1482.15,
@@ -35998,5 +35989,14 @@
         "low":1235.0,
         "close":1244.0,
         "volume":89744.0
+    },
+    {
+        "datetime":"2026-08-26T03:45:00.000",
+        "symbol":"NSE:VOLTAS",
+        "open":1244.8,
+        "high":1244.8,
+        "low":1225.9,
+        "close":1232.2,
+        "volume":130387.0
     }
 ]

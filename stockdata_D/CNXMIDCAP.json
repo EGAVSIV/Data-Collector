@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-29T03:45:00.000",
-        "symbol":"NSE:CNXMIDCAP",
-        "open":8148.5,
-        "high":8184.25,
-        "low":8070.7002,
-        "close":8095.8999,
-        "volume":0.0
-    },
-    {
         "datetime":"2010-06-30T03:45:00.000",
         "symbol":"NSE:CNXMIDCAP",
         "open":8032.3999,
@@ -35998,5 +35989,14 @@
         "low":63602.2,
         "close":64162.9,
         "volume":2039473499.0
+    },
+    {
+        "datetime":"2026-08-26T03:45:00.000",
+        "symbol":"NSE:CNXMIDCAP",
+        "open":64289.4,
+        "high":64372.45,
+        "low":64231.1,
+        "close":64338.9,
+        "volume":370015365.0
     }
 ]

@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T05:45:00.000",
-        "symbol":"NSE:CUMMINSIND",
-        "open":4445.1,
-        "high":4447.6,
-        "low":4431.0,
-        "close":4438.3,
-        "volume":6334.0
-    },
-    {
-        "datetime":"2025-12-31T06:00:00.000",
-        "symbol":"NSE:CUMMINSIND",
-        "open":4438.4,
-        "high":4438.4,
-        "low":4421.7,
-        "close":4422.0,
-        "volume":8155.0
-    },
-    {
-        "datetime":"2025-12-31T06:15:00.000",
-        "symbol":"NSE:CUMMINSIND",
-        "open":4422.0,
-        "high":4444.0,
-        "low":4421.3,
-        "close":4440.7,
-        "volume":10733.0
-    },
-    {
         "datetime":"2025-12-31T06:30:00.000",
         "symbol":"NSE:CUMMINSIND",
         "open":4440.7,
@@ -35998,5 +35971,32 @@
         "low":5194.5,
         "close":5196.0,
         "volume":33464.0
+    },
+    {
+        "datetime":"2026-08-26T03:45:00.000",
+        "symbol":"NSE:CUMMINSIND",
+        "open":5184.0,
+        "high":5237.0,
+        "low":5181.5,
+        "close":5204.5,
+        "volume":54160.0
+    },
+    {
+        "datetime":"2026-08-26T04:00:00.000",
+        "symbol":"NSE:CUMMINSIND",
+        "open":5201.0,
+        "high":5204.5,
+        "low":5178.5,
+        "close":5181.0,
+        "volume":34684.0
+    },
+    {
+        "datetime":"2026-08-26T04:15:00.000",
+        "symbol":"NSE:CUMMINSIND",
+        "open":5181.0,
+        "high":5183.5,
+        "low":5171.0,
+        "close":5179.0,
+        "volume":5793.0
     }
 ]

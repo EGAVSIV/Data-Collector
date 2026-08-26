@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T05:45:00.000",
-        "symbol":"NSE:PRESTIGE",
-        "open":1588.6,
-        "high":1588.8,
-        "low":1585.0,
-        "close":1588.2,
-        "volume":3592.0
-    },
-    {
-        "datetime":"2025-12-31T06:00:00.000",
-        "symbol":"NSE:PRESTIGE",
-        "open":1588.1,
-        "high":1590.0,
-        "low":1587.6,
-        "close":1589.7,
-        "volume":7611.0
-    },
-    {
-        "datetime":"2025-12-31T06:15:00.000",
-        "symbol":"NSE:PRESTIGE",
-        "open":1589.2,
-        "high":1589.5,
-        "low":1586.5,
-        "close":1587.3,
-        "volume":3007.0
-    },
-    {
         "datetime":"2025-12-31T06:30:00.000",
         "symbol":"NSE:PRESTIGE",
         "open":1587.3,
@@ -35067,10 +35040,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:PRESTIGE",
         "open":1578.2,
-        "high":1581.7,
+        "high":1581.6,
         "low":1576.7,
         "close":1581.4,
-        "volume":3186.0
+        "volume":2547.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35971,32 @@
         "low":1609.7,
         "close":1617.5,
         "volume":27644.0
+    },
+    {
+        "datetime":"2026-08-26T03:45:00.000",
+        "symbol":"NSE:PRESTIGE",
+        "open":1633.5,
+        "high":1643.8,
+        "low":1630.3,
+        "close":1635.8,
+        "volume":27733.0
+    },
+    {
+        "datetime":"2026-08-26T04:00:00.000",
+        "symbol":"NSE:PRESTIGE",
+        "open":1635.8,
+        "high":1636.1,
+        "low":1628.5,
+        "close":1633.6,
+        "volume":7531.0
+    },
+    {
+        "datetime":"2026-08-26T04:15:00.000",
+        "symbol":"NSE:PRESTIGE",
+        "open":1634.7,
+        "high":1634.7,
+        "low":1630.9,
+        "close":1632.7,
+        "volume":936.0
     }
 ]

@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T05:45:00.000",
-        "symbol":"NSE:COFORGE",
-        "open":1660.3,
-        "high":1663.0,
-        "low":1658.2,
-        "close":1661.5,
-        "volume":55615.0
-    },
-    {
-        "datetime":"2025-12-31T06:00:00.000",
-        "symbol":"NSE:COFORGE",
-        "open":1660.8,
-        "high":1662.0,
-        "low":1653.6,
-        "close":1655.0,
-        "volume":70391.0
-    },
-    {
-        "datetime":"2025-12-31T06:15:00.000",
-        "symbol":"NSE:COFORGE",
-        "open":1655.0,
-        "high":1656.2,
-        "low":1646.7,
-        "close":1649.8,
-        "volume":132532.0
-    },
-    {
         "datetime":"2025-12-31T06:30:00.000",
         "symbol":"NSE:COFORGE",
         "open":1649.9,
@@ -35998,5 +35971,32 @@
         "low":1890.0,
         "close":1892.7,
         "volume":93497.0
+    },
+    {
+        "datetime":"2026-08-26T03:45:00.000",
+        "symbol":"NSE:COFORGE",
+        "open":1905.9,
+        "high":1937.1,
+        "low":1900.0,
+        "close":1917.9,
+        "volume":338273.0
+    },
+    {
+        "datetime":"2026-08-26T04:00:00.000",
+        "symbol":"NSE:COFORGE",
+        "open":1916.4,
+        "high":1918.8,
+        "low":1905.0,
+        "close":1913.0,
+        "volume":217608.0
+    },
+    {
+        "datetime":"2026-08-26T04:15:00.000",
+        "symbol":"NSE:COFORGE",
+        "open":1913.0,
+        "high":1914.9,
+        "low":1912.2,
+        "close":1914.4,
+        "volume":21378.0
     }
 ]

@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T05:45:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":282.45,
-        "high":283.1,
-        "low":281.65,
-        "close":282.65,
-        "volume":164962.0
-    },
-    {
-        "datetime":"2025-12-31T06:00:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":282.6,
-        "high":283.8,
-        "low":282.55,
-        "close":283.75,
-        "volume":73283.0
-    },
-    {
-        "datetime":"2025-12-31T06:15:00.000",
-        "symbol":"NSE:PETRONET",
-        "open":283.7,
-        "high":284.3,
-        "low":283.5,
-        "close":283.95,
-        "volume":84586.0
-    },
-    {
         "datetime":"2025-12-31T06:30:00.000",
         "symbol":"NSE:PETRONET",
         "open":284.0,
@@ -35070,7 +35043,7 @@
         "high":287.6,
         "low":286.8,
         "close":287.5,
-        "volume":96173.0
+        "volume":78195.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35998,5 +35971,32 @@
         "low":292.4,
         "close":292.85,
         "volume":170678.0
+    },
+    {
+        "datetime":"2026-08-26T03:45:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":294.15,
+        "high":295.95,
+        "low":293.5,
+        "close":294.2,
+        "volume":124971.0
+    },
+    {
+        "datetime":"2026-08-26T04:00:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":293.85,
+        "high":295.3,
+        "low":293.4,
+        "close":295.1,
+        "volume":78421.0
+    },
+    {
+        "datetime":"2026-08-26T04:15:00.000",
+        "symbol":"NSE:PETRONET",
+        "open":295.1,
+        "high":295.1,
+        "low":294.75,
+        "close":294.85,
+        "volume":4190.0
     }
 ]
