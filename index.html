@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -36,6 +36,39 @@
             color: var(--accent);
             margin: 0 0 10px 0;
             font-size: 26px;
+        }
+
+        /* TAB BUTTON NAVIGATION */
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: var(--card-bg);
+            color: #94a3b8;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: #0f172a;
+            border-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
         }
 
         .controls {
@@ -80,10 +113,10 @@
             display: inline-block;
             background: #0284c7;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 18px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             margin-bottom: 20px;
         }
 
@@ -97,7 +130,7 @@
         }
 
         th, td {
-            padding: 14px 18px;
+            padding: 12px 16px;
             text-align: left;
         }
 
@@ -106,7 +139,7 @@
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 0.5px;
         }
 
@@ -136,61 +169,99 @@
 <div class="container">
     <header>
         <h1>MACD Multi-Timeframe Scanner Dashboard</h1>
-        <p style="color: #94a3b8; margin: 0;">Automated transition & condition filter across 4 Timeframe Pairs</p>
+        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States & RSI calculations across 4 Timeframe Pairs</p>
     </header>
 
-    <div class="controls">
-        <div class="control-group">
-            <label for="pairSelect">1. Select Timeframe Pair (LTF -> HTF)</label>
-            <select id="pairSelect" onchange="filterData()">
-                <option value="15m -> 1h">15m -> 1h</option>
-                <option value="1h -> Daily">1h -> Daily</option>
-                <option value="Daily -> Weekly">Daily -> Weekly</option>
-                <option value="Weekly -> Monthly">Weekly -> Monthly</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <label for="conditionSelect">2. Select MACD Transition Condition</label>
-            <select id="conditionSelect" onchange="filterData()">
-                <option value="Strong Bullish">Strong Bullish</option>
-                <option value="Bullish Reversal">Bullish Reversal</option>
-                <option value="Bullish Pullback">Bullish Pullback</option>
-                <option value="Deep Pullback">Deep Pullback</option>
-                <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
-                <option value="Oversold Accumulation">Oversold Accumulation</option>
-                <option value="Neutral / Consolidating">Neutral / Consolidating</option>
-                <option value="Complex Reversal Failure">Complex Reversal Failure</option>
-                <option value="Counter-Trend Buy">Counter-Trend Buy</option>
-                <option value="Early Recovery Attempt">Early Recovery Attempt</option>
-                <option value="Correction in Progress">Correction in Progress</option>
-                <option value="Accelerating Correction">Accelerating Correction</option>
-                <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
-                <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
-                <option value="Bearish Continuation">Bearish Continuation</option>
-                <option value="Strong Bearish">Strong Bearish</option>
-            </select>
-        </div>
+    <!-- TAB NAVIGATION -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('tabScreener')">Stock Screener</button>
+        <button class="tab-btn" onclick="switchTab('tabGuide')">Market Bias Guide (Tab 2)</button>
     </div>
 
-    <div class="stats-badge" id="countBadge">Matching Stocks: 0</div>
+    <!-- TAB 1: SCREENER -->
+    <div id="tabScreener" class="tab-content active">
+        <div class="controls">
+            <div class="control-group">
+                <label for="pairSelect">1. Select Timeframe Pair (LTF -> HTF)</label>
+                <select id="pairSelect" onchange="filterData()">
+                    <option value="15m -> 1h">15m -> 1h</option>
+                    <option value="1h -> Daily">1h -> Daily</option>
+                    <option value="Daily -> Weekly">Daily -> Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
+                </select>
+            </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Symbol</th>
-                <th>Timeframe Pair</th>
-                <th>Condition / Interpretation</th>
-                <th>Last Close Price</th>
-            </tr>
-        </thead>
-        <tbody id="stockTableBody">
-        </tbody>
-    </table>
+            <div class="control-group">
+                <label for="conditionSelect">2. Select MACD Transition Condition</label>
+                <select id="conditionSelect" onchange="filterData()">
+                    <option value="Strong Bullish">Strong Bullish</option>
+                    <option value="Bullish Reversal">Bullish Reversal</option>
+                    <option value="Bullish Pullback">Bullish Pullback</option>
+                    <option value="Deep Pullback">Deep Pullback</option>
+                    <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
+                    <option value="Oversold Accumulation">Oversold Accumulation</option>
+                    <option value="Neutral / Consolidating">Neutral / Consolidating</option>
+                    <option value="Complex Reversal Failure">Complex Reversal Failure</option>
+                    <option value="Counter-Trend Buy">Counter-Trend Buy</option>
+                    <option value="Early Recovery Attempt">Early Recovery Attempt</option>
+                    <option value="Correction in Progress">Correction in Progress</option>
+                    <option value="Accelerating Correction">Accelerating Correction</option>
+                    <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
+                    <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
+                    <option value="Bearish Continuation">Bearish Continuation</option>
+                    <option value="Strong Bearish">Strong Bearish</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-badge" id="countBadge">Matching Stocks: 0</div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Timeframe Pair</th>
+                    <th>Close Price</th>
+                    <th>HTF MACD State</th>
+                    <th>LTF MACD State</th>
+                    <th>HTF RSI (14)</th>
+                    <th>LTF RSI (14)</th>
+                    <th>Market Bias</th>
+                </tr>
+            </thead>
+            <tbody id="stockTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TAB 2: MARKET BIAS GUIDE -->
+    <div id="tabGuide" class="tab-content">
+        <h2 style="color: var(--accent); margin-top: 0;">Market Bias & Practical Interpretation Reference</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 25%;">Market Bias</th>
+                    <th style="width: 75%;">Practical Trading Interpretation</th>
+                </tr>
+            </thead>
+            <tbody id="guideTableBody">
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <script>
-    const stockData = [{"symbol": "SHRIRAMFIN", "pair": "15m -> 1h", "condition": "Early Recovery Attempt", "close": 1123.5}, {"symbol": "COFORGE", "pair": "Daily -> Weekly", "condition": "Bullish Pullback", "close": 1881.6}, {"symbol": "SBICARD", "pair": "Daily -> Weekly", "condition": "Dip Buy / Reversal", "close": 665.15}, {"symbol": "CGPOWER", "pair": "1h -> Daily", "condition": "Complex Reversal Failure", "close": 868.75}, {"symbol": "ADANIGREEN", "pair": "1h -> Daily", "condition": "Neutral / Consolidating", "close": 1307.4}, {"symbol": "LTF", "pair": "Daily -> Weekly", "condition": "Strong Bullish", "close": 322.9}, {"symbol": "OIL", "pair": "Daily -> Weekly", "condition": "Bullish Pullback", "close": 471.3}, {"symbol": "MOTHERSON", "pair": "1h -> Daily", "condition": "Early Recovery Attempt", "close": 165.93}, {"symbol": "GVT&D", "pair": "Daily -> Weekly", "condition": "Early Recovery Attempt", "close": 4333.4}, {"symbol": "VEDL", "pair": "15m -> 1h", "condition": "Strong Bullish", "close": 286.4}, {"symbol": "RELIANCE", "pair": "1h -> Daily", "condition": "Accelerating Correction", "close": 1302.2}, {"symbol": "SHREECEM", "pair": "Weekly -> Monthly", "condition": "Strong Bearish", "close": 24860.0}, {"symbol": "GLENMARK", "pair": "Weekly -> Monthly", "condition": "Strong Bullish", "close": 2440.9}, {"symbol": "MANAPPURAM", "pair": "Daily -> Weekly", "condition": "Strong Bullish", "close": 368.05}, {"symbol": "HINDALCO", "pair": "1h -> Daily", "condition": "Strong Bullish", "close": 1056.5}, {"symbol": "TITAN", "pair": "15m -> 1h", "condition": "Strong Bullish", "close": 5112.3}, {"symbol": "ASIANPAINT", "pair": "Weekly -> Monthly", "condition": "Neutral / Consolidating", "close": 2633.1}, {"symbol": "HDFCAMC", "pair": "1h -> Daily", "condition": "Bullish Pullback", "close": 2673.4}, {"symbol": "SRF", "pair": "15m -> 1h", "condition": "Dip Buy / Reversal", "close": 2592.7}, {"symbol": "KEI", "pair": "15m -> 1h", "condition": "Oversold Accumulation", "close": 5528.8}, {"symbol": "PREMIERENE", "pair": "Daily -> Weekly", "condition": "Accelerating Correction", "close": 990.3}, {"symbol": "LUPIN", "pair": "15m -> 1h", "condition": "Neutral / Consolidating", "close": 2196.4}, {"symbol": "COCHINSHIP", "pair": "15m -> 1h", "condition": "Bullish Pullback", "close": 1547.0}, {"symbol": "DIXON", "pair": "1h -> Daily", "condition": "Bullish Pullback", "close": 14764.0}, {"symbol": "ICICIGI", "pair": "1h -> Daily", "condition": "Complex Reversal Failure", "close": 1591.2}, {"symbol": "NESTLEIND", "pair": "Weekly -> Monthly", "condition": "Bullish Pullback", "close": 1456.1}, {"symbol": "TCS", "pair": "15m -> 1h", "condition": "Weak Oversold Bounce", "close": 2270.1}, {"symbol": "PATANJALI", "pair": "15m -> 1h", "condition": "Strong Bearish", "close": 346.1}, {"symbol": "BDL", "pair": "15m -> 1h", "condition": "Bullish Pullback", "close": 1360.0}, {"symbol": "BOSCHLTD", "pair": "15m -> 1h", "condition": "Bullish Pullback", "close": 48875.0}, {"symbol": "YESBANK", "pair": "Daily -> Weekly", "condition": "Accelerating Correction", "close": 22.38}, {"symbol": "MARICO", "pair": "Weekly -> Monthly", "condition": "Bullish Pullback", "close": 831.95}, {"symbol": "HDFCBANK", "pair": "Weekly -> Monthly", "condition": "Strong Bearish", "close": 727.75}, {"symbol": "CANBK", "pair": "Weekly -> Monthly", "condition": "Early Recovery Attempt", "close": 129.51}, {"symbol": "APOLLOHOSP", "pair": "Weekly -> Monthly", "condition": "Bullish Pullback", "close": 8810.0}, {"symbol": "INOXWIND", "pair": "15m -> 1h", "condition": "Complex Reversal Failure", "close": 73.24}, {"symbol": "LICI", "pair": "15m -> 1h", "condition": "Strong Bearish", "close": 415.95}, {"symbol": "MCX", "pair": "Weekly -> Monthly", "condition": "Strong Bullish", "close": 3351.9}, {"symbol": "SWIGGY", "pair": "1h -> Daily", "condition": "Bullish Pullback", "close": 288.0}, {"symbol": "SWIGGY", "pair": "Daily -> Weekly", "condition": "Dip Buy / Reversal", "close": 288.0}, {"symbol": "JSWSTEEL", "pair": "Weekly -> Monthly", "condition": "Strong Bullish", "close": 1339.6}, {"symbol": "ETERNAL", "pair": "Daily -> Weekly", "condition": "Bullish Pullback", "close": 327.8}, {"symbol": "SUNPHARMA", "pair": "1h -> Daily", "condition": "Bearish Continuation", "close": 1910.2}, {"symbol": "KFINTECH", "pair": "1h -> Daily", "condition": "Strong Bullish", "close": 973.25}, {"symbol": "BSE", "pair": "15m -> 1h", "condition": "Strong Bullish", "close": 3342.1}];
+    const stockData = [];
+    const guideData = [{"Market Bias": "Strong Bullish", "Interpretation": "Strong Momentum Continuation: Full bullish alignment. HTF and LTF are accelerating in uptrend territory. High-probability trend-following entry."}, {"Market Bias": "Bullish Reversal", "Interpretation": "Early Momentum Re-Ignition: HTF is strong above zero; LTF crosses positive from deep oversold. Excellent low-risk buy setup on a bottoming LTF bar."}, {"Market Bias": "Bullish Pullback", "Interpretation": "Healthy Dip / Profit-Taking: HTF remains strong above zero while LTF experiences a minor pullback. Look for LTF reversal signals to buy the dip."}, {"Market Bias": "Deep Pullback", "Interpretation": "Intermediate Support Test: LTF drops below zero into correction mode while HTF stays bullish. Wait for LTF to stabilize before taking long positions."}, {"Market Bias": "Dip Buy / Reversal", "Interpretation": "HTF Bottoming Buy: HTF is turning positive below zero (macro bottom); LTF fires an early bullish entry. Great risk-to-reward long setup."}, {"Market Bias": "Oversold Accumulation", "Interpretation": "Dual Reversal Setup: Both timeframes crossing positive below zero. Indicates long-term base building; ideal for long-term swing positioning."}, {"Market Bias": "Neutral / Consolidating", "Interpretation": "Mixed Recovery: HTF trying to turn up, but LTF is fading above zero. Expect choppy, sideways consolidation. Avoid aggressive trades."}, {"Market Bias": "Complex Reversal Failure", "Interpretation": "Failing Base: HTF recovery attempt losing steam as LTF breaks negative under zero. Stand aside or trade tight ranges."}, {"Market Bias": "Counter-Trend Buy", "Interpretation": "HTF Pullback Re-Entry: HTF taking profits above zero; LTF turns positive. Offers a quick scalp or swing buy in line with broader trend support."}, {"Market Bias": "Early Recovery Attempt", "Interpretation": "Consolidation Bounce: HTF in upper-level cooling phase while LTF attempts a low-level bounce. Moderate probability setup; trade with smaller size."}, {"Market Bias": "Correction in Progress", "Interpretation": "Upper-Level Pullback: Both HTF and LTF taking profits above zero. Price is actively retracing; do not buy until LTF turns positive."}, {"Market Bias": "Accelerating Correction", "Interpretation": "Deeper Retracement: HTF negative above zero; LTF breaks down under zero. Support levels being tested; wait for LTF reversal."}, {"Market Bias": "Aggressive Counter-Trend", "Interpretation": "Relief Rally Scalp: HTF in strong downtrend; LTF triggers a short-term buy. High-risk bounce trade; keep profit targets tight."}, {"Market Bias": "Weak Oversold Bounce", "Interpretation": "Failing Bottom: HTF strongly bearish; LTF attempts a low-level bounce. High failure rate for longs; watch out for bear traps."}, {"Market Bias": "Bearish Continuation", "Interpretation": "Bear Market Rally Fading: LTF turns negative above zero inside an active HTF downtrend. High-probability Short Entry / Sell Signal."}, {"Market Bias": "Strong Bearish", "Interpretation": "Maximum Downward Alignment: HTF and LTF accelerating down below zero. Strong bearish momentum. Avoid long trades; stay short or in cash."}];
+
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+        
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
 
     function getBadgeClass(cond) {
         if (cond.includes('Bullish') || cond.includes('Buy') || cond.includes('Recovery') || cond.includes('Accumulation')) {
@@ -213,7 +284,7 @@
         tableBody.innerHTML = '';
 
         if (filtered.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching this pair & condition.</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching this pair & condition.</td></tr>`;
             return;
         }
 
@@ -223,15 +294,36 @@
             tr.innerHTML = `
                 <td style="font-weight: bold; color: var(--accent);">${row.symbol}</td>
                 <td>${row.pair}</td>
-                <td><span class="badge ${badgeClass}">${row.condition}</span></td>
                 <td>${row.close !== undefined ? row.close.toFixed(2) : 'N/A'}</td>
+                <td style="color: #cbd5e1;">${row.htf_state}</td>
+                <td style="color: #cbd5e1;">${row.ltf_state}</td>
+                <td style="font-weight: bold; color: ${row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'};">${row.htf_rsi}</td>
+                <td style="font-weight: bold; color: ${row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'};">${row.ltf_rsi}</td>
+                <td><span class="badge ${badgeClass}">${row.condition}</span></td>
             `;
             tableBody.appendChild(tr);
         });
     }
 
-    // Initial load
-    document.addEventListener('DOMContentLoaded', filterData);
+    function populateGuide() {
+        const guideBody = document.getElementById('guideTableBody');
+        guideBody.innerHTML = '';
+        guideData.forEach(row => {
+            const badgeClass = getBadgeClass(row['Market Bias']);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><span class="badge ${badgeClass}">${row['Market Bias']}</span></td>
+                <td style="color: #cbd5e1; line-height: 1.5;">${row['Interpretation']}</td>
+            `;
+            guideBody.appendChild(tr);
+        });
+    }
+
+    // Initial Load
+    document.addEventListener('DOMContentLoaded', () => {
+        filterData();
+        populateGuide();
+    });
 </script>
 
 </body>
