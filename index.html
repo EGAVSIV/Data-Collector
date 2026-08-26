@@ -1,789 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MACD Master // Multi-Timeframe Scanner // RaoSab.in</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg-void:#060a14;
-    --bg-deep:#0b1120;
-    --panel:#0f172a;
-    --panel-glass: rgba(17,25,45,0.72);
-    --border: rgba(255,255,255,0.08);
-    --border-bright: rgba(0,229,255,0.35);
-    --cyan:#00e5ff;
-    --cyan-soft: rgba(0,229,255,0.15);
-    --magenta:#ff3d81;
-    --amber:#ffb703;
-    --green:#00ffa3;
-    --green-soft: rgba(0,255,163,0.14);
-    --red:#ff4d5e;
-    --red-soft: rgba(255,77,94,0.14);
-    --amber-soft: rgba(255,183,3,0.14);
-    --text-main:#eef2ff;
-    --text-dim:#8892b0;
-    --text-faint:#5b6584;
-    --font-display:'Sora', sans-serif;
-    --font-body:'Inter', sans-serif;
-    --font-mono:'JetBrains Mono', monospace;
-  }
-
-  *{box-sizing:border-box;}
-
-  body{
-    margin:0;
-    min-height:100vh;
-    font-family: var(--font-body);
-    color: var(--text-main);
-    background:
-      radial-gradient(ellipse 1200px 600px at 15% -10%, rgba(0,229,255,0.10), transparent 60%),
-      radial-gradient(ellipse 1000px 700px at 110% 10%, rgba(255,61,129,0.10), transparent 55%),
-      radial-gradient(ellipse 900px 900px at 50% 120%, rgba(0,255,163,0.06), transparent 60%),
-      var(--bg-void);
-    padding: 20px 20px 60px;
-    position: relative;
-  }
-
-  body::before{
-    content:"";
-    position: fixed;
-    inset:0;
-    pointer-events:none;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 42px 42px;
-    mask-image: radial-gradient(ellipse 1200px 700px at 50% 0%, black, transparent 75%);
-    z-index:0;
-  }
-
-  .container{
-    max-width: 1340px;
-    margin: 0 auto;
-    position: relative;
-    z-index:1;
-  }
-
-  /* ===== TOP BRAND BAR ===== */
-  .brand-bar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 8px 4px 16px;
-    margin-bottom: 6px;
-  }
-
-  .brand-logo{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    text-decoration:none;
-  }
-
-  .brand-mark{
-    width:26px; height:26px;
-    border-radius:7px;
-    background: linear-gradient(135deg, var(--cyan), var(--magenta));
-    display:flex; align-items:center; justify-content:center;
-    font-family: var(--font-display);
-    font-weight:800;
-    font-size:13px;
-    color:#060a14;
-  }
-
-  .brand-name{
-    font-family: var(--font-display);
-    font-weight:700;
-    font-size: 15px;
-    letter-spacing: 0.5px;
-    color: var(--text-main);
-  }
-  .brand-name span{ color: var(--cyan); }
-
-  .brand-tag{
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-faint);
-    letter-spacing: 1px;
-  }
-
-  /* ===== HEADER ===== */
-  header{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:16px;
-    margin-bottom: 28px;
-    padding-bottom: 22px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .brand-eyebrow{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    color: var(--cyan);
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .pulse-dot{
-    width:8px; height:8px;
-    border-radius:50%;
-    background: var(--green);
-    box-shadow: 0 0 0 0 rgba(0,255,163,0.7);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse{
-    0%{ box-shadow: 0 0 0 0 rgba(0,255,163,0.55);}
-    70%{ box-shadow: 0 0 0 8px rgba(0,255,163,0);}
-    100%{ box-shadow: 0 0 0 0 rgba(0,255,163,0);}
-  }
-
-  h1{
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(28px, 3.4vw, 42px);
-    line-height:1.05;
-    margin:0;
-    letter-spacing: -0.5px;
-    background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 55%, var(--magenta) 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-  }
-
-  .subtitle{
-    font-family: var(--font-body);
-    color: var(--text-dim);
-    margin: 10px 0 0;
-    font-size: 14.5px;
-    max-width: 540px;
-  }
-
-  .header-stats{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .mini-stat{
-    font-family: var(--font-mono);
-    background: var(--panel-glass);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 16px;
-    text-align:right;
-    min-width: 108px;
-    backdrop-filter: blur(6px);
-    cursor: pointer;
-    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-  }
-  .mini-stat:hover{
-    transform: translateY(-2px);
-    border-color: var(--border-bright);
-    box-shadow: 0 8px 24px -10px rgba(0,229,255,0.35);
-  }
-  .mini-stat .k{ display:block; font-size:10px; letter-spacing:1.5px; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px;}
-  .mini-stat .v{ display:block; font-size:17px; font-weight:700; }
-  .mini-stat.up .v{ color: var(--green); }
-  .mini-stat.down .v{ color: var(--red); }
-  .mini-stat.flat .v{ color: var(--amber); }
-  .mini-stat.up .k{ background: linear-gradient(90deg, rgba(0,255,163,0.18), transparent); }
-  .mini-stat .hint{
-    display:block;
-    font-size:9px;
-    color: var(--text-faint);
-    margin-top:3px;
-    letter-spacing: 0.5px;
-  }
-
-  /* ===== TABS ===== */
-  .tab-buttons{
-    display:flex;
-    gap:6px;
-    margin-bottom: 22px;
-    position: relative;
-    flex-wrap: wrap;
-  }
-
-  .tab-btn{
-    font-family: var(--font-display);
-    padding: 13px 26px;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    border-bottom: none;
-    background: var(--panel-glass);
-    color: var(--text-dim);
-    border-radius: 10px 10px 0 0;
-    transition: all 0.25s cubic-bezier(.4,0,.2,1);
-    position: relative;
-    backdrop-filter: blur(6px);
-  }
-
-  .tab-btn:hover{
-    color: var(--text-main);
-    background: rgba(0,229,255,0.06);
-  }
-
-  .tab-btn.active{
-    background: linear-gradient(180deg, rgba(0,229,255,0.16), rgba(0,229,255,0.03));
-    color: var(--cyan);
-    border-color: var(--border-bright);
-    box-shadow: 0 -2px 18px rgba(0,229,255,0.18);
-  }
-
-  .tab-btn.active::after{
-    content:"";
-    position:absolute;
-    left:0; right:0; bottom:-1px;
-    height:2px;
-    background: linear-gradient(90deg, var(--cyan), var(--magenta));
-  }
-
-  .tab-content{ display:none; animation: fadeUp 0.35s ease; }
-  .tab-content.active{ display:block; }
-
-  @keyframes fadeUp{
-    from{ opacity:0; transform: translateY(6px);}
-    to{ opacity:1; transform: translateY(0);}
-  }
-
-  /* ===== CONTROLS ===== */
-  .controls{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap:18px;
-    background: linear-gradient(155deg, var(--panel-glass), rgba(15,23,42,0.4));
-    border: 1px solid var(--border);
-    padding: 22px;
-    border-radius: 14px;
-    margin-bottom: 22px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
-  }
-
-  .control-group{ display:flex; flex-direction:column; gap:9px; }
-
-  label{
-    font-family: var(--font-mono);
-    font-weight:600;
-    font-size: 11px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    color: var(--cyan);
-    display:flex;
-    align-items:center;
-    gap:8px;
-  }
-  label::before{
-    content:"";
-    width:5px; height:5px;
-    border-radius:50%;
-    background: var(--cyan);
-    box-shadow: 0 0 8px var(--cyan);
-  }
-
-  select{
-    padding: 12px 14px;
-    background: var(--bg-deep);
-    color: var(--text-main);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight:500;
-    outline: none;
-    cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300e5ff' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 36px;
-  }
-
-  select:focus{
-    border-color: var(--cyan);
-    box-shadow: 0 0 0 3px var(--cyan-soft);
-  }
-
-  /* ===== STATS BADGE ===== */
-  .stats-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    background: linear-gradient(120deg, rgba(0,229,255,0.18), rgba(255,61,129,0.12));
-    border: 1px solid var(--border-bright);
-    color: var(--text-main);
-    padding: 12px 22px;
-    border-radius: 10px;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 15px;
-    margin-bottom: 20px;
-    box-shadow: 0 0 24px rgba(0,229,255,0.12);
-  }
-  .stats-badge::before{
-    content:"◆";
-    color: var(--cyan);
-    font-size: 12px;
-  }
-  .stats-badge .count-num{
-    font-family: var(--font-mono);
-    color: var(--cyan);
-    font-size: 17px;
-  }
-
-  /* ===== TABLE ===== */
-  .table-wrap{
-    background: var(--panel-glass);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 14px 40px -16px rgba(0,0,0,0.7);
-  }
-
-  table{
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th, td{
-    padding: 14px 18px;
-    text-align: left;
-  }
-
-  th{
-    background: linear-gradient(180deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02));
-    color: var(--cyan);
-    font-family: var(--font-mono);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 1px;
-    border-bottom: 1px solid var(--border-bright);
-    white-space: nowrap;
-  }
-
-  td{
-    font-family: var(--font-mono);
-    font-size: 13.5px;
-    color: var(--text-main);
-  }
-
-  tbody tr{
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s ease;
-  }
-
-  tbody tr:hover{
-    background: linear-gradient(90deg, rgba(0,229,255,0.06), rgba(255,61,129,0.03));
-  }
-
-  tbody tr:last-child{ border-bottom: none; }
-
-  .sym{
-    font-family: var(--font-display);
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 0.3px;
-  }
-
-  .pair-chip{
-    display:inline-block;
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 6px;
-    background: rgba(255,255,255,0.06);
-    color: var(--text-dim);
-    border: 1px solid var(--border);
-  }
-
-  .badge{
-    display:inline-block;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-family: var(--font-body);
-    font-size: 11.5px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-    border: 1px solid transparent;
-    white-space: nowrap;
-  }
-
-  .bullish{ background: var(--green-soft); color: var(--green); border-color: rgba(0,255,163,0.35); box-shadow: 0 0 12px rgba(0,255,163,0.12); }
-  .bearish{ background: var(--red-soft); color: var(--red); border-color: rgba(255,77,94,0.35); box-shadow: 0 0 12px rgba(255,77,94,0.12); }
-  .neutral{ background: var(--amber-soft); color: var(--amber); border-color: rgba(255,183,3,0.35); box-shadow: 0 0 12px rgba(255,183,3,0.12); }
-
-  .empty-row td{
-    text-align:center;
-    color: var(--text-faint);
-    padding: 50px 20px;
-    font-family: var(--font-body);
-    font-size: 14px;
-  }
-
-  /* ===== GUIDE TAB ===== */
-  .guide-intro{
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 24px;
-    margin: 0 0 6px;
-    color: var(--text-main);
-  }
-  .guide-sub{
-    color: var(--text-dim);
-    font-size: 13.5px;
-    margin: 0 0 20px;
-  }
-
-  .guide-table td:first-child{ width: 230px; }
-  .guide-table td:last-child{
-    font-family: var(--font-body);
-    color: var(--text-dim);
-    line-height: 1.6;
-    font-size: 13.5px;
-  }
-
-  .section-gap{ margin-top: 36px; }
-
-  footer{
-    text-align:center;
-    color: var(--text-faint);
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 1px;
-    margin-top: 34px;
-    text-transform: uppercase;
-  }
-  footer a{ color: var(--cyan); text-decoration:none; }
-  footer a:hover{ text-decoration:underline; }
-
-  /* ===== MODAL ===== */
-  .modal-overlay{
-    display:none;
-    position: fixed;
-    inset:0;
-    background: rgba(3,6,14,0.78);
-    backdrop-filter: blur(4px);
-    z-index: 50;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-  }
-  .modal-overlay.active{ display:flex; }
-
-  .modal-panel{
-    width: 100%;
-    max-width: 1100px;
-    max-height: 82vh;
-    background: linear-gradient(155deg, #0d1526, #0a0f1d);
-    border: 1px solid var(--border-bright);
-    border-radius: 16px;
-    box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 40px rgba(0,229,255,0.08);
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    animation: modalIn 0.25s ease;
-  }
-
-  @keyframes modalIn{
-    from{ opacity:0; transform: translateY(14px) scale(0.98);}
-    to{ opacity:1; transform: translateY(0) scale(1);}
-  }
-
-  .modal-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 18px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .modal-title{
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 19px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .modal-title .badge{ font-size: 12px; }
-
-  .modal-close{
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    width: 34px; height: 34px;
-    border-radius: 9px;
-    cursor:pointer;
-    font-size: 16px;
-    font-family: var(--font-mono);
-    transition: all 0.15s ease;
-  }
-  .modal-close:hover{
-    color: var(--red);
-    border-color: rgba(255,77,94,0.4);
-    background: rgba(255,77,94,0.08);
-  }
-
-  .modal-body{
-    overflow-y: auto;
-    padding: 0;
-  }
-
-  .modal-body table th{ position: sticky; top:0; z-index:2; }
-
-  /* scrollbar */
-  .modal-body::-webkit-scrollbar{ width:8px; }
-  .modal-body::-webkit-scrollbar-thumb{ background: rgba(0,229,255,0.25); border-radius: 8px; }
-  .modal-body::-webkit-scrollbar-track{ background: transparent; }
-
-  @media (max-width: 640px){
-    .controls{ grid-template-columns: 1fr; }
-    th, td{ padding: 10px 12px; font-size: 12px; }
-    .tab-btn{ padding: 11px 16px; font-size: 12.5px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MACD Master // Multi-Timeframe Scanner // RaoSab.in</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-void:#060a14;
+            --bg-deep:#0b1120;
+            --panel-glass: rgba(17,25,45,0.72);
+            --border: rgba(255,255,255,0.08);
+            --border-bright: rgba(0,229,255,0.35);
+            --cyan:#00e5ff;
+            --cyan-soft: rgba(0,229,255,0.15);
+            --magenta:#ff3d81;
+            --amber:#ffb703;
+            --green:#00ffa3;
+            --green-soft: rgba(0,255,163,0.14);
+            --red:#ff4d5e;
+            --red-soft: rgba(255,77,94,0.14);
+            --amber-soft: rgba(255,183,3,0.14);
+            --text-main:#eef2ff;
+            --text-dim:#8892b0;
+            --text-faint:#5b6584;
+            --font-display:'Sora', sans-serif;
+            --font-body:'Inter', sans-serif;
+            --font-mono:'JetBrains Mono', monospace;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin:0; min-height:100vh; font-family: var(--font-body); color: var(--text-main);
+            background:
+              radial-gradient(ellipse 1200px 600px at 15% -10%, rgba(0,229,255,0.10), transparent 60%),
+              radial-gradient(ellipse 1000px 700px at 110% 10%, rgba(255,61,129,0.10), transparent 55%),
+              radial-gradient(ellipse 900px 900px at 50% 120%, rgba(0,255,163,0.06), transparent 60%),
+              var(--bg-void);
+            padding: 20px 20px 60px; position: relative;
+        }
+        body::before {
+            content:""; position: fixed; inset:0; pointer-events:none;
+            background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                               linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: radial-gradient(ellipse 1200px 700px at 50% 0%, black, transparent 75%);
+            z-index:0;
+        }
+        .container { max-width: 1340px; margin: 0 auto; position: relative; z-index:1; }
+        .brand-bar { display:flex; align-items:center; justify-content:space-between; padding: 8px 4px 16px; margin-bottom: 6px; }
+        .brand-logo { display:flex; align-items:center; gap:9px; text-decoration:none; }
+        .brand-mark {
+            width:26px; height:26px; border-radius:7px;
+            background: linear-gradient(135deg, var(--cyan), var(--magenta));
+            display:flex; align-items:center; justify-content:center;
+            font-family: var(--font-display); font-weight:800; font-size:13px; color:#060a14;
+        }
+        .brand-name { font-family: var(--font-display); font-weight:700; font-size: 15px; letter-spacing: 0.5px; color: var(--text-main); }
+        .brand-name span { color: var(--cyan); }
+        .brand-tag { font-family: var(--font-mono); font-size: 11px; color: var(--text-faint); letter-spacing: 1px; }
+        header {
+            display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px;
+            margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--border);
+        }
+        .brand-eyebrow {
+            display:flex; align-items:center; gap:8px; font-family: var(--font-mono); font-size: 11px;
+            letter-spacing: 2.5px; color: var(--cyan); text-transform: uppercase; margin-bottom: 10px;
+        }
+        .pulse-dot {
+            width:8px; height:8px; border-radius:50%; background: var(--green);
+            box-shadow: 0 0 0 0 rgba(0,255,163,0.7); animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%{ box-shadow: 0 0 0 0 rgba(0,255,163,0.55);}
+            70%{ box-shadow: 0 0 0 8px rgba(0,255,163,0);}
+            100%{ box-shadow: 0 0 0 0 rgba(0,255,163,0);}
+        }
+        h1 {
+            font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 3.4vw, 42px);
+            line-height:1.05; margin:0; letter-spacing: -0.5px;
+            background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 55%, var(--magenta) 100%);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+        }
+        .subtitle { font-family: var(--font-body); color: var(--text-dim); margin: 10px 0 0; font-size: 14.5px; max-width: 540px; }
+        .header-stats { display:flex; gap:10px; flex-wrap:wrap; }
+        .mini-stat {
+            font-family: var(--font-mono); background: var(--panel-glass); border: 1px solid var(--border);
+            border-radius: 10px; padding: 10px 16px; text-align:right; min-width: 108px; backdrop-filter: blur(6px);
+            cursor: pointer; transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+        }
+        .mini-stat:hover { transform: translateY(-2px); border-color: var(--border-bright); box-shadow: 0 8px 24px -10px rgba(0,229,255,0.35); }
+        .mini-stat .k { display:block; font-size:10px; letter-spacing:1.5px; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px;}
+        .mini-stat .v { display:block; font-size:17px; font-weight:700; }
+        .mini-stat.up .v { color: var(--green); }
+        .mini-stat.down .v { color: var(--red); }
+        .mini-stat.flat .v { color: var(--amber); }
+        .mini-stat .hint { display:block; font-size:9px; color: var(--text-faint); margin-top:3px; letter-spacing: 0.5px; }
+        .tab-buttons { display:flex; gap:6px; margin-bottom: 22px; position: relative; flex-wrap: wrap; }
+        .tab-btn {
+            font-family: var(--font-display); padding: 13px 26px; font-weight: 700; font-size: 14px;
+            letter-spacing: 0.3px; cursor: pointer; border: 1px solid var(--border); border-bottom: none;
+            background: var(--panel-glass); color: var(--text-dim); border-radius: 10px 10px 0 0;
+            transition: all 0.25s cubic-bezier(.4,0,.2,1); position: relative; backdrop-filter: blur(6px);
+        }
+        .tab-btn:hover { color: var(--text-main); background: rgba(0,229,255,0.06); }
+        .tab-btn.active {
+            background: linear-gradient(180deg, rgba(0,229,255,0.16), rgba(0,229,255,0.03));
+            color: var(--cyan); border-color: var(--border-bright); box-shadow: 0 -2px 18px rgba(0,229,255,0.18);
+        }
+        .tab-btn.active::after { content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px; background: linear-gradient(90deg, var(--cyan), var(--magenta)); }
+        .tab-content { display:none; animation: fadeUp 0.35s ease; }
+        .tab-content.active { display:block; }
+        @keyframes fadeUp { from{ opacity:0; transform: translateY(6px);} to{ opacity:1; transform: translateY(0);} }
+        .controls {
+            display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:18px;
+            background: linear-gradient(155deg, var(--panel-glass), rgba(15,23,42,0.4)); border: 1px solid var(--border);
+            padding: 22px; border-radius: 14px; margin-bottom: 22px; backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
+        }
+        .control-group { display:flex; flex-direction:column; gap:9px; }
+        label {
+            font-family: var(--font-mono); font-weight:600; font-size: 11px; letter-spacing: 1.4px;
+            text-transform: uppercase; color: var(--cyan); display:flex; align-items:center; gap:8px;
+        }
+        label::before { content:""; width:5px; height:5px; border-radius:50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+        select {
+            padding: 12px 14px; background: var(--bg-deep); color: var(--text-main); border: 1px solid var(--border);
+            border-radius: 8px; font-family: var(--font-mono); font-size: 14px; font-weight:500; outline: none; cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300e5ff' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px;
+        }
+        select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px var(--cyan-soft); }
+        .stats-badge {
+            display:inline-flex; align-items:center; gap:10px;
+            background: linear-gradient(120deg, rgba(0,229,255,0.18), rgba(255,61,129,0.12));
+            border: 1px solid var(--border-bright); color: var(--text-main); padding: 12px 22px; border-radius: 10px;
+            font-family: var(--font-display); font-weight: 700; font-size: 15px; margin-bottom: 20px;
+            box-shadow: 0 0 24px rgba(0,229,255,0.12);
+        }
+        .stats-badge::before { content:"◆"; color: var(--cyan); font-size: 12px; }
+        .stats-badge .count-num { font-family: var(--font-mono); color: var(--cyan); font-size: 17px; }
+        .table-wrap {
+            background: var(--panel-glass); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+            backdrop-filter: blur(10px); box-shadow: 0 14px 40px -16px rgba(0,0,0,0.7);
+        }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 14px 18px; text-align: left; }
+        th {
+            background: linear-gradient(180deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02)); color: var(--cyan);
+            font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; font-size: 11px;
+            letter-spacing: 1px; border-bottom: 1px solid var(--border-bright); white-space: nowrap;
+        }
+        td { font-family: var(--font-mono); font-size: 13.5px; color: var(--text-main); }
+        tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s ease; }
+        tbody tr:hover { background: linear-gradient(90deg, rgba(0,229,255,0.06), rgba(255,61,129,0.03)); }
+        tbody tr:last-child { border-bottom: none; }
+        .sym { font-family: var(--font-display); font-weight: 700; color: #ffffff; letter-spacing: 0.3px; }
+        .pair-chip { display:inline-block; font-size: 11px; padding: 3px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); color: var(--text-dim); border: 1px solid var(--border); }
+        .badge { display:inline-block; padding: 5px 12px; border-radius: 20px; font-family: var(--font-body); font-size: 11.5px; font-weight: 700; letter-spacing: 0.2px; border: 1px solid transparent; white-space: nowrap; }
+        .bullish { background: var(--green-soft); color: var(--green); border-color: rgba(0,255,163,0.35); box-shadow: 0 0 12px rgba(0,255,163,0.12); }
+        .bearish { background: var(--red-soft); color: var(--red); border-color: rgba(255,77,94,0.35); box-shadow: 0 0 12px rgba(255,77,94,0.12); }
+        .neutral { background: var(--amber-soft); color: var(--amber); border-color: rgba(255,183,3,0.35); box-shadow: 0 0 12px rgba(255,183,3,0.12); }
+        .empty-row td { text-align:center; color: var(--text-faint); padding: 50px 20px; font-family: var(--font-body); font-size: 14px; }
+        .guide-intro { font-family: var(--font-display); font-weight: 800; font-size: 24px; margin: 0 0 6px; color: var(--text-main); }
+        .guide-sub { color: var(--text-dim); font-size: 13.5px; margin: 0 0 20px; }
+        .guide-table td:first-child { width: 230px; }
+        .guide-table td:last-child { font-family: var(--font-body); color: var(--text-dim); line-height: 1.6; font-size: 13.5px; }
+        .section-gap { margin-top: 36px; }
+        footer { text-align:center; color: var(--text-faint); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; margin-top: 34px; text-transform: uppercase; }
+        footer a { color: var(--cyan); text-decoration:none; }
+        footer a:hover { text-decoration:underline; }
+        .modal-overlay { display:none; position: fixed; inset:0; background: rgba(3,6,14,0.78); backdrop-filter: blur(4px); z-index: 50; align-items: center; justify-content: center; padding: 24px; }
+        .modal-overlay.active { display:flex; }
+        .modal-panel {
+            width: 100%; max-width: 1100px; max-height: 82vh; background: linear-gradient(155deg, #0d1526, #0a0f1d);
+            border: 1px solid var(--border-bright); border-radius: 16px;
+            box-shadow: 0 30px 80px -20px rgba(0,0,0,0.8), 0 0 40px rgba(0,229,255,0.08);
+            display:flex; flex-direction:column; overflow:hidden; animation: modalIn 0.25s ease;
+        }
+        @keyframes modalIn { from{ opacity:0; transform: translateY(14px) scale(0.98);} to{ opacity:1; transform: translateY(0) scale(1);} }
+        .modal-header { display:flex; align-items:center; justify-content:space-between; padding: 18px 24px; border-bottom: 1px solid var(--border); }
+        .modal-title { font-family: var(--font-display); font-weight: 800; font-size: 19px; display:flex; align-items:center; gap:10px; }
+        .modal-title .badge { font-size: 12px; }
+        .modal-close {
+            background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--text-dim);
+            width: 34px; height: 34px; border-radius: 9px; cursor:pointer; font-size: 16px; font-family: var(--font-mono);
+            transition: all 0.15s ease;
+        }
+        .modal-close:hover { color: var(--red); border-color: rgba(255,77,94,0.4); background: rgba(255,77,94,0.08); }
+        .modal-body { overflow-y: auto; padding: 0; }
+        .modal-body table th { position: sticky; top:0; z-index:2; }
+        .modal-body::-webkit-scrollbar { width:8px; }
+        .modal-body::-webkit-scrollbar-thumb { background: rgba(0,229,255,0.25); border-radius: 8px; }
+        .modal-body::-webkit-scrollbar-track { background: transparent; }
+        @media (max-width: 640px) {
+            .controls { grid-template-columns: 1fr; }
+            th, td { padding: 10px 12px; font-size: 12px; }
+            .tab-btn { padding: 11px 16px; font-size: 12.5px; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
 
-  <div class="brand-bar">
-    <a class="brand-logo" href="https://www.raosab.in" target="_blank" rel="noopener">
-      <span class="brand-mark">RS</span>
-      <span class="brand-name">RAO<span>SAB</span>.IN</span>
-    </a>
-    <span class="brand-tag">Technical Scanner Suite</span>
-  </div>
-
-  <header>
-    <div>
-      <div class="brand-eyebrow"><span class="pulse-dot"></span> LIVE SCAN &middot; MULTI-TIMEFRAME ENGINE</div>
-      <h1>MACD Master Dashboard</h1>
-      <p class="subtitle">Automated transition detection, MACD state mapping, RSI(14) correlation &amp; divergence scanning across four timeframe pairs.</p>
-    </div>
-    <div class="header-stats">
-      <div class="mini-stat up" onclick="openBiasModal('bullish')">
-        <span class="k">Bullish Setups</span><span class="v" id="statBull">0</span>
-        <span class="hint">tap to view all →</span>
-      </div>
-      <div class="mini-stat down" onclick="openBiasModal('bearish')">
-        <span class="k">Bearish Setups</span><span class="v" id="statBear">0</span>
-        <span class="hint">tap to view all →</span>
-      </div>
-      <div class="mini-stat flat" onclick="openBiasModal('neutral')">
-        <span class="k">Neutral</span><span class="v" id="statNeutral">0</span>
-        <span class="hint">tap to view all →</span>
-      </div>
-    </div>
-  </header>
-
-  <div class="tab-buttons">
-    <button class="tab-btn active" onclick="switchTab('tabScreener')">⚡ Stock Screener</button>
-    <button class="tab-btn" onclick="switchTab('tabDivergence')">🌀 Divergence Scanner</button>
-    <button class="tab-btn" onclick="switchTab('tabGuide')">📖 Market Bias Guide</button>
-  </div>
-
-  <!-- TAB 1: SCREENER -->
-  <div id="tabScreener" class="tab-content active">
-    <div class="controls">
-      <div class="control-group">
-        <label for="pairSelect">Timeframe Pair (LTF → HTF)</label>
-        <select id="pairSelect" onchange="filterData()">
-          <option value="15m -> 1h">15m → 1h</option>
-          <option value="1h -> Daily">1h → Daily</option>
-          <option value="Daily -> Weekly">Daily → Weekly</option>
-          <option value="Weekly -> Monthly">Weekly → Monthly</option>
-        </select>
-      </div>
-
-      <div class="control-group">
-        <label for="conditionSelect">MACD Transition Condition</label>
-        <select id="conditionSelect" onchange="filterData()">
-          <option value="Strong Bullish">Strong Bullish</option>
-          <option value="Bullish Reversal">Bullish Reversal</option>
-          <option value="Bullish Pullback">Bullish Pullback</option>
-          <option value="Deep Pullback">Deep Pullback</option>
-          <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
-          <option value="Oversold Accumulation">Oversold Accumulation</option>
-          <option value="Neutral / Consolidating">Neutral / Consolidating</option>
-          <option value="Complex Reversal Failure">Complex Reversal Failure</option>
-          <option value="Counter-Trend Buy">Counter-Trend Buy</option>
-          <option value="Early Recovery Attempt">Early Recovery Attempt</option>
-          <option value="Correction in Progress">Correction in Progress</option>
-          <option value="Accelerating Correction">Accelerating Correction</option>
-          <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
-          <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
-          <option value="Bearish Continuation">Bearish Continuation</option>
-          <option value="Strong Bearish">Strong Bearish</option>
-        </select>
-      </div>
+    <div class="brand-bar">
+        <a class="brand-logo" href="https://www.raosab.in" target="_blank" rel="noopener">
+            <span class="brand-mark">RS</span>
+            <span class="brand-name">RAO<span>SAB</span>.IN</span>
+        </a>
+        <span class="brand-tag">Technical Scanner Suite</span>
     </div>
 
-    <div class="stats-badge">Matching Stocks: <span class="count-num" id="countBadge">0</span></div>
+    <header>
+        <div>
+            <div class="brand-eyebrow"><span class="pulse-dot"></span> LIVE SCAN &middot; MULTI-TIMEFRAME ENGINE</div>
+            <h1>MACD Master Dashboard</h1>
+            <p class="subtitle">Automated transition detection, MACD state mapping, RSI(14) correlation &amp; divergence scanning across four timeframe pairs.</p>
+        </div>
+        <div class="header-stats">
+            <div class="mini-stat up" onclick="openBiasModal('bullish')">
+                <span class="k">Bullish Setups</span><span class="v" id="statBull">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat down" onclick="openBiasModal('bearish')">
+                <span class="k">Bearish Setups</span><span class="v" id="statBear">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat flat" onclick="openBiasModal('neutral')">
+                <span class="k">Neutral</span><span class="v" id="statNeutral">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+        </div>
+    </header>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Timeframe Pair</th>
-            <th>Close Price</th>
-            <th>HTF MACD State</th>
-            <th>LTF MACD State</th>
-            <th>HTF RSI (14)</th>
-            <th>LTF RSI (14)</th>
-            <th>Market Bias</th>
-          </tr>
-        </thead>
-        <tbody id="stockTableBody"></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- TAB 2: DIVERGENCE SCANNER -->
-  <div id="tabDivergence" class="tab-content">
-    <div class="controls">
-      <div class="control-group">
-        <label for="divPairSelect">Timeframe Pair (LTF → HTF)</label>
-        <select id="divPairSelect" onchange="filterDivergenceData()">
-          <option value="15m -> 1h">15m → 1h</option>
-          <option value="1h -> Daily">1h → Daily</option>
-          <option value="Daily -> Weekly">Daily → Weekly</option>
-          <option value="Weekly -> Monthly">Weekly → Monthly</option>
-        </select>
-      </div>
-
-      <div class="control-group">
-        <label for="divTypeSelect">Divergence Type</label>
-        <select id="divTypeSelect" onchange="filterDivergenceData()">
-          <option value="Regular Bullish Divergence">Regular Bullish Divergence</option>
-          <option value="Regular Bearish Divergence">Regular Bearish Divergence</option>
-          <option value="Hidden Bullish Divergence">Hidden Bullish Divergence</option>
-          <option value="Hidden Bearish Divergence">Hidden Bearish Divergence</option>
-        </select>
-      </div>
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('tabScreener')">&#9889; Stock Screener</button>
+        <button class="tab-btn" onclick="switchTab('tabDivergence')">&#127760; Divergence Scanner</button>
+        <button class="tab-btn" onclick="switchTab('tabGuide')">&#128214; Market Bias Guide</button>
     </div>
 
-    <div class="stats-badge">Matching Stocks: <span class="count-num" id="divCountBadge">0</span></div>
+    <!-- TAB 1: SCREENER -->
+    <div id="tabScreener" class="tab-content active">
+        <div class="controls">
+            <div class="control-group">
+                <label for="pairSelect">Timeframe Pair (LTF &rarr; HTF)</label>
+                <select id="pairSelect" onchange="filterData()">
+                    <option value="15m -> 1h">15m &rarr; 1h</option>
+                    <option value="1h -> Daily">1h &rarr; Daily</option>
+                    <option value="Daily -> Weekly">Daily &rarr; Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly &rarr; Monthly</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="conditionSelect">MACD Transition Condition</label>
+                <select id="conditionSelect" onchange="filterData()">
+                    <option value="Strong Bullish">Strong Bullish</option>
+                    <option value="Bullish Reversal">Bullish Reversal</option>
+                    <option value="Bullish Pullback">Bullish Pullback</option>
+                    <option value="Deep Pullback">Deep Pullback</option>
+                    <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
+                    <option value="Oversold Accumulation">Oversold Accumulation</option>
+                    <option value="Neutral / Consolidating">Neutral / Consolidating</option>
+                    <option value="Complex Reversal Failure">Complex Reversal Failure</option>
+                    <option value="Counter-Trend Buy">Counter-Trend Buy</option>
+                    <option value="Early Recovery Attempt">Early Recovery Attempt</option>
+                    <option value="Correction in Progress">Correction in Progress</option>
+                    <option value="Accelerating Correction">Accelerating Correction</option>
+                    <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
+                    <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
+                    <option value="Bearish Continuation">Bearish Continuation</option>
+                    <option value="Strong Bearish">Strong Bearish</option>
+                </select>
+            </div>
+        </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Timeframe Pair</th>
-            <th>Close Price</th>
-            <th>HTF Divergence</th>
-            <th>LTF Divergence</th>
-            <th>HTF RSI (14)</th>
-            <th>LTF RSI (14)</th>
-            <th>Type</th>
-          </tr>
-        </thead>
-        <tbody id="divTableBody"></tbody>
-      </table>
+        <div class="stats-badge">Matching Stocks: <span class="count-num" id="countBadge">0</span></div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Timeframe Pair</th><th>Close Price</th><th>HTF MACD State</th>
+                        <th>LTF MACD State</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th><th>Market Bias</th>
+                    </tr>
+                </thead>
+                <tbody id="stockTableBody"></tbody>
+            </table>
+        </div>
     </div>
-  </div>
 
-  <!-- TAB 3: MARKET BIAS GUIDE -->
-  <div id="tabGuide" class="tab-content">
-    <p class="guide-intro">Market Bias Reference</p>
-    <p class="guide-sub">Practical trading interpretation for every MACD transition condition tracked by the scanner.</p>
-    <div class="table-wrap">
-      <table class="guide-table">
-        <thead>
-          <tr>
-            <th style="width: 25%;">Market Bias</th>
-            <th style="width: 75%;">Practical Trading Interpretation</th>
-          </tr>
-        </thead>
-        <tbody id="guideTableBody"></tbody>
-      </table>
+    <!-- TAB 2: DIVERGENCE SCANNER -->
+    <div id="tabDivergence" class="tab-content">
+        <div class="controls">
+            <div class="control-group">
+                <label for="divPairSelect">Timeframe Pair (LTF &rarr; HTF)</label>
+                <select id="divPairSelect" onchange="filterDivergenceData()">
+                    <option value="15m -> 1h">15m &rarr; 1h</option>
+                    <option value="1h -> Daily">1h &rarr; Daily</option>
+                    <option value="Daily -> Weekly">Daily &rarr; Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly &rarr; Monthly</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="divTypeSelect">Divergence Type</label>
+                <select id="divTypeSelect" onchange="filterDivergenceData()">
+                    <option value="Regular Bullish Divergence">Regular Bullish Divergence</option>
+                    <option value="Regular Bearish Divergence">Regular Bearish Divergence</option>
+                    <option value="Hidden Bullish Divergence">Hidden Bullish Divergence</option>
+                    <option value="Hidden Bearish Divergence">Hidden Bearish Divergence</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-badge">Matching Stocks: <span class="count-num" id="divCountBadge">0</span></div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Timeframe Pair</th><th>Close Price</th><th>HTF Divergence</th>
+                        <th>LTF Divergence</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th><th>Type</th>
+                    </tr>
+                </thead>
+                <tbody id="divTableBody"></tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="section-gap">
-      <p class="guide-intro" style="font-size:20px;">Divergence Types Reference</p>
-      <p class="guide-sub">How the 4 divergence types are read across the LTF / HTF pair.</p>
-      <div class="table-wrap">
-        <table class="guide-table">
-          <thead>
-            <tr>
-              <th style="width: 25%;">Divergence Type</th>
-              <th style="width: 75%;">Practical Trading Interpretation</th>
-            </tr>
-          </thead>
-          <tbody id="divGuideTableBody"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+    <!-- TAB 3: MARKET BIAS GUIDE -->
+    <div id="tabGuide" class="tab-content">
+        <p class="guide-intro">Market Bias Reference</p>
+        <p class="guide-sub">Practical trading interpretation for every MACD transition condition tracked by the scanner.</p>
+        <div class="table-wrap">
+            <table class="guide-table">
+                <thead><tr><th style="width:25%;">Market Bias</th><th style="width:75%;">Practical Trading Interpretation</th></tr></thead>
+                <tbody id="guideTableBody"></tbody>
+            </table>
+        </div>
 
-  <footer>MACD Master &middot; Multi-Timeframe Scanner &middot; Powered by <a href="https://www.raosab.in" target="_blank" rel="noopener">RaoSab.in</a> &middot; For educational reference only</footer>
+        <div class="section-gap">
+            <p class="guide-intro" style="font-size:20px;">Divergence Types Reference</p>
+            <p class="guide-sub">How the 4 divergence types are read across the LTF / HTF pair.</p>
+            <div class="table-wrap">
+                <table class="guide-table">
+                    <thead><tr><th style="width:25%;">Divergence Type</th><th style="width:75%;">Practical Trading Interpretation</th></tr></thead>
+                    <tbody id="divGuideTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer>MACD Master &middot; Multi-Timeframe Scanner &middot; 26 Aug 2026 &middot; Powered by <a href="https://www.raosab.in" target="_blank" rel="noopener">RaoSab.in</a></footer>
 </div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="biasModal" onclick="if(event.target===this) closeBiasModal()">
-  <div class="modal-panel">
-    <div class="modal-header">
-      <div class="modal-title" id="modalTitle"></div>
-      <button class="modal-close" onclick="closeBiasModal()">✕</button>
+    <div class="modal-panel">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTitle"></div>
+            <button class="modal-close" onclick="closeBiasModal()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Setup / Condition</th><th>Timeframe Pair</th><th>HTF MACD State</th>
+                        <th>LTF MACD State</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th>
+                    </tr>
+                </thead>
+                <tbody id="modalTableBody"></tbody>
+            </table>
+        </div>
     </div>
-    <div class="modal-body">
-      <table>
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Setup / Condition</th>
-            <th>Timeframe Pair</th>
-            <th>HTF MACD State</th>
-            <th>LTF MACD State</th>
-            <th>HTF RSI (14)</th>
-            <th>LTF RSI (14)</th>
-          </tr>
-        </thead>
-        <tbody id="modalTableBody"></tbody>
-      </table>
-    </div>
-  </div>
 </div>
 
 <script>
-    // ---- Sample MACD screener data (this block is auto-generated by generate_dashboard.py) ----
     const stockData = [{"symbol": "SHRIRAMFIN", "pair": "15m -> 1h", "close": 1121.9, "htf_state": "NC < 0", "ltf_state": "PCO < 0", "htf_rsi": 53.47, "ltf_rsi": 39.82, "condition": "Weak Oversold Bounce"}, {"symbol": "COFORGE", "pair": "Daily -> Weekly", "close": 1880.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 82.51, "ltf_rsi": 66.9, "condition": "Bullish Pullback"}, {"symbol": "SBICARD", "pair": "Daily -> Weekly", "close": 660.1, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 57.17, "ltf_rsi": 50.04, "condition": "Dip Buy / Reversal"}, {"symbol": "KALYANKJIL", "pair": "1h -> Daily", "close": 611.0, "htf_state": "NC > 0", "ltf_state": "NC > 0", "htf_rsi": 57.91, "ltf_rsi": 58.12, "condition": "Correction in Progress"}, {"symbol": "CGPOWER", "pair": "1h -> Daily", "close": 868.5, "htf_state": "PCO < 0", "ltf_state": "NC < 0", "htf_rsi": 44.97, "ltf_rsi": 49.6, "condition": "Complex Reversal Failure"}, {"symbol": "ADANIGREEN", "pair": "1h -> Daily", "close": 1308.6, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 34.9, "ltf_rsi": 54.76, "condition": "Neutral / Consolidating"}, {"symbol": "LTF", "pair": "Daily -> Weekly", "close": 322.2, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 67.69, "ltf_rsi": 54.08, "condition": "Strong Bullish"}, {"symbol": "OIL", "pair": "Daily -> Weekly", "close": 469.15, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 42.84, "ltf_rsi": 63.63, "condition": "Bullish Pullback"}, {"symbol": "MOTHERSON", "pair": "1h -> Daily", "close": 166.75, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 68.87, "ltf_rsi": 43.46, "condition": "Early Recovery Attempt"}, {"symbol": "GVT&D", "pair": "Daily -> Weekly", "close": 4340.0, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 43.12, "ltf_rsi": 48.58, "condition": "Early Recovery Attempt"}, {"symbol": "VEDL", "pair": "15m -> 1h", "close": 287.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 73.8, "ltf_rsi": 69.09, "condition": "Strong Bullish"}, {"symbol": "AUBANK", "pair": "15m -> 1h", "close": 1120.4, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 59.94, "ltf_rsi": 43.05, "condition": "Early Recovery Attempt"}, {"symbol": "RADICO", "pair": "15m -> 1h", "close": 4626.5, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 53.78, "ltf_rsi": 45.15, "condition": "Neutral / Consolidating"}, {"symbol": "SBILIFE", "pair": "Weekly -> Monthly", "close": 1768.2, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 46.42, "ltf_rsi": 41.89, "condition": "Accelerating Correction"}, {"symbol": "RELIANCE", "pair": "1h -> Daily", "close": 1302.5, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 37.17, "ltf_rsi": 46.18, "condition": "Accelerating Correction"}, {"symbol": "SHREECEM", "pair": "Weekly -> Monthly", "close": 24865.0, "htf_state": "NC < 0", "ltf_state": "NC < 0", "htf_rsi": 27.09, "ltf_rsi": 50.51, "condition": "Strong Bearish"}, {"symbol": "GLENMARK", "pair": "Weekly -> Monthly", "close": 2438.3, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 70.37, "ltf_rsi": 62.84, "condition": "Strong Bullish"}, {"symbol": "MANAPPURAM", "pair": "Daily -> Weekly", "close": 365.4, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 62.95, "ltf_rsi": 51.07, "condition": "Strong Bullish"}, {"symbol": "HINDALCO", "pair": "1h -> Daily", "close": 1056.25, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 56.5, "ltf_rsi": 57.85, "condition": "Strong Bullish"}, {"symbol": "DALBHARAT", "pair": "Daily -> Weekly", "close": 1898.0, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 62.13, "ltf_rsi": 64.1, "condition": "Dip Buy / Reversal"}, {"symbol": "JUBLFOOD", "pair": "Daily -> Weekly", "close": 499.5, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 70.35, "ltf_rsi": 62.55, "condition": "Neutral / Consolidating"}, {"symbol": "ASIANPAINT", "pair": "Weekly -> Monthly", "close": 2626.5, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 56.06, "ltf_rsi": 48.98, "condition": "Neutral / Consolidating"}, {"symbol": "HDFCAMC", "pair": "1h -> Daily", "close": 2673.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 66.77, "ltf_rsi": 75.0, "condition": "Bullish Pullback"}, {"symbol": "SRF", "pair": "15m -> 1h", "close": 2594.7, "htf_state": "PCO < 0", "ltf_state": "PCO > 0", "htf_rsi": 57.06, "ltf_rsi": 68.88, "condition": "Dip Buy / Reversal"}, {"symbol": "KEI", "pair": "15m -> 1h", "close": 5535.1, "htf_state": "PCO < 0", "ltf_state": "PCO < 0", "htf_rsi": 58.26, "ltf_rsi": 41.53, "condition": "Oversold Accumulation"}, {"symbol": "PREMIERENE", "pair": "Daily -> Weekly", "close": 1005.0, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 52.04, "ltf_rsi": 40.49, "condition": "Accelerating Correction"}, {"symbol": "LUPIN", "pair": "15m -> 1h", "close": 2197.7, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 55.57, "ltf_rsi": 62.06, "condition": "Neutral / Consolidating"}, {"symbol": "DIXON", "pair": "1h -> Daily", "close": 14735.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 60.23, "ltf_rsi": 61.0, "condition": "Bullish Pullback"}, {"symbol": "COALINDIA", "pair": "15m -> 1h", "close": 403.2, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 35.71, "ltf_rsi": 60.71, "condition": "Neutral / Consolidating"}, {"symbol": "NUVAMA", "pair": "15m -> 1h", "close": 1765.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 57.3, "ltf_rsi": 50.29, "condition": "Bullish Pullback"}, {"symbol": "ICICIGI", "pair": "1h -> Daily", "close": 1587.8, "htf_state": "PCO < 0", "ltf_state": "NC < 0", "htf_rsi": 22.05, "ltf_rsi": 33.86, "condition": "Complex Reversal Failure"}, {"symbol": "NESTLEIND", "pair": "Weekly -> Monthly", "close": 1451.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 60.92, "ltf_rsi": 53.64, "condition": "Bullish Pullback"}, {"symbol": "TCS", "pair": "15m -> 1h", "close": 2271.9, "htf_state": "NC < 0", "ltf_state": "PCO < 0", "htf_rsi": 34.34, "ltf_rsi": 38.03, "condition": "Weak Oversold Bounce"}, {"symbol": "BDL", "pair": "15m -> 1h", "close": 1361.0, "htf_state": "NC > 0", "ltf_state": "NC > 0", "htf_rsi": 54.03, "ltf_rsi": 46.74, "condition": "Correction in Progress"}, {"symbol": "BDL", "pair": "1h -> Daily", "close": 1361.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 61.31, "ltf_rsi": 54.03, "condition": "Bullish Pullback"}, {"symbol": "BOSCHLTD", "pair": "15m -> 1h", "close": 48875.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 79.49, "ltf_rsi": 67.4, "condition": "Bullish Pullback"}, {"symbol": "YESBANK", "pair": "Daily -> Weekly", "close": 22.38, "htf_state": "NC > 0", "ltf_state": "NC < 0", "htf_rsi": 53.45, "ltf_rsi": 42.79, "condition": "Accelerating Correction"}, {"symbol": "MARICO", "pair": "Weekly -> Monthly", "close": 833.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 63.17, "ltf_rsi": 53.08, "condition": "Bullish Pullback"}, {"symbol": "HDFCBANK", "pair": "Weekly -> Monthly", "close": 727.2, "htf_state": "NC < 0", "ltf_state": "NC < 0", "htf_rsi": 26.84, "ltf_rsi": 40.64, "condition": "Strong Bearish"}, {"symbol": "CANBK", "pair": "Weekly -> Monthly", "close": 129.45, "htf_state": "NC > 0", "ltf_state": "PCO < 0", "htf_rsi": 55.52, "ltf_rsi": 51.67, "condition": "Early Recovery Attempt"}, {"symbol": "APOLLOHOSP", "pair": "Weekly -> Monthly", "close": 8766.5, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 66.74, "ltf_rsi": 63.49, "condition": "Bullish Pullback"}, {"symbol": "ALKEM", "pair": "15m -> 1h", "close": 5330.0, "htf_state": "PCO < 0", "ltf_state": "NC > 0", "htf_rsi": 45.54, "ltf_rsi": 53.57, "condition": "Neutral / Consolidating"}, {"symbol": "LICI", "pair": "15m -> 1h", "close": 415.75, "htf_state": "NC < 0", "ltf_state": "NC < 0", "htf_rsi": 25.9, "ltf_rsi": 28.97, "condition": "Strong Bearish"}, {"symbol": "MCX", "pair": "Weekly -> Monthly", "close": 3350.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 75.86, "ltf_rsi": 52.64, "condition": "Strong Bullish"}, {"symbol": "SWIGGY", "pair": "1h -> Daily", "close": 288.0, "htf_state": "NC > 0", "ltf_state": "NC > 0", "htf_rsi": 47.44, "ltf_rsi": 61.92, "condition": "Correction in Progress"}, {"symbol": "JSWSTEEL", "pair": "Weekly -> Monthly", "close": 1341.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 69.01, "ltf_rsi": 59.89, "condition": "Strong Bullish"}, {"symbol": "ETERNAL", "pair": "Daily -> Weekly", "close": 327.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 78.34, "ltf_rsi": 61.8, "condition": "Bullish Pullback"}, {"symbol": "SUNPHARMA", "pair": "1h -> Daily", "close": 1910.2, "htf_state": "NC < 0", "ltf_state": "NC > 0", "htf_rsi": 33.11, "ltf_rsi": 43.28, "condition": "Bearish Continuation"}, {"symbol": "DRREDDY", "pair": "15m -> 1h", "close": 1185.0, "htf_state": "PCO > 0", "ltf_state": "NC > 0", "htf_rsi": 47.82, "ltf_rsi": 58.13, "condition": "Bullish Pullback"}, {"symbol": "KFINTECH", "pair": "1h -> Daily", "close": 976.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 64.05, "ltf_rsi": 60.52, "condition": "Strong Bullish"}, {"symbol": "BSE", "pair": "15m -> 1h", "close": 3341.0, "htf_state": "PCO > 0", "ltf_state": "PCO > 0", "htf_rsi": 56.43, "ltf_rsi": 58.88, "condition": "Strong Bullish"}];
-
     const guideData = [{"Market Bias": "Strong Bullish", "Interpretation": "Strong Momentum Continuation: Full bullish alignment. HTF and LTF are accelerating in uptrend territory. High-probability trend-following entry."}, {"Market Bias": "Bullish Reversal", "Interpretation": "Early Momentum Re-Ignition: HTF is strong above zero; LTF crosses positive from deep oversold. Excellent low-risk buy setup on a bottoming LTF bar."}, {"Market Bias": "Bullish Pullback", "Interpretation": "Healthy Dip / Profit-Taking: HTF remains strong above zero while LTF experiences a minor pullback. Look for LTF reversal signals to buy the dip."}, {"Market Bias": "Deep Pullback", "Interpretation": "Intermediate Support Test: LTF drops below zero into correction mode while HTF stays bullish. Wait for LTF to stabilize before taking long positions."}, {"Market Bias": "Dip Buy / Reversal", "Interpretation": "HTF Bottoming Buy: HTF is turning positive below zero (macro bottom); LTF fires an early bullish entry. Great risk-to-reward long setup."}, {"Market Bias": "Oversold Accumulation", "Interpretation": "Dual Reversal Setup: Both timeframes crossing positive below zero. Indicates long-term base building; ideal for long-term swing positioning."}, {"Market Bias": "Neutral / Consolidating", "Interpretation": "Mixed Recovery: HTF trying to turn up, but LTF is fading above zero. Expect choppy, sideways consolidation. Avoid aggressive trades."}, {"Market Bias": "Complex Reversal Failure", "Interpretation": "Failing Base: HTF recovery attempt losing steam as LTF breaks negative under zero. Stand aside or trade tight ranges."}, {"Market Bias": "Counter-Trend Buy", "Interpretation": "HTF Pullback Re-Entry: HTF taking profits above zero; LTF turns positive. Offers a quick scalp or swing buy in line with broader trend support."}, {"Market Bias": "Early Recovery Attempt", "Interpretation": "Consolidation Bounce: HTF in upper-level cooling phase while LTF attempts a low-level bounce. Moderate probability setup; trade with smaller size."}, {"Market Bias": "Correction in Progress", "Interpretation": "Upper-Level Pullback: Both HTF and LTF taking profits above zero. Price is actively retracing; do not buy until LTF turns positive."}, {"Market Bias": "Accelerating Correction", "Interpretation": "Deeper Retracement: HTF negative above zero; LTF breaks down under zero. Support levels being tested; wait for LTF reversal."}, {"Market Bias": "Aggressive Counter-Trend", "Interpretation": "Relief Rally Scalp: HTF in strong downtrend; LTF triggers a short-term buy. High-risk bounce trade; keep profit targets tight."}, {"Market Bias": "Weak Oversold Bounce", "Interpretation": "Failing Bottom: HTF strongly bearish; LTF attempts a low-level bounce. High failure rate for longs; watch out for bear traps."}, {"Market Bias": "Bearish Continuation", "Interpretation": "Bear Market Rally Fading: LTF turns negative above zero inside an active HTF downtrend. High-probability Short Entry / Sell Signal."}, {"Market Bias": "Strong Bearish", "Interpretation": "Maximum Downward Alignment: HTF and LTF accelerating down below zero. Strong bearish momentum. Avoid long trades; stay short or in cash."}];
-
-    // ---- Sample Divergence data (this block is auto-generated by generate_dashboard.py) ----
-    const divergenceData = [{"symbol": "TCS", "pair": "15m -> 1h", "close": 2271.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 34.34, "ltf_rsi": 38.03, "type": "Regular Bullish Divergence"}, {"symbol": "SHREECEM", "pair": "Weekly -> Monthly", "close": 24865.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 27.09, "ltf_rsi": 50.51, "type": "Regular Bearish Divergence"}, {"symbol": "COFORGE", "pair": "Daily -> Weekly", "close": 1880.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 82.51, "ltf_rsi": 66.9, "type": "Hidden Bullish Divergence"}, {"symbol": "HDFCBANK", "pair": "Weekly -> Monthly", "close": 727.2, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 26.84, "ltf_rsi": 40.64, "type": "Hidden Bearish Divergence"}, {"symbol": "ICICIGI", "pair": "1h -> Daily", "close": 1587.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 22.05, "ltf_rsi": 33.86, "type": "Regular Bullish Divergence"}, {"symbol": "LICI", "pair": "15m -> 1h", "close": 415.75, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 25.9, "ltf_rsi": 28.97, "type": "Regular Bearish Divergence"}];
-
-    const divGuideData = [
-      {"Divergence Type": "Regular Bullish Divergence", "Interpretation": "Price makes a lower low while MACD makes a higher low. Momentum is fading on the downside — classic reversal warning. Best used to spot exhaustion at the end of a downtrend."},
-      {"Divergence Type": "Regular Bearish Divergence", "Interpretation": "Price makes a higher high while MACD makes a lower high. Momentum is fading on the upside — classic reversal warning. Best used to spot exhaustion at the end of an uptrend."},
-      {"Divergence Type": "Hidden Bullish Divergence", "Interpretation": "Price makes a higher low while MACD makes a lower low. Confirms trend continuation — a healthy pullback within an existing uptrend rather than a reversal."},
-      {"Divergence Type": "Hidden Bearish Divergence", "Interpretation": "Price makes a lower high while MACD makes a higher high. Confirms trend continuation — a healthy relief bounce within an existing downtrend rather than a reversal."}
-    ];
+    const divergenceData = [{"symbol": "SHRIRAMFIN", "pair": "15m -> 1h", "close": 1121.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 53.47, "ltf_rsi": 39.82, "type": "Hidden Bullish Divergence"}, {"symbol": "SHRIRAMFIN", "pair": "1h -> Daily", "close": 1121.9, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 43.69, "ltf_rsi": 53.47, "type": "Regular Bullish Divergence"}, {"symbol": "SHRIRAMFIN", "pair": "Daily -> Weekly", "close": 1117.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 74.1, "ltf_rsi": 43.69, "type": "Hidden Bullish Divergence"}, {"symbol": "SHRIRAMFIN", "pair": "Weekly -> Monthly", "close": 1117.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 69.04, "ltf_rsi": 74.1, "type": "Hidden Bullish Divergence"}, {"symbol": "SOLARINDS", "pair": "15m -> 1h", "close": 20140.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 67.81, "ltf_rsi": 74.86, "type": "Hidden Bullish Divergence"}, {"symbol": "SOLARINDS", "pair": "1h -> Daily", "close": 20140.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 70.74, "ltf_rsi": 67.81, "type": "Hidden Bullish Divergence"}, {"symbol": "INDIGO", "pair": "1h -> Daily", "close": 5249.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 43.83, "ltf_rsi": 85.2, "type": "Hidden Bullish Divergence"}, {"symbol": "INDIGO", "pair": "Daily -> Weekly", "close": 5250.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 68.0, "ltf_rsi": 43.83, "type": "Hidden Bullish Divergence"}, {"symbol": "INDIGO", "pair": "Weekly -> Monthly", "close": 5250.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.45, "ltf_rsi": 68.0, "type": "Hidden Bullish Divergence"}, {"symbol": "TATAPOWER", "pair": "1h -> Daily", "close": 365.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 24.02, "ltf_rsi": 33.33, "type": "Regular Bullish Divergence"}, {"symbol": "TATAPOWER", "pair": "Daily -> Weekly", "close": 364.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 30.31, "ltf_rsi": 24.02, "type": "Regular Bullish Divergence"}, {"symbol": "TATAPOWER", "pair": "Weekly -> Monthly", "close": 364.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.01, "ltf_rsi": 30.31, "type": "Hidden Bullish Divergence"}, {"symbol": "COFORGE", "pair": "15m -> 1h", "close": 1884.8, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 54.51, "ltf_rsi": 38.69, "type": "Hidden Bullish Divergence"}, {"symbol": "COFORGE", "pair": "1h -> Daily", "close": 1884.8, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 66.9, "ltf_rsi": 54.51, "type": "Regular Bearish Divergence"}, {"symbol": "COFORGE", "pair": "Weekly -> Monthly", "close": 1880.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.99, "ltf_rsi": 82.51, "type": "Hidden Bullish Divergence"}, {"symbol": "JINDALSTEL", "pair": "Weekly -> Monthly", "close": 1175.4, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 62.91, "ltf_rsi": 45.19, "type": "Hidden Bullish Divergence"}, {"symbol": "MOTILALOFS", "pair": "15m -> 1h", "close": 1043.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 83.91, "ltf_rsi": 50.0, "type": "Regular Bearish Divergence"}, {"symbol": "MOTILALOFS", "pair": "1h -> Daily", "close": 1043.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 88.6, "ltf_rsi": 83.91, "type": "Regular Bearish Divergence"}, {"symbol": "MOTILALOFS", "pair": "Weekly -> Monthly", "close": 1040.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 57.28, "ltf_rsi": 68.75, "type": "Regular Bearish Divergence"}, {"symbol": "KALYANKJIL", "pair": "1h -> Daily", "close": 611.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.91, "ltf_rsi": 58.12, "type": "Hidden Bullish Divergence"}, {"symbol": "KALYANKJIL", "pair": "Daily -> Weekly", "close": 610.6, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 87.15, "ltf_rsi": 57.91, "type": "Hidden Bullish Divergence"}, {"symbol": "KALYANKJIL", "pair": "Weekly -> Monthly", "close": 610.6, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 53.34, "ltf_rsi": 87.15, "type": "Regular Bullish Divergence"}, {"symbol": "CGPOWER", "pair": "Weekly -> Monthly", "close": 865.05, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 60.69, "ltf_rsi": 49.91, "type": "Hidden Bullish Divergence"}, {"symbol": "BAJFINANCE", "pair": "1h -> Daily", "close": 1088.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 32.91, "ltf_rsi": 58.9, "type": "Hidden Bullish Divergence"}, {"symbol": "BAJFINANCE", "pair": "Daily -> Weekly", "close": 1085.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.62, "ltf_rsi": 32.91, "type": "Hidden Bullish Divergence"}, {"symbol": "SAIL", "pair": "Daily -> Weekly", "close": 194.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.63, "ltf_rsi": 69.29, "type": "Hidden Bullish Divergence"}, {"symbol": "SAIL", "pair": "Weekly -> Monthly", "close": 194.9, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 66.32, "ltf_rsi": 46.63, "type": "Hidden Bullish Divergence"}, {"symbol": "ADANIENSOL", "pair": "15m -> 1h", "close": 1583.7, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 59.72, "ltf_rsi": 21.14, "type": "Hidden Bullish Divergence"}, {"symbol": "KAYNES", "pair": "Daily -> Weekly", "close": 4032.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 67.67, "ltf_rsi": 60.49, "type": "Regular Bullish Divergence"}, {"symbol": "KAYNES", "pair": "Weekly -> Monthly", "close": 4032.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 36.92, "ltf_rsi": 67.67, "type": "Regular Bullish Divergence"}, {"symbol": "ADANIGREEN", "pair": "Weekly -> Monthly", "close": 1303.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.99, "ltf_rsi": 44.39, "type": "Hidden Bullish Divergence"}, {"symbol": "IDEA", "pair": "15m -> 1h", "close": 15.06, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 81.17, "ltf_rsi": 41.46, "type": "Hidden Bullish Divergence"}, {"symbol": "LTF", "pair": "15m -> 1h", "close": 323.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 66.88, "ltf_rsi": 51.76, "type": "Hidden Bullish Divergence"}, {"symbol": "LTF", "pair": "1h -> Daily", "close": 323.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 54.08, "ltf_rsi": 66.88, "type": "Hidden Bullish Divergence"}, {"symbol": "LTF", "pair": "Daily -> Weekly", "close": 322.2, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.69, "ltf_rsi": 54.08, "type": "Hidden Bullish Divergence"}, {"symbol": "LTF", "pair": "Weekly -> Monthly", "close": 322.2, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 71.16, "ltf_rsi": 67.69, "type": "Regular Bearish Divergence"}, {"symbol": "SUZLON", "pair": "15m -> 1h", "close": 47.03, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 60.37, "ltf_rsi": 41.46, "type": "Regular Bullish Divergence"}, {"symbol": "SUZLON", "pair": "1h -> Daily", "close": 47.03, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 41.83, "ltf_rsi": 60.37, "type": "Regular Bullish Divergence"}, {"symbol": "SUZLON", "pair": "Weekly -> Monthly", "close": 46.94, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 34.71, "ltf_rsi": 35.1, "type": "Hidden Bullish Divergence"}, {"symbol": "OIL", "pair": "Weekly -> Monthly", "close": 469.15, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 54.46, "ltf_rsi": 42.84, "type": "Hidden Bullish Divergence"}, {"symbol": "GMRAIRPORT", "pair": "Weekly -> Monthly", "close": 98.85, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 56.28, "ltf_rsi": 54.22, "type": "Hidden Bullish Divergence"}, {"symbol": "MOTHERSON", "pair": "15m -> 1h", "close": 166.75, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 43.46, "ltf_rsi": 68.38, "type": "Hidden Bearish Divergence"}, {"symbol": "MOTHERSON", "pair": "Weekly -> Monthly", "close": 165.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 70.08, "ltf_rsi": 74.14, "type": "Regular Bearish Divergence"}, {"symbol": "GVT&D", "pair": "1h -> Daily", "close": 4350.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 48.58, "ltf_rsi": 71.05, "type": "Hidden Bearish Divergence"}, {"symbol": "GVT&D", "pair": "Daily -> Weekly", "close": 4340.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 43.12, "ltf_rsi": 48.58, "type": "Hidden Bearish Divergence"}, {"symbol": "GVT&D", "pair": "Weekly -> Monthly", "close": 4340.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 72.69, "ltf_rsi": 43.12, "type": "Hidden Bullish Divergence"}, {"symbol": "IREDA", "pair": "1h -> Daily", "close": 119.03, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 43.55, "ltf_rsi": 65.23, "type": "Hidden Bearish Divergence"}, {"symbol": "IREDA", "pair": "Daily -> Weekly", "close": 118.8, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 37.05, "ltf_rsi": 43.55, "type": "Hidden Bearish Divergence"}, {"symbol": "HEROMOTOCO", "pair": "15m -> 1h", "close": 5632.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 39.4, "ltf_rsi": 18.5, "type": "Hidden Bearish Divergence"}, {"symbol": "HEROMOTOCO", "pair": "Daily -> Weekly", "close": 5595.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 69.61, "ltf_rsi": 53.14, "type": "Regular Bearish Divergence"}, {"symbol": "HEROMOTOCO", "pair": "Weekly -> Monthly", "close": 5595.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 64.95, "ltf_rsi": 69.61, "type": "Regular Bearish Divergence"}, {"symbol": "PHOENIXLTD", "pair": "15m -> 1h", "close": 1932.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 60.14, "ltf_rsi": 51.55, "type": "Hidden Bullish Divergence"}, {"symbol": "PHOENIXLTD", "pair": "1h -> Daily", "close": 1932.1, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 52.86, "ltf_rsi": 60.14, "type": "Hidden Bullish Divergence"}, {"symbol": "PHOENIXLTD", "pair": "Weekly -> Monthly", "close": 1924.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 63.7, "ltf_rsi": 59.21, "type": "Hidden Bullish Divergence"}, {"symbol": "HAL", "pair": "15m -> 1h", "close": 4891.4, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 52.63, "ltf_rsi": 35.63, "type": "Hidden Bearish Divergence"}, {"symbol": "HAL", "pair": "Weekly -> Monthly", "close": 4865.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 49.95, "ltf_rsi": 69.58, "type": "Hidden Bullish Divergence"}, {"symbol": "AXISBANK", "pair": "15m -> 1h", "close": 1255.9, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 75.48, "ltf_rsi": 57.3, "type": "Regular Bearish Divergence"}, {"symbol": "AXISBANK", "pair": "1h -> Daily", "close": 1255.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 49.65, "ltf_rsi": 75.48, "type": "Regular Bearish Divergence"}, {"symbol": "AXISBANK", "pair": "Daily -> Weekly", "close": 1255.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 45.64, "ltf_rsi": 49.65, "type": "Regular Bullish Divergence"}, {"symbol": "AXISBANK", "pair": "Weekly -> Monthly", "close": 1255.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 52.63, "ltf_rsi": 45.64, "type": "Hidden Bullish Divergence"}, {"symbol": "INDHOTEL", "pair": "Weekly -> Monthly", "close": 721.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 45.71, "ltf_rsi": 69.25, "type": "Hidden Bullish Divergence"}, {"symbol": "PAYTM", "pair": "15m -> 1h", "close": 1722.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 88.16, "ltf_rsi": 51.04, "type": "Hidden Bullish Divergence"}, {"symbol": "OFSS", "pair": "15m -> 1h", "close": 11760.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 52.12, "ltf_rsi": 37.46, "type": "Regular Bearish Divergence"}, {"symbol": "OFSS", "pair": "1h -> Daily", "close": 11760.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 51.59, "ltf_rsi": 52.12, "type": "Regular Bearish Divergence"}, {"symbol": "OFSS", "pair": "Daily -> Weekly", "close": 11800.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 68.98, "ltf_rsi": 51.59, "type": "Hidden Bullish Divergence"}, {"symbol": "BLUESTARCO", "pair": "15m -> 1h", "close": 1490.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 37.04, "ltf_rsi": 29.37, "type": "Regular Bullish Divergence"}, {"symbol": "BLUESTARCO", "pair": "1h -> Daily", "close": 1490.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 27.84, "ltf_rsi": 37.04, "type": "Regular Bullish Divergence"}, {"symbol": "BLUESTARCO", "pair": "Daily -> Weekly", "close": 1485.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 36.72, "ltf_rsi": 27.84, "type": "Hidden Bullish Divergence"}, {"symbol": "BLUESTARCO", "pair": "Weekly -> Monthly", "close": 1485.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 45.57, "ltf_rsi": 36.72, "type": "Hidden Bullish Divergence"}, {"symbol": "GODREJCP", "pair": "Daily -> Weekly", "close": 922.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 36.09, "ltf_rsi": 18.96, "type": "Regular Bullish Divergence"}, {"symbol": "GODREJCP", "pair": "Weekly -> Monthly", "close": 922.8, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 37.67, "ltf_rsi": 36.09, "type": "Regular Bullish Divergence"}, {"symbol": "MFSL", "pair": "15m -> 1h", "close": 1585.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 56.78, "ltf_rsi": 41.71, "type": "Hidden Bullish Divergence"}, {"symbol": "MFSL", "pair": "1h -> Daily", "close": 1585.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 65.07, "ltf_rsi": 56.78, "type": "Hidden Bullish Divergence"}, {"symbol": "MFSL", "pair": "Daily -> Weekly", "close": 1600.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 42.58, "ltf_rsi": 65.07, "type": "Regular Bullish Divergence"}, {"symbol": "MFSL", "pair": "Weekly -> Monthly", "close": 1600.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 48.46, "ltf_rsi": 42.58, "type": "Hidden Bullish Divergence"}, {"symbol": "NAUKRI", "pair": "15m -> 1h", "close": 1324.9, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 33.68, "ltf_rsi": 20.88, "type": "Regular Bullish Divergence"}, {"symbol": "NAUKRI", "pair": "1h -> Daily", "close": 1324.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 64.05, "ltf_rsi": 33.68, "type": "Hidden Bullish Divergence"}, {"symbol": "NAUKRI", "pair": "Daily -> Weekly", "close": 1323.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 82.89, "ltf_rsi": 64.05, "type": "Hidden Bullish Divergence"}, {"symbol": "NAUKRI", "pair": "Weekly -> Monthly", "close": 1323.5, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 42.19, "ltf_rsi": 82.89, "type": "Regular Bullish Divergence"}, {"symbol": "ADANIENT", "pair": "15m -> 1h", "close": 3129.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 81.84, "ltf_rsi": 39.26, "type": "Hidden Bullish Divergence"}, {"symbol": "PNB", "pair": "15m -> 1h", "close": 116.46, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 58.78, "ltf_rsi": 31.97, "type": "Hidden Bullish Divergence"}, {"symbol": "PNB", "pair": "1h -> Daily", "close": 116.46, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 57.96, "ltf_rsi": 58.78, "type": "Hidden Bullish Divergence"}, {"symbol": "PNB", "pair": "Weekly -> Monthly", "close": 116.7, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 53.38, "ltf_rsi": 79.52, "type": "Hidden Bullish Divergence"}, {"symbol": "ITC", "pair": "15m -> 1h", "close": 271.15, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 73.01, "ltf_rsi": 38.24, "type": "Hidden Bullish Divergence"}, {"symbol": "ITC", "pair": "1h -> Daily", "close": 271.15, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 26.95, "ltf_rsi": 73.01, "type": "Hidden Bearish Divergence"}, {"symbol": "ITC", "pair": "Daily -> Weekly", "close": 270.25, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 28.3, "ltf_rsi": 26.95, "type": "Hidden Bearish Divergence"}, {"symbol": "ITC", "pair": "Weekly -> Monthly", "close": 270.25, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 19.32, "ltf_rsi": 28.3, "type": "Regular Bullish Divergence"}, {"symbol": "BAJAJHLDNG", "pair": "1h -> Daily", "close": 11299.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 54.87, "ltf_rsi": 54.85, "type": "Hidden Bearish Divergence"}, {"symbol": "BAJAJHLDNG", "pair": "Daily -> Weekly", "close": 11540.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 64.33, "ltf_rsi": 54.87, "type": "Hidden Bearish Divergence"}, {"symbol": "BAJAJHLDNG", "pair": "Weekly -> Monthly", "close": 11540.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 33.39, "ltf_rsi": 64.33, "type": "Hidden Bearish Divergence"}, {"symbol": "BPCL", "pair": "15m -> 1h", "close": 319.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 76.84, "ltf_rsi": 36.62, "type": "Hidden Bullish Divergence"}, {"symbol": "BPCL", "pair": "Daily -> Weekly", "close": 318.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 67.89, "ltf_rsi": 42.26, "type": "Hidden Bullish Divergence"}, {"symbol": "BPCL", "pair": "Weekly -> Monthly", "close": 318.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 47.59, "ltf_rsi": 67.89, "type": "Hidden Bullish Divergence"}, {"symbol": "MAZDOCK", "pair": "Daily -> Weekly", "close": 2625.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 58.46, "ltf_rsi": 65.93, "type": "Hidden Bearish Divergence"}, {"symbol": "MAZDOCK", "pair": "Weekly -> Monthly", "close": 2625.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 39.69, "ltf_rsi": 58.46, "type": "Hidden Bearish Divergence"}, {"symbol": "BANDHANBNK", "pair": "Weekly -> Monthly", "close": 173.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 46.38, "ltf_rsi": 39.66, "type": "Hidden Bearish Divergence"}, {"symbol": "VEDL", "pair": "Daily -> Weekly", "close": 286.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 38.75, "ltf_rsi": 58.51, "type": "Hidden Bullish Divergence"}, {"symbol": "VEDL", "pair": "Weekly -> Monthly", "close": 286.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 65.39, "ltf_rsi": 38.75, "type": "Hidden Bullish Divergence"}, {"symbol": "FEDERALBNK", "pair": "15m -> 1h", "close": 346.55, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 27.92, "ltf_rsi": 54.17, "type": "Hidden Bearish Divergence"}, {"symbol": "FEDERALBNK", "pair": "1h -> Daily", "close": 346.55, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 41.56, "ltf_rsi": 27.92, "type": "Hidden Bullish Divergence"}, {"symbol": "FEDERALBNK", "pair": "Daily -> Weekly", "close": 345.3, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 77.77, "ltf_rsi": 41.56, "type": "Hidden Bullish Divergence"}, {"symbol": "FEDERALBNK", "pair": "Weekly -> Monthly", "close": 345.3, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 73.35, "ltf_rsi": 77.77, "type": "Hidden Bullish Divergence"}, {"symbol": "AUBANK", "pair": "Daily -> Weekly", "close": 1113.5, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 72.42, "ltf_rsi": 58.62, "type": "Regular Bearish Divergence"}, {"symbol": "AUBANK", "pair": "Weekly -> Monthly", "close": 1113.5, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 67.19, "ltf_rsi": 72.42, "type": "Regular Bearish Divergence"}, {"symbol": "IEX", "pair": "15m -> 1h", "close": 121.89, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 39.39, "ltf_rsi": 13.91, "type": "Regular Bullish Divergence"}, {"symbol": "IEX", "pair": "1h -> Daily", "close": 121.89, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 20.84, "ltf_rsi": 39.39, "type": "Regular Bullish Divergence"}, {"symbol": "IEX", "pair": "Daily -> Weekly", "close": 122.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 43.83, "ltf_rsi": 20.84, "type": "Hidden Bearish Divergence"}, {"symbol": "IEX", "pair": "Weekly -> Monthly", "close": 122.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 20.84, "ltf_rsi": 43.83, "type": "Hidden Bearish Divergence"}, {"symbol": "CHOLAFIN", "pair": "Weekly -> Monthly", "close": 1868.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.21, "ltf_rsi": 75.25, "type": "Hidden Bullish Divergence"}, {"symbol": "EICHERMOT", "pair": "15m -> 1h", "close": 8070.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 57.47, "ltf_rsi": 33.07, "type": "Hidden Bearish Divergence"}, {"symbol": "EICHERMOT", "pair": "1h -> Daily", "close": 8070.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 57.02, "ltf_rsi": 57.47, "type": "Hidden Bearish Divergence"}, {"symbol": "EICHERMOT", "pair": "Daily -> Weekly", "close": 8035.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 77.38, "ltf_rsi": 57.02, "type": "Hidden Bullish Divergence"}, {"symbol": "EICHERMOT", "pair": "Weekly -> Monthly", "close": 8035.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 69.21, "ltf_rsi": 77.38, "type": "Hidden Bullish Divergence"}, {"symbol": "KPITTECH", "pair": "15m -> 1h", "close": 591.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.41, "ltf_rsi": 47.73, "type": "Regular Bullish Divergence"}, {"symbol": "KPITTECH", "pair": "1h -> Daily", "close": 591.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 32.59, "ltf_rsi": 57.41, "type": "Regular Bullish Divergence"}, {"symbol": "KPITTECH", "pair": "Daily -> Weekly", "close": 590.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 29.66, "ltf_rsi": 32.59, "type": "Hidden Bearish Divergence"}, {"symbol": "KPITTECH", "pair": "Weekly -> Monthly", "close": 590.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 21.96, "ltf_rsi": 29.66, "type": "Regular Bullish Divergence"}, {"symbol": "PERSISTENT", "pair": "15m -> 1h", "close": 5615.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.29, "ltf_rsi": 30.87, "type": "Hidden Bullish Divergence"}, {"symbol": "PERSISTENT", "pair": "1h -> Daily", "close": 5615.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 58.71, "ltf_rsi": 42.29, "type": "Hidden Bullish Divergence"}, {"symbol": "PERSISTENT", "pair": "Daily -> Weekly", "close": 5590.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 65.46, "ltf_rsi": 58.71, "type": "Regular Bearish Divergence"}, {"symbol": "PERSISTENT", "pair": "Weekly -> Monthly", "close": 5590.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 46.96, "ltf_rsi": 65.46, "type": "Regular Bullish Divergence"}, {"symbol": "UNIONBANK", "pair": "15m -> 1h", "close": 188.17, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 76.24, "ltf_rsi": 53.23, "type": "Hidden Bullish Divergence"}, {"symbol": "UNIONBANK", "pair": "Weekly -> Monthly", "close": 187.52, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 59.98, "ltf_rsi": 71.7, "type": "Regular Bearish Divergence"}, {"symbol": "GRASIM", "pair": "15m -> 1h", "close": 3307.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 52.68, "ltf_rsi": 65.35, "type": "Regular Bearish Divergence"}, {"symbol": "GRASIM", "pair": "Weekly -> Monthly", "close": 3299.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 64.4, "ltf_rsi": 59.79, "type": "Hidden Bullish Divergence"}, {"symbol": "COLPAL", "pair": "15m -> 1h", "close": 1871.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 42.15, "ltf_rsi": 52.91, "type": "Regular Bullish Divergence"}, {"symbol": "COLPAL", "pair": "1h -> Daily", "close": 1871.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 13.77, "ltf_rsi": 42.15, "type": "Regular Bullish Divergence"}, {"symbol": "COLPAL", "pair": "Daily -> Weekly", "close": 1860.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 27.58, "ltf_rsi": 13.77, "type": "Hidden Bearish Divergence"}, {"symbol": "COLPAL", "pair": "Weekly -> Monthly", "close": 1860.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 35.53, "ltf_rsi": 27.58, "type": "Hidden Bearish Divergence"}, {"symbol": "MANKIND", "pair": "Weekly -> Monthly", "close": 2393.7, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 52.11, "ltf_rsi": 42.01, "type": "Hidden Bullish Divergence"}, {"symbol": "WAAREEENER", "pair": "1h -> Daily", "close": 2639.7, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 44.66, "ltf_rsi": 42.09, "type": "Hidden Bearish Divergence"}, {"symbol": "WAAREEENER", "pair": "Daily -> Weekly", "close": 2635.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 32.54, "ltf_rsi": 44.66, "type": "Hidden Bearish Divergence"}, {"symbol": "IOC", "pair": "15m -> 1h", "close": 138.88, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 57.41, "ltf_rsi": 28.85, "type": "Hidden Bullish Divergence"}, {"symbol": "IOC", "pair": "1h -> Daily", "close": 138.88, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 39.24, "ltf_rsi": 57.41, "type": "Hidden Bearish Divergence"}, {"symbol": "IOC", "pair": "Daily -> Weekly", "close": 139.48, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 50.01, "ltf_rsi": 39.24, "type": "Hidden Bearish Divergence"}, {"symbol": "IOC", "pair": "Weekly -> Monthly", "close": 139.48, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 47.31, "ltf_rsi": 50.01, "type": "Hidden Bullish Divergence"}, {"symbol": "MARUTI", "pair": "15m -> 1h", "close": 13569.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.6, "ltf_rsi": 28.57, "type": "Hidden Bearish Divergence"}, {"symbol": "MARUTI", "pair": "1h -> Daily", "close": 13569.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 26.74, "ltf_rsi": 55.6, "type": "Hidden Bearish Divergence"}, {"symbol": "MARUTI", "pair": "Daily -> Weekly", "close": 13520.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 56.72, "ltf_rsi": 26.74, "type": "Hidden Bullish Divergence"}, {"symbol": "MARUTI", "pair": "Weekly -> Monthly", "close": 13520.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 54.38, "ltf_rsi": 56.72, "type": "Hidden Bullish Divergence"}, {"symbol": "HAVELLS", "pair": "15m -> 1h", "close": 1263.1, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.39, "ltf_rsi": 59.22, "type": "Regular Bearish Divergence"}, {"symbol": "HAVELLS", "pair": "1h -> Daily", "close": 1263.1, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 37.04, "ltf_rsi": 55.39, "type": "Regular Bearish Divergence"}, {"symbol": "HAVELLS", "pair": "Daily -> Weekly", "close": 1258.7, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 62.07, "ltf_rsi": 37.04, "type": "Hidden Bearish Divergence"}, {"symbol": "HAVELLS", "pair": "Weekly -> Monthly", "close": 1258.7, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 33.18, "ltf_rsi": 62.07, "type": "Hidden Bearish Divergence"}, {"symbol": "ANGELONE", "pair": "15m -> 1h", "close": 300.2, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 73.4, "ltf_rsi": 34.67, "type": "Hidden Bullish Divergence"}, {"symbol": "ANGELONE", "pair": "1h -> Daily", "close": 300.2, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 51.82, "ltf_rsi": 73.4, "type": "Regular Bullish Divergence"}, {"symbol": "ANGELONE", "pair": "Daily -> Weekly", "close": 298.85, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 35.52, "ltf_rsi": 51.82, "type": "Regular Bullish Divergence"}, {"symbol": "ANGELONE", "pair": "Weekly -> Monthly", "close": 298.85, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 50.89, "ltf_rsi": 35.52, "type": "Hidden Bullish Divergence"}, {"symbol": "ONGC", "pair": "15m -> 1h", "close": 233.44, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 28.86, "ltf_rsi": 64.68, "type": "Hidden Bearish Divergence"}, {"symbol": "ONGC", "pair": "1h -> Daily", "close": 233.44, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 35.19, "ltf_rsi": 28.86, "type": "Regular Bullish Divergence"}, {"symbol": "ONGC", "pair": "Daily -> Weekly", "close": 232.21, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 17.61, "ltf_rsi": 35.19, "type": "Regular Bullish Divergence"}, {"symbol": "ONGC", "pair": "Weekly -> Monthly", "close": 232.21, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.82, "ltf_rsi": 17.61, "type": "Hidden Bullish Divergence"}, {"symbol": "360ONE", "pair": "15m -> 1h", "close": 1198.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 40.13, "ltf_rsi": 20.83, "type": "Regular Bullish Divergence"}, {"symbol": "360ONE", "pair": "1h -> Daily", "close": 1198.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 53.35, "ltf_rsi": 40.13, "type": "Hidden Bullish Divergence"}, {"symbol": "360ONE", "pair": "Weekly -> Monthly", "close": 1197.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 50.15, "ltf_rsi": 62.54, "type": "Hidden Bullish Divergence"}, {"symbol": "GODFRYPHLP", "pair": "1h -> Daily", "close": 2154.9, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 27.71, "ltf_rsi": 65.17, "type": "Hidden Bearish Divergence"}, {"symbol": "GODFRYPHLP", "pair": "Daily -> Weekly", "close": 2153.3, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 39.18, "ltf_rsi": 27.71, "type": "Hidden Bearish Divergence"}, {"symbol": "GODFRYPHLP", "pair": "Weekly -> Monthly", "close": 2153.3, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 36.93, "ltf_rsi": 39.18, "type": "Hidden Bearish Divergence"}, {"symbol": "ADANIPORTS", "pair": "15m -> 1h", "close": 1696.8, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 69.82, "ltf_rsi": 46.41, "type": "Regular Bearish Divergence"}, {"symbol": "ADANIPORTS", "pair": "1h -> Daily", "close": 1696.8, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 49.05, "ltf_rsi": 69.82, "type": "Regular Bearish Divergence"}, {"symbol": "ADANIPORTS", "pair": "Weekly -> Monthly", "close": 1691.5, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 58.84, "ltf_rsi": 38.16, "type": "Regular Bearish Divergence"}, {"symbol": "LICHSGFIN", "pair": "15m -> 1h", "close": 525.7, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 90.44, "ltf_rsi": 81.82, "type": "Regular Bearish Divergence"}, {"symbol": "LICHSGFIN", "pair": "Daily -> Weekly", "close": 524.4, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 44.37, "ltf_rsi": 61.31, "type": "Hidden Bearish Divergence"}, {"symbol": "LICHSGFIN", "pair": "Weekly -> Monthly", "close": 524.4, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 35.78, "ltf_rsi": 44.37, "type": "Hidden Bearish Divergence"}, {"symbol": "RADICO", "pair": "15m -> 1h", "close": 4626.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 53.78, "ltf_rsi": 45.15, "type": "Hidden Bullish Divergence"}, {"symbol": "NHPC", "pair": "Weekly -> Monthly", "close": 76.24, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 41.54, "ltf_rsi": 43.83, "type": "Hidden Bullish Divergence"}, {"symbol": "PRESTIGE", "pair": "15m -> 1h", "close": 1621.2, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 46.53, "ltf_rsi": 23.16, "type": "Hidden Bearish Divergence"}, {"symbol": "PRESTIGE", "pair": "1h -> Daily", "close": 1621.2, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 61.67, "ltf_rsi": 46.53, "type": "Hidden Bearish Divergence"}, {"symbol": "PRESTIGE", "pair": "Weekly -> Monthly", "close": 1615.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.66, "ltf_rsi": 67.69, "type": "Hidden Bullish Divergence"}, {"symbol": "AUROPHARMA", "pair": "15m -> 1h", "close": 1621.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.05, "ltf_rsi": 43.01, "type": "Regular Bullish Divergence"}, {"symbol": "AUROPHARMA", "pair": "1h -> Daily", "close": 1621.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 56.97, "ltf_rsi": 46.05, "type": "Regular Bullish Divergence"}, {"symbol": "AUROPHARMA", "pair": "Weekly -> Monthly", "close": 1623.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 80.54, "ltf_rsi": 66.47, "type": "Hidden Bullish Divergence"}, {"symbol": "SBILIFE", "pair": "15m -> 1h", "close": 1772.7, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 48.62, "ltf_rsi": 39.94, "type": "Hidden Bearish Divergence"}, {"symbol": "SBILIFE", "pair": "1h -> Daily", "close": 1772.7, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 18.8, "ltf_rsi": 48.62, "type": "Regular Bullish Divergence"}, {"symbol": "SONACOMS", "pair": "Weekly -> Monthly", "close": 795.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 75.15, "ltf_rsi": 80.74, "type": "Hidden Bullish Divergence"}, {"symbol": "BRITANNIA", "pair": "15m -> 1h", "close": 5341.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 58.76, "ltf_rsi": 35.14, "type": "Hidden Bullish Divergence"}, {"symbol": "BRITANNIA", "pair": "1h -> Daily", "close": 5341.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 45.11, "ltf_rsi": 58.76, "type": "Hidden Bullish Divergence"}, {"symbol": "BRITANNIA", "pair": "Weekly -> Monthly", "close": 5310.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 40.34, "ltf_rsi": 48.94, "type": "Hidden Bullish Divergence"}, {"symbol": "INDIANB", "pair": "15m -> 1h", "close": 888.6, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 70.07, "ltf_rsi": 48.95, "type": "Regular Bullish Divergence"}, {"symbol": "INDIANB", "pair": "1h -> Daily", "close": 888.6, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 55.35, "ltf_rsi": 70.07, "type": "Regular Bullish Divergence"}, {"symbol": "RELIANCE", "pair": "1h -> Daily", "close": 1302.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 37.17, "ltf_rsi": 46.18, "type": "Hidden Bearish Divergence"}, {"symbol": "RELIANCE", "pair": "Daily -> Weekly", "close": 1298.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 40.01, "ltf_rsi": 37.17, "type": "Hidden Bearish Divergence"}, {"symbol": "RELIANCE", "pair": "Weekly -> Monthly", "close": 1298.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 37.8, "ltf_rsi": 40.01, "type": "Hidden Bullish Divergence"}, {"symbol": "UPL", "pair": "15m -> 1h", "close": 585.6, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 86.89, "ltf_rsi": 61.71, "type": "Regular Bearish Divergence"}, {"symbol": "UPL", "pair": "Daily -> Weekly", "close": 589.3, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 39.44, "ltf_rsi": 63.04, "type": "Regular Bullish Divergence"}, {"symbol": "UPL", "pair": "Weekly -> Monthly", "close": 589.3, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 44.71, "ltf_rsi": 39.44, "type": "Regular Bullish Divergence"}, {"symbol": "DELHIVERY", "pair": "15m -> 1h", "close": 451.05, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 66.16, "ltf_rsi": 54.33, "type": "Regular Bullish Divergence"}, {"symbol": "DELHIVERY", "pair": "1h -> Daily", "close": 451.05, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 36.48, "ltf_rsi": 66.16, "type": "Regular Bullish Divergence"}, {"symbol": "JSWENERGY", "pair": "15m -> 1h", "close": 544.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 49.04, "ltf_rsi": 27.27, "type": "Hidden Bearish Divergence"}, {"symbol": "JSWENERGY", "pair": "1h -> Daily", "close": 544.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 36.59, "ltf_rsi": 49.04, "type": "Regular Bullish Divergence"}, {"symbol": "JSWENERGY", "pair": "Daily -> Weekly", "close": 543.5, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 47.81, "ltf_rsi": 36.59, "type": "Regular Bullish Divergence"}, {"symbol": "JSWENERGY", "pair": "Weekly -> Monthly", "close": 543.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 52.92, "ltf_rsi": 47.81, "type": "Hidden Bullish Divergence"}, {"symbol": "SHREECEM", "pair": "15m -> 1h", "close": 24825.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 70.0, "ltf_rsi": 38.0, "type": "Regular Bullish Divergence"}, {"symbol": "SHREECEM", "pair": "1h -> Daily", "close": 24825.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 31.6, "ltf_rsi": 70.0, "type": "Regular Bullish Divergence"}, {"symbol": "CUMMINSIND", "pair": "15m -> 1h", "close": 5192.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 56.16, "ltf_rsi": 58.62, "type": "Hidden Bearish Divergence"}, {"symbol": "CUMMINSIND", "pair": "1h -> Daily", "close": 5192.5, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 37.8, "ltf_rsi": 56.16, "type": "Hidden Bearish Divergence"}, {"symbol": "CUMMINSIND", "pair": "Weekly -> Monthly", "close": 5200.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 69.19, "ltf_rsi": 46.91, "type": "Hidden Bullish Divergence"}, {"symbol": "TIINDIA", "pair": "15m -> 1h", "close": 2860.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.8, "ltf_rsi": 34.29, "type": "Hidden Bullish Divergence"}, {"symbol": "TIINDIA", "pair": "1h -> Daily", "close": 2860.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 58.77, "ltf_rsi": 46.8, "type": "Hidden Bullish Divergence"}, {"symbol": "TIINDIA", "pair": "Daily -> Weekly", "close": 2860.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 42.91, "ltf_rsi": 58.77, "type": "Hidden Bearish Divergence"}, {"symbol": "FORCEMOT", "pair": "15m -> 1h", "close": 17400.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 38.36, "ltf_rsi": 23.81, "type": "Hidden Bearish Divergence"}, {"symbol": "FORCEMOT", "pair": "1h -> Daily", "close": 17400.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 33.68, "ltf_rsi": 38.36, "type": "Regular Bullish Divergence"}, {"symbol": "PIDILITIND", "pair": "15m -> 1h", "close": 1649.6, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 52.83, "ltf_rsi": 50.22, "type": "Regular Bullish Divergence"}, {"symbol": "PIDILITIND", "pair": "1h -> Daily", "close": 1649.6, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 39.47, "ltf_rsi": 52.83, "type": "Regular Bullish Divergence"}, {"symbol": "VOLTAS", "pair": "15m -> 1h", "close": 1221.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 43.06, "ltf_rsi": 37.45, "type": "Regular Bullish Divergence"}, {"symbol": "VOLTAS", "pair": "1h -> Daily", "close": 1221.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 37.46, "ltf_rsi": 43.06, "type": "Regular Bullish Divergence"}, {"symbol": "VOLTAS", "pair": "Daily -> Weekly", "close": 1217.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 44.57, "ltf_rsi": 37.46, "type": "Hidden Bullish Divergence"}, {"symbol": "VOLTAS", "pair": "Weekly -> Monthly", "close": 1217.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 46.04, "ltf_rsi": 44.57, "type": "Hidden Bullish Divergence"}, {"symbol": "IRFC", "pair": "15m -> 1h", "close": 86.24, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 52.88, "ltf_rsi": 45.22, "type": "Regular Bullish Divergence"}, {"symbol": "IRFC", "pair": "1h -> Daily", "close": 86.24, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 26.23, "ltf_rsi": 52.88, "type": "Regular Bullish Divergence"}, {"symbol": "IRFC", "pair": "Daily -> Weekly", "close": 85.7, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 22.6, "ltf_rsi": 26.23, "type": "Regular Bullish Divergence"}, {"symbol": "IRFC", "pair": "Weekly -> Monthly", "close": 85.7, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 25.62, "ltf_rsi": 22.6, "type": "Regular Bullish Divergence"}, {"symbol": "NYKAA", "pair": "1h -> Daily", "close": 339.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.57, "ltf_rsi": 78.12, "type": "Hidden Bullish Divergence"}, {"symbol": "NYKAA", "pair": "Daily -> Weekly", "close": 340.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 77.53, "ltf_rsi": 57.57, "type": "Hidden Bullish Divergence"}, {"symbol": "DLF", "pair": "15m -> 1h", "close": 676.65, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 24.56, "ltf_rsi": 14.81, "type": "Hidden Bullish Divergence"}, {"symbol": "DLF", "pair": "1h -> Daily", "close": 676.65, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 66.26, "ltf_rsi": 24.56, "type": "Hidden Bullish Divergence"}, {"symbol": "DLF", "pair": "Daily -> Weekly", "close": 672.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.52, "ltf_rsi": 66.26, "type": "Hidden Bullish Divergence"}, {"symbol": "MANAPPURAM", "pair": "15m -> 1h", "close": 367.7, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 53.47, "ltf_rsi": 40.51, "type": "Hidden Bearish Divergence"}, {"symbol": "MANAPPURAM", "pair": "1h -> Daily", "close": 367.7, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 51.07, "ltf_rsi": 53.47, "type": "Hidden Bullish Divergence"}, {"symbol": "MANAPPURAM", "pair": "Daily -> Weekly", "close": 365.4, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 62.95, "ltf_rsi": 51.07, "type": "Hidden Bullish Divergence"}, {"symbol": "BANKBARODA", "pair": "15m -> 1h", "close": 243.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 70.16, "ltf_rsi": 55.07, "type": "Hidden Bearish Divergence"}, {"symbol": "BANKBARODA", "pair": "1h -> Daily", "close": 243.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 35.11, "ltf_rsi": 70.16, "type": "Hidden Bearish Divergence"}, {"symbol": "BANKBARODA", "pair": "Daily -> Weekly", "close": 242.5, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 35.69, "ltf_rsi": 35.11, "type": "Hidden Bearish Divergence"}, {"symbol": "BANKBARODA", "pair": "Weekly -> Monthly", "close": 242.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.66, "ltf_rsi": 35.69, "type": "Hidden Bullish Divergence"}, {"symbol": "HINDALCO", "pair": "15m -> 1h", "close": 1056.25, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 57.85, "ltf_rsi": 83.18, "type": "Hidden Bullish Divergence"}, {"symbol": "HINDALCO", "pair": "Daily -> Weekly", "close": 1053.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.98, "ltf_rsi": 56.5, "type": "Hidden Bullish Divergence"}, {"symbol": "HINDALCO", "pair": "Weekly -> Monthly", "close": 1053.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 68.85, "ltf_rsi": 42.98, "type": "Hidden Bullish Divergence"}, {"symbol": "TITAN", "pair": "Daily -> Weekly", "close": 5100.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 85.43, "ltf_rsi": 61.01, "type": "Hidden Bullish Divergence"}, {"symbol": "TITAN", "pair": "Weekly -> Monthly", "close": 5100.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.03, "ltf_rsi": 85.43, "type": "Hidden Bullish Divergence"}, {"symbol": "GAIL", "pair": "15m -> 1h", "close": 174.76, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 68.46, "ltf_rsi": 51.3, "type": "Hidden Bullish Divergence"}, {"symbol": "GAIL", "pair": "1h -> Daily", "close": 174.76, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 45.78, "ltf_rsi": 68.46, "type": "Hidden Bullish Divergence"}, {"symbol": "GAIL", "pair": "Daily -> Weekly", "close": 174.49, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 65.08, "ltf_rsi": 45.78, "type": "Hidden Bullish Divergence"}, {"symbol": "MAXHEALTH", "pair": "15m -> 1h", "close": 1012.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 69.87, "ltf_rsi": 34.7, "type": "Regular Bullish Divergence"}, {"symbol": "MAXHEALTH", "pair": "1h -> Daily", "close": 1012.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 28.59, "ltf_rsi": 69.87, "type": "Regular Bullish Divergence"}, {"symbol": "MAXHEALTH", "pair": "Weekly -> Monthly", "close": 1005.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 36.81, "ltf_rsi": 47.93, "type": "Hidden Bullish Divergence"}, {"symbol": "LT", "pair": "15m -> 1h", "close": 4052.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 39.01, "ltf_rsi": 30.35, "type": "Regular Bearish Divergence"}, {"symbol": "LT", "pair": "1h -> Daily", "close": 4052.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 46.99, "ltf_rsi": 39.01, "type": "Regular Bearish Divergence"}, {"symbol": "LT", "pair": "Weekly -> Monthly", "close": 4038.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 56.66, "ltf_rsi": 54.19, "type": "Hidden Bullish Divergence"}, {"symbol": "PAGEIND", "pair": "15m -> 1h", "close": 35135.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 35.71, "ltf_rsi": 24.83, "type": "Regular Bullish Divergence"}, {"symbol": "PAGEIND", "pair": "1h -> Daily", "close": 35135.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 16.31, "ltf_rsi": 35.71, "type": "Regular Bullish Divergence"}, {"symbol": "HINDZINC", "pair": "Daily -> Weekly", "close": 626.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 49.18, "ltf_rsi": 61.23, "type": "Hidden Bullish Divergence"}, {"symbol": "HINDZINC", "pair": "Weekly -> Monthly", "close": 626.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 62.49, "ltf_rsi": 49.18, "type": "Hidden Bullish Divergence"}, {"symbol": "BANKNIFTY", "pair": "Daily -> Weekly", "close": 57783.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 72.27, "ltf_rsi": 44.92, "type": "Hidden Bullish Divergence"}, {"symbol": "BANKNIFTY", "pair": "Weekly -> Monthly", "close": 57783.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 50.77, "ltf_rsi": 72.27, "type": "Hidden Bullish Divergence"}, {"symbol": "DALBHARAT", "pair": "1h -> Daily", "close": 1880.8, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 64.1, "ltf_rsi": 50.25, "type": "Hidden Bullish Divergence"}, {"symbol": "DALBHARAT", "pair": "Daily -> Weekly", "close": 1898.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 62.13, "ltf_rsi": 64.1, "type": "Hidden Bullish Divergence"}, {"symbol": "DALBHARAT", "pair": "Weekly -> Monthly", "close": 1898.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 40.26, "ltf_rsi": 62.13, "type": "Hidden Bullish Divergence"}, {"symbol": "JUBLFOOD", "pair": "15m -> 1h", "close": 502.95, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 40.53, "ltf_rsi": 12.44, "type": "Hidden Bullish Divergence"}, {"symbol": "JUBLFOOD", "pair": "1h -> Daily", "close": 502.95, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 62.55, "ltf_rsi": 40.53, "type": "Hidden Bullish Divergence"}, {"symbol": "JUBLFOOD", "pair": "Daily -> Weekly", "close": 499.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 70.35, "ltf_rsi": 62.55, "type": "Regular Bullish Divergence"}, {"symbol": "JUBLFOOD", "pair": "Weekly -> Monthly", "close": 499.5, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 30.09, "ltf_rsi": 70.35, "type": "Regular Bullish Divergence"}, {"symbol": "APLAPOLLO", "pair": "Weekly -> Monthly", "close": 2159.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 62.12, "ltf_rsi": 71.13, "type": "Regular Bearish Divergence"}, {"symbol": "ASIANPAINT", "pair": "15m -> 1h", "close": 2630.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 50.38, "ltf_rsi": 17.39, "type": "Regular Bullish Divergence"}, {"symbol": "ASIANPAINT", "pair": "1h -> Daily", "close": 2630.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 22.6, "ltf_rsi": 50.38, "type": "Regular Bullish Divergence"}, {"symbol": "MUTHOOTFIN", "pair": "15m -> 1h", "close": 3200.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 50.53, "ltf_rsi": 41.23, "type": "Hidden Bullish Divergence"}, {"symbol": "MUTHOOTFIN", "pair": "1h -> Daily", "close": 3200.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 78.17, "ltf_rsi": 50.53, "type": "Hidden Bullish Divergence"}, {"symbol": "MUTHOOTFIN", "pair": "Daily -> Weekly", "close": 3206.9, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 47.11, "ltf_rsi": 78.17, "type": "Hidden Bullish Divergence"}, {"symbol": "BHARTIARTL", "pair": "15m -> 1h", "close": 1913.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 33.87, "ltf_rsi": 36.02, "type": "Regular Bullish Divergence"}, {"symbol": "BHARTIARTL", "pair": "1h -> Daily", "close": 1913.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 42.53, "ltf_rsi": 33.87, "type": "Regular Bullish Divergence"}, {"symbol": "BHARTIARTL", "pair": "Daily -> Weekly", "close": 1902.1, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 52.81, "ltf_rsi": 42.53, "type": "Hidden Bullish Divergence"}, {"symbol": "CIPLA", "pair": "15m -> 1h", "close": 1410.6, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 38.72, "ltf_rsi": 50.94, "type": "Hidden Bearish Divergence"}, {"symbol": "CIPLA", "pair": "1h -> Daily", "close": 1410.6, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 20.4, "ltf_rsi": 38.72, "type": "Regular Bullish Divergence"}, {"symbol": "CIPLA", "pair": "Daily -> Weekly", "close": 1402.7, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 50.52, "ltf_rsi": 20.4, "type": "Hidden Bullish Divergence"}, {"symbol": "HDFCAMC", "pair": "Daily -> Weekly", "close": 2667.9, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 47.61, "ltf_rsi": 66.77, "type": "Hidden Bearish Divergence"}, {"symbol": "HDFCAMC", "pair": "Weekly -> Monthly", "close": 2667.9, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 51.88, "ltf_rsi": 47.61, "type": "Hidden Bearish Divergence"}, {"symbol": "ICICIBANK", "pair": "Weekly -> Monthly", "close": 1430.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.9, "ltf_rsi": 81.68, "type": "Hidden Bullish Divergence"}, {"symbol": "TECHM", "pair": "15m -> 1h", "close": 1570.4, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 38.95, "ltf_rsi": 35.27, "type": "Regular Bullish Divergence"}, {"symbol": "TECHM", "pair": "1h -> Daily", "close": 1570.4, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 29.21, "ltf_rsi": 38.95, "type": "Regular Bullish Divergence"}, {"symbol": "TECHM", "pair": "Daily -> Weekly", "close": 1571.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 63.81, "ltf_rsi": 29.21, "type": "Hidden Bullish Divergence"}, {"symbol": "TECHM", "pair": "Weekly -> Monthly", "close": 1571.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.33, "ltf_rsi": 63.81, "type": "Hidden Bullish Divergence"}, {"symbol": "SRF", "pair": "Daily -> Weekly", "close": 2583.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 45.84, "ltf_rsi": 39.58, "type": "Hidden Bearish Divergence"}, {"symbol": "SRF", "pair": "Weekly -> Monthly", "close": 2583.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 31.38, "ltf_rsi": 45.84, "type": "Hidden Bearish Divergence"}, {"symbol": "KEI", "pair": "Weekly -> Monthly", "close": 5540.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 65.34, "ltf_rsi": 56.48, "type": "Hidden Bullish Divergence"}, {"symbol": "CNXMIDCAP", "pair": "Weekly -> Monthly", "close": 64101.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.14, "ltf_rsi": 65.04, "type": "Hidden Bullish Divergence"}, {"symbol": "LAURUSLABS", "pair": "15m -> 1h", "close": 1893.6, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 93.68, "ltf_rsi": 55.15, "type": "Hidden Bullish Divergence"}, {"symbol": "LAURUSLABS", "pair": "1h -> Daily", "close": 1893.6, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 60.39, "ltf_rsi": 93.68, "type": "Regular Bearish Divergence"}, {"symbol": "LAURUSLABS", "pair": "Daily -> Weekly", "close": 1887.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 84.51, "ltf_rsi": 60.39, "type": "Regular Bearish Divergence"}, {"symbol": "DIVISLAB", "pair": "15m -> 1h", "close": 9030.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 96.81, "ltf_rsi": 92.76, "type": "Hidden Bullish Divergence"}, {"symbol": "DIVISLAB", "pair": "1h -> Daily", "close": 9030.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 75.45, "ltf_rsi": 96.81, "type": "Hidden Bullish Divergence"}, {"symbol": "KOTAKBANK", "pair": "Weekly -> Monthly", "close": 416.7, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 46.89, "ltf_rsi": 62.78, "type": "Hidden Bearish Divergence"}, {"symbol": "LUPIN", "pair": "Daily -> Weekly", "close": 2185.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.66, "ltf_rsi": 13.21, "type": "Hidden Bullish Divergence"}, {"symbol": "LUPIN", "pair": "Weekly -> Monthly", "close": 2185.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 63.82, "ltf_rsi": 42.66, "type": "Hidden Bullish Divergence"}, {"symbol": "NIFTY", "pair": "15m -> 1h", "close": 24207.75, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.9, "ltf_rsi": 23.21, "type": "Regular Bullish Divergence"}, {"symbol": "NIFTY", "pair": "1h -> Daily", "close": 24207.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 29.27, "ltf_rsi": 48.9, "type": "Regular Bullish Divergence"}, {"symbol": "NIFTY", "pair": "Daily -> Weekly", "close": 24207.75, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 57.68, "ltf_rsi": 29.27, "type": "Hidden Bullish Divergence"}, {"symbol": "NIFTY", "pair": "Weekly -> Monthly", "close": 24207.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 43.36, "ltf_rsi": 57.68, "type": "Hidden Bullish Divergence"}, {"symbol": "COCHINSHIP", "pair": "Weekly -> Monthly", "close": 1547.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 39.06, "ltf_rsi": 51.3, "type": "Hidden Bullish Divergence"}, {"symbol": "JIOFIN", "pair": "15m -> 1h", "close": 242.1, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.15, "ltf_rsi": 27.59, "type": "Regular Bullish Divergence"}, {"symbol": "JIOFIN", "pair": "1h -> Daily", "close": 242.1, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 18.7, "ltf_rsi": 46.15, "type": "Regular Bullish Divergence"}, {"symbol": "JIOFIN", "pair": "Daily -> Weekly", "close": 241.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 52.09, "ltf_rsi": 18.7, "type": "Hidden Bearish Divergence"}, {"symbol": "JIOFIN", "pair": "Weekly -> Monthly", "close": 241.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 29.02, "ltf_rsi": 52.09, "type": "Hidden Bearish Divergence"}, {"symbol": "POWERGRID", "pair": "Weekly -> Monthly", "close": 265.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 40.83, "ltf_rsi": 30.55, "type": "Hidden Bullish Divergence"}, {"symbol": "DABUR", "pair": "15m -> 1h", "close": 394.35, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 40.88, "ltf_rsi": 44.32, "type": "Hidden Bearish Divergence"}, {"symbol": "DABUR", "pair": "Daily -> Weekly", "close": 392.2, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 21.99, "ltf_rsi": 20.25, "type": "Regular Bullish Divergence"}, {"symbol": "DABUR", "pair": "Weekly -> Monthly", "close": 392.2, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 36.15, "ltf_rsi": 21.99, "type": "Regular Bullish Divergence"}, {"symbol": "DIXON", "pair": "15m -> 1h", "close": 14735.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 61.0, "ltf_rsi": 24.47, "type": "Hidden Bullish Divergence"}, {"symbol": "DIXON", "pair": "1h -> Daily", "close": 14735.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 60.23, "ltf_rsi": 61.0, "type": "Regular Bearish Divergence"}, {"symbol": "DIXON", "pair": "Daily -> Weekly", "close": 14735.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 75.37, "ltf_rsi": 60.23, "type": "Hidden Bullish Divergence"}, {"symbol": "DIXON", "pair": "Weekly -> Monthly", "close": 14735.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 49.13, "ltf_rsi": 75.37, "type": "Hidden Bullish Divergence"}, {"symbol": "PFC", "pair": "15m -> 1h", "close": 364.45, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 56.01, "ltf_rsi": 30.77, "type": "Hidden Bullish Divergence"}, {"symbol": "PFC", "pair": "1h -> Daily", "close": 364.45, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 11.99, "ltf_rsi": 56.01, "type": "Regular Bullish Divergence"}, {"symbol": "RBLBANK", "pair": "15m -> 1h", "close": 381.6, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 31.96, "ltf_rsi": 30.41, "type": "Regular Bullish Divergence"}, {"symbol": "LODHA", "pair": "1h -> Daily", "close": 1280.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 63.38, "ltf_rsi": 71.91, "type": "Hidden Bullish Divergence"}, {"symbol": "LODHA", "pair": "Daily -> Weekly", "close": 1265.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 78.1, "ltf_rsi": 63.38, "type": "Hidden Bullish Divergence"}, {"symbol": "NMDC", "pair": "1h -> Daily", "close": 88.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 58.42, "ltf_rsi": 70.75, "type": "Regular Bullish Divergence"}, {"symbol": "NMDC", "pair": "Daily -> Weekly", "close": 88.21, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 50.82, "ltf_rsi": 58.42, "type": "Regular Bullish Divergence"}, {"symbol": "NMDC", "pair": "Weekly -> Monthly", "close": 88.21, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.32, "ltf_rsi": 50.82, "type": "Hidden Bullish Divergence"}, {"symbol": "COALINDIA", "pair": "15m -> 1h", "close": 403.2, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 35.71, "ltf_rsi": 60.71, "type": "Hidden Bearish Divergence"}, {"symbol": "COALINDIA", "pair": "1h -> Daily", "close": 403.2, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 32.31, "ltf_rsi": 35.71, "type": "Hidden Bearish Divergence"}, {"symbol": "COALINDIA", "pair": "Daily -> Weekly", "close": 403.5, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 25.65, "ltf_rsi": 32.31, "type": "Regular Bullish Divergence"}, {"symbol": "COALINDIA", "pair": "Weekly -> Monthly", "close": 403.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 52.31, "ltf_rsi": 25.65, "type": "Hidden Bullish Divergence"}, {"symbol": "NUVAMA", "pair": "15m -> 1h", "close": 1765.5, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 57.3, "ltf_rsi": 50.29, "type": "Hidden Bearish Divergence"}, {"symbol": "NUVAMA", "pair": "Weekly -> Monthly", "close": 1779.3, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 54.11, "ltf_rsi": 62.41, "type": "Regular Bearish Divergence"}, {"symbol": "NTPC", "pair": "15m -> 1h", "close": 336.95, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 45.03, "ltf_rsi": 31.82, "type": "Regular Bearish Divergence"}, {"symbol": "NTPC", "pair": "1h -> Daily", "close": 336.95, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 32.55, "ltf_rsi": 45.03, "type": "Regular Bearish Divergence"}, {"symbol": "NTPC", "pair": "Daily -> Weekly", "close": 334.6, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 22.27, "ltf_rsi": 32.55, "type": "Regular Bullish Divergence"}, {"symbol": "NTPC", "pair": "Weekly -> Monthly", "close": 334.6, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 49.92, "ltf_rsi": 22.27, "type": "Hidden Bullish Divergence"}, {"symbol": "TATASTEEL", "pair": "1h -> Daily", "close": 189.4, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 47.03, "ltf_rsi": 65.8, "type": "Regular Bullish Divergence"}, {"symbol": "TATASTEEL", "pair": "Daily -> Weekly", "close": 188.01, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 29.79, "ltf_rsi": 47.03, "type": "Regular Bullish Divergence"}, {"symbol": "ICICIGI", "pair": "15m -> 1h", "close": 1587.8, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 33.86, "ltf_rsi": 16.63, "type": "Hidden Bearish Divergence"}, {"symbol": "ICICIGI", "pair": "Weekly -> Monthly", "close": 1596.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 29.66, "ltf_rsi": 35.93, "type": "Hidden Bullish Divergence"}, {"symbol": "NESTLEIND", "pair": "15m -> 1h", "close": 1456.9, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 47.41, "ltf_rsi": 47.59, "type": "Hidden Bearish Divergence"}, {"symbol": "NESTLEIND", "pair": "1h -> Daily", "close": 1456.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 26.77, "ltf_rsi": 47.41, "type": "Hidden Bearish Divergence"}, {"symbol": "NESTLEIND", "pair": "Daily -> Weekly", "close": 1451.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 53.64, "ltf_rsi": 26.77, "type": "Hidden Bullish Divergence"}, {"symbol": "NESTLEIND", "pair": "Weekly -> Monthly", "close": 1451.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 60.92, "ltf_rsi": 53.64, "type": "Hidden Bullish Divergence"}, {"symbol": "PETRONET", "pair": "15m -> 1h", "close": 291.95, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 39.23, "ltf_rsi": 31.06, "type": "Hidden Bullish Divergence"}, {"symbol": "PETRONET", "pair": "1h -> Daily", "close": 291.95, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 66.81, "ltf_rsi": 39.23, "type": "Hidden Bullish Divergence"}, {"symbol": "TCS", "pair": "15m -> 1h", "close": 2271.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 34.34, "ltf_rsi": 38.03, "type": "Regular Bullish Divergence"}, {"symbol": "TCS", "pair": "1h -> Daily", "close": 2271.9, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 37.77, "ltf_rsi": 34.34, "type": "Regular Bullish Divergence"}, {"symbol": "WIPRO", "pair": "15m -> 1h", "close": 177.55, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 20.29, "ltf_rsi": 32.34, "type": "Regular Bullish Divergence"}, {"symbol": "WIPRO", "pair": "1h -> Daily", "close": 177.55, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 28.41, "ltf_rsi": 20.29, "type": "Regular Bullish Divergence"}, {"symbol": "WIPRO", "pair": "Daily -> Weekly", "close": 177.35, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 26.86, "ltf_rsi": 28.41, "type": "Hidden Bearish Divergence"}, {"symbol": "WIPRO", "pair": "Weekly -> Monthly", "close": 177.35, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 27.66, "ltf_rsi": 26.86, "type": "Regular Bullish Divergence"}, {"symbol": "HCLTECH", "pair": "15m -> 1h", "close": 1300.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 34.61, "ltf_rsi": 37.78, "type": "Regular Bullish Divergence"}, {"symbol": "HCLTECH", "pair": "1h -> Daily", "close": 1300.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 40.83, "ltf_rsi": 34.61, "type": "Regular Bullish Divergence"}, {"symbol": "HCLTECH", "pair": "Daily -> Weekly", "close": 1298.5, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 64.37, "ltf_rsi": 40.83, "type": "Regular Bearish Divergence"}, {"symbol": "TATACONSUM", "pair": "15m -> 1h", "close": 1047.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 39.59, "ltf_rsi": 48.33, "type": "Regular Bullish Divergence"}, {"symbol": "TATACONSUM", "pair": "1h -> Daily", "close": 1047.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 38.87, "ltf_rsi": 39.59, "type": "Regular Bullish Divergence"}, {"symbol": "TATACONSUM", "pair": "Daily -> Weekly", "close": 1047.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 14.86, "ltf_rsi": 38.87, "type": "Hidden Bearish Divergence"}, {"symbol": "TATACONSUM", "pair": "Weekly -> Monthly", "close": 1047.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 46.08, "ltf_rsi": 14.86, "type": "Hidden Bullish Divergence"}, {"symbol": "DMART", "pair": "15m -> 1h", "close": 3818.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 35.28, "ltf_rsi": 21.83, "type": "Hidden Bearish Divergence"}, {"symbol": "DMART", "pair": "1h -> Daily", "close": 3818.8, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 40.38, "ltf_rsi": 35.28, "type": "Regular Bullish Divergence"}, {"symbol": "DMART", "pair": "Daily -> Weekly", "close": 3826.9, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 41.46, "ltf_rsi": 40.38, "type": "Regular Bullish Divergence"}, {"symbol": "DMART", "pair": "Weekly -> Monthly", "close": 3826.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 43.13, "ltf_rsi": 41.46, "type": "Hidden Bullish Divergence"}, {"symbol": "FORTIS", "pair": "15m -> 1h", "close": 917.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 55.5, "ltf_rsi": 16.34, "type": "Hidden Bullish Divergence"}, {"symbol": "INFY", "pair": "15m -> 1h", "close": 1122.7, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 32.59, "ltf_rsi": 40.57, "type": "Hidden Bearish Divergence"}, {"symbol": "INFY", "pair": "1h -> Daily", "close": 1122.7, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 36.95, "ltf_rsi": 32.59, "type": "Hidden Bearish Divergence"}, {"symbol": "INDUSTOWER", "pair": "Weekly -> Monthly", "close": 377.7, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 43.62, "ltf_rsi": 28.08, "type": "Regular Bearish Divergence"}, {"symbol": "PATANJALI", "pair": "1h -> Daily", "close": 348.45, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 37.15, "ltf_rsi": 50.94, "type": "Hidden Bearish Divergence"}, {"symbol": "PATANJALI", "pair": "Daily -> Weekly", "close": 348.15, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 15.73, "ltf_rsi": 37.15, "type": "Hidden Bearish Divergence"}, {"symbol": "HDFCLIFE", "pair": "15m -> 1h", "close": 557.75, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 59.71, "ltf_rsi": 34.08, "type": "Hidden Bearish Divergence"}, {"symbol": "HDFCLIFE", "pair": "1h -> Daily", "close": 557.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 59.13, "ltf_rsi": 59.71, "type": "Hidden Bullish Divergence"}, {"symbol": "HDFCLIFE", "pair": "Daily -> Weekly", "close": 553.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 31.78, "ltf_rsi": 59.13, "type": "Hidden Bullish Divergence"}, {"symbol": "HDFCLIFE", "pair": "Weekly -> Monthly", "close": 553.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 15.99, "ltf_rsi": 31.78, "type": "Regular Bullish Divergence"}, {"symbol": "TORNTPHARM", "pair": "15m -> 1h", "close": 4890.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 52.11, "ltf_rsi": 43.01, "type": "Hidden Bullish Divergence"}, {"symbol": "TORNTPHARM", "pair": "1h -> Daily", "close": 4890.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 44.25, "ltf_rsi": 52.11, "type": "Hidden Bullish Divergence"}, {"symbol": "TORNTPHARM", "pair": "Daily -> Weekly", "close": 4890.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 61.83, "ltf_rsi": 44.25, "type": "Hidden Bullish Divergence"}, {"symbol": "BEL", "pair": "15m -> 1h", "close": 408.55, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 60.09, "ltf_rsi": 43.94, "type": "Hidden Bullish Divergence"}, {"symbol": "EXIDEIND", "pair": "15m -> 1h", "close": 443.8, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 19.28, "ltf_rsi": 37.96, "type": "Regular Bullish Divergence"}, {"symbol": "EXIDEIND", "pair": "1h -> Daily", "close": 443.8, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 32.32, "ltf_rsi": 19.28, "type": "Hidden Bullish Divergence"}, {"symbol": "EXIDEIND", "pair": "Daily -> Weekly", "close": 444.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 72.29, "ltf_rsi": 32.32, "type": "Hidden Bullish Divergence"}, {"symbol": "BDL", "pair": "15m -> 1h", "close": 1361.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 54.03, "ltf_rsi": 46.74, "type": "Regular Bearish Divergence"}, {"symbol": "BDL", "pair": "Daily -> Weekly", "close": 1363.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 53.83, "ltf_rsi": 61.31, "type": "Hidden Bearish Divergence"}, {"symbol": "BDL", "pair": "Weekly -> Monthly", "close": 1363.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 35.45, "ltf_rsi": 53.83, "type": "Hidden Bearish Divergence"}, {"symbol": "RECLTD", "pair": "15m -> 1h", "close": 323.15, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.34, "ltf_rsi": 27.12, "type": "Regular Bullish Divergence"}, {"symbol": "RECLTD", "pair": "1h -> Daily", "close": 323.15, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 21.23, "ltf_rsi": 46.34, "type": "Regular Bullish Divergence"}, {"symbol": "RECLTD", "pair": "Daily -> Weekly", "close": 322.2, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 43.48, "ltf_rsi": 21.23, "type": "Hidden Bearish Divergence"}, {"symbol": "RECLTD", "pair": "Weekly -> Monthly", "close": 322.2, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 37.21, "ltf_rsi": 43.48, "type": "Hidden Bearish Divergence"}, {"symbol": "TATAELXSI", "pair": "15m -> 1h", "close": 3636.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 34.24, "ltf_rsi": 34.06, "type": "Regular Bullish Divergence"}, {"symbol": "TATAELXSI", "pair": "1h -> Daily", "close": 3636.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 43.23, "ltf_rsi": 34.24, "type": "Regular Bullish Divergence"}, {"symbol": "TATAELXSI", "pair": "Daily -> Weekly", "close": 3650.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 24.02, "ltf_rsi": 43.23, "type": "Regular Bullish Divergence"}, {"symbol": "TATAELXSI", "pair": "Weekly -> Monthly", "close": 3650.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 17.26, "ltf_rsi": 24.02, "type": "Regular Bullish Divergence"}, {"symbol": "GODREJPROP", "pair": "15m -> 1h", "close": 2047.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 53.53, "ltf_rsi": 4.68, "type": "Hidden Bearish Divergence"}, {"symbol": "GODREJPROP", "pair": "1h -> Daily", "close": 2047.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 43.86, "ltf_rsi": 53.53, "type": "Hidden Bullish Divergence"}, {"symbol": "GODREJPROP", "pair": "Daily -> Weekly", "close": 2035.1, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.08, "ltf_rsi": 43.86, "type": "Hidden Bullish Divergence"}, {"symbol": "BANKINDIA", "pair": "Weekly -> Monthly", "close": 145.95, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 60.26, "ltf_rsi": 60.25, "type": "Hidden Bullish Divergence"}, {"symbol": "SBIN", "pair": "15m -> 1h", "close": 1054.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 78.3, "ltf_rsi": 33.66, "type": "Regular Bullish Divergence"}, {"symbol": "SBIN", "pair": "1h -> Daily", "close": 1054.5, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 35.99, "ltf_rsi": 78.3, "type": "Regular Bullish Divergence"}, {"symbol": "SBIN", "pair": "Weekly -> Monthly", "close": 1052.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 62.43, "ltf_rsi": 68.54, "type": "Hidden Bullish Divergence"}, {"symbol": "PGEL", "pair": "1h -> Daily", "close": 588.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 38.83, "ltf_rsi": 24.8, "type": "Hidden Bullish Divergence"}, {"symbol": "PGEL", "pair": "Daily -> Weekly", "close": 587.15, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 68.16, "ltf_rsi": 38.83, "type": "Hidden Bullish Divergence"}, {"symbol": "PGEL", "pair": "Weekly -> Monthly", "close": 587.15, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 41.7, "ltf_rsi": 68.16, "type": "Hidden Bullish Divergence"}, {"symbol": "CNXFINANCE", "pair": "1h -> Daily", "close": 26386.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 35.05, "ltf_rsi": 70.07, "type": "Hidden Bullish Divergence"}, {"symbol": "CNXFINANCE", "pair": "Daily -> Weekly", "close": 26386.75, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 59.22, "ltf_rsi": 35.05, "type": "Hidden Bullish Divergence"}, {"symbol": "CNXFINANCE", "pair": "Weekly -> Monthly", "close": 26386.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 47.03, "ltf_rsi": 59.22, "type": "Hidden Bullish Divergence"}, {"symbol": "ABB", "pair": "15m -> 1h", "close": 7605.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 60.78, "ltf_rsi": 41.72, "type": "Hidden Bullish Divergence"}, {"symbol": "ABB", "pair": "1h -> Daily", "close": 7605.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 43.35, "ltf_rsi": 60.78, "type": "Hidden Bearish Divergence"}, {"symbol": "ABB", "pair": "Daily -> Weekly", "close": 7609.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 62.77, "ltf_rsi": 43.35, "type": "Hidden Bearish Divergence"}, {"symbol": "ABB", "pair": "Weekly -> Monthly", "close": 7609.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 66.99, "ltf_rsi": 62.77, "type": "Regular Bearish Divergence"}, {"symbol": "PNBHOUSING", "pair": "15m -> 1h", "close": 1181.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 69.07, "ltf_rsi": 11.9, "type": "Hidden Bullish Divergence"}, {"symbol": "PNBHOUSING", "pair": "1h -> Daily", "close": 1181.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 64.23, "ltf_rsi": 69.07, "type": "Hidden Bullish Divergence"}, {"symbol": "PNBHOUSING", "pair": "Weekly -> Monthly", "close": 1185.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 53.0, "ltf_rsi": 66.51, "type": "Hidden Bullish Divergence"}, {"symbol": "BOSCHLTD", "pair": "15m -> 1h", "close": 48875.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 79.49, "ltf_rsi": 67.4, "type": "Hidden Bullish Divergence"}, {"symbol": "BOSCHLTD", "pair": "1h -> Daily", "close": 48875.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 88.33, "ltf_rsi": 79.49, "type": "Hidden Bullish Divergence"}, {"symbol": "BOSCHLTD", "pair": "Weekly -> Monthly", "close": 48895.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 70.03, "ltf_rsi": 89.48, "type": "Hidden Bullish Divergence"}, {"symbol": "VMM", "pair": "15m -> 1h", "close": 110.19, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 15.69, "ltf_rsi": 21.79, "type": "Hidden Bearish Divergence"}, {"symbol": "VMM", "pair": "1h -> Daily", "close": 110.19, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 50.2, "ltf_rsi": 15.69, "type": "Hidden Bearish Divergence"}, {"symbol": "VMM", "pair": "Daily -> Weekly", "close": 109.62, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 34.29, "ltf_rsi": 50.2, "type": "Regular Bullish Divergence"}, {"symbol": "ASTRAL", "pair": "Weekly -> Monthly", "close": 1526.1, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 50.81, "ltf_rsi": 48.8, "type": "Hidden Bullish Divergence"}, {"symbol": "RVNL", "pair": "15m -> 1h", "close": 221.39, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 46.66, "ltf_rsi": 45.29, "type": "Hidden Bearish Divergence"}, {"symbol": "RVNL", "pair": "1h -> Daily", "close": 221.39, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 27.83, "ltf_rsi": 46.66, "type": "Regular Bullish Divergence"}, {"symbol": "RVNL", "pair": "Daily -> Weekly", "close": 221.39, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 22.03, "ltf_rsi": 27.83, "type": "Regular Bullish Divergence"}, {"symbol": "RVNL", "pair": "Weekly -> Monthly", "close": 221.39, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 28.62, "ltf_rsi": 22.03, "type": "Hidden Bullish Divergence"}, {"symbol": "POWERINDIA", "pair": "15m -> 1h", "close": 33170.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 29.05, "ltf_rsi": 32.98, "type": "Regular Bullish Divergence"}, {"symbol": "POWERINDIA", "pair": "1h -> Daily", "close": 33170.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 55.72, "ltf_rsi": 29.05, "type": "Regular Bullish Divergence"}, {"symbol": "OBEROIRLTY", "pair": "15m -> 1h", "close": 1874.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 47.03, "ltf_rsi": 22.92, "type": "Hidden Bullish Divergence"}, {"symbol": "OBEROIRLTY", "pair": "1h -> Daily", "close": 1874.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 63.99, "ltf_rsi": 47.03, "type": "Regular Bearish Divergence"}, {"symbol": "OBEROIRLTY", "pair": "Daily -> Weekly", "close": 1870.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 64.16, "ltf_rsi": 63.99, "type": "Regular Bearish Divergence"}, {"symbol": "OBEROIRLTY", "pair": "Weekly -> Monthly", "close": 1870.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.76, "ltf_rsi": 64.16, "type": "Hidden Bullish Divergence"}, {"symbol": "YESBANK", "pair": "15m -> 1h", "close": 22.4, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 39.66, "ltf_rsi": 6.67, "type": "Regular Bullish Divergence"}, {"symbol": "YESBANK", "pair": "1h -> Daily", "close": 22.4, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.79, "ltf_rsi": 39.66, "type": "Regular Bullish Divergence"}, {"symbol": "YESBANK", "pair": "Daily -> Weekly", "close": 22.38, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 53.45, "ltf_rsi": 42.79, "type": "Regular Bullish Divergence"}, {"symbol": "YESBANK", "pair": "Weekly -> Monthly", "close": 22.38, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.14, "ltf_rsi": 53.45, "type": "Hidden Bearish Divergence"}, {"symbol": "NAM_INDIA", "pair": "15m -> 1h", "close": 1227.3, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 27.84, "ltf_rsi": 36.59, "type": "Regular Bullish Divergence"}, {"symbol": "NAM_INDIA", "pair": "1h -> Daily", "close": 1227.3, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.01, "ltf_rsi": 27.84, "type": "Regular Bearish Divergence"}, {"symbol": "NAM_INDIA", "pair": "Daily -> Weekly", "close": 1223.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 62.51, "ltf_rsi": 55.01, "type": "Regular Bearish Divergence"}, {"symbol": "POLYCAB", "pair": "15m -> 1h", "close": 9085.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 58.52, "ltf_rsi": 50.62, "type": "Hidden Bearish Divergence"}, {"symbol": "POLYCAB", "pair": "1h -> Daily", "close": 9085.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 39.71, "ltf_rsi": 58.52, "type": "Hidden Bearish Divergence"}, {"symbol": "POLYCAB", "pair": "Daily -> Weekly", "close": 9060.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 46.73, "ltf_rsi": 39.71, "type": "Hidden Bearish Divergence"}, {"symbol": "POLYCAB", "pair": "Weekly -> Monthly", "close": 9060.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 63.17, "ltf_rsi": 46.73, "type": "Regular Bearish Divergence"}, {"symbol": "MPHASIS", "pair": "15m -> 1h", "close": 2396.4, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 35.74, "ltf_rsi": 39.29, "type": "Regular Bullish Divergence"}, {"symbol": "MPHASIS", "pair": "1h -> Daily", "close": 2396.4, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 46.21, "ltf_rsi": 35.74, "type": "Regular Bullish Divergence"}, {"symbol": "CDSL", "pair": "1h -> Daily", "close": 1435.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 75.83, "ltf_rsi": 72.06, "type": "Hidden Bullish Divergence"}, {"symbol": "CDSL", "pair": "Daily -> Weekly", "close": 1434.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 69.21, "ltf_rsi": 75.83, "type": "Hidden Bullish Divergence"}, {"symbol": "CDSL", "pair": "Weekly -> Monthly", "close": 1434.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 37.41, "ltf_rsi": 69.21, "type": "Hidden Bullish Divergence"}, {"symbol": "LTM", "pair": "15m -> 1h", "close": 4506.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 49.37, "ltf_rsi": 49.45, "type": "Hidden Bearish Divergence"}, {"symbol": "LTM", "pair": "1h -> Daily", "close": 4506.5, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 45.76, "ltf_rsi": 49.37, "type": "Hidden Bearish Divergence"}, {"symbol": "BAJAJFINSV", "pair": "1h -> Daily", "close": 2018.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 31.26, "ltf_rsi": 57.32, "type": "Hidden Bullish Divergence"}, {"symbol": "BAJAJFINSV", "pair": "Daily -> Weekly", "close": 2010.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 68.68, "ltf_rsi": 31.26, "type": "Hidden Bullish Divergence"}, {"symbol": "BAJAJFINSV", "pair": "Weekly -> Monthly", "close": 2010.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 48.22, "ltf_rsi": 68.68, "type": "Hidden Bullish Divergence"}, {"symbol": "SIEMENS", "pair": "Weekly -> Monthly", "close": 4043.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 62.3, "ltf_rsi": 58.59, "type": "Hidden Bullish Divergence"}, {"symbol": "HINDUNILVR", "pair": "Daily -> Weekly", "close": 2021.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 27.01, "ltf_rsi": 34.93, "type": "Regular Bullish Divergence"}, {"symbol": "HINDUNILVR", "pair": "Weekly -> Monthly", "close": 2021.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 41.87, "ltf_rsi": 27.01, "type": "Regular Bullish Divergence"}, {"symbol": "UNOMINDA", "pair": "15m -> 1h", "close": 1260.8, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 62.06, "ltf_rsi": 36.48, "type": "Hidden Bearish Divergence"}, {"symbol": "UNOMINDA", "pair": "Weekly -> Monthly", "close": 1260.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 57.63, "ltf_rsi": 68.65, "type": "Regular Bearish Divergence"}, {"symbol": "HDFCBANK", "pair": "15m -> 1h", "close": 727.6, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 58.7, "ltf_rsi": 47.01, "type": "Regular Bullish Divergence"}, {"symbol": "HDFCBANK", "pair": "1h -> Daily", "close": 727.6, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 39.27, "ltf_rsi": 58.7, "type": "Regular Bullish Divergence"}, {"symbol": "HDFCBANK", "pair": "Daily -> Weekly", "close": 727.2, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 40.64, "ltf_rsi": 39.27, "type": "Regular Bullish Divergence"}, {"symbol": "HDFCBANK", "pair": "Weekly -> Monthly", "close": 727.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 26.84, "ltf_rsi": 40.64, "type": "Regular Bullish Divergence"}, {"symbol": "INDUSINDBK", "pair": "15m -> 1h", "close": 1000.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 38.21, "ltf_rsi": 46.35, "type": "Hidden Bullish Divergence"}, {"symbol": "INDUSINDBK", "pair": "1h -> Daily", "close": 1000.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 44.12, "ltf_rsi": 38.21, "type": "Regular Bullish Divergence"}, {"symbol": "INDUSINDBK", "pair": "Daily -> Weekly", "close": 1004.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 67.49, "ltf_rsi": 44.12, "type": "Hidden Bullish Divergence"}, {"symbol": "INDUSINDBK", "pair": "Weekly -> Monthly", "close": 1004.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.91, "ltf_rsi": 67.49, "type": "Hidden Bullish Divergence"}, {"symbol": "ADANIPOWER", "pair": "15m -> 1h", "close": 208.05, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 73.99, "ltf_rsi": 27.75, "type": "Regular Bullish Divergence"}, {"symbol": "ADANIPOWER", "pair": "1h -> Daily", "close": 208.05, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 47.7, "ltf_rsi": 73.99, "type": "Regular Bullish Divergence"}, {"symbol": "ADANIPOWER", "pair": "Weekly -> Monthly", "close": 207.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 71.72, "ltf_rsi": 42.56, "type": "Hidden Bullish Divergence"}, {"symbol": "HYUNDAI", "pair": "Daily -> Weekly", "close": 2250.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 85.52, "ltf_rsi": 56.83, "type": "Hidden Bearish Divergence"}, {"symbol": "CANBK", "pair": "Weekly -> Monthly", "close": 129.45, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.52, "ltf_rsi": 51.67, "type": "Regular Bearish Divergence"}, {"symbol": "SUPREMEIND", "pair": "Daily -> Weekly", "close": 3540.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 49.26, "ltf_rsi": 56.66, "type": "Regular Bullish Divergence"}, {"symbol": "SUPREMEIND", "pair": "Weekly -> Monthly", "close": 3540.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 36.64, "ltf_rsi": 49.26, "type": "Regular Bullish Divergence"}, {"symbol": "HINDPETRO", "pair": "Weekly -> Monthly", "close": 375.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 43.58, "ltf_rsi": 44.54, "type": "Hidden Bullish Divergence"}, {"symbol": "ULTRACEMCO", "pair": "15m -> 1h", "close": 11775.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 73.4, "ltf_rsi": 78.72, "type": "Regular Bearish Divergence"}, {"symbol": "ULTRACEMCO", "pair": "Weekly -> Monthly", "close": 11717.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 47.17, "ltf_rsi": 52.9, "type": "Hidden Bullish Divergence"}, {"symbol": "NBCC", "pair": "1h -> Daily", "close": 89.2, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 23.85, "ltf_rsi": 65.22, "type": "Hidden Bearish Divergence"}, {"symbol": "NBCC", "pair": "Daily -> Weekly", "close": 89.21, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 43.75, "ltf_rsi": 23.85, "type": "Hidden Bearish Divergence"}, {"symbol": "NBCC", "pair": "Weekly -> Monthly", "close": 89.21, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 37.75, "ltf_rsi": 43.75, "type": "Hidden Bullish Divergence"}, {"symbol": "APOLLOHOSP", "pair": "15m -> 1h", "close": 8799.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 71.1, "ltf_rsi": 39.51, "type": "Hidden Bullish Divergence"}, {"symbol": "APOLLOHOSP", "pair": "Weekly -> Monthly", "close": 8766.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 66.74, "ltf_rsi": 63.49, "type": "Hidden Bullish Divergence"}, {"symbol": "INOXWIND", "pair": "1h -> Daily", "close": 73.39, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 34.89, "ltf_rsi": 46.93, "type": "Regular Bullish Divergence"}, {"symbol": "INOXWIND", "pair": "Daily -> Weekly", "close": 73.2, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 16.29, "ltf_rsi": 34.89, "type": "Regular Bullish Divergence"}, {"symbol": "INOXWIND", "pair": "Weekly -> Monthly", "close": 73.2, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 23.01, "ltf_rsi": 16.29, "type": "Regular Bullish Divergence"}, {"symbol": "CONCOR", "pair": "15m -> 1h", "close": 517.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 47.7, "ltf_rsi": 52.28, "type": "Hidden Bearish Divergence"}, {"symbol": "CONCOR", "pair": "1h -> Daily", "close": 517.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 53.45, "ltf_rsi": 47.7, "type": "Regular Bullish Divergence"}, {"symbol": "CONCOR", "pair": "Daily -> Weekly", "close": 517.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 52.15, "ltf_rsi": 53.45, "type": "Regular Bearish Divergence"}, {"symbol": "ALKEM", "pair": "Daily -> Weekly", "close": 5303.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 46.77, "ltf_rsi": 26.44, "type": "Hidden Bullish Divergence"}, {"symbol": "ALKEM", "pair": "Weekly -> Monthly", "close": 5303.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 57.68, "ltf_rsi": 46.77, "type": "Hidden Bullish Divergence"}, {"symbol": "AMBUJACEM", "pair": "15m -> 1h", "close": 422.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 79.32, "ltf_rsi": 56.57, "type": "Regular Bullish Divergence"}, {"symbol": "AMBUJACEM", "pair": "1h -> Daily", "close": 422.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 33.43, "ltf_rsi": 79.32, "type": "Regular Bullish Divergence"}, {"symbol": "CAMS", "pair": "15m -> 1h", "close": 751.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 41.48, "ltf_rsi": 36.54, "type": "Hidden Bearish Divergence"}, {"symbol": "CAMS", "pair": "1h -> Daily", "close": 751.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 21.22, "ltf_rsi": 41.48, "type": "Regular Bullish Divergence"}, {"symbol": "CAMS", "pair": "Daily -> Weekly", "close": 746.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 48.14, "ltf_rsi": 21.22, "type": "Hidden Bullish Divergence"}, {"symbol": "CAMS", "pair": "Weekly -> Monthly", "close": 746.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 39.79, "ltf_rsi": 48.14, "type": "Hidden Bearish Divergence"}, {"symbol": "ZYDUSLIFE", "pair": "15m -> 1h", "close": 1149.5, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 84.95, "ltf_rsi": 72.09, "type": "Regular Bearish Divergence"}, {"symbol": "ZYDUSLIFE", "pair": "1h -> Daily", "close": 1149.5, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 57.63, "ltf_rsi": 84.95, "type": "Regular Bullish Divergence"}, {"symbol": "ZYDUSLIFE", "pair": "Daily -> Weekly", "close": 1150.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 67.43, "ltf_rsi": 57.63, "type": "Regular Bearish Divergence"}, {"symbol": "ZYDUSLIFE", "pair": "Weekly -> Monthly", "close": 1150.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 66.18, "ltf_rsi": 67.43, "type": "Hidden Bullish Divergence"}, {"symbol": "LICI", "pair": "15m -> 1h", "close": 415.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 25.9, "ltf_rsi": 28.97, "type": "Hidden Bullish Divergence"}, {"symbol": "LICI", "pair": "1h -> Daily", "close": 415.75, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 71.46, "ltf_rsi": 25.9, "type": "Hidden Bullish Divergence"}, {"symbol": "LICI", "pair": "Daily -> Weekly", "close": 415.3, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 52.38, "ltf_rsi": 71.46, "type": "Hidden Bullish Divergence"}, {"symbol": "LICI", "pair": "Weekly -> Monthly", "close": 415.3, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 37.39, "ltf_rsi": 52.38, "type": "Hidden Bearish Divergence"}, {"symbol": "CROMPTON", "pair": "15m -> 1h", "close": 238.1, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 21.29, "ltf_rsi": 10.67, "type": "Regular Bullish Divergence"}, {"symbol": "CROMPTON", "pair": "1h -> Daily", "close": 238.1, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 19.44, "ltf_rsi": 21.29, "type": "Regular Bullish Divergence"}, {"symbol": "CROMPTON", "pair": "Daily -> Weekly", "close": 238.25, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 26.88, "ltf_rsi": 19.44, "type": "Regular Bullish Divergence"}, {"symbol": "CROMPTON", "pair": "Weekly -> Monthly", "close": 238.25, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 31.67, "ltf_rsi": 26.88, "type": "Hidden Bearish Divergence"}, {"symbol": "VBL", "pair": "15m -> 1h", "close": 421.2, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 44.37, "ltf_rsi": 14.39, "type": "Regular Bearish Divergence"}, {"symbol": "VBL", "pair": "1h -> Daily", "close": 421.2, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 35.88, "ltf_rsi": 44.37, "type": "Regular Bearish Divergence"}, {"symbol": "VBL", "pair": "Daily -> Weekly", "close": 421.25, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 10.36, "ltf_rsi": 35.88, "type": "Regular Bullish Divergence"}, {"symbol": "BHARATFORG", "pair": "15m -> 1h", "close": 2006.1, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 17.11, "ltf_rsi": 16.91, "type": "Regular Bullish Divergence"}, {"symbol": "BHARATFORG", "pair": "1h -> Daily", "close": 2006.1, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 28.74, "ltf_rsi": 17.11, "type": "Regular Bullish Divergence"}, {"symbol": "BHARATFORG", "pair": "Daily -> Weekly", "close": 2005.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 56.57, "ltf_rsi": 28.74, "type": "Regular Bearish Divergence"}, {"symbol": "BHARATFORG", "pair": "Weekly -> Monthly", "close": 2005.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 67.25, "ltf_rsi": 56.57, "type": "Hidden Bullish Divergence"}, {"symbol": "MCX", "pair": "1h -> Daily", "close": 3350.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 86.78, "ltf_rsi": 82.3, "type": "Hidden Bullish Divergence"}, {"symbol": "MCX", "pair": "Daily -> Weekly", "close": 3350.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 52.64, "ltf_rsi": 86.78, "type": "Hidden Bullish Divergence"}, {"symbol": "MCX", "pair": "Weekly -> Monthly", "close": 3350.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 75.86, "ltf_rsi": 52.64, "type": "Hidden Bullish Divergence"}, {"symbol": "BAJAJ_AUTO", "pair": "1h -> Daily", "close": 11750.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.23, "ltf_rsi": 45.12, "type": "Regular Bearish Divergence"}, {"symbol": "BAJAJ_AUTO", "pair": "Daily -> Weekly", "close": 11724.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 71.68, "ltf_rsi": 55.23, "type": "Regular Bearish Divergence"}, {"symbol": "BAJAJ_AUTO", "pair": "Weekly -> Monthly", "close": 11724.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 71.05, "ltf_rsi": 71.68, "type": "Hidden Bullish Divergence"}, {"symbol": "ICICIPRULI", "pair": "1h -> Daily", "close": 518.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.39, "ltf_rsi": 63.65, "type": "Hidden Bullish Divergence"}, {"symbol": "ICICIPRULI", "pair": "Daily -> Weekly", "close": 515.05, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 48.64, "ltf_rsi": 57.39, "type": "Hidden Bullish Divergence"}, {"symbol": "BIOCON", "pair": "15m -> 1h", "close": 417.1, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 64.24, "ltf_rsi": 57.35, "type": "Hidden Bullish Divergence"}, {"symbol": "SWIGGY", "pair": "15m -> 1h", "close": 288.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 61.92, "ltf_rsi": 32.89, "type": "Hidden Bullish Divergence"}, {"symbol": "SWIGGY", "pair": "Daily -> Weekly", "close": 286.55, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 62.43, "ltf_rsi": 47.44, "type": "Regular Bullish Divergence"}, {"symbol": "JSWSTEEL", "pair": "Daily -> Weekly", "close": 1341.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 59.89, "ltf_rsi": 59.65, "type": "Regular Bearish Divergence"}, {"symbol": "JSWSTEEL", "pair": "Weekly -> Monthly", "close": 1341.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 69.01, "ltf_rsi": 59.89, "type": "Regular Bearish Divergence"}, {"symbol": "ETERNAL", "pair": "15m -> 1h", "close": 327.2, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 45.95, "ltf_rsi": 39.84, "type": "Hidden Bullish Divergence"}, {"symbol": "ETERNAL", "pair": "1h -> Daily", "close": 327.2, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 61.8, "ltf_rsi": 45.95, "type": "Hidden Bullish Divergence"}, {"symbol": "ETERNAL", "pair": "Weekly -> Monthly", "close": 327.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 62.28, "ltf_rsi": 78.34, "type": "Regular Bearish Divergence"}, {"symbol": "IDFCFIRSTB", "pair": "1h -> Daily", "close": 84.73, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 45.45, "ltf_rsi": 31.45, "type": "Hidden Bullish Divergence"}, {"symbol": "IDFCFIRSTB", "pair": "Daily -> Weekly", "close": 84.4, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 86.43, "ltf_rsi": 45.45, "type": "Hidden Bullish Divergence"}, {"symbol": "IDFCFIRSTB", "pair": "Weekly -> Monthly", "close": 84.4, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 57.35, "ltf_rsi": 86.43, "type": "Regular Bearish Divergence"}, {"symbol": "BHEL", "pair": "15m -> 1h", "close": 416.7, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 66.5, "ltf_rsi": 36.27, "type": "Hidden Bearish Divergence"}, {"symbol": "BHEL", "pair": "1h -> Daily", "close": 416.7, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 54.75, "ltf_rsi": 66.5, "type": "Hidden Bearish Divergence"}, {"symbol": "BHEL", "pair": "Daily -> Weekly", "close": 415.5, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 51.78, "ltf_rsi": 54.75, "type": "Hidden Bullish Divergence"}, {"symbol": "BHEL", "pair": "Weekly -> Monthly", "close": 415.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 69.61, "ltf_rsi": 51.78, "type": "Hidden Bullish Divergence"}, {"symbol": "SUNPHARMA", "pair": "Weekly -> Monthly", "close": 1899.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 59.98, "ltf_rsi": 57.47, "type": "Hidden Bullish Divergence"}, {"symbol": "TRENT", "pair": "15m -> 1h", "close": 2915.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 54.97, "ltf_rsi": 35.47, "type": "Hidden Bullish Divergence"}, {"symbol": "ABCAPITAL", "pair": "15m -> 1h", "close": 410.5, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 50.99, "ltf_rsi": 33.97, "type": "Regular Bearish Divergence"}, {"symbol": "ABCAPITAL", "pair": "1h -> Daily", "close": 410.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 40.37, "ltf_rsi": 50.99, "type": "Regular Bearish Divergence"}, {"symbol": "ABCAPITAL", "pair": "Daily -> Weekly", "close": 410.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 73.26, "ltf_rsi": 40.37, "type": "Hidden Bullish Divergence"}, {"symbol": "ABCAPITAL", "pair": "Weekly -> Monthly", "close": 410.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 71.23, "ltf_rsi": 73.26, "type": "Regular Bearish Divergence"}, {"symbol": "NIFTYJR", "pair": "15m -> 1h", "close": 74487.75, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "", "htf_rsi": 61.37, "ltf_rsi": 26.62, "type": "Regular Bullish Divergence"}, {"symbol": "NIFTYJR", "pair": "1h -> Daily", "close": 74487.75, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 49.45, "ltf_rsi": 61.37, "type": "Regular Bullish Divergence"}, {"symbol": "NIFTYJR", "pair": "Weekly -> Monthly", "close": 74501.05, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 57.83, "ltf_rsi": 74.0, "type": "Hidden Bullish Divergence"}, {"symbol": "UNITDSPR", "pair": "15m -> 1h", "close": 1524.9, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 23.78, "ltf_rsi": 45.21, "type": "Hidden Bullish Divergence"}, {"symbol": "UNITDSPR", "pair": "1h -> Daily", "close": 1524.9, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 53.57, "ltf_rsi": 23.78, "type": "Hidden Bullish Divergence"}, {"symbol": "UNITDSPR", "pair": "Daily -> Weekly", "close": 1538.5, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 81.72, "ltf_rsi": 53.57, "type": "Regular Bearish Divergence"}, {"symbol": "UNITDSPR", "pair": "Weekly -> Monthly", "close": 1538.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 55.76, "ltf_rsi": 81.72, "type": "Hidden Bullish Divergence"}, {"symbol": "PIIND", "pair": "15m -> 1h", "close": 2519.0, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 65.47, "ltf_rsi": 49.06, "type": "Hidden Bearish Divergence"}, {"symbol": "PIIND", "pair": "1h -> Daily", "close": 2519.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 20.73, "ltf_rsi": 65.47, "type": "Regular Bullish Divergence"}, {"symbol": "PIIND", "pair": "Daily -> Weekly", "close": 2508.3, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 34.7, "ltf_rsi": 20.73, "type": "Hidden Bearish Divergence"}, {"symbol": "PIIND", "pair": "Weekly -> Monthly", "close": 2508.3, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 24.09, "ltf_rsi": 34.7, "type": "Regular Bullish Divergence"}, {"symbol": "DRREDDY", "pair": "15m -> 1h", "close": 1185.0, "htf_divergence": "", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 47.82, "ltf_rsi": 58.13, "type": "Regular Bearish Divergence"}, {"symbol": "DRREDDY", "pair": "1h -> Daily", "close": 1185.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 53.59, "ltf_rsi": 47.82, "type": "Hidden Bearish Divergence"}, {"symbol": "DRREDDY", "pair": "Daily -> Weekly", "close": 1182.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 36.01, "ltf_rsi": 53.59, "type": "Hidden Bearish Divergence"}, {"symbol": "DRREDDY", "pair": "Weekly -> Monthly", "close": 1182.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 42.73, "ltf_rsi": 36.01, "type": "Hidden Bullish Divergence"}, {"symbol": "TMPV", "pair": "15m -> 1h", "close": 314.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 54.9, "ltf_rsi": 40.83, "type": "Hidden Bearish Divergence"}, {"symbol": "TMPV", "pair": "1h -> Daily", "close": 314.9, "htf_divergence": "Regular Bullish Divergence", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 17.72, "ltf_rsi": 54.9, "type": "Regular Bullish Divergence"}, {"symbol": "TMPV", "pair": "Daily -> Weekly", "close": 313.1, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 34.82, "ltf_rsi": 17.72, "type": "Regular Bullish Divergence"}, {"symbol": "M&M", "pair": "15m -> 1h", "close": 3415.0, "htf_divergence": "", "ltf_divergence": "Regular Bullish Divergence", "htf_rsi": 49.16, "ltf_rsi": 25.62, "type": "Regular Bullish Divergence"}, {"symbol": "M&M", "pair": "Weekly -> Monthly", "close": 3398.2, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "", "htf_rsi": 55.56, "ltf_rsi": 71.2, "type": "Regular Bearish Divergence"}, {"symbol": "POLICYBZR", "pair": "15m -> 1h", "close": 1840.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 67.76, "ltf_rsi": 39.9, "type": "Hidden Bullish Divergence"}, {"symbol": "POLICYBZR", "pair": "1h -> Daily", "close": 1840.0, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 90.41, "ltf_rsi": 67.76, "type": "Hidden Bullish Divergence"}, {"symbol": "KFINTECH", "pair": "15m -> 1h", "close": 976.0, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 60.52, "ltf_rsi": 53.32, "type": "Hidden Bearish Divergence"}, {"symbol": "KFINTECH", "pair": "1h -> Daily", "close": 976.0, "htf_divergence": "Regular Bearish Divergence", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 64.05, "ltf_rsi": 60.52, "type": "Hidden Bullish Divergence"}, {"symbol": "KFINTECH", "pair": "Daily -> Weekly", "close": 976.5, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "Regular Bearish Divergence", "htf_rsi": 68.78, "ltf_rsi": 64.05, "type": "Regular Bearish Divergence"}, {"symbol": "KFINTECH", "pair": "Weekly -> Monthly", "close": 976.5, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 28.22, "ltf_rsi": 68.78, "type": "Hidden Bearish Divergence"}, {"symbol": "BSE", "pair": "15m -> 1h", "close": 3341.0, "htf_divergence": "Hidden Bearish Divergence", "ltf_divergence": "", "htf_rsi": 56.43, "ltf_rsi": 58.88, "type": "Hidden Bearish Divergence"}, {"symbol": "BSE", "pair": "1h -> Daily", "close": 3341.0, "htf_divergence": "", "ltf_divergence": "Hidden Bearish Divergence", "htf_rsi": 42.47, "ltf_rsi": 56.43, "type": "Hidden Bearish Divergence"}, {"symbol": "BSE", "pair": "Daily -> Weekly", "close": 3325.6, "htf_divergence": "Hidden Bullish Divergence", "ltf_divergence": "", "htf_rsi": 22.04, "ltf_rsi": 42.47, "type": "Hidden Bullish Divergence"}, {"symbol": "BSE", "pair": "Weekly -> Monthly", "close": 3325.6, "htf_divergence": "", "ltf_divergence": "Hidden Bullish Divergence", "htf_rsi": 56.28, "ltf_rsi": 22.04, "type": "Hidden Bullish Divergence"}];
+    const divGuideData = [{"Divergence Type": "Regular Bullish Divergence", "Interpretation": "Price makes a lower low while MACD makes a higher low. Downside momentum is fading \u2014 classic reversal warning at the end of a downtrend."}, {"Divergence Type": "Regular Bearish Divergence", "Interpretation": "Price makes a higher high while MACD makes a lower high. Upside momentum is fading \u2014 classic reversal warning at the end of an uptrend."}, {"Divergence Type": "Hidden Bullish Divergence", "Interpretation": "Price makes a higher low while MACD makes a lower low. Confirms trend continuation \u2014 a healthy pullback inside an existing uptrend rather than a reversal."}, {"Divergence Type": "Hidden Bearish Divergence", "Interpretation": "Price makes a lower high while MACD makes a higher high. Confirms trend continuation \u2014 a healthy relief bounce inside an existing downtrend rather than a reversal."}];
 
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
     }
@@ -795,6 +397,14 @@
             return 'bearish';
         }
         return 'neutral';
+    }
+
+    function getDivBadgeClass(type) {
+        return type.includes('Bullish') ? 'bullish' : type.includes('Bearish') ? 'bearish' : 'neutral';
+    }
+
+    function rsiColor(v) {
+        return v > 60 ? '#00ffa3' : v < 40 ? '#ff4d5e' : '#ffb703';
     }
 
     function updateHeaderStats() {
@@ -810,11 +420,6 @@
         document.getElementById('statNeutral').innerText = neu;
     }
 
-    function rsiColor(v) {
-        return v > 60 ? '#00ffa3' : v < 40 ? '#ff4d5e' : '#ffb703';
-    }
-
-    // ---- MODAL: full list per bias category ----
     function openBiasModal(type) {
         const labels = { bullish: 'Bullish Setups', bearish: 'Bearish Setups', neutral: 'Neutral Setups' };
         const matches = stockData.filter(item => getBadgeClass(item.condition) === type);
@@ -828,23 +433,20 @@
         if (matches.length === 0) {
             body.innerHTML = `<tr class="empty-row"><td colspan="7">No stocks currently in this category.</td></tr>`;
         } else {
-            matches
-                .sort((a, b) => a.symbol.localeCompare(b.symbol))
-                .forEach(row => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td class="sym">${row.symbol}</td>
-                        <td><span class="badge ${type}">${row.condition}</span></td>
-                        <td><span class="pair-chip">${row.pair}</span></td>
-                        <td style="color:#cbd5e1;">${row.htf_state}</td>
-                        <td style="color:#cbd5e1;">${row.ltf_state}</td>
-                        <td style="font-weight:700; color:${rsiColor(row.htf_rsi)};">${row.htf_rsi}</td>
-                        <td style="font-weight:700; color:${rsiColor(row.ltf_rsi)};">${row.ltf_rsi}</td>
-                    `;
-                    body.appendChild(tr);
-                });
+            matches.sort((a, b) => a.symbol.localeCompare(b.symbol)).forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="sym">${row.symbol}</td>
+                    <td><span class="badge ${type}">${row.condition}</span></td>
+                    <td><span class="pair-chip">${row.pair}</span></td>
+                    <td style="color:#cbd5e1;">${row.htf_state}</td>
+                    <td style="color:#cbd5e1;">${row.ltf_state}</td>
+                    <td style="font-weight:700; color:${rsiColor(row.htf_rsi)};">${row.htf_rsi}</td>
+                    <td style="font-weight:700; color:${rsiColor(row.ltf_rsi)};">${row.ltf_rsi}</td>
+                `;
+                body.appendChild(tr);
+            });
         }
-
         document.getElementById('biasModal').classList.add('active');
     }
 
@@ -852,27 +454,19 @@
         document.getElementById('biasModal').classList.remove('active');
     }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeBiasModal();
-    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBiasModal(); });
 
-    // ---- TAB 1: Screener filter ----
     function filterData() {
         const selectedPair = document.getElementById('pairSelect').value;
         const selectedCondition = document.getElementById('conditionSelect').value;
         const tableBody = document.getElementById('stockTableBody');
-
         const filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
-
         document.getElementById('countBadge').innerText = filtered.length;
-
         tableBody.innerHTML = '';
-
         if (filtered.length === 0) {
             tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No stocks matching this pair &amp; condition.</td></tr>`;
             return;
         }
-
         filtered.forEach(row => {
             const badgeClass = getBadgeClass(row.condition);
             const tr = document.createElement('tr');
@@ -880,37 +474,27 @@
                 <td class="sym">${row.symbol}</td>
                 <td><span class="pair-chip">${row.pair}</span></td>
                 <td>${row.close !== undefined ? row.close.toFixed(2) : 'N/A'}</td>
-                <td style="color: #cbd5e1;">${row.htf_state}</td>
-                <td style="color: #cbd5e1;">${row.ltf_state}</td>
-                <td style="font-weight: 700; color: ${rsiColor(row.htf_rsi)};">${row.htf_rsi}</td>
-                <td style="font-weight: 700; color: ${rsiColor(row.ltf_rsi)};">${row.ltf_rsi}</td>
+                <td style="color:#cbd5e1;">${row.htf_state}</td>
+                <td style="color:#cbd5e1;">${row.ltf_state}</td>
+                <td style="font-weight:700; color:${rsiColor(row.htf_rsi)};">${row.htf_rsi}</td>
+                <td style="font-weight:700; color:${rsiColor(row.ltf_rsi)};">${row.ltf_rsi}</td>
                 <td><span class="badge ${badgeClass}">${row.condition}</span></td>
             `;
             tableBody.appendChild(tr);
         });
     }
 
-    // ---- TAB 2: Divergence Scanner filter ----
-    function getDivBadgeClass(type) {
-        return type.includes('Bullish') ? 'bullish' : type.includes('Bearish') ? 'bearish' : 'neutral';
-    }
-
     function filterDivergenceData() {
         const selectedPair = document.getElementById('divPairSelect').value;
         const selectedType = document.getElementById('divTypeSelect').value;
         const tableBody = document.getElementById('divTableBody');
-
         const filtered = divergenceData.filter(item => item.pair === selectedPair && item.type === selectedType);
-
         document.getElementById('divCountBadge').innerText = filtered.length;
-
         tableBody.innerHTML = '';
-
         if (filtered.length === 0) {
             tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No divergence matching this pair &amp; type.</td></tr>`;
             return;
         }
-
         filtered.forEach(row => {
             const badgeClass = getDivBadgeClass(row.type);
             const tr = document.createElement('tr');
@@ -918,8 +502,8 @@
                 <td class="sym">${row.symbol}</td>
                 <td><span class="pair-chip">${row.pair}</span></td>
                 <td>${row.close !== undefined ? row.close.toFixed(2) : 'N/A'}</td>
-                <td style="color:#cbd5e1;">${row.htf_divergence || '—'}</td>
-                <td style="color:#cbd5e1;">${row.ltf_divergence || '—'}</td>
+                <td style="color:#cbd5e1;">${row.htf_divergence || '&mdash;'}</td>
+                <td style="color:#cbd5e1;">${row.ltf_divergence || '&mdash;'}</td>
                 <td style="font-weight:700; color:${rsiColor(row.htf_rsi)};">${row.htf_rsi}</td>
                 <td style="font-weight:700; color:${rsiColor(row.ltf_rsi)};">${row.ltf_rsi}</td>
                 <td><span class="badge ${badgeClass}">${row.type}</span></td>
@@ -934,10 +518,7 @@
         guideData.forEach(row => {
             const badgeClass = getBadgeClass(row['Market Bias']);
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><span class="badge ${badgeClass}">${row['Market Bias']}</span></td>
-                <td>${row['Interpretation']}</td>
-            `;
+            tr.innerHTML = `<td><span class="badge ${badgeClass}">${row['Market Bias']}</span></td><td>${row['Interpretation']}</td>`;
             guideBody.appendChild(tr);
         });
 
@@ -946,15 +527,11 @@
         divGuideData.forEach(row => {
             const badgeClass = getDivBadgeClass(row['Divergence Type']);
             const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><span class="badge ${badgeClass}">${row['Divergence Type']}</span></td>
-                <td>${row['Interpretation']}</td>
-            `;
+            tr.innerHTML = `<td><span class="badge ${badgeClass}">${row['Divergence Type']}</span></td><td>${row['Interpretation']}</td>`;
             divGuideBody.appendChild(tr);
         });
     }
 
-    // Initial Load
     document.addEventListener('DOMContentLoaded', () => {
         filterData();
         filterDivergenceData();
