@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T06:30:00.000",
-        "symbol":"NSE:UPL",
-        "open":795.35,
-        "high":796.7,
-        "low":795.1,
-        "close":796.45,
-        "volume":25641.0
-    },
-    {
         "datetime":"2025-12-31T06:45:00.000",
         "symbol":"NSE:UPL",
         "open":796.45,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-26T04:15:00.000",
         "symbol":"NSE:UPL",
         "open":581.7,
-        "high":581.7,
+        "high":582.35,
         "low":580.6,
-        "close":581.2,
-        "volume":14397.0
+        "close":582.35,
+        "volume":44187.0
+    },
+    {
+        "datetime":"2026-08-26T04:30:00.000",
+        "symbol":"NSE:UPL",
+        "open":582.65,
+        "high":584.5,
+        "low":582.2,
+        "close":582.5,
+        "volume":74010.0
     }
 ]
