@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-04-26T08:45:00.000",
-        "symbol":"NSE:RVNL",
-        "open":292.1,
-        "high":292.15,
-        "low":289.35,
-        "close":289.85,
-        "volume":2778424.0
-    },
-    {
         "datetime":"2024-04-26T09:45:00.000",
         "symbol":"NSE:RVNL",
         "open":290.0,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-26T07:45:00.000",
         "symbol":"NSE:RVNL",
         "open":220.88,
-        "high":220.92,
+        "high":221.06,
+        "low":220.1,
+        "close":220.75,
+        "volume":332809.0
+    },
+    {
+        "datetime":"2026-08-26T08:45:00.000",
+        "symbol":"NSE:RVNL",
+        "open":220.72,
+        "high":220.72,
         "low":220.72,
-        "close":220.82,
-        "volume":25904.0
+        "close":220.72,
+        "volume":75.0
     }
 ]

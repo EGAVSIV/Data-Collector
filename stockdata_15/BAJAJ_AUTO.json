@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T03:45:00.000",
-        "symbol":"NSE:BAJAJ_AUTO",
-        "open":9361.5,
-        "high":9392.5,
-        "low":9333.0,
-        "close":9350.0,
-        "volume":10654.0
-    },
-    {
-        "datetime":"2026-01-01T04:00:00.000",
-        "symbol":"NSE:BAJAJ_AUTO",
-        "open":9347.5,
-        "high":9359.5,
-        "low":9334.0,
-        "close":9349.0,
-        "volume":3780.0
-    },
-    {
-        "datetime":"2026-01-01T04:15:00.000",
-        "symbol":"NSE:BAJAJ_AUTO",
-        "open":9348.5,
-        "high":9370.0,
-        "low":9318.5,
-        "close":9323.0,
-        "volume":4541.0
-    },
-    {
         "datetime":"2026-01-01T04:30:00.000",
         "symbol":"NSE:BAJAJ_AUTO",
         "open":9330.5,
@@ -34915,9 +34888,9 @@
         "symbol":"NSE:BAJAJ_AUTO",
         "open":11685.0,
         "high":11685.0,
-        "low":11667.0,
+        "low":11671.0,
         "close":11682.0,
-        "volume":10155.0
+        "volume":5561.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-26T07:45:00.000",
         "symbol":"NSE:BAJAJ_AUTO",
         "open":11744.0,
-        "high":11763.0,
+        "high":11790.0,
         "low":11743.0,
-        "close":11763.0,
-        "volume":2903.0
+        "close":11774.0,
+        "volume":7003.0
+    },
+    {
+        "datetime":"2026-08-26T08:00:00.000",
+        "symbol":"NSE:BAJAJ_AUTO",
+        "open":11774.0,
+        "high":11808.0,
+        "low":11774.0,
+        "close":11803.0,
+        "volume":9557.0
+    },
+    {
+        "datetime":"2026-08-26T08:15:00.000",
+        "symbol":"NSE:BAJAJ_AUTO",
+        "open":11803.0,
+        "high":11807.0,
+        "low":11786.0,
+        "close":11789.0,
+        "volume":6964.0
+    },
+    {
+        "datetime":"2026-08-26T08:30:00.000",
+        "symbol":"NSE:BAJAJ_AUTO",
+        "open":11794.0,
+        "high":11804.0,
+        "low":11788.0,
+        "close":11799.0,
+        "volume":3529.0
     }
 ]

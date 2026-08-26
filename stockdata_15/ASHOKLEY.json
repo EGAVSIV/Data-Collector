@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T03:45:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":179.08,
-        "high":181.6,
-        "low":178.81,
-        "close":181.6,
-        "volume":1228849.0
-    },
-    {
-        "datetime":"2026-01-01T04:00:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":181.59,
-        "high":182.99,
-        "low":181.3,
-        "close":182.59,
-        "volume":1909864.0
-    },
-    {
-        "datetime":"2026-01-01T04:15:00.000",
-        "symbol":"NSE:ASHOKLEY",
-        "open":182.7,
-        "high":182.98,
-        "low":182.17,
-        "close":182.22,
-        "volume":1104948.0
-    },
-    {
         "datetime":"2026-01-01T04:30:00.000",
         "symbol":"NSE:ASHOKLEY",
         "open":182.35,
@@ -34917,7 +34890,7 @@
         "high":174.51,
         "low":174.27,
         "close":174.4,
-        "volume":175939.0
+        "volume":158347.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35178,7 +35151,7 @@
         "high":173.86,
         "low":173.47,
         "close":173.59,
-        "volume":180396.0
+        "volume":180436.0
     },
     {
         "datetime":"2026-08-20T09:15:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-26T07:45:00.000",
         "symbol":"NSE:ASHOKLEY",
         "open":178.18,
-        "high":178.42,
+        "high":178.98,
         "low":178.17,
-        "close":178.33,
-        "volume":69408.0
+        "close":178.9,
+        "volume":266282.0
+    },
+    {
+        "datetime":"2026-08-26T08:00:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":178.95,
+        "high":179.35,
+        "low":178.88,
+        "close":179.02,
+        "volume":600962.0
+    },
+    {
+        "datetime":"2026-08-26T08:15:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":179.08,
+        "high":179.2,
+        "low":178.71,
+        "close":178.82,
+        "volume":481869.0
+    },
+    {
+        "datetime":"2026-08-26T08:30:00.000",
+        "symbol":"NSE:ASHOKLEY",
+        "open":178.82,
+        "high":178.94,
+        "low":178.52,
+        "close":178.9,
+        "volume":245333.0
     }
 ]

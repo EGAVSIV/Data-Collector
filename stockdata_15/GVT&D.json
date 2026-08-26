@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T03:45:00.000",
-        "symbol":"NSE:GVT&D",
-        "open":3135.9,
-        "high":3184.9,
-        "low":3135.9,
-        "close":3179.6,
-        "volume":23629.0
-    },
-    {
-        "datetime":"2026-01-01T04:00:00.000",
-        "symbol":"NSE:GVT&D",
-        "open":3174.0,
-        "high":3174.5,
-        "low":3159.0,
-        "close":3167.7,
-        "volume":9135.0
-    },
-    {
-        "datetime":"2026-01-01T04:15:00.000",
-        "symbol":"NSE:GVT&D",
-        "open":3165.7,
-        "high":3174.2,
-        "low":3157.7,
-        "close":3168.4,
-        "volume":7339.0
-    },
-    {
         "datetime":"2026-01-01T04:30:00.000",
         "symbol":"NSE:GVT&D",
         "open":3168.2,
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-26T07:45:00.000",
         "symbol":"NSE:GVT&D",
         "open":4276.5,
-        "high":4290.6,
+        "high":4292.0,
         "low":4272.4,
-        "close":4281.5,
-        "volume":14629.0
+        "close":4288.1,
+        "volume":23621.0
+    },
+    {
+        "datetime":"2026-08-26T08:00:00.000",
+        "symbol":"NSE:GVT&D",
+        "open":4288.1,
+        "high":4313.9,
+        "low":4288.0,
+        "close":4309.4,
+        "volume":68521.0
+    },
+    {
+        "datetime":"2026-08-26T08:15:00.000",
+        "symbol":"NSE:GVT&D",
+        "open":4309.0,
+        "high":4348.0,
+        "low":4307.8,
+        "close":4348.0,
+        "volume":66040.0
+    },
+    {
+        "datetime":"2026-08-26T08:30:00.000",
+        "symbol":"NSE:GVT&D",
+        "open":4346.7,
+        "high":4368.9,
+        "low":4335.0,
+        "close":4335.4,
+        "volume":95589.0
     }
 ]
