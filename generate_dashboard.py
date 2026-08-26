@@ -44,7 +44,6 @@ def calculate_indicators(df, fast=12, slow=26, signal=9, rsi_period=14):
     if df.empty or len(df) < slow + signal:
         return None
     
-    # Ensure dataframe is sorted by timestamp/date
     if 'datetime' in df.columns:
         df = df.sort_values('datetime')
     elif 'date' in df.columns:
@@ -52,13 +51,13 @@ def calculate_indicators(df, fast=12, slow=26, signal=9, rsi_period=14):
 
     close = df['close']
     
-    # 1. MACD Calculation
+    # MACD Calculation
     ema_fast = close.ewm(span=fast, adjust=False).mean()
     ema_slow = close.ewm(span=slow, adjust=False).mean()
     macd_line = ema_fast - ema_slow
     signal_line = macd_line.ewm(span=signal, adjust=False).mean()
     
-    # 2. RSI (14) Calculation
+    # RSI (14) Calculation
     delta = close.diff()
     gain = (delta.where(delta > 0, 0)).rolling(window=rsi_period).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(window=rsi_period).mean()
@@ -90,26 +89,25 @@ def map_transition(ltf_prev, ltf_curr, htf_curr):
     if None in (ltf_prev, ltf_curr, htf_curr):
         return None
     
-    # 16 Condition Mapping Logic
-    if htf_curr == 1: # HTF: PCO > 0
+    if htf_curr == 1:
         if ltf_prev == 3 and ltf_curr == 1: return "Strong Bullish"
         if ltf_prev == 4 and ltf_curr == 2: return "Bullish Reversal"
         if ltf_prev == 1 and ltf_curr == 3: return "Bullish Pullback"
         if ltf_prev == 2 and ltf_curr == 4: return "Deep Pullback"
         
-    elif htf_curr == 2: # HTF: PCO < 0
+    elif htf_curr == 2:
         if ltf_prev == 3 and ltf_curr == 1: return "Dip Buy / Reversal"
         if ltf_prev == 4 and ltf_curr == 2: return "Oversold Accumulation"
         if ltf_prev == 1 and ltf_curr == 3: return "Neutral / Consolidating"
         if ltf_prev == 2 and ltf_curr == 4: return "Complex Reversal Failure"
         
-    elif htf_curr == 3: # HTF: NC > 0
+    elif htf_curr == 3:
         if ltf_prev == 3 and ltf_curr == 1: return "Counter-Trend Buy"
         if ltf_prev == 4 and ltf_curr == 2: return "Early Recovery Attempt"
         if ltf_prev == 1 and ltf_curr == 3: return "Correction in Progress"
         if ltf_prev == 2 and ltf_curr == 4: return "Accelerating Correction"
         
-    elif htf_curr == 4: # HTF: NC < 0
+    elif htf_curr == 4:
         if ltf_prev == 3 and ltf_curr == 1: return "Aggressive Counter-Trend"
         if ltf_prev == 4 and ltf_curr == 2: return "Weak Oversold Bounce"
         if ltf_prev == 1 and ltf_curr == 3: return "Bearish Continuation"
@@ -117,19 +115,61 @@ def map_transition(ltf_prev, ltf_curr, htf_curr):
 
     return None
 
-# --- Main Data Processing Pipeline ---
+# --- Divergence Detection Logic ---
+def detect_divergence(df, lookback=30):
+    if df is None or len(df) < lookback:
+        return "No Divergence"
+    
+    macd = df['macd']
+    lows = df['low'] if 'low' in df.columns else df['close']
+    highs = df['high'] if 'high' in df.columns else df['close']
+    
+    p_low1 = lows.iloc[-lookback:-15].min()
+    p_low2 = lows.iloc[-15:].min()
+    m_low1 = macd.iloc[-lookback:-15].min()
+    m_low2 = macd.iloc[-15:].min()
+
+    p_high1 = highs.iloc[-lookback:-15].max()
+    p_high2 = highs.iloc[-15:].max()
+    m_high1 = macd.iloc[-lookback:-15].max()
+    m_high2 = macd.iloc[-15:].max()
+
+    # Normal Divergence (ND)
+    if p_low2 < p_low1 and m_low2 > m_low1:
+        return "Bullish ND"
+    if p_high2 > p_high1 and m_high2 < m_high1:
+        return "Bearish ND"
+
+    # Reverse Divergence (RD)
+    if p_low2 > p_low1 and m_low2 < m_low1:
+        return "Bullish RD"
+    if p_high2 < p_high1 and m_high2 > m_high1:
+        return "Bearish RD"
+
+    return "No Divergence"
+
+def get_setup_category(divergence_type):
+    if "Bullish" in divergence_type:
+        return "Bullish"
+    elif "Bearish" in divergence_type:
+        return "Bearish"
+    return "Neutral"
+
+# --- Main Processing Pipeline ---
 def process_stock_data():
-    results = []
+    tab1_results = []
+    tab3_results = []
     
     sample_folder = TF_FOLDERS['D']
     if not os.path.exists(sample_folder):
-        print(f"Directory {sample_folder} not found. Please check paths.")
-        return []
+        print(f"Directory {sample_folder} not found. Returning empty dataset.")
+        return [], []
 
     symbols = [f.replace('.json', '') for f in os.listdir(sample_folder) if f.endswith('.json')]
     
     for symbol in symbols:
         tf_data = {}
+        tf_dfs = {}
         
         for tf, folder in TF_FOLDERS.items():
             file_path = os.path.join(folder, f"{symbol}.json")
@@ -155,6 +195,7 @@ def process_stock_data():
                                 'rsi': round(float(rsi.iloc[-1]), 2) if pd.notna(rsi.iloc[-1]) else "N/A",
                                 'close': float(df['close'].iloc[-1])
                             }
+                            tf_dfs[tf] = df
                 except Exception as e:
                     continue
         
@@ -164,9 +205,10 @@ def process_stock_data():
                 ltf_info = tf_data[ltf_key]
                 htf_info = tf_data[htf_key]
                 
+                # Tab 1 Logic
                 condition = map_transition(ltf_info['prev_num'], ltf_info['curr_num'], htf_info['curr_num'])
                 if condition:
-                    results.append({
+                    tab1_results.append({
                         'symbol': symbol,
                         'pair': pair_label,
                         'close': ltf_info['close'],
@@ -176,15 +218,37 @@ def process_stock_data():
                         'ltf_rsi': ltf_info['rsi'],
                         'condition': condition
                     })
-                    
-    return results
 
-# --- Generate Embedded HTML Dashboard ---
-def build_html_dashboard(results):
-    json_data = json.dumps(results)
+                # Tab 3 Divergence Logic
+                ltf_df = tf_dfs.get(ltf_key)
+                divergence = detect_divergence(ltf_df)
+                category = get_setup_category(divergence)
+
+                tab3_results.append({
+                    'symbol': symbol,
+                    'pair': pair_label,
+                    'close': ltf_info['close'],
+                    'htf_state': htf_info['macd_state_txt'],
+                    'ltf_state': ltf_info['macd_state_txt'],
+                    'htf_rsi': htf_info['rsi'],
+                    'ltf_rsi': ltf_info['rsi'],
+                    'divergence': divergence,
+                    'category': category
+                })
+                    
+    return tab1_results, tab3_results
+
+def build_html_dashboard(tab1_data, tab3_data):
+    json_tab1 = json.dumps(tab1_data)
+    json_tab3 = json.dumps(tab3_data)
     guide_json_data = json.dumps(MARKET_BIAS_GUIDE)
     
-    html_content = f"""<!DOCTYPE html>
+    with open('index.html', 'w') as f:
+        f.write(get_html_string(json_tab1, guide_json_data, json_tab3))
+    print("Successfully generated index.html dashboard with Tab 1, Tab 2, and Tab 3!")
+
+def get_html_string(json_tab1, guide_json_data, json_tab3):
+    return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -224,7 +288,6 @@ def build_html_dashboard(results):
             font-size: 26px;
         }}
 
-        /* TAB BUTTON NAVIGATION */
         .tab-buttons {{
             display: flex;
             gap: 10px;
@@ -306,6 +369,48 @@ def build_html_dashboard(results):
             margin-bottom: 20px;
         }}
 
+        .summary-cards {{
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }}
+
+        .card {{
+            flex: 1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }}
+
+        .card:hover {{
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }}
+
+        .card.active {{
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+        }}
+
+        .card-title {{
+            font-size: 14px;
+            font-weight: 600;
+            color: #94a3b8;
+        }}
+
+        .card-count {{
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 5px;
+        }}
+
+        .card-bullish .card-count {{ color: #4ade80; }}
+        .card-bearish .card-count {{ color: #fca5a5; }}
+        .card-neutral .card-count {{ color: #fde047; }}
+
         table {{
             width: 100%;
             border-collapse: collapse;
@@ -355,13 +460,14 @@ def build_html_dashboard(results):
 <div class="container">
     <header>
         <h1>MACD Multi-Timeframe Scanner Dashboard</h1>
-        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States & RSI calculations across 4 Timeframe Pairs</p>
+        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States, RSI & Divergence calculations across 4 Timeframe Pairs</p>
     </header>
 
     <!-- TAB NAVIGATION -->
     <div class="tab-buttons">
         <button class="tab-btn active" onclick="switchTab('tabScreener')">Stock Screener</button>
         <button class="tab-btn" onclick="switchTab('tabGuide')">Market Bias Guide (Tab 2)</button>
+        <button class="tab-btn" onclick="switchTab('tabDivergence')">Divergence Scanner (Tab 3)</button>
     </div>
 
     <!-- TAB 1: SCREENER -->
@@ -435,11 +541,62 @@ def build_html_dashboard(results):
         </table>
     </div>
 
+    <!-- TAB 3: DIVERGENCE SCANNER -->
+    <div id="tabDivergence" class="tab-content">
+        <div class="controls" style="grid-template-columns: 1fr;">
+            <div class="control-group">
+                <label for="divPairSelect">Select Timeframe Pair</label>
+                <select id="divPairSelect" onchange="filterDivergenceData()">
+                    <option value="ALL">All Pairs</option>
+                    <option value="15m -> 1h">15m -> 1h</option>
+                    <option value="1h -> Daily">1h -> Daily</option>
+                    <option value="Daily -> Weekly">Daily -> Weekly</option>
+                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="summary-cards">
+            <div class="card card-bullish active" id="cardBullish" onclick="setDivergenceCategory('Bullish')">
+                <div class="card-title">Bullish Setups (RD/ND)</div>
+                <div class="card-count" id="countBullish">0</div>
+            </div>
+            <div class="card card-bearish" id="cardBearish" onclick="setDivergenceCategory('Bearish')">
+                <div class="card-title">Bearish Setups (RD/ND)</div>
+                <div class="card-count" id="countBearish">0</div>
+            </div>
+            <div class="card card-neutral" id="cardNeutral" onclick="setDivergenceCategory('Neutral')">
+                <div class="card-title">Neutral / No Divergence</div>
+                <div class="card-count" id="countNeutral">0</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Timeframe Pair</th>
+                    <th>Close Price</th>
+                    <th>Setup Style (Divergence)</th>
+                    <th>HTF MACD State</th>
+                    <th>LTF MACD State</th>
+                    <th>HTF RSI (14)</th>
+                    <th>LTF RSI (14)</th>
+                </tr>
+            </thead>
+            <tbody id="divergenceTableBody">
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 <script>
-    const stockData = {json_data};
+    const stockData = {json_tab1};
     const guideData = {guide_json_data};
+    const divergenceData = {json_tab3};
+
+    let selectedDivCategory = 'Bullish';
 
     function switchTab(tabId) {{
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -466,7 +623,6 @@ def build_html_dashboard(results):
         const filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
 
         document.getElementById('countBadge').innerText = `Matching Stocks: ${{filtered.length}}`;
-
         tableBody.innerHTML = '';
 
         if (filtered.length === 0) {{
@@ -491,6 +647,55 @@ def build_html_dashboard(results):
         }});
     }}
 
+    function setDivergenceCategory(cat) {{
+        selectedDivCategory = cat;
+        document.querySelectorAll('.summary-cards .card').forEach(c => c.classList.remove('active'));
+        document.getElementById('card' + cat).classList.add('active');
+        filterDivergenceData();
+    }}
+
+    function filterDivergenceData() {{
+        const selectedPair = document.getElementById('divPairSelect').value;
+        const tableBody = document.getElementById('divergenceTableBody');
+
+        let filteredByPair = divergenceData;
+        if (selectedPair !== 'ALL') {{
+            filteredByPair = divergenceData.filter(item => item.pair === selectedPair);
+        }}
+
+        const countBullish = filteredByPair.filter(i => i.category === 'Bullish').length;
+        const countBearish = filteredByPair.filter(i => i.category === 'Bearish').length;
+        const countNeutral = filteredByPair.filter(i => i.category === 'Neutral').length;
+
+        document.getElementById('countBullish').innerText = countBullish;
+        document.getElementById('countBearish').innerText = countBearish;
+        document.getElementById('countNeutral').innerText = countNeutral;
+
+        const filtered = filteredByPair.filter(item => item.category === selectedDivCategory);
+
+        tableBody.innerHTML = '';
+        if (filtered.length === 0) {{
+            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching current filters.</td></tr>`;
+            return;
+        }}
+
+        filtered.forEach(row => {{
+            const badgeClass = getBadgeClass(row.divergence);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="font-weight: bold; color: var(--accent);">${{row.symbol}}</td>
+                <td>${{row.pair}}</td>
+                <td>${{row.close !== undefined ? row.close.toFixed(2) : 'N/A'}}</td>
+                <td><span class="badge ${{badgeClass}}">${{row.divergence}}</span></td>
+                <td style="color: #cbd5e1;">${{row.htf_state}}</td>
+                <td style="color: #cbd5e1;">${{row.ltf_state}}</td>
+                <td style="font-weight: bold; color: ${{row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.htf_rsi}}</td>
+                <td style="font-weight: bold; color: ${{row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'}};">${{row.ltf_rsi}}</td>
+            `;
+            tableBody.appendChild(tr);
+        }});
+    }}
+
     function populateGuide() {{
         const guideBody = document.getElementById('guideTableBody');
         guideBody.innerHTML = '';
@@ -505,20 +710,16 @@ def build_html_dashboard(results):
         }});
     }}
 
-    // Initial Load
     document.addEventListener('DOMContentLoaded', () => {{
         filterData();
         populateGuide();
+        filterDivergenceData();
     }});
 </script>
 
 </body>
-</html>
-"""
-    with open('index.html', 'w') as f:
-        f.write(html_content)
-    print("Successfully generated index.html dashboard with Tab 1 & Tab 2!")
+</html>"""
 
 if __name__ == '__main__':
-    data = process_stock_data()
-    build_html_dashboard(data)
+    tab1_data, tab3_data = process_stock_data()
+    build_html_dashboard(tab1_data, tab3_data)
