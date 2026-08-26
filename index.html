@@ -1,254 +1,518 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MACD Master Multi-Timeframe Dashboard</title>
-    <style>
-        :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f8fafc;
-            --border-color: #334155;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MACD Master // Multi-Timeframe Scanner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-void:#060a14;
+    --bg-deep:#0b1120;
+    --panel:#0f172a;
+    --panel-glass: rgba(17,25,45,0.72);
+    --border: rgba(255,255,255,0.08);
+    --border-bright: rgba(0,229,255,0.35);
+    --cyan:#00e5ff;
+    --cyan-soft: rgba(0,229,255,0.15);
+    --magenta:#ff3d81;
+    --amber:#ffb703;
+    --green:#00ffa3;
+    --green-soft: rgba(0,255,163,0.14);
+    --red:#ff4d5e;
+    --red-soft: rgba(255,77,94,0.14);
+    --amber-soft: rgba(255,183,3,0.14);
+    --text-main:#eef2ff;
+    --text-dim:#8892b0;
+    --text-faint:#5b6584;
+    --font-display:'Sora', sans-serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-        }
+  *{box-sizing:border-box;}
 
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background:
+      radial-gradient(ellipse 1200px 600px at 15% -10%, rgba(0,229,255,0.10), transparent 60%),
+      radial-gradient(ellipse 1000px 700px at 110% 10%, rgba(255,61,129,0.10), transparent 55%),
+      radial-gradient(ellipse 900px 900px at 50% 120%, rgba(0,255,163,0.06), transparent 60%),
+      var(--bg-void);
+    padding: 28px 20px 60px;
+    position: relative;
+  }
 
-        header {
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 15px;
-        }
+  /* faint scanline / grid texture for terminal feel */
+  body::before{
+    content:"";
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse 1200px 700px at 50% 0%, black, transparent 75%);
+    z-index:0;
+  }
 
-        h1 {
-            color: var(--accent);
-            margin: 0 0 10px 0;
-            font-size: 26px;
-        }
+  .container{
+    max-width: 1340px;
+    margin: 0 auto;
+    position: relative;
+    z-index:1;
+  }
 
-        /* TAB BUTTON NAVIGATION */
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+  /* ===== HEADER ===== */
+  header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom: 28px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--border);
+  }
 
-        .tab-btn {
-            padding: 12px 24px;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: #94a3b8;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.2s ease-in-out;
-        }
+  .brand-eyebrow{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
 
-        .tab-btn.active {
-            background: var(--accent);
-            color: #0f172a;
-            border-color: var(--accent);
-        }
+  .pulse-dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(0,255,163,0.7);
+    animation: pulse 2s infinite;
+  }
 
-        .tab-content {
-            display: none;
-        }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(0,255,163,0.55);}
+    70%{ box-shadow: 0 0 0 8px rgba(0,255,163,0);}
+    100%{ box-shadow: 0 0 0 0 rgba(0,255,163,0);}
+  }
 
-        .tab-content.active {
-            display: block;
-        }
+  h1{
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 3.4vw, 42px);
+    line-height:1.05;
+    margin:0;
+    letter-spacing: -0.5px;
+    background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 55%, var(--magenta) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
 
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        }
+  .subtitle{
+    font-family: var(--font-body);
+    color: var(--text-dim);
+    margin: 10px 0 0;
+    font-size: 14.5px;
+    max-width: 520px;
+  }
 
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+  .header-stats{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
 
-        label {
-            font-weight: 600;
-            font-size: 14px;
-            color: #94a3b8;
-        }
+  .mini-stat{
+    font-family: var(--font-mono);
+    background: var(--panel-glass);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    text-align:right;
+    min-width: 108px;
+    backdrop-filter: blur(6px);
+  }
+  .mini-stat .k{ display:block; font-size:10px; letter-spacing:1.5px; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px;}
+  .mini-stat .v{ display:block; font-size:17px; font-weight:700; }
+  .mini-stat.up .v{ color: var(--green); }
+  .mini-stat.down .v{ color: var(--red); }
+  .mini-stat.flat .v{ color: var(--amber); }
 
-        select {
-            padding: 10px 14px;
-            background: #0f172a;
-            color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 15px;
-            outline: none;
-            cursor: pointer;
-        }
+  /* ===== TABS ===== */
+  .tab-buttons{
+    display:flex;
+    gap:6px;
+    margin-bottom: 22px;
+    position: relative;
+  }
 
-        select:focus {
-            border-color: var(--accent);
-        }
+  .tab-btn{
+    font-family: var(--font-display);
+    padding: 13px 26px;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--panel-glass);
+    color: var(--text-dim);
+    border-radius: 10px 10px 0 0;
+    transition: all 0.25s cubic-bezier(.4,0,.2,1);
+    position: relative;
+    backdrop-filter: blur(6px);
+  }
 
-        .stats-badge {
-            display: inline-block;
-            background: #0284c7;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
-            margin-bottom: 20px;
-        }
+  .tab-btn:hover{
+    color: var(--text-main);
+    background: rgba(0,229,255,0.06);
+  }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-        }
+  .tab-btn.active{
+    background: linear-gradient(180deg, rgba(0,229,255,0.16), rgba(0,229,255,0.03));
+    color: var(--cyan);
+    border-color: var(--border-bright);
+    box-shadow: 0 -2px 18px rgba(0,229,255,0.18);
+  }
 
-        th, td {
-            padding: 12px 16px;
-            text-align: left;
-        }
+  .tab-btn.active::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  }
 
-        th {
-            background-color: #334155;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 0.5px;
-        }
+  .tab-content{ display:none; animation: fadeUp 0.35s ease; }
+  .tab-content.active{ display:block; }
 
-        tr {
-            border-bottom: 1px solid var(--border-color);
-        }
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(6px);}
+    to{ opacity:1; transform: translateY(0);}
+  }
 
-        tr:hover {
-            background-color: #26334d;
-        }
+  /* ===== CONTROLS ===== */
+  .controls{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap:18px;
+    background: linear-gradient(155deg, var(--panel-glass), rgba(15,23,42,0.4));
+    border: 1px solid var(--border);
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
+  }
 
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+  .control-group{ display:flex; flex-direction:column; gap:9px; }
 
-        .bullish { background: #166534; color: #4ade80; }
-        .bearish { background: #991b1b; color: #fca5a5; }
-        .neutral { background: #854d0e; color: #fde047; }
-    </style>
+  label{
+    font-family: var(--font-mono);
+    font-weight:600;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  label::before{
+    content:"";
+    width:5px; height:5px;
+    border-radius:50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  select{
+    padding: 12px 14px;
+    background: var(--bg-deep);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight:500;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2300e5ff' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  select:focus{
+    border-color: var(--cyan);
+    box-shadow: 0 0 0 3px var(--cyan-soft);
+  }
+
+  /* ===== STATS BADGE ===== */
+  .stats-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background: linear-gradient(120deg, rgba(0,229,255,0.18), rgba(255,61,129,0.12));
+    border: 1px solid var(--border-bright);
+    color: var(--text-main);
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 24px rgba(0,229,255,0.12);
+  }
+  .stats-badge::before{
+    content:"◆";
+    color: var(--cyan);
+    font-size: 12px;
+  }
+  .stats-badge .count-num{
+    font-family: var(--font-mono);
+    color: var(--cyan);
+    font-size: 17px;
+  }
+
+  /* ===== TABLE ===== */
+  .table-wrap{
+    background: var(--panel-glass);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 14px 40px -16px rgba(0,0,0,0.7);
+  }
+
+  table{
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td{
+    padding: 14px 18px;
+    text-align: left;
+  }
+
+  th{
+    background: linear-gradient(180deg, rgba(0,229,255,0.08), rgba(0,229,255,0.02));
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border-bright);
+    white-space: nowrap;
+  }
+
+  td{
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    color: var(--text-main);
+  }
+
+  tbody tr{
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  tbody tr:hover{
+    background: linear-gradient(90deg, rgba(0,229,255,0.06), rgba(255,61,129,0.03));
+  }
+
+  tbody tr:last-child{ border-bottom: none; }
+
+  .sym{
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+  }
+
+  .pair-chip{
+    display:inline-block;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  .badge{
+    display:inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    border: 1px solid transparent;
+  }
+
+  .bullish{ background: var(--green-soft); color: var(--green); border-color: rgba(0,255,163,0.35); box-shadow: 0 0 12px rgba(0,255,163,0.12); }
+  .bearish{ background: var(--red-soft); color: var(--red); border-color: rgba(255,77,94,0.35); box-shadow: 0 0 12px rgba(255,77,94,0.12); }
+  .neutral{ background: var(--amber-soft); color: var(--amber); border-color: rgba(255,183,3,0.35); box-shadow: 0 0 12px rgba(255,183,3,0.12); }
+
+  .empty-row td{
+    text-align:center;
+    color: var(--text-faint);
+    padding: 50px 20px;
+    font-family: var(--font-body);
+    font-size: 14px;
+  }
+
+  /* ===== GUIDE TAB ===== */
+  .guide-intro{
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    margin: 0 0 6px;
+    color: var(--text-main);
+  }
+  .guide-sub{
+    color: var(--text-dim);
+    font-size: 13.5px;
+    margin: 0 0 20px;
+  }
+
+  .guide-table td:first-child{ width: 230px; }
+  .guide-table td:last-child{
+    font-family: var(--font-body);
+    color: var(--text-dim);
+    line-height: 1.6;
+    font-size: 13.5px;
+  }
+
+  footer{
+    text-align:center;
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 34px;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 640px){
+    .controls{ grid-template-columns: 1fr; }
+    th, td{ padding: 10px 12px; font-size: 12px; }
+    .tab-btn{ padding: 11px 16px; font-size: 12.5px; }
+  }
+</style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>MACD Multi-Timeframe Scanner Dashboard</h1>
-        <p style="color: #94a3b8; margin: 0;">Automated transition, MACD States & RSI calculations across 4 Timeframe Pairs</p>
-    </header>
+  <header>
+    <div>
+      <div class="brand-eyebrow"><span class="pulse-dot"></span> LIVE SCAN &middot; MULTI-TIMEFRAME ENGINE</div>
+      <h1>MACD Master Dashboard</h1>
+      <p class="subtitle">Automated transition detection, MACD state mapping &amp; RSI(14) correlation across four timeframe pairs.</p>
+    </div>
+    <div class="header-stats">
+      <div class="mini-stat up"><span class="k">Bullish Setups</span><span class="v" id="statBull">0</span></div>
+      <div class="mini-stat down"><span class="k">Bearish Setups</span><span class="v" id="statBear">0</span></div>
+      <div class="mini-stat flat"><span class="k">Neutral</span><span class="v" id="statNeutral">0</span></div>
+    </div>
+  </header>
 
-    <!-- TAB NAVIGATION -->
-    <div class="tab-buttons">
-        <button class="tab-btn active" onclick="switchTab('tabScreener')">Stock Screener</button>
-        <button class="tab-btn" onclick="switchTab('tabGuide')">Market Bias Guide (Tab 2)</button>
+  <div class="tab-buttons">
+    <button class="tab-btn active" onclick="switchTab('tabScreener')">⚡ Stock Screener</button>
+    <button class="tab-btn" onclick="switchTab('tabGuide')">📖 Market Bias Guide</button>
+  </div>
+
+  <!-- TAB 1: SCREENER -->
+  <div id="tabScreener" class="tab-content active">
+    <div class="controls">
+      <div class="control-group">
+        <label for="pairSelect">Timeframe Pair (LTF → HTF)</label>
+        <select id="pairSelect" onchange="filterData()">
+          <option value="15m -> 1h">15m → 1h</option>
+          <option value="1h -> Daily">1h → Daily</option>
+          <option value="Daily -> Weekly">Daily → Weekly</option>
+          <option value="Weekly -> Monthly">Weekly → Monthly</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="conditionSelect">MACD Transition Condition</label>
+        <select id="conditionSelect" onchange="filterData()">
+          <option value="Strong Bullish">Strong Bullish</option>
+          <option value="Bullish Reversal">Bullish Reversal</option>
+          <option value="Bullish Pullback">Bullish Pullback</option>
+          <option value="Deep Pullback">Deep Pullback</option>
+          <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
+          <option value="Oversold Accumulation">Oversold Accumulation</option>
+          <option value="Neutral / Consolidating">Neutral / Consolidating</option>
+          <option value="Complex Reversal Failure">Complex Reversal Failure</option>
+          <option value="Counter-Trend Buy">Counter-Trend Buy</option>
+          <option value="Early Recovery Attempt">Early Recovery Attempt</option>
+          <option value="Correction in Progress">Correction in Progress</option>
+          <option value="Accelerating Correction">Accelerating Correction</option>
+          <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
+          <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
+          <option value="Bearish Continuation">Bearish Continuation</option>
+          <option value="Strong Bearish">Strong Bearish</option>
+        </select>
+      </div>
     </div>
 
-    <!-- TAB 1: SCREENER -->
-    <div id="tabScreener" class="tab-content active">
-        <div class="controls">
-            <div class="control-group">
-                <label for="pairSelect">1. Select Timeframe Pair (LTF -> HTF)</label>
-                <select id="pairSelect" onchange="filterData()">
-                    <option value="15m -> 1h">15m -> 1h</option>
-                    <option value="1h -> Daily">1h -> Daily</option>
-                    <option value="Daily -> Weekly">Daily -> Weekly</option>
-                    <option value="Weekly -> Monthly">Weekly -> Monthly</option>
-                </select>
-            </div>
+    <div class="stats-badge">Matching Stocks: <span class="count-num" id="countBadge">0</span></div>
 
-            <div class="control-group">
-                <label for="conditionSelect">2. Select MACD Transition Condition</label>
-                <select id="conditionSelect" onchange="filterData()">
-                    <option value="Strong Bullish">Strong Bullish</option>
-                    <option value="Bullish Reversal">Bullish Reversal</option>
-                    <option value="Bullish Pullback">Bullish Pullback</option>
-                    <option value="Deep Pullback">Deep Pullback</option>
-                    <option value="Dip Buy / Reversal">Dip Buy / Reversal</option>
-                    <option value="Oversold Accumulation">Oversold Accumulation</option>
-                    <option value="Neutral / Consolidating">Neutral / Consolidating</option>
-                    <option value="Complex Reversal Failure">Complex Reversal Failure</option>
-                    <option value="Counter-Trend Buy">Counter-Trend Buy</option>
-                    <option value="Early Recovery Attempt">Early Recovery Attempt</option>
-                    <option value="Correction in Progress">Correction in Progress</option>
-                    <option value="Accelerating Correction">Accelerating Correction</option>
-                    <option value="Aggressive Counter-Trend">Aggressive Counter-Trend</option>
-                    <option value="Weak Oversold Bounce">Weak Oversold Bounce</option>
-                    <option value="Bearish Continuation">Bearish Continuation</option>
-                    <option value="Strong Bearish">Strong Bearish</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="stats-badge" id="countBadge">Matching Stocks: 0</div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Symbol</th>
-                    <th>Timeframe Pair</th>
-                    <th>Close Price</th>
-                    <th>HTF MACD State</th>
-                    <th>LTF MACD State</th>
-                    <th>HTF RSI (14)</th>
-                    <th>LTF RSI (14)</th>
-                    <th>Market Bias</th>
-                </tr>
-            </thead>
-            <tbody id="stockTableBody">
-            </tbody>
-        </table>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Timeframe Pair</th>
+            <th>Close Price</th>
+            <th>HTF MACD State</th>
+            <th>LTF MACD State</th>
+            <th>HTF RSI (14)</th>
+            <th>LTF RSI (14)</th>
+            <th>Market Bias</th>
+          </tr>
+        </thead>
+        <tbody id="stockTableBody"></tbody>
+      </table>
     </div>
+  </div>
 
-    <!-- TAB 2: MARKET BIAS GUIDE -->
-    <div id="tabGuide" class="tab-content">
-        <h2 style="color: var(--accent); margin-top: 0;">Market Bias & Practical Interpretation Reference</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th style="width: 25%;">Market Bias</th>
-                    <th style="width: 75%;">Practical Trading Interpretation</th>
-                </tr>
-            </thead>
-            <tbody id="guideTableBody">
-            </tbody>
-        </table>
+  <!-- TAB 2: MARKET BIAS GUIDE -->
+  <div id="tabGuide" class="tab-content">
+    <p class="guide-intro">Market Bias Reference</p>
+    <p class="guide-sub">Practical trading interpretation for every MACD transition condition tracked by the scanner.</p>
+    <div class="table-wrap">
+      <table class="guide-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Market Bias</th>
+            <th style="width: 75%;">Practical Trading Interpretation</th>
+          </tr>
+        </thead>
+        <tbody id="guideTableBody"></tbody>
+      </table>
     </div>
+  </div>
 
+  <footer>MACD Master &middot; Multi-Timeframe Scanner &middot; For educational reference only</footer>
 </div>
 
 <script>
@@ -258,7 +522,7 @@
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-        
+
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
     }
@@ -272,6 +536,19 @@
         return 'neutral';
     }
 
+    function updateHeaderStats() {
+        let bull = 0, bear = 0, neu = 0;
+        stockData.forEach(item => {
+            const cls = getBadgeClass(item.condition);
+            if (cls === 'bullish') bull++;
+            else if (cls === 'bearish') bear++;
+            else neu++;
+        });
+        document.getElementById('statBull').innerText = bull;
+        document.getElementById('statBear').innerText = bear;
+        document.getElementById('statNeutral').innerText = neu;
+    }
+
     function filterData() {
         const selectedPair = document.getElementById('pairSelect').value;
         const selectedCondition = document.getElementById('conditionSelect').value;
@@ -279,12 +556,12 @@
 
         const filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
 
-        document.getElementById('countBadge').innerText = `Matching Stocks: ${filtered.length}`;
+        document.getElementById('countBadge').innerText = filtered.length;
 
         tableBody.innerHTML = '';
 
         if (filtered.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: #94a3b8; padding: 30px;">No stocks matching this pair & condition.</td></tr>`;
+            tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No stocks matching this pair &amp; condition.</td></tr>`;
             return;
         }
 
@@ -292,13 +569,13 @@
             const badgeClass = getBadgeClass(row.condition);
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td style="font-weight: bold; color: var(--accent);">${row.symbol}</td>
-                <td>${row.pair}</td>
+                <td class="sym">${row.symbol}</td>
+                <td><span class="pair-chip">${row.pair}</span></td>
                 <td>${row.close !== undefined ? row.close.toFixed(2) : 'N/A'}</td>
                 <td style="color: #cbd5e1;">${row.htf_state}</td>
                 <td style="color: #cbd5e1;">${row.ltf_state}</td>
-                <td style="font-weight: bold; color: ${row.htf_rsi > 60 ? '#4ade80' : row.htf_rsi < 40 ? '#fca5a5' : '#fde047'};">${row.htf_rsi}</td>
-                <td style="font-weight: bold; color: ${row.ltf_rsi > 60 ? '#4ade80' : row.ltf_rsi < 40 ? '#fca5a5' : '#fde047'};">${row.ltf_rsi}</td>
+                <td style="font-weight: 700; color: ${row.htf_rsi > 60 ? '#00ffa3' : row.htf_rsi < 40 ? '#ff4d5e' : '#ffb703'};">${row.htf_rsi}</td>
+                <td style="font-weight: 700; color: ${row.ltf_rsi > 60 ? '#00ffa3' : row.ltf_rsi < 40 ? '#ff4d5e' : '#ffb703'};">${row.ltf_rsi}</td>
                 <td><span class="badge ${badgeClass}">${row.condition}</span></td>
             `;
             tableBody.appendChild(tr);
@@ -313,7 +590,7 @@
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td><span class="badge ${badgeClass}">${row['Market Bias']}</span></td>
-                <td style="color: #cbd5e1; line-height: 1.5;">${row['Interpretation']}</td>
+                <td>${row['Interpretation']}</td>
             `;
             guideBody.appendChild(tr);
         });
@@ -323,6 +600,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         filterData();
         populateGuide();
+        updateHeaderStats();
     });
 </script>
 
