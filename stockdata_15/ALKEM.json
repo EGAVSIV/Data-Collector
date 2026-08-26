@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T07:45:00.000",
-        "symbol":"NSE:ALKEM",
-        "open":5494.0,
-        "high":5502.5,
-        "low":5490.0,
-        "close":5502.0,
-        "volume":423.0
-    },
-    {
-        "datetime":"2025-12-31T08:00:00.000",
-        "symbol":"NSE:ALKEM",
-        "open":5498.5,
-        "high":5502.0,
-        "low":5492.5,
-        "close":5495.0,
-        "volume":576.0
-    },
-    {
         "datetime":"2025-12-31T08:15:00.000",
         "symbol":"NSE:ALKEM",
         "open":5495.5,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:ALKEM",
         "open":5352.0,
         "high":5352.0,
-        "low":5340.5,
-        "close":5342.0,
-        "volume":1124.0
+        "low":5337.0,
+        "close":5349.5,
+        "volume":1837.0
+    },
+    {
+        "datetime":"2026-08-26T05:45:00.000",
+        "symbol":"NSE:ALKEM",
+        "open":5351.5,
+        "high":5352.5,
+        "low":5326.0,
+        "close":5331.0,
+        "volume":1937.0
+    },
+    {
+        "datetime":"2026-08-26T06:00:00.000",
+        "symbol":"NSE:ALKEM",
+        "open":5329.5,
+        "high":5329.5,
+        "low":5320.0,
+        "close":5322.5,
+        "volume":526.0
     }
 ]

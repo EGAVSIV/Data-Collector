@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T04:45:00.000",
-        "symbol":"NSE:RADICO",
-        "open":1764.35,
-        "high":1782.0,
-        "low":1763.55,
-        "close":1771.9,
-        "volume":68643.0
-    },
-    {
         "datetime":"2024-05-02T05:45:00.000",
         "symbol":"NSE:RADICO",
         "open":1771.95,
@@ -35996,7 +35987,16 @@
         "open":4617.3,
         "high":4635.0,
         "low":4608.0,
-        "close":4631.9,
-        "volume":49267.0
+        "close":4634.3,
+        "volume":50830.0
+    },
+    {
+        "datetime":"2026-08-26T05:45:00.000",
+        "symbol":"NSE:RADICO",
+        "open":4634.7,
+        "high":4640.0,
+        "low":4628.1,
+        "close":4637.8,
+        "volume":10951.0
     }
 ]

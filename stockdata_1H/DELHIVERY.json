@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T04:45:00.000",
-        "symbol":"NSE:DELHIVERY",
-        "open":453.65,
-        "high":453.65,
-        "low":449.9,
-        "close":450.75,
-        "volume":72434.0
-    },
-    {
         "datetime":"2024-05-02T05:45:00.000",
         "symbol":"NSE:DELHIVERY",
         "open":450.75,
@@ -35996,7 +35987,16 @@
         "open":447.8,
         "high":451.8,
         "low":445.8,
-        "close":451.0,
-        "volume":179421.0
+        "close":450.8,
+        "volume":191729.0
+    },
+    {
+        "datetime":"2026-08-26T05:45:00.000",
+        "symbol":"NSE:DELHIVERY",
+        "open":450.6,
+        "high":450.8,
+        "low":449.7,
+        "close":450.05,
+        "volume":49610.0
     }
 ]

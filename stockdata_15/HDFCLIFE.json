@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T07:45:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":750.95,
-        "high":751.7,
-        "low":750.3,
-        "close":751.0,
-        "volume":59214.0
-    },
-    {
-        "datetime":"2025-12-31T08:00:00.000",
-        "symbol":"NSE:HDFCLIFE",
-        "open":751.05,
-        "high":751.1,
-        "low":749.3,
-        "close":750.4,
-        "volume":53249.0
-    },
-    {
         "datetime":"2025-12-31T08:15:00.000",
         "symbol":"NSE:HDFCLIFE",
         "open":750.3,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-26T05:30:00.000",
         "symbol":"NSE:HDFCLIFE",
         "open":555.55,
-        "high":556.3,
+        "high":559.0,
         "low":555.5,
-        "close":556.15,
-        "volume":53876.0
+        "close":558.8,
+        "volume":359444.0
+    },
+    {
+        "datetime":"2026-08-26T05:45:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":558.7,
+        "high":563.5,
+        "low":558.7,
+        "close":561.55,
+        "volume":530850.0
+    },
+    {
+        "datetime":"2026-08-26T06:00:00.000",
+        "symbol":"NSE:HDFCLIFE",
+        "open":562.0,
+        "high":562.0,
+        "low":560.8,
+        "close":561.15,
+        "volume":82368.0
     }
 ]

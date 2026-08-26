@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2026-01-01T05:45:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27661.25,
-        "high":27663.4,
-        "low":27645.05,
-        "close":27647.0,
-        "volume":1381038.0
-    },
-    {
-        "datetime":"2026-01-01T06:00:00.000",
-        "symbol":"NSE:CNXFINANCE",
-        "open":27647.6,
-        "high":27650.85,
-        "low":27628.95,
-        "close":27630.35,
-        "volume":1768732.0
-    },
-    {
         "datetime":"2026-01-01T06:15:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":27631.9,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-26T05:30:00.000",
         "symbol":"NSE:CNXFINANCE",
         "open":26434.6,
-        "high":26435.65,
-        "low":26408.9,
-        "close":26410.9,
-        "volume":1251228.0
+        "high":26454.3,
+        "low":26403.65,
+        "close":26452.65,
+        "volume":3811856.0
+    },
+    {
+        "datetime":"2026-08-26T05:45:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26452.75,
+        "high":26458.7,
+        "low":26425.25,
+        "close":26439.75,
+        "volume":3934375.0
+    },
+    {
+        "datetime":"2026-08-26T06:00:00.000",
+        "symbol":"NSE:CNXFINANCE",
+        "open":26440.15,
+        "high":26459.9,
+        "low":26428.4,
+        "close":26459.8,
+        "volume":2011407.0
     }
 ]
