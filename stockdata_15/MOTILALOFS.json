@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:MOTILALOFS",
-        "open":857.75,
-        "high":859.0,
-        "low":857.0,
-        "close":858.45,
-        "volume":16571.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:MOTILALOFS",
-        "open":858.9,
-        "high":858.9,
-        "low":854.7,
-        "close":855.55,
-        "volume":27591.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:MOTILALOFS",
-        "open":855.3,
-        "high":857.95,
-        "low":854.05,
-        "close":856.0,
-        "volume":34979.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:MOTILALOFS",
         "open":859.25,
@@ -34941,10 +34914,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:MOTILALOFS",
         "open":940.65,
-        "high":941.85,
+        "high":941.95,
         "low":940.05,
         "close":941.1,
-        "volume":9957.0
+        "volume":12608.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-26T07:00:00.000",
         "symbol":"NSE:MOTILALOFS",
         "open":1037.35,
-        "high":1038.6,
+        "high":1039.0,
         "low":1036.6,
-        "close":1038.1,
-        "volume":12246.0
+        "close":1038.45,
+        "volume":23780.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:MOTILALOFS",
+        "open":1038.45,
+        "high":1038.8,
+        "low":1035.5,
+        "close":1036.7,
+        "volume":27547.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:MOTILALOFS",
+        "open":1036.9,
+        "high":1041.0,
+        "low":1036.0,
+        "close":1036.45,
+        "volume":36476.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:MOTILALOFS",
+        "open":1036.1,
+        "high":1037.45,
+        "low":1034.5,
+        "close":1036.95,
+        "volume":19015.0
     }
 ]

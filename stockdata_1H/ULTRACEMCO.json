@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T06:45:00.000",
-        "symbol":"NSE:ULTRACEMCO",
-        "open":9996.05,
-        "high":9999.9,
-        "low":9975.0,
-        "close":9985.55,
-        "volume":22926.0
-    },
-    {
         "datetime":"2024-05-02T07:45:00.000",
         "symbol":"NSE:ULTRACEMCO",
         "open":9984.25,
@@ -35996,7 +35987,16 @@
         "open":11680.0,
         "high":11693.0,
         "low":11651.0,
-        "close":11663.0,
-        "volume":8222.0
+        "close":11674.0,
+        "volume":17708.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:ULTRACEMCO",
+        "open":11673.0,
+        "high":11684.0,
+        "low":11664.0,
+        "close":11677.0,
+        "volume":1246.0
     }
 ]

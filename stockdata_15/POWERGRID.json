@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:POWERGRID",
-        "open":264.5,
-        "high":264.8,
-        "low":264.3,
-        "close":264.65,
-        "volume":198395.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:POWERGRID",
-        "open":264.65,
-        "high":265.0,
-        "low":264.25,
-        "close":264.9,
-        "volume":890339.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:POWERGRID",
-        "open":264.9,
-        "high":264.9,
-        "low":264.0,
-        "close":264.3,
-        "volume":590119.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:POWERGRID",
         "open":264.45,
@@ -35975,11 +35948,11 @@
     {
         "datetime":"2026-08-26T06:30:00.000",
         "symbol":"NSE:POWERGRID",
-        "open":267.85,
-        "high":267.9,
+        "open":267.75,
+        "high":267.8,
         "low":267.35,
         "close":267.5,
-        "volume":106176.0
+        "volume":97589.0
     },
     {
         "datetime":"2026-08-26T06:45:00.000",
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:POWERGRID",
         "open":267.6,
         "high":267.75,
-        "low":267.5,
-        "close":267.75,
-        "volume":30462.0
+        "low":267.05,
+        "close":267.35,
+        "volume":119013.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:POWERGRID",
+        "open":267.3,
+        "high":267.4,
+        "low":267.1,
+        "close":267.2,
+        "volume":56494.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:POWERGRID",
+        "open":267.25,
+        "high":267.3,
+        "low":267.05,
+        "close":267.05,
+        "volume":66071.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:POWERGRID",
+        "open":267.1,
+        "high":267.1,
+        "low":266.5,
+        "close":266.8,
+        "volume":188235.0
     }
 ]

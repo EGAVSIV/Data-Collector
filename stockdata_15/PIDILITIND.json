@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:PIDILITIND",
-        "open":1478.3,
-        "high":1479.2,
-        "low":1477.0,
-        "close":1479.0,
-        "volume":14935.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:PIDILITIND",
-        "open":1479.8,
-        "high":1479.9,
-        "low":1474.8,
-        "close":1475.2,
-        "volume":28929.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:PIDILITIND",
-        "open":1475.3,
-        "high":1489.0,
-        "low":1475.0,
-        "close":1482.1,
-        "volume":253421.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:PIDILITIND",
         "open":1485.7,
@@ -34941,10 +34914,10 @@
         "datetime":"2026-08-19T07:45:00.000",
         "symbol":"NSE:PIDILITIND",
         "open":1656.6,
-        "high":1657.0,
+        "high":1657.8,
         "low":1655.5,
         "close":1656.7,
-        "volume":10198.0
+        "volume":13253.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:PIDILITIND",
         "open":1646.9,
         "high":1647.2,
-        "low":1645.0,
-        "close":1645.5,
-        "volume":4285.0
+        "low":1643.3,
+        "close":1645.8,
+        "volume":11657.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:PIDILITIND",
+        "open":1645.7,
+        "high":1646.4,
+        "low":1644.0,
+        "close":1644.2,
+        "volume":7599.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:PIDILITIND",
+        "open":1644.4,
+        "high":1645.1,
+        "low":1644.1,
+        "close":1644.2,
+        "volume":5905.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:PIDILITIND",
+        "open":1644.2,
+        "high":1645.2,
+        "low":1644.0,
+        "close":1644.1,
+        "volume":3612.0
     }
 ]

@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T06:45:00.000",
-        "symbol":"NSE:COFORGE",
-        "open":1009.9,
-        "high":1010.98,
-        "low":1006.41,
-        "close":1007.0,
-        "volume":187940.0
-    },
-    {
         "datetime":"2024-05-02T07:45:00.000",
         "symbol":"NSE:COFORGE",
         "open":1006.99,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-26T06:45:00.000",
         "symbol":"NSE:COFORGE",
         "open":1887.9,
-        "high":1889.2,
+        "high":1890.5,
         "low":1886.4,
-        "close":1888.4,
-        "volume":52034.0
+        "close":1890.4,
+        "volume":111431.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:COFORGE",
+        "open":1890.4,
+        "high":1890.8,
+        "low":1888.0,
+        "close":1888.1,
+        "volume":19130.0
     }
 ]

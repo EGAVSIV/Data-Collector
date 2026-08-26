@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-06T09:45:00.000",
-        "symbol":"NSE:EXIDEIND",
-        "open":460.05,
-        "high":461.4,
-        "low":459.6,
-        "close":461.0,
-        "volume":236916.0
-    },
-    {
         "datetime":"2024-05-07T03:45:00.000",
         "symbol":"NSE:EXIDEIND",
         "open":462.25,
@@ -35996,7 +35987,16 @@
         "open":445.2,
         "high":445.5,
         "low":443.65,
-        "close":444.7,
-        "volume":85270.0
+        "close":444.5,
+        "volume":121426.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:EXIDEIND",
+        "open":444.45,
+        "high":444.75,
+        "low":444.25,
+        "close":444.55,
+        "volume":6334.0
     }
 ]

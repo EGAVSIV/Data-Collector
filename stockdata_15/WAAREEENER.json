@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:WAAREEENER",
-        "open":2981.8,
-        "high":2992.8,
-        "low":2975.0,
-        "close":2991.2,
-        "volume":62480.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:WAAREEENER",
-        "open":2991.1,
-        "high":2991.1,
-        "low":2962.5,
-        "close":2964.4,
-        "volume":76316.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:WAAREEENER",
-        "open":2964.4,
-        "high":2965.0,
-        "low":2954.8,
-        "close":2962.1,
-        "volume":72839.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:WAAREEENER",
         "open":2972.0,
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:WAAREEENER",
         "open":2652.5,
         "high":2652.9,
-        "low":2650.0,
-        "close":2651.0,
-        "volume":3420.0
+        "low":2645.0,
+        "close":2647.1,
+        "volume":9155.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:WAAREEENER",
+        "open":2647.1,
+        "high":2649.3,
+        "low":2645.0,
+        "close":2648.0,
+        "volume":9327.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:WAAREEENER",
+        "open":2648.4,
+        "high":2651.2,
+        "low":2647.3,
+        "close":2649.0,
+        "volume":4144.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:WAAREEENER",
+        "open":2648.0,
+        "high":2649.4,
+        "low":2646.0,
+        "close":2646.5,
+        "volume":2741.0
     }
 ]

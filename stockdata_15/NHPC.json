@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:NHPC",
-        "open":78.92,
-        "high":79.19,
-        "low":78.89,
-        "close":79.16,
-        "volume":295834.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:NHPC",
-        "open":79.19,
-        "high":79.43,
-        "low":78.88,
-        "close":79.3,
-        "volume":1584624.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:NHPC",
-        "open":79.3,
-        "high":79.35,
-        "low":79.07,
-        "close":79.2,
-        "volume":2589740.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:NHPC",
         "open":79.18,
@@ -35996,7 +35969,34 @@
         "open":76.45,
         "high":76.46,
         "low":76.3,
+        "close":76.34,
+        "volume":134593.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:NHPC",
+        "open":76.34,
+        "high":76.4,
+        "low":76.32,
+        "close":76.38,
+        "volume":60226.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:NHPC",
+        "open":76.38,
+        "high":76.39,
+        "low":76.26,
         "close":76.31,
-        "volume":99170.0
+        "volume":148149.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:NHPC",
+        "open":76.29,
+        "high":76.32,
+        "low":76.29,
+        "close":76.3,
+        "volume":17104.0
     }
 ]

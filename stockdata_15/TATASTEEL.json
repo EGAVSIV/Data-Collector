@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:TATASTEEL",
-        "open":179.82,
-        "high":180.39,
-        "low":179.82,
-        "close":180.34,
-        "volume":1121358.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:TATASTEEL",
-        "open":180.36,
-        "high":180.42,
-        "low":179.92,
-        "close":180.17,
-        "volume":1825758.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:TATASTEEL",
-        "open":180.2,
-        "high":180.32,
-        "low":179.82,
-        "close":179.93,
-        "volume":2516501.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:TATASTEEL",
         "open":180.61,
@@ -35994,9 +35967,36 @@
         "datetime":"2026-08-26T07:00:00.000",
         "symbol":"NSE:TATASTEEL",
         "open":184.72,
-        "high":185.64,
+        "high":185.7,
         "low":184.67,
-        "close":185.62,
-        "volume":1019629.0
+        "close":185.51,
+        "volume":1396611.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:TATASTEEL",
+        "open":185.5,
+        "high":185.57,
+        "low":185.29,
+        "close":185.52,
+        "volume":519488.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:TATASTEEL",
+        "open":185.51,
+        "high":185.91,
+        "low":185.49,
+        "close":185.71,
+        "volume":461055.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:TATASTEEL",
+        "open":185.73,
+        "high":185.81,
+        "low":185.66,
+        "close":185.7,
+        "volume":222278.0
     }
 ]

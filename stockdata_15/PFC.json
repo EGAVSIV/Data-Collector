@@ -1,32 +1,5 @@
 [
     {
-        "datetime":"2025-12-31T09:15:00.000",
-        "symbol":"NSE:PFC",
-        "open":355.55,
-        "high":356.35,
-        "low":355.55,
-        "close":356.35,
-        "volume":109022.0
-    },
-    {
-        "datetime":"2025-12-31T09:30:00.000",
-        "symbol":"NSE:PFC",
-        "open":356.45,
-        "high":356.5,
-        "low":355.2,
-        "close":355.2,
-        "volume":247183.0
-    },
-    {
-        "datetime":"2025-12-31T09:45:00.000",
-        "symbol":"NSE:PFC",
-        "open":355.3,
-        "high":355.7,
-        "low":355.05,
-        "close":355.25,
-        "volume":336939.0
-    },
-    {
         "datetime":"2026-01-01T03:45:00.000",
         "symbol":"NSE:PFC",
         "open":358.0,
@@ -34942,9 +34915,9 @@
         "symbol":"NSE:PFC",
         "open":374.2,
         "high":374.3,
-        "low":373.6,
+        "low":373.5,
         "close":373.65,
-        "volume":165737.0
+        "volume":237128.0
     },
     {
         "datetime":"2026-08-19T08:00:00.000",
@@ -35995,8 +35968,35 @@
         "symbol":"NSE:PFC",
         "open":365.8,
         "high":365.85,
-        "low":365.2,
-        "close":365.2,
-        "volume":49003.0
+        "low":364.4,
+        "close":364.5,
+        "volume":177768.0
+    },
+    {
+        "datetime":"2026-08-26T07:15:00.000",
+        "symbol":"NSE:PFC",
+        "open":364.5,
+        "high":364.6,
+        "low":364.2,
+        "close":364.5,
+        "volume":81365.0
+    },
+    {
+        "datetime":"2026-08-26T07:30:00.000",
+        "symbol":"NSE:PFC",
+        "open":364.45,
+        "high":364.55,
+        "low":364.05,
+        "close":364.05,
+        "volume":143657.0
+    },
+    {
+        "datetime":"2026-08-26T07:45:00.000",
+        "symbol":"NSE:PFC",
+        "open":364.1,
+        "high":364.1,
+        "low":363.35,
+        "close":363.8,
+        "volume":113030.0
     }
 ]
