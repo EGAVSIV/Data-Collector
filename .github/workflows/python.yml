@@ -4,16 +4,14 @@ on:
   # Manual Run Trigger
   workflow_dispatch:
 
-  # Scheduled Runs
+  # Scheduled Runs (Times offset by ~7 mins from peak :00 and :30 marks to ensure prompt runner execution)
   schedule:
-    # 09:00 AM IST
-    - cron: "30 3 * * 1-5"
-    # Every 30 minutes from 09:30 AM until 03:30 PM IST
-    - cron: "0,30 4-9 * * 1-5"
-    # 03:30 PM IST
-    - cron: "0 10 * * 1-5"
-    # 04:00 PM IST
-    - cron: "30 10 * * 1-5"
+    # 09:07 AM IST (03:37 AM UTC)
+    - cron: "37 3 * * 1-5"
+    # Every 30 minutes from 09:37 AM IST until 03:37 PM IST (04:07 - 10:07 UTC)
+    - cron: "7,37 4-9 * * 1-5"
+    # 04:07 PM IST (10:37 AM UTC)
+    - cron: "37 10 * * 1-5"
 
 permissions:
   contents: write
@@ -29,7 +27,7 @@ jobs:
     timeout-minutes: 55
 
     steps:
-      # STEP 1: Fast Shallow Checkout (Only fetches the latest commit)
+      # STEP 1: Fast Shallow Checkout
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
@@ -42,9 +40,10 @@ jobs:
           python-version: "3.11"
           cache: "pip"
 
-      # STEP 3: Install Dependencies Directly
+      # STEP 3: Install Dependencies
       - name: Install Dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       # STEP 4: Run Data Downloader
@@ -61,10 +60,10 @@ jobs:
         run: |
           rm -f download_log.txt error_symbols.txt
 
-      # STEP 6: Fast Automated Commit & Push (Only pushes if files changed)
+      # STEP 6: Fast Automated Commit & Push
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto update stock data"
+          commit_message: "Auto update stock data [skip ci]"
           file_pattern: "stockdata_D/* stockdata_W/* stockdata_M/* stockdata_15/* stockdata_1H/*"
           skip_dirty_check: false
