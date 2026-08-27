@@ -1,7 +1,8 @@
 import os, time, socket, ssl, multiprocessing as mp
 from datetime import datetime
 from tvDatafeed import TvDatafeed, Interval
-import pyt
+from zoneinfo import ZoneInfo
+from datetime import timezone
 
 # ==============================
 # TradingView Credentials
@@ -86,10 +87,10 @@ def fetch_save(args):
 
             if df is not None and not df.empty:
                 # 1. Convert datetime index from UTC to IST
-                ist = pytz.timezone('Asia/Kolkata')
+                ist = ZoneInfo('Asia/Kolkata')
                 if df.index.tz is None:
                     # If timezone naive, assume UTC and convert to IST
-                    df.index = df.index.tz_localize('UTC').tz_convert(ist)
+                    df.index = df.index.tz_localize(timezone.utc).tz_convert(ist)
                 else:
                     # If already timezone aware, directly convert to IST
                     df.index = df.index.tz_convert(ist)
