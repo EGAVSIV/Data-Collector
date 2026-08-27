@@ -195,18 +195,7 @@ def detect_divergence(df, lookback=DIVERGENCE_LOOKBACK, split=DIVERGENCE_SPLIT):
     return None
 
 
-# --- POINT 2: Divergence -> Recommendation mapping -----------------------
-# NOTE on terminology: the brief used "ND"/"RD" shorthand. Mapped onto this
-# codebase's existing divergence vocabulary (which already distinguishes
-# "Regular" = reversal-type divergence vs "Hidden" = continuation-type
-# divergence, see DIVERGENCE_GUIDE above) as follows:
-#   - Both HTF & LTF show a *Regular* divergence (same direction)  -> STRONG
-#     signal, because both timeframes are independently flagging a reversal.
-#   - HTF shows a *Hidden* (continuation) divergence while LTF shows a fresh
-#     *Regular* (reversal) divergence -> a tactical entry trigger in the
-#     direction the HTF continuation implies.
-# If your source system's "ND"/"RD" convention differs, adjust the four
-# elif branches below accordingly.
+# --- Divergence -> Recommendation mapping ---
 def get_divergence_recommendation(symbol, htf_pair_label, ltf_pair_label, htf_div, ltf_div):
     htf_div = htf_div or ""
     ltf_div = ltf_div or ""
@@ -236,7 +225,7 @@ def get_divergence_recommendation(symbol, htf_pair_label, ltf_pair_label, htf_di
     return bucket, remark, recommendation
 
 
-# --- POINT 1: Last-updated (IST) helper -----------------------------------
+# --- Timestamp Helpers ---
 def _get_ts_col(df):
     if 'datetime' in df.columns:
         return 'datetime'
@@ -255,7 +244,7 @@ def format_ist(ts):
     return ts.strftime('%d %b %Y, %I:%M %p IST')
 
 
-# --- POINT 5: MACD 360 FNO (Daily-only, last N sessions) ------------------
+# --- MACD 360 FNO (Daily-only, last N sessions) ---
 def compute_macd360_fno(days=MACD360_DAYS):
     """
     Walks every symbol's Daily data, and for each of the last `days` daily
@@ -349,7 +338,7 @@ def process_stock_data():
     Returns (macd_results, divergence_results, last_15m_ts):
       macd_results       -> Tab 1 (Stock Screener) rows
       divergence_results -> Tab 2 (Divergence Scanner) rows
-      last_15m_ts        -> pandas Timestamp of the latest 15m candle seen (Point 1)
+      last_15m_ts        -> pandas Timestamp of the latest 15m candle seen
     """
     macd_results = []
     divergence_results = []
@@ -392,7 +381,6 @@ def process_stock_data():
                                 'close': float(df['close'].iloc[-1])
                             }
 
-                            # POINT 1: track the most recent 15m candle timestamp seen
                             if tf == '15':
                                 date_col = _get_ts_col(df)
                                 if date_col:
@@ -426,10 +414,8 @@ def process_stock_data():
                 ltf_div = ltf_info['divergence']
                 htf_div = htf_info['divergence']
                 if ltf_div or htf_div:
-                    # LTF divergence is the actionable trigger; fall back to HTF if LTF has none
                     div_type = ltf_div or htf_div
 
-                    # POINT 2: recommendation bucket / remark / call
                     bucket, remark, recommendation = get_divergence_recommendation(
                         symbol, pair_label, pair_label, htf_div, ltf_div
                     )
@@ -448,7 +434,7 @@ def process_stock_data():
                         'recommendation': recommendation
                     })
 
-    # POINT 4: keep everything grouped/sorted Timeframe-Pair wise by default
+    # Group/sort Timeframe-Pair wise by default
     macd_results.sort(key=lambda r: (PAIR_ORDER.get(r['pair'], 99), r['symbol']))
     divergence_results.sort(key=lambda r: (PAIR_ORDER.get(r['pair'], 99), r['symbol']))
 
@@ -1001,7 +987,6 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         document.getElementById('statNeutral').innerText = neu;
     }}
 
-    // POINT 3: divergence tab summary stat cards
     function updateDivergenceStats() {{
         let sb = 0, b = 0, s = 0, ss = 0, w = 0;
         divergenceData.forEach(item => {{
@@ -1059,7 +1044,6 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
 
     document.addEventListener('keydown', (e) => {{ if (e.key === 'Escape') closeBiasModal(); }});
 
-    // ---------- POINT 4: generic sortable-table support ----------
     let screenerSort = {{ key: 'pair', asc: true }};
     let divergenceSort = {{ key: 'pair', asc: true }};
 
@@ -1186,11 +1170,10 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         }});
     }}
 
-    // ---------- POINT 5: MACD 360 FNO charts ----------
     let macd360Charts = {{}};
     function renderMacd360Charts() {{
         if (!macd360Data || macd360Data.length === 0 || typeof Chart === 'undefined') return;
-        if (macd360Charts.rendered) return; // render once
+        if (macd360Charts.rendered) return;
         macd360Charts.rendered = true;
 
         const labels = macd360Data.map(d => d.date);
