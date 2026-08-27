@@ -1,10 +1,10 @@
-name: Fetch TradingView Stock Data
+name: Fetch Data and Update MACD Dashboard
 
 on:
   # Manual Run Trigger
   workflow_dispatch:
 
-  # Scheduled Runs (Times offset by ~7 mins from peak :00 and :30 marks to ensure prompt runner execution)
+  # Scheduled Runs (Times offset by ~7 mins to avoid GitHub queue delays)
   schedule:
     # 09:07 AM IST (03:37 AM UTC)
     - cron: "37 3 * * 1-5"
@@ -21,17 +21,17 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  fetch-stock-data:
-    name: Download and Update Stock Data
+  update-stock-dashboard:
+    name: Download Data and Build Dashboard
     runs-on: ubuntu-latest
     timeout-minutes: 55
 
     steps:
-      # STEP 1: Fast Shallow Checkout
+      # STEP 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       # STEP 2: Setup Python with Dependency Caching
       - name: Setup Python
@@ -45,6 +45,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pandas numpy requests
 
       # STEP 4: Run Data Downloader
       - name: Run Stock Data Downloader
@@ -54,16 +55,26 @@ jobs:
         run: |
           python data_collector.py
 
-      # STEP 5: Clean Up Logs
+      # STEP 5: Generate Dashboard (Runs immediately after data collection)
+      - name: Generate Dashboard HTML
+        run: |
+          python generate_dashboard.py
+
+      # STEP 6: Clean Up Temporary Log Files
       - name: Remove Runtime Log Files
         if: always()
         run: |
           rm -f download_log.txt error_symbols.txt
 
-      # STEP 6: Fast Automated Commit & Push
+      # STEP 7: Automated Commit & Push (Saves both stock data and HTML dashboard)
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto update stock data [skip ci]"
-          file_pattern: "stockdata_D/* stockdata_W/* stockdata_M/* stockdata_15/* stockdata_1H/*"
+          commit_message: "Auto-update stock data and MACD dashboard [skip ci]"
+          branch: main
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          author_name: "github-actions[bot]"
+          author_email: "github-actions[bot]@users.noreply.github.com"
+          file_pattern: "stockdata_D/* stockdata_W/* stockdata_M/* stockdata_15/* stockdata_1H/* *.html index.html"
           skip_dirty_check: false
