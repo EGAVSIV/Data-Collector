@@ -244,7 +244,7 @@
             <div class="brand-eyebrow"><span class="pulse-dot"></span> LIVE SCAN &middot; MULTI-TIMEFRAME ENGINE</div>
             <h1>MACD Master Dashboard</h1>
             <p class="subtitle">Automated transition detection, MACD state mapping, RSI(14) correlation &amp; divergence scanning across four timeframe pairs.</p>
-            <div class="last-updated">&#9201; Last Data Updated (15m candle, IST): <b id="lastUpdatedTime">27 Aug 2026, 09:45 AM IST</b></div>
+            <div class="last-updated">&#9201; Last Data Updated (15m candle, IST): <b id="lastUpdatedTime">27 Aug 2026, 03:15 PM IST</b></div>
         </div>
         <div class="header-stats">
             <div class="mini-stat up" onclick="openBiasModal('bullish')">
@@ -534,6 +534,7 @@
         document.getElementById('statNeutral').innerText = neu;
     }
 
+    // POINT 3: divergence tab summary stat cards
     function updateDivergenceStats() {
         let sb = 0, b = 0, s = 0, ss = 0, w = 0;
         divergenceData.forEach(item => {
@@ -591,6 +592,7 @@
 
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeBiasModal(); });
 
+    // ---------- POINT 4: generic sortable-table support ----------
     let screenerSort = { key: 'pair', asc: true };
     let divergenceSort = { key: 'pair', asc: true };
 
@@ -717,10 +719,11 @@
         });
     }
 
+    // ---------- POINT 5: MACD 360 FNO charts ----------
     let macd360Charts = {};
     function renderMacd360Charts() {
         if (!macd360Data || macd360Data.length === 0 || typeof Chart === 'undefined') return;
-        if (macd360Charts.rendered) return;
+        if (macd360Charts.rendered) return; // render once
         macd360Charts.rendered = true;
 
         const labels = macd360Data.map(d => d.date);
