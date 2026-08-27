@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:NESTLEIND",
-        "open":1241.425,
-        "high":1241.425,
-        "low":1230.275,
-        "close":1233.575,
-        "volume":303996.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:NESTLEIND",
-        "open":1233.525,
-        "high":1235.575,
-        "low":1226.225,
-        "close":1227.55,
-        "volume":221840.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:NESTLEIND",
         "open":1227.675,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-27T06:45:00.000",
         "symbol":"NSE:NESTLEIND",
         "open":1441.9,
-        "high":1444.7,
+        "high":1447.6,
         "low":1441.6,
-        "close":1444.0,
-        "volume":11951.0
+        "close":1445.9,
+        "volume":57658.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:NESTLEIND",
+        "open":1446.1,
+        "high":1447.5,
+        "low":1443.7,
+        "close":1446.2,
+        "volume":53668.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:NESTLEIND",
+        "open":1446.2,
+        "high":1449.4,
+        "low":1444.0,
+        "close":1447.9,
+        "volume":128965.0
     }
 ]

@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:POWERGRID",
-        "open":312.3,
-        "high":313.0,
-        "low":310.95,
-        "close":311.35,
-        "volume":3350861.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:POWERGRID",
-        "open":311.35,
-        "high":313.15,
-        "low":311.0,
-        "close":311.7,
-        "volume":2086866.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:POWERGRID",
         "open":311.45,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-27T06:45:00.000",
         "symbol":"NSE:POWERGRID",
         "open":264.6,
-        "high":264.75,
-        "low":264.45,
-        "close":264.7,
-        "volume":59819.0
+        "high":265.0,
+        "low":264.25,
+        "close":264.45,
+        "volume":393187.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:POWERGRID",
+        "open":264.5,
+        "high":264.95,
+        "low":263.85,
+        "close":264.15,
+        "volume":459496.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:POWERGRID",
+        "open":264.2,
+        "high":266.3,
+        "low":264.05,
+        "close":265.85,
+        "volume":1078890.0
     }
 ]

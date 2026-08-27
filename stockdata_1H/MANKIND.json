@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:MANKIND",
-        "open":2312.05,
-        "high":2331.2,
-        "low":2309.55,
-        "close":2324.6,
-        "volume":63948.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:MANKIND",
-        "open":2324.85,
-        "high":2331.15,
-        "low":2322.0,
-        "close":2322.0,
-        "volume":20168.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:MANKIND",
         "open":2322.65,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-27T06:45:00.000",
         "symbol":"NSE:MANKIND",
         "open":2390.4,
-        "high":2392.3,
-        "low":2388.0,
-        "close":2390.0,
-        "volume":4739.0
+        "high":2393.8,
+        "low":2383.7,
+        "close":2386.3,
+        "volume":32184.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:MANKIND",
+        "open":2384.4,
+        "high":2389.5,
+        "low":2383.2,
+        "close":2383.2,
+        "volume":31924.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:MANKIND",
+        "open":2383.4,
+        "high":2399.7,
+        "low":2382.9,
+        "close":2396.2,
+        "volume":160821.0
     }
 ]

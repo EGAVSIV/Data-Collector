@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:LICHSGFIN",
-        "open":658.7,
-        "high":658.7,
-        "low":650.25,
-        "close":655.55,
-        "volume":515294.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:LICHSGFIN",
-        "open":655.55,
-        "high":659.25,
-        "low":650.55,
-        "close":653.25,
-        "volume":253149.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:LICHSGFIN",
         "open":652.8,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-27T06:45:00.000",
         "symbol":"NSE:LICHSGFIN",
         "open":529.1,
-        "high":531.25,
+        "high":541.5,
         "low":525.5,
-        "close":531.1,
-        "volume":534545.0
+        "close":541.25,
+        "volume":1597133.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:LICHSGFIN",
+        "open":541.45,
+        "high":543.4,
+        "low":532.5,
+        "close":533.8,
+        "volume":855539.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:LICHSGFIN",
+        "open":534.0,
+        "high":537.8,
+        "low":533.2,
+        "close":535.55,
+        "volume":626980.0
     }
 ]

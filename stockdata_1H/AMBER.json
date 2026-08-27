@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:AMBER",
-        "open":3902.45,
-        "high":3940.0,
-        "low":3890.0,
-        "close":3916.95,
-        "volume":24530.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:AMBER",
-        "open":3916.1,
-        "high":3918.0,
-        "low":3899.0,
-        "close":3900.4,
-        "volume":9494.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:AMBER",
         "open":3900.5,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-27T06:45:00.000",
         "symbol":"NSE:AMBER",
         "open":7636.5,
-        "high":7669.5,
+        "high":7725.0,
         "low":7632.5,
-        "close":7667.0,
-        "volume":10246.0
+        "close":7725.0,
+        "volume":68540.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7725.0,
+        "high":7752.0,
+        "low":7709.5,
+        "close":7734.0,
+        "volume":58732.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:AMBER",
+        "open":7734.0,
+        "high":7736.0,
+        "low":7700.0,
+        "close":7720.0,
+        "volume":61684.0
     }
 ]

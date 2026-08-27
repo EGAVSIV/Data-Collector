@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:BDL",
-        "open":976.35,
-        "high":980.75,
-        "low":973.525,
-        "close":974.575,
-        "volume":230106.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:BDL",
-        "open":974.575,
-        "high":985.0,
-        "low":973.5,
-        "close":978.05,
-        "volume":127008.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:BDL",
         "open":977.525,
@@ -35995,8 +35977,26 @@
         "symbol":"NSE:BDL",
         "open":1350.0,
         "high":1350.0,
-        "low":1347.0,
-        "close":1348.2,
-        "volume":18079.0
+        "low":1343.4,
+        "close":1346.0,
+        "volume":58992.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:BDL",
+        "open":1345.4,
+        "high":1346.4,
+        "low":1341.1,
+        "close":1345.0,
+        "volume":45221.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:BDL",
+        "open":1345.0,
+        "high":1346.6,
+        "low":1339.1,
+        "close":1341.4,
+        "volume":100569.0
     }
 ]

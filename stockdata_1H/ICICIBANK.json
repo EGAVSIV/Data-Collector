@@ -1,23 +1,5 @@
 [
     {
-        "datetime":"2024-05-03T05:45:00.000",
-        "symbol":"NSE:ICICIBANK",
-        "open":1142.7,
-        "high":1144.0,
-        "low":1136.6,
-        "close":1142.3,
-        "volume":2527038.0
-    },
-    {
-        "datetime":"2024-05-03T06:45:00.000",
-        "symbol":"NSE:ICICIBANK",
-        "open":1142.1,
-        "high":1146.85,
-        "low":1136.3,
-        "close":1138.7,
-        "volume":1860105.0
-    },
-    {
         "datetime":"2024-05-03T07:45:00.000",
         "symbol":"NSE:ICICIBANK",
         "open":1138.85,
@@ -35994,9 +35976,27 @@
         "datetime":"2026-08-27T06:45:00.000",
         "symbol":"NSE:ICICIBANK",
         "open":1444.3,
-        "high":1445.0,
-        "low":1442.2,
-        "close":1443.1,
-        "volume":213051.0
+        "high":1453.8,
+        "low":1440.3,
+        "close":1449.8,
+        "volume":1935946.0
+    },
+    {
+        "datetime":"2026-08-27T07:45:00.000",
+        "symbol":"NSE:ICICIBANK",
+        "open":1449.9,
+        "high":1451.1,
+        "low":1443.7,
+        "close":1445.0,
+        "volume":2089188.0
+    },
+    {
+        "datetime":"2026-08-27T08:45:00.000",
+        "symbol":"NSE:ICICIBANK",
+        "open":1445.1,
+        "high":1451.3,
+        "low":1445.1,
+        "close":1448.3,
+        "volume":2890357.0
     }
 ]
