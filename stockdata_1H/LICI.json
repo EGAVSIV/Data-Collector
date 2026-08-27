@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T08:45:00.000",
-        "symbol":"NSE:LICI",
-        "open":499.2,
-        "high":501.0,
-        "low":498.775,
-        "close":499.225,
-        "volume":1136702.0
-    },
-    {
-        "datetime":"2024-05-02T09:45:00.000",
-        "symbol":"NSE:LICI",
-        "open":499.25,
-        "high":500.325,
-        "low":498.525,
-        "close":499.625,
-        "volume":579086.0
-    },
-    {
-        "datetime":"2024-05-03T03:45:00.000",
-        "symbol":"NSE:LICI",
-        "open":501.025,
-        "high":502.0,
-        "low":497.7,
-        "close":497.925,
-        "volume":840090.0
-    },
-    {
-        "datetime":"2024-05-03T04:45:00.000",
-        "symbol":"NSE:LICI",
-        "open":498.125,
-        "high":498.325,
-        "low":494.525,
-        "close":495.75,
-        "volume":625400.0
-    },
-    {
         "datetime":"2024-05-03T05:45:00.000",
         "symbol":"NSE:LICI",
         "open":495.875,
@@ -35998,5 +35962,41 @@
         "low":415.15,
         "close":415.75,
         "volume":2145562.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:LICI",
+        "open":417.6,
+        "high":421.25,
+        "low":415.8,
+        "close":417.25,
+        "volume":1358384.0
+    },
+    {
+        "datetime":"2026-08-27T04:45:00.000",
+        "symbol":"NSE:LICI",
+        "open":417.3,
+        "high":418.0,
+        "low":415.15,
+        "close":415.85,
+        "volume":1190714.0
+    },
+    {
+        "datetime":"2026-08-27T05:45:00.000",
+        "symbol":"NSE:LICI",
+        "open":415.65,
+        "high":419.3,
+        "low":415.45,
+        "close":418.6,
+        "volume":601976.0
+    },
+    {
+        "datetime":"2026-08-27T06:45:00.000",
+        "symbol":"NSE:LICI",
+        "open":418.65,
+        "high":418.8,
+        "low":418.3,
+        "close":418.45,
+        "volume":44942.0
     }
 ]

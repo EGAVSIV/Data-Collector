@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-29T03:45:00.000",
-        "symbol":"NSE:RADICO",
-        "open":117.85,
-        "high":119.6,
-        "low":116.65,
-        "close":117.3,
-        "volume":33371.0
-    },
-    {
         "datetime":"2010-06-30T03:45:00.000",
         "symbol":"NSE:RADICO",
         "open":117.95,
@@ -35998,5 +35989,14 @@
         "low":4602.2,
         "close":4614.0,
         "volume":232813.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:RADICO",
+        "open":4617.9,
+        "high":4650.6,
+        "low":4574.3,
+        "close":4587.3,
+        "volume":62568.0
     }
 ]

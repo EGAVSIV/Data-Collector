@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:MPHASIS",
-        "open":545.0,
-        "high":568.0,
-        "low":545.0,
-        "close":563.5,
-        "volume":808444.0
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:MPHASIS",
         "open":555.0,
@@ -35998,5 +35989,14 @@
         "low":2385.8,
         "close":2400.0,
         "volume":378910.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:MPHASIS",
+        "open":2391.2,
+        "high":2419.2,
+        "low":2385.3,
+        "close":2390.4,
+        "volume":48932.0
     }
 ]

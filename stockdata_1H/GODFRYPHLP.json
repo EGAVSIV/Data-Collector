@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T08:45:00.000",
-        "symbol":"NSE:GODFRYPHLP",
-        "open":1086.66558,
-        "high":1096.64890335,
-        "low":1075.38225795,
-        "close":1094.48223885,
-        "volume":64803.06480306
-    },
-    {
-        "datetime":"2024-05-02T09:45:00.000",
-        "symbol":"NSE:GODFRYPHLP",
-        "open":1094.2322391,
-        "high":1101.9655647,
-        "low":1093.31557335,
-        "close":1095.665571,
-        "volume":26970.02697003
-    },
-    {
-        "datetime":"2024-05-03T03:45:00.000",
-        "symbol":"NSE:GODFRYPHLP",
-        "open":1093.33224,
-        "high":1173.33216,
-        "low":1093.33224,
-        "close":1165.4988345,
-        "volume":463170.46317046
-    },
-    {
-        "datetime":"2024-05-03T04:45:00.000",
-        "symbol":"NSE:GODFRYPHLP",
-        "open":1166.332167,
-        "high":1179.5988204,
-        "low":1163.998836,
-        "close":1177.84882215,
-        "volume":291504.29150429
-    },
-    {
         "datetime":"2024-05-03T05:45:00.000",
         "symbol":"NSE:GODFRYPHLP",
         "open":1177.98215535,
@@ -35998,5 +35962,41 @@
         "low":2147.0,
         "close":2154.9,
         "volume":63656.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:GODFRYPHLP",
+        "open":2153.0,
+        "high":2161.0,
+        "low":2140.0,
+        "close":2141.1,
+        "volume":27458.0
+    },
+    {
+        "datetime":"2026-08-27T04:45:00.000",
+        "symbol":"NSE:GODFRYPHLP",
+        "open":2141.6,
+        "high":2141.9,
+        "low":2130.3,
+        "close":2133.8,
+        "volume":25938.0
+    },
+    {
+        "datetime":"2026-08-27T05:45:00.000",
+        "symbol":"NSE:GODFRYPHLP",
+        "open":2133.0,
+        "high":2138.9,
+        "low":2127.4,
+        "close":2128.3,
+        "volume":13028.0
+    },
+    {
+        "datetime":"2026-08-27T06:45:00.000",
+        "symbol":"NSE:GODFRYPHLP",
+        "open":2128.3,
+        "high":2136.5,
+        "low":2128.3,
+        "close":2131.0,
+        "volume":1544.0
     }
 ]

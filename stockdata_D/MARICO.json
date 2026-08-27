@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:MARICO",
-        "open":62.6,
-        "high":68.25,
-        "low":60.0,
-        "close":64.75,
-        "volume":1869666.0
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:MARICO",
         "open":65.025,
@@ -35998,5 +35989,14 @@
         "low":829.45,
         "close":833.0,
         "volume":1411009.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:MARICO",
+        "open":833.1,
+        "high":834.95,
+        "low":825.8,
+        "close":829.95,
+        "volume":942975.0
     }
 ]

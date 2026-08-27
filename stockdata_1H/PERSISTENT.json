@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T08:45:00.000",
-        "symbol":"NSE:PERSISTENT",
-        "open":3412.15,
-        "high":3420.95,
-        "low":3400.7,
-        "close":3405.1,
-        "volume":59695.0
-    },
-    {
-        "datetime":"2024-05-02T09:45:00.000",
-        "symbol":"NSE:PERSISTENT",
-        "open":3407.0,
-        "high":3415.0,
-        "low":3404.55,
-        "close":3412.0,
-        "volume":23675.0
-    },
-    {
-        "datetime":"2024-05-03T03:45:00.000",
-        "symbol":"NSE:PERSISTENT",
-        "open":3433.5,
-        "high":3445.35,
-        "low":3405.0,
-        "close":3421.25,
-        "volume":83813.0
-    },
-    {
-        "datetime":"2024-05-03T04:45:00.000",
-        "symbol":"NSE:PERSISTENT",
-        "open":3420.95,
-        "high":3423.25,
-        "low":3396.0,
-        "close":3408.0,
-        "volume":60248.0
-    },
-    {
         "datetime":"2024-05-03T05:45:00.000",
         "symbol":"NSE:PERSISTENT",
         "open":3408.15,
@@ -35998,5 +35962,41 @@
         "low":5607.0,
         "close":5615.0,
         "volume":44532.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:PERSISTENT",
+        "open":5629.0,
+        "high":5665.0,
+        "low":5597.0,
+        "close":5636.5,
+        "volume":42290.0
+    },
+    {
+        "datetime":"2026-08-27T04:45:00.000",
+        "symbol":"NSE:PERSISTENT",
+        "open":5640.0,
+        "high":5648.5,
+        "low":5615.0,
+        "close":5617.0,
+        "volume":16711.0
+    },
+    {
+        "datetime":"2026-08-27T05:45:00.000",
+        "symbol":"NSE:PERSISTENT",
+        "open":5617.0,
+        "high":5646.0,
+        "low":5616.0,
+        "close":5640.5,
+        "volume":29798.0
+    },
+    {
+        "datetime":"2026-08-27T06:45:00.000",
+        "symbol":"NSE:PERSISTENT",
+        "open":5637.5,
+        "high":5646.5,
+        "low":5637.5,
+        "close":5640.0,
+        "volume":2951.0
     }
 ]

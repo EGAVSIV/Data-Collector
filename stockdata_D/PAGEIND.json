@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:PAGEIND",
-        "open":934.0,
-        "high":944.79999,
-        "low":931.15002,
-        "close":936.0,
-        "volume":457.0
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:PAGEIND",
         "open":942.0,
@@ -35998,5 +35989,14 @@
         "low":35100.0,
         "close":35155.0,
         "volume":22437.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:PAGEIND",
+        "open":35160.0,
+        "high":36215.0,
+        "low":35160.0,
+        "close":35960.0,
+        "volume":21431.0
     }
 ]

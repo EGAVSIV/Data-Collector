@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:DRREDDY",
-        "open":292.25,
-        "high":296.99,
-        "low":287.47,
-        "close":290.25,
-        "volume":3320555.0
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:DRREDDY",
         "open":290.0,
@@ -35998,5 +35989,14 @@
         "low":1180.1,
         "close":1182.0,
         "volume":1993156.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:DRREDDY",
+        "open":1182.0,
+        "high":1191.9,
+        "low":1177.0,
+        "close":1184.2,
+        "volume":465851.0
     }
 ]

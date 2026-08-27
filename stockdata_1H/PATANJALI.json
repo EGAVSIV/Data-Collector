@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T08:45:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":487.1661795,
-        "high":487.58284575,
-        "low":481.3661853,
-        "close":483.999516,
-        "volume":350100.35010035
-    },
-    {
-        "datetime":"2024-05-02T09:45:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":484.01618265,
-        "high":488.332845,
-        "low":483.33285,
-        "close":485.999514,
-        "volume":213849.21384921
-    },
-    {
-        "datetime":"2024-05-03T03:45:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":486.64951335,
-        "high":487.4661792,
-        "low":480.999519,
-        "close":482.9661837,
-        "volume":134946.13494613
-    },
-    {
-        "datetime":"2024-05-03T04:45:00.000",
-        "symbol":"NSE:PATANJALI",
-        "open":482.332851,
-        "high":482.8661838,
-        "low":478.332855,
-        "close":479.5995204,
-        "volume":154710.15471015
-    },
-    {
         "datetime":"2024-05-03T05:45:00.000",
         "symbol":"NSE:PATANJALI",
         "open":479.14952085,
@@ -35998,5 +35962,41 @@
         "low":345.6,
         "close":348.45,
         "volume":426863.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":347.8,
+        "high":348.85,
+        "low":345.25,
+        "close":346.45,
+        "volume":306736.0
+    },
+    {
+        "datetime":"2026-08-27T04:45:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":346.3,
+        "high":347.5,
+        "low":345.6,
+        "close":346.8,
+        "volume":103998.0
+    },
+    {
+        "datetime":"2026-08-27T05:45:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":346.75,
+        "high":348.8,
+        "low":346.6,
+        "close":347.5,
+        "volume":177641.0
+    },
+    {
+        "datetime":"2026-08-27T06:45:00.000",
+        "symbol":"NSE:PATANJALI",
+        "open":347.5,
+        "high":347.65,
+        "low":346.8,
+        "close":347.3,
+        "volume":18032.0
     }
 ]

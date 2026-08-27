@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:BAJFINANCE",
-        "open":4.46899986,
-        "high":4.61500015,
-        "low":4.46899986,
-        "close":4.61300011,
-        "volume":3792400.0
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:BAJFINANCE",
         "open":4.56599999,
@@ -35998,5 +35989,14 @@
         "low":1082.4,
         "close":1085.0,
         "volume":3234877.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:BAJFINANCE",
+        "open":1090.0,
+        "high":1107.0,
+        "low":1086.6,
+        "close":1089.1,
+        "volume":2739320.0
     }
 ]

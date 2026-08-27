@@ -1,41 +1,5 @@
 [
     {
-        "datetime":"2024-05-02T08:45:00.000",
-        "symbol":"NSE:NAM_INDIA",
-        "open":585.9,
-        "high":588.2,
-        "low":582.5,
-        "close":583.8,
-        "volume":75964.0
-    },
-    {
-        "datetime":"2024-05-02T09:45:00.000",
-        "symbol":"NSE:NAM_INDIA",
-        "open":584.0,
-        "high":584.85,
-        "low":580.0,
-        "close":582.5,
-        "volume":38175.0
-    },
-    {
-        "datetime":"2024-05-03T03:45:00.000",
-        "symbol":"NSE:NAM_INDIA",
-        "open":585.85,
-        "high":603.0,
-        "low":585.05,
-        "close":598.2,
-        "volume":487538.0
-    },
-    {
-        "datetime":"2024-05-03T04:45:00.000",
-        "symbol":"NSE:NAM_INDIA",
-        "open":598.0,
-        "high":598.95,
-        "low":592.35,
-        "close":594.15,
-        "volume":207739.0
-    },
-    {
         "datetime":"2024-05-03T05:45:00.000",
         "symbol":"NSE:NAM_INDIA",
         "open":594.8,
@@ -35998,5 +35962,41 @@
         "low":1225.0,
         "close":1227.3,
         "volume":115514.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:NAM_INDIA",
+        "open":1220.0,
+        "high":1234.0,
+        "low":1215.3,
+        "close":1218.4,
+        "volume":268241.0
+    },
+    {
+        "datetime":"2026-08-27T04:45:00.000",
+        "symbol":"NSE:NAM_INDIA",
+        "open":1218.1,
+        "high":1219.6,
+        "low":1211.0,
+        "close":1215.6,
+        "volume":95497.0
+    },
+    {
+        "datetime":"2026-08-27T05:45:00.000",
+        "symbol":"NSE:NAM_INDIA",
+        "open":1215.6,
+        "high":1215.6,
+        "low":1205.1,
+        "close":1206.6,
+        "volume":121529.0
+    },
+    {
+        "datetime":"2026-08-27T06:45:00.000",
+        "symbol":"NSE:NAM_INDIA",
+        "open":1206.7,
+        "high":1213.8,
+        "low":1206.7,
+        "close":1213.0,
+        "volume":29128.0
     }
 ]

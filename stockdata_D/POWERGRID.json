@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:POWERGRID",
-        "open":57.375,
-        "high":58.78125,
-        "low":57.15,
-        "close":58.55625,
-        "volume":2708252.4444444398
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:POWERGRID",
         "open":58.33125,
@@ -35998,5 +35989,14 @@
         "low":265.2,
         "close":265.2,
         "volume":5303523.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:POWERGRID",
+        "open":264.8,
+        "high":265.95,
+        "low":262.3,
+        "close":264.65,
+        "volume":4830982.0
     }
 ]

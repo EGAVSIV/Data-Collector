@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2010-06-30T03:45:00.000",
-        "symbol":"NSE:HAVELLS",
-        "open":61.540002,
-        "high":63.1,
-        "low":60.609998,
-        "close":62.804999,
-        "volume":2461180.0
-    },
-    {
         "datetime":"2010-07-01T03:45:00.000",
         "symbol":"NSE:HAVELLS",
         "open":62.1,
@@ -35998,5 +35989,14 @@
         "low":1258.7,
         "close":1258.7,
         "volume":455405.0
+    },
+    {
+        "datetime":"2026-08-27T03:45:00.000",
+        "symbol":"NSE:HAVELLS",
+        "open":1255.6,
+        "high":1265.0,
+        "low":1252.3,
+        "close":1257.2,
+        "volume":387118.0
     }
 ]
