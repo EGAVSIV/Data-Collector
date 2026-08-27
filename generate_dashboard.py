@@ -1,5 +1,8 @@
 import os
 import json
+import datetime
+from collections import defaultdict
+
 import pandas as pd
 import numpy as np
 
@@ -19,9 +22,17 @@ TF_PAIRS = [
     ('W', 'M', 'Weekly -> Monthly')
 ]
 
+# Order used for "Timeframe Pair" sorting everywhere in the dashboard
+PAIR_ORDER = {label: i for i, (_, _, label) in enumerate(TF_PAIRS)}
+
 # Divergence lookback window & split point (older half vs recent half)
 DIVERGENCE_LOOKBACK = 30
 DIVERGENCE_SPLIT = 15
+
+# Number of trailing daily sessions used by the "MACD 360 FNO" tab
+MACD360_DAYS = 15
+
+IST = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
 
 # Market Bias Reference Dictionary for Tab 1 guide
 MARKET_BIAS_GUIDE = [
@@ -45,10 +56,19 @@ MARKET_BIAS_GUIDE = [
 
 # Divergence Type Reference Dictionary for Tab 3 guide
 DIVERGENCE_GUIDE = [
-    {"Divergence Type": "Regular Bullish Divergence", "Interpretation": "Price makes a lower low while MACD makes a higher low. Downside momentum is fading — classic reversal warning at the end of a downtrend."},
-    {"Divergence Type": "Regular Bearish Divergence", "Interpretation": "Price makes a higher high while MACD makes a lower high. Upside momentum is fading — classic reversal warning at the end of an uptrend."},
-    {"Divergence Type": "Hidden Bullish Divergence", "Interpretation": "Price makes a higher low while MACD makes a lower low. Confirms trend continuation — a healthy pullback inside an existing uptrend rather than a reversal."},
-    {"Divergence Type": "Hidden Bearish Divergence", "Interpretation": "Price makes a lower high while MACD makes a higher high. Confirms trend continuation — a healthy relief bounce inside an existing downtrend rather than a reversal."}
+    {"Divergence Type": "Regular Bullish Divergence", "Interpretation": "Price makes a lower low while MACD makes a higher low. Downside momentum is fading \u2014 classic reversal warning at the end of a downtrend."},
+    {"Divergence Type": "Regular Bearish Divergence", "Interpretation": "Price makes a higher high while MACD makes a lower high. Upside momentum is fading \u2014 classic reversal warning at the end of an uptrend."},
+    {"Divergence Type": "Hidden Bullish Divergence", "Interpretation": "Price makes a higher low while MACD makes a lower low. Confirms trend continuation \u2014 a healthy pullback inside an existing uptrend rather than a reversal."},
+    {"Divergence Type": "Hidden Bearish Divergence", "Interpretation": "Price makes a lower high while MACD makes a higher high. Confirms trend continuation \u2014 a healthy relief bounce inside an existing downtrend rather than a reversal."}
+]
+
+# Recommendation guide shown in the Divergence tab (Point 2)
+RECOMMENDATION_GUIDE = [
+    {"Recommendation": "STRONG BUY", "Bucket": "Regular Bullish (HTF) + Regular Bullish (LTF)", "Interpretation": "Both timeframes show a classic reversal (Regular) bullish divergence at the same time \u2014 the strongest possible reversal confluence."},
+    {"Recommendation": "BUY", "Bucket": "Hidden Bullish (HTF) + Regular Bullish (LTF)", "Interpretation": "HTF is in continuation mode (Hidden) while LTF fires a fresh reversal (Regular) divergence \u2014 a trend-continuation entry trigger."},
+    {"Recommendation": "SELL", "Bucket": "Hidden Bearish (HTF) + Regular Bearish (LTF)", "Interpretation": "HTF downtrend continuation (Hidden) with an LTF Regular bearish divergence \u2014 a short-entry trigger inside the larger downtrend."},
+    {"Recommendation": "STRONG SELL", "Bucket": "Regular Bearish (HTF) + Regular Bearish (LTF)", "Interpretation": "Both timeframes show a classic reversal (Regular) bearish divergence at the same time \u2014 strong distribution / top signal."},
+    {"Recommendation": "WATCH", "Bucket": "Any other combination", "Interpretation": "Divergence present but the HTF/LTF combination does not match a defined high-confidence setup. Treat as informational only."}
 ]
 
 # --- Technical Indicator Functions ---
@@ -56,11 +76,9 @@ def calculate_indicators(df, fast=12, slow=26, signal=9, rsi_period=14):
     if df.empty or len(df) < slow + signal:
         return None
 
-    # Ensure dataframe is sorted by timestamp/date
-    if 'datetime' in df.columns:
-        df = df.sort_values('datetime')
-    elif 'date' in df.columns:
-        df = df.sort_values('date')
+    date_col = 'datetime' if 'datetime' in df.columns else ('date' if 'date' in df.columns else None)
+    if date_col:
+        df = df.sort_values(date_col)
 
     close = df['close']
 
@@ -176,20 +194,171 @@ def detect_divergence(df, lookback=DIVERGENCE_LOOKBACK, split=DIVERGENCE_SPLIT):
 
     return None
 
+
+# --- POINT 2: Divergence -> Recommendation mapping -----------------------
+# NOTE on terminology: the brief used "ND"/"RD" shorthand. Mapped onto this
+# codebase's existing divergence vocabulary (which already distinguishes
+# "Regular" = reversal-type divergence vs "Hidden" = continuation-type
+# divergence, see DIVERGENCE_GUIDE above) as follows:
+#   - Both HTF & LTF show a *Regular* divergence (same direction)  -> STRONG
+#     signal, because both timeframes are independently flagging a reversal.
+#   - HTF shows a *Hidden* (continuation) divergence while LTF shows a fresh
+#     *Regular* (reversal) divergence -> a tactical entry trigger in the
+#     direction the HTF continuation implies.
+# If your source system's "ND"/"RD" convention differs, adjust the four
+# elif branches below accordingly.
+def get_divergence_recommendation(symbol, htf_pair_label, ltf_pair_label, htf_div, ltf_div):
+    htf_div = htf_div or ""
+    ltf_div = ltf_div or ""
+
+    if htf_div == "Regular Bullish Divergence" and ltf_div == "Regular Bullish Divergence":
+        bucket = "Bullish RD + Bullish RD"
+        remark = (f"{symbol}: HTF ({htf_pair_label.split('->')[-1].strip() if '->' in htf_pair_label else htf_pair_label}) "
+                  f"Regular Bullish Divergence and LTF Regular Bullish Divergence (Strong Reversal Confluence)")
+        recommendation = "STRONG BUY"
+    elif htf_div == "Hidden Bullish Divergence" and ltf_div == "Regular Bullish Divergence":
+        bucket = "Bullish HD + Bullish RD"
+        remark = f"{symbol}: HTF Hidden Bullish Divergence and LTF Regular Bullish Divergence (Trend Continuation with Entry Signal)"
+        recommendation = "BUY"
+    elif htf_div == "Regular Bearish Divergence" and ltf_div == "Regular Bearish Divergence":
+        bucket = "Bearish RD + Bearish RD"
+        remark = f"{symbol}: HTF Regular Bearish Divergence and LTF Regular Bearish Divergence (Strong Distribution Signal)"
+        recommendation = "STRONG SELL"
+    elif htf_div == "Hidden Bearish Divergence" and ltf_div == "Regular Bearish Divergence":
+        bucket = "Bearish HD + Bearish RD"
+        remark = f"{symbol}: HTF Hidden Bearish Divergence and LTF Regular Bearish Divergence (Downtrend Continuation Signal)"
+        recommendation = "SELL"
+    else:
+        bucket = "Other"
+        remark = ""
+        recommendation = "WATCH"
+
+    return bucket, remark, recommendation
+
+
+# --- POINT 1: Last-updated (IST) helper -----------------------------------
+def _get_ts_col(df):
+    if 'datetime' in df.columns:
+        return 'datetime'
+    if 'date' in df.columns:
+        return 'date'
+    return None
+
+def format_ist(ts):
+    """Format a timestamp as an IST string. Assumes naive timestamps are
+    already local (IST) NSE feed times; tz-aware timestamps are converted."""
+    if ts is None:
+        return "N/A"
+    ts = pd.to_datetime(ts)
+    if ts.tzinfo is not None:
+        ts = ts.tz_convert(IST)
+    return ts.strftime('%d %b %Y, %I:%M %p IST')
+
+
+# --- POINT 5: MACD 360 FNO (Daily-only, last N sessions) ------------------
+def compute_macd360_fno(days=MACD360_DAYS):
+    """
+    Walks every symbol's Daily data, and for each of the last `days` daily
+    sessions counts (across the whole universe):
+      - MACD > 0 vs MACD < 0
+      - PCO (macd>signal) vs NCO (macd<=signal)
+      - MACD>0 & PCO   vs   MACD>0 & NCO
+      - MACD<0 & PCO   vs   MACD<0 & NCO
+    Returns a list of dicts sorted chronologically, one per session.
+    """
+    folder = TF_FOLDERS['D']
+    if not os.path.exists(folder):
+        return []
+
+    agg = defaultdict(lambda: {
+        'above_zero': 0, 'below_zero': 0,
+        'pco': 0, 'nco': 0,
+        'above_pco': 0, 'above_nco': 0,
+        'below_pco': 0, 'below_nco': 0,
+    })
+    real_dates = {}
+
+    symbols = [f.replace('.json', '') for f in os.listdir(folder) if f.endswith('.json')]
+
+    for symbol in symbols:
+        file_path = os.path.join(folder, f"{symbol}.json")
+        if not os.path.exists(file_path):
+            continue
+        try:
+            with open(file_path, 'r') as f:
+                raw_data = json.load(f)
+            df = pd.DataFrame(raw_data)
+            df = calculate_indicators(df)
+            if df is None or len(df) < days:
+                continue
+
+            date_col = _get_ts_col(df)
+            df_tail = df.tail(days)
+
+            for _, row in df_tail.iterrows():
+                macd_v, sig_v = row.get('macd'), row.get('signal')
+                if pd.isna(macd_v) or pd.isna(sig_v):
+                    continue
+
+                if date_col:
+                    ts = pd.to_datetime(row[date_col])
+                    key = ts.strftime('%Y-%m-%d')
+                    label = ts.strftime('%d %b')
+                else:
+                    key = str(row.name)
+                    label = key
+
+                real_dates[key] = label
+
+                above = macd_v > 0
+                pco = macd_v > sig_v
+                bucket = agg[key]
+
+                if above:
+                    bucket['above_zero'] += 1
+                    if pco:
+                        bucket['above_pco'] += 1
+                    else:
+                        bucket['above_nco'] += 1
+                else:
+                    bucket['below_zero'] += 1
+                    if pco:
+                        bucket['below_pco'] += 1
+                    else:
+                        bucket['below_nco'] += 1
+
+                if pco:
+                    bucket['pco'] += 1
+                else:
+                    bucket['nco'] += 1
+        except Exception:
+            continue
+
+    sorted_keys = sorted(agg.keys())[-days:]
+    result = []
+    for k in sorted_keys:
+        row = {'date': real_dates.get(k, k)}
+        row.update(agg[k])
+        result.append(row)
+    return result
+
+
 # --- Main Data Processing Pipeline ---
 def process_stock_data():
     """
-    Returns (macd_results, divergence_results):
+    Returns (macd_results, divergence_results, last_15m_ts):
       macd_results       -> Tab 1 (Stock Screener) rows
       divergence_results -> Tab 2 (Divergence Scanner) rows
+      last_15m_ts        -> pandas Timestamp of the latest 15m candle seen (Point 1)
     """
     macd_results = []
     divergence_results = []
+    last_15m_ts = None
 
     sample_folder = TF_FOLDERS['D']
     if not os.path.exists(sample_folder):
         print(f"Directory {sample_folder} not found. Please check paths.")
-        return [], []
+        return [], [], None
 
     symbols = [f.replace('.json', '') for f in os.listdir(sample_folder) if f.endswith('.json')]
 
@@ -222,6 +391,14 @@ def process_stock_data():
                                 'rsi': round(float(rsi.iloc[-1]), 2) if pd.notna(rsi.iloc[-1]) else "N/A",
                                 'close': float(df['close'].iloc[-1])
                             }
+
+                            # POINT 1: track the most recent 15m candle timestamp seen
+                            if tf == '15':
+                                date_col = _get_ts_col(df)
+                                if date_col:
+                                    ts = pd.to_datetime(df[date_col].iloc[-1])
+                                    if last_15m_ts is None or ts > last_15m_ts:
+                                        last_15m_ts = ts
                 except Exception:
                     continue
 
@@ -251,6 +428,12 @@ def process_stock_data():
                 if ltf_div or htf_div:
                     # LTF divergence is the actionable trigger; fall back to HTF if LTF has none
                     div_type = ltf_div or htf_div
+
+                    # POINT 2: recommendation bucket / remark / call
+                    bucket, remark, recommendation = get_divergence_recommendation(
+                        symbol, pair_label, pair_label, htf_div, ltf_div
+                    )
+
                     divergence_results.append({
                         'symbol': symbol,
                         'pair': pair_label,
@@ -259,17 +442,28 @@ def process_stock_data():
                         'ltf_divergence': ltf_div or "",
                         'htf_rsi': htf_info['rsi'],
                         'ltf_rsi': ltf_info['rsi'],
-                        'type': div_type
+                        'type': div_type,
+                        'bucket': bucket,
+                        'remark': remark,
+                        'recommendation': recommendation
                     })
 
-    return macd_results, divergence_results
+    # POINT 4: keep everything grouped/sorted Timeframe-Pair wise by default
+    macd_results.sort(key=lambda r: (PAIR_ORDER.get(r['pair'], 99), r['symbol']))
+    divergence_results.sort(key=lambda r: (PAIR_ORDER.get(r['pair'], 99), r['symbol']))
+
+    return macd_results, divergence_results, last_15m_ts
+
 
 # --- Generate Embedded HTML Dashboard ---
-def build_html_dashboard(macd_results, divergence_results, date_str):
+def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15m_ts, date_str):
     json_data = json.dumps(macd_results)
     div_json_data = json.dumps(divergence_results)
     guide_json_data = json.dumps(MARKET_BIAS_GUIDE)
     div_guide_json_data = json.dumps(DIVERGENCE_GUIDE)
+    reco_guide_json_data = json.dumps(RECOMMENDATION_GUIDE)
+    macd360_json_data = json.dumps(macd360_data)
+    last_updated_str = format_ist(last_15m_ts) if last_15m_ts is not None else "N/A"
 
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
@@ -280,6 +474,7 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
     <style>
         :root {{
             --bg-void:#060a14;
@@ -357,6 +552,11 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
             -webkit-background-clip:text; background-clip:text; color:transparent;
         }}
         .subtitle {{ font-family: var(--font-body); color: var(--text-dim); margin: 10px 0 0; font-size: 14.5px; max-width: 540px; }}
+        .last-updated {{
+            font-family: var(--font-mono); font-size: 11.5px; color: var(--text-faint); margin-top: 10px;
+            display:flex; align-items:center; gap:7px; letter-spacing: 0.3px;
+        }}
+        .last-updated b {{ color: var(--cyan); font-weight: 600; }}
         .header-stats {{ display:flex; gap:10px; flex-wrap:wrap; }}
         .mini-stat {{
             font-family: var(--font-mono); background: var(--panel-glass); border: 1px solid var(--border);
@@ -369,7 +569,9 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
         .mini-stat.up .v {{ color: var(--green); }}
         .mini-stat.down .v {{ color: var(--red); }}
         .mini-stat.flat .v {{ color: var(--amber); }}
+        .mini-stat.cyan .v {{ color: var(--cyan); }}
         .mini-stat .hint {{ display:block; font-size:9px; color: var(--text-faint); margin-top:3px; letter-spacing: 0.5px; }}
+        .stat-row {{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 20px; }}
         .tab-buttons {{ display:flex; gap:6px; margin-bottom: 22px; position: relative; flex-wrap: wrap; }}
         .tab-btn {{
             font-family: var(--font-display); padding: 13px 26px; font-weight: 700; font-size: 14px;
@@ -426,6 +628,10 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
             font-family: var(--font-mono); font-weight: 600; text-transform: uppercase; font-size: 11px;
             letter-spacing: 1px; border-bottom: 1px solid var(--border-bright); white-space: nowrap;
         }}
+        th.sortable {{ cursor:pointer; user-select:none; }}
+        th.sortable:hover {{ color: #fff; }}
+        th.sortable .arrow {{ display:inline-block; margin-left:5px; opacity:0.5; font-size:9px; }}
+        th.sortable.sort-asc .arrow, th.sortable.sort-desc .arrow {{ opacity:1; color: var(--magenta); }}
         td {{ font-family: var(--font-mono); font-size: 13.5px; color: var(--text-main); }}
         tbody tr {{ border-bottom: 1px solid var(--border); transition: background 0.15s ease; }}
         tbody tr:hover {{ background: linear-gradient(90deg, rgba(0,229,255,0.06), rgba(255,61,129,0.03)); }}
@@ -436,12 +642,25 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
         .bullish {{ background: var(--green-soft); color: var(--green); border-color: rgba(0,255,163,0.35); box-shadow: 0 0 12px rgba(0,255,163,0.12); }}
         .bearish {{ background: var(--red-soft); color: var(--red); border-color: rgba(255,77,94,0.35); box-shadow: 0 0 12px rgba(255,77,94,0.12); }}
         .neutral {{ background: var(--amber-soft); color: var(--amber); border-color: rgba(255,183,3,0.35); box-shadow: 0 0 12px rgba(255,183,3,0.12); }}
+        .reco-strongbuy {{ background: var(--green-soft); color: var(--green); border-color: rgba(0,255,163,0.5); }}
+        .reco-buy {{ background: rgba(0,255,163,0.08); color: var(--green); border-color: rgba(0,255,163,0.25); }}
+        .reco-sell {{ background: rgba(255,77,94,0.08); color: var(--red); border-color: rgba(255,77,94,0.25); }}
+        .reco-strongsell {{ background: var(--red-soft); color: var(--red); border-color: rgba(255,77,94,0.5); }}
+        .reco-watch {{ background: rgba(255,255,255,0.05); color: var(--text-dim); border-color: var(--border); }}
         .empty-row td {{ text-align:center; color: var(--text-faint); padding: 50px 20px; font-family: var(--font-body); font-size: 14px; }}
         .guide-intro {{ font-family: var(--font-display); font-weight: 800; font-size: 24px; margin: 0 0 6px; color: var(--text-main); }}
         .guide-sub {{ color: var(--text-dim); font-size: 13.5px; margin: 0 0 20px; }}
         .guide-table td:first-child {{ width: 230px; }}
         .guide-table td:last-child {{ font-family: var(--font-body); color: var(--text-dim); line-height: 1.6; font-size: 13.5px; }}
         .section-gap {{ margin-top: 36px; }}
+        .chart-grid {{ display:grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 20px; }}
+        .chart-card {{
+            background: var(--panel-glass); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px 10px;
+            backdrop-filter: blur(10px); box-shadow: 0 14px 40px -16px rgba(0,0,0,0.7);
+        }}
+        .chart-card h3 {{ font-family: var(--font-display); font-size: 15px; margin: 0 0 4px; color: var(--text-main); }}
+        .chart-card p {{ font-family: var(--font-body); font-size: 12px; color: var(--text-dim); margin: 0 0 12px; }}
+        .chart-card canvas {{ max-height: 260px; }}
         footer {{ text-align:center; color: var(--text-faint); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; margin-top: 34px; text-transform: uppercase; }}
         footer a {{ color: var(--cyan); text-decoration:none; }}
         footer a:hover {{ text-decoration:underline; }}
@@ -492,6 +711,7 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
             <div class="brand-eyebrow"><span class="pulse-dot"></span> LIVE SCAN &middot; MULTI-TIMEFRAME ENGINE</div>
             <h1>MACD Master Dashboard</h1>
             <p class="subtitle">Automated transition detection, MACD state mapping, RSI(14) correlation &amp; divergence scanning across four timeframe pairs.</p>
+            <div class="last-updated">&#9201; Last Data Updated (15m candle, IST): <b id="lastUpdatedTime">{last_updated_str}</b></div>
         </div>
         <div class="header-stats">
             <div class="mini-stat up" onclick="openBiasModal('bullish')">
@@ -513,6 +733,7 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
         <button class="tab-btn active" onclick="switchTab('tabScreener')">&#9889; Stock Screener</button>
         <button class="tab-btn" onclick="switchTab('tabDivergence')">&#127760; Divergence Scanner</button>
         <button class="tab-btn" onclick="switchTab('tabGuide')">&#128214; Market Bias Guide</button>
+        <button class="tab-btn" onclick="switchTab('tabMacd360')">&#128207; MACD 360 FNO</button>
     </div>
 
     <!-- TAB 1: SCREENER -->
@@ -553,11 +774,17 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
         <div class="stats-badge">Matching Stocks: <span class="count-num" id="countBadge">0</span></div>
 
         <div class="table-wrap">
-            <table>
+            <table id="screenerTable">
                 <thead>
                     <tr>
-                        <th>Symbol</th><th>Timeframe Pair</th><th>Close Price</th><th>HTF MACD State</th>
-                        <th>LTF MACD State</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th><th>Market Bias</th>
+                        <th class="sortable" data-key="symbol">Symbol<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="pair">Timeframe Pair<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="close">Close Price<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="htf_state">HTF MACD State<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="ltf_state">LTF MACD State<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="htf_rsi">HTF RSI (14)<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="ltf_rsi">LTF RSI (14)<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="condition">Market Bias<span class="arrow">&#9650;&#9660;</span></th>
                     </tr>
                 </thead>
                 <tbody id="stockTableBody"></tbody>
@@ -567,6 +794,13 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
 
     <!-- TAB 2: DIVERGENCE SCANNER -->
     <div id="tabDivergence" class="tab-content">
+        <div class="stat-row">
+            <div class="mini-stat up"><span class="k">Strong Buy</span><span class="v" id="statStrongBuy">0</span></div>
+            <div class="mini-stat up"><span class="k">Buy</span><span class="v" id="statBuy">0</span></div>
+            <div class="mini-stat down"><span class="k">Sell</span><span class="v" id="statSell">0</span></div>
+            <div class="mini-stat down"><span class="k">Strong Sell</span><span class="v" id="statStrongSell">0</span></div>
+            <div class="mini-stat flat"><span class="k">Watch</span><span class="v" id="statWatch">0</span></div>
+        </div>
         <div class="controls">
             <div class="control-group">
                 <label for="divPairSelect">Timeframe Pair (LTF &rarr; HTF)</label>
@@ -586,16 +820,34 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
                     <option value="Hidden Bearish Divergence">Hidden Bearish Divergence</option>
                 </select>
             </div>
+            <div class="control-group">
+                <label for="divRecoSelect">Recommendation</label>
+                <select id="divRecoSelect" onchange="filterDivergenceData()">
+                    <option value="ALL">All</option>
+                    <option value="STRONG BUY">Strong Buy</option>
+                    <option value="BUY">Buy</option>
+                    <option value="SELL">Sell</option>
+                    <option value="STRONG SELL">Strong Sell</option>
+                    <option value="WATCH">Watch</option>
+                </select>
+            </div>
         </div>
 
         <div class="stats-badge">Matching Stocks: <span class="count-num" id="divCountBadge">0</span></div>
 
         <div class="table-wrap">
-            <table>
+            <table id="divergenceTable">
                 <thead>
                     <tr>
-                        <th>Symbol</th><th>Timeframe Pair</th><th>Close Price</th><th>HTF Divergence</th>
-                        <th>LTF Divergence</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th><th>Type</th>
+                        <th class="sortable" data-key="symbol">Symbol<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="pair">Timeframe Pair<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="close">Close Price<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="htf_divergence">HTF Divergence<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="ltf_divergence">LTF Divergence<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="htf_rsi">HTF RSI (14)<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="ltf_rsi">LTF RSI (14)<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="type">Type<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="recommendation">Recommendation<span class="arrow">&#9650;&#9660;</span></th>
                     </tr>
                 </thead>
                 <tbody id="divTableBody"></tbody>
@@ -622,6 +874,45 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
                     <thead><tr><th style="width:25%;">Divergence Type</th><th style="width:75%;">Practical Trading Interpretation</th></tr></thead>
                     <tbody id="divGuideTableBody"></tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="section-gap">
+            <p class="guide-intro" style="font-size:20px;">Divergence Recommendation Logic</p>
+            <p class="guide-sub">How HTF + LTF divergence combinations map to a call.</p>
+            <div class="table-wrap">
+                <table class="guide-table">
+                    <thead><tr><th style="width:16%;">Call</th><th style="width:28%;">HTF + LTF Combination</th><th style="width:56%;">Why</th></tr></thead>
+                    <tbody id="recoGuideTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: MACD 360 FNO (Daily-only) -->
+    <div id="tabMacd360" class="tab-content">
+        <p class="guide-intro">MACD 360 FNO &mdash; Daily Timeframe Breadth</p>
+        <p class="guide-sub">Universe-wide Daily MACD breadth over the last {MACD360_DAYS} sessions. Counts are computed purely on the Daily timeframe (no LTF/HTF pairing).</p>
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h3>MACD &gt; 0 vs MACD &lt; 0 (Count)</h3>
+                <p>How many stocks in the universe have Daily MACD above vs below the zero line, each session.</p>
+                <canvas id="chartZero"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>MACD PCO vs NCO (Count)</h3>
+                <p>Positive Crossover (MACD &gt; Signal) vs Negative Crossover (MACD &le; Signal), each session.</p>
+                <canvas id="chartCross"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>MACD &gt; 0 &amp; PCO vs MACD &gt; 0 &amp; NCO</h3>
+                <p>Within the above-zero group: how many are also in a positive crossover vs a negative crossover.</p>
+                <canvas id="chartAboveSplit"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>MACD &lt; 0 &amp; PCO vs MACD &lt; 0 &amp; NCO</h3>
+                <p>Within the below-zero group: how many are also in a positive crossover vs a negative crossover.</p>
+                <canvas id="chartBelowSplit"></canvas>
             </div>
         </div>
     </div>
@@ -655,12 +946,19 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
     const guideData = {guide_json_data};
     const divergenceData = {div_json_data};
     const divGuideData = {div_guide_json_data};
+    const recoGuideData = {reco_guide_json_data};
+    const macd360Data = {macd360_json_data};
+
+    const PAIR_ORDER = {{"15m -> 1h": 0, "1h -> Daily": 1, "Daily -> Weekly": 2, "Weekly -> Monthly": 3}};
 
     function switchTab(tabId) {{
         document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
         document.getElementById(tabId).classList.add('active');
         event.currentTarget.classList.add('active');
+        if (tabId === 'tabMacd360') {{
+            renderMacd360Charts();
+        }}
     }}
 
     function getBadgeClass(cond) {{
@@ -674,6 +972,16 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
 
     function getDivBadgeClass(type) {{
         return type.includes('Bullish') ? 'bullish' : type.includes('Bearish') ? 'bearish' : 'neutral';
+    }}
+
+    function getRecoClass(reco) {{
+        switch (reco) {{
+            case 'STRONG BUY': return 'reco-strongbuy';
+            case 'BUY': return 'reco-buy';
+            case 'SELL': return 'reco-sell';
+            case 'STRONG SELL': return 'reco-strongsell';
+            default: return 'reco-watch';
+        }}
     }}
 
     function rsiColor(v) {{
@@ -693,6 +1001,25 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
         document.getElementById('statNeutral').innerText = neu;
     }}
 
+    // POINT 3: divergence tab summary stat cards
+    function updateDivergenceStats() {{
+        let sb = 0, b = 0, s = 0, ss = 0, w = 0;
+        divergenceData.forEach(item => {{
+            switch (item.recommendation) {{
+                case 'STRONG BUY': sb++; break;
+                case 'BUY': b++; break;
+                case 'SELL': s++; break;
+                case 'STRONG SELL': ss++; break;
+                default: w++;
+            }}
+        }});
+        document.getElementById('statStrongBuy').innerText = sb;
+        document.getElementById('statBuy').innerText = b;
+        document.getElementById('statSell').innerText = s;
+        document.getElementById('statStrongSell').innerText = ss;
+        document.getElementById('statWatch').innerText = w;
+    }}
+
     function openBiasModal(type) {{
         const labels = {{ bullish: 'Bullish Setups', bearish: 'Bearish Setups', neutral: 'Neutral Setups' }};
         const matches = stockData.filter(item => getBadgeClass(item.condition) === type);
@@ -706,7 +1033,10 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
         if (matches.length === 0) {{
             body.innerHTML = `<tr class="empty-row"><td colspan="7">No stocks currently in this category.</td></tr>`;
         }} else {{
-            matches.sort((a, b) => a.symbol.localeCompare(b.symbol)).forEach(row => {{
+            matches
+                .slice()
+                .sort((a, b) => (PAIR_ORDER[a.pair] - PAIR_ORDER[b.pair]) || a.symbol.localeCompare(b.symbol))
+                .forEach(row => {{
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="sym">${{row.symbol}}</td>
@@ -729,11 +1059,44 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
 
     document.addEventListener('keydown', (e) => {{ if (e.key === 'Escape') closeBiasModal(); }});
 
+    // ---------- POINT 4: generic sortable-table support ----------
+    let screenerSort = {{ key: 'pair', asc: true }};
+    let divergenceSort = {{ key: 'pair', asc: true }};
+
+    function sortRows(rows, sortState) {{
+        const {{ key, asc }} = sortState;
+        const sorted = rows.slice().sort((a, b) => {{
+            let av = a[key], bv = b[key];
+            if (key === 'pair') {{ av = PAIR_ORDER[av]; bv = PAIR_ORDER[bv]; }}
+            if (typeof av === 'number' && typeof bv === 'number') {{
+                return asc ? av - bv : bv - av;
+            }}
+            av = String(av); bv = String(bv);
+            return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+        }});
+        return sorted;
+    }}
+
+    function bindSortableHeaders(tableId, sortStateGetter, sortStateSetter, rerenderFn) {{
+        document.querySelectorAll(`#${{tableId}} th.sortable`).forEach(th => {{
+            th.addEventListener('click', () => {{
+                const key = th.getAttribute('data-key');
+                const state = sortStateGetter();
+                const asc = (state.key === key) ? !state.asc : true;
+                sortStateSetter({{ key, asc }});
+                document.querySelectorAll(`#${{tableId}} th.sortable`).forEach(h => h.classList.remove('sort-asc', 'sort-desc'));
+                th.classList.add(asc ? 'sort-asc' : 'sort-desc');
+                rerenderFn();
+            }});
+        }});
+    }}
+
     function filterData() {{
         const selectedPair = document.getElementById('pairSelect').value;
         const selectedCondition = document.getElementById('conditionSelect').value;
         const tableBody = document.getElementById('stockTableBody');
-        const filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
+        let filtered = stockData.filter(item => item.pair === selectedPair && item.condition === selectedCondition);
+        filtered = sortRows(filtered, screenerSort);
         document.getElementById('countBadge').innerText = filtered.length;
         tableBody.innerHTML = '';
         if (filtered.length === 0) {{
@@ -760,17 +1123,25 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
     function filterDivergenceData() {{
         const selectedPair = document.getElementById('divPairSelect').value;
         const selectedType = document.getElementById('divTypeSelect').value;
+        const selectedReco = document.getElementById('divRecoSelect').value;
         const tableBody = document.getElementById('divTableBody');
-        const filtered = divergenceData.filter(item => item.pair === selectedPair && item.type === selectedType);
+        let filtered = divergenceData.filter(item =>
+            item.pair === selectedPair &&
+            item.type === selectedType &&
+            (selectedReco === 'ALL' || item.recommendation === selectedReco)
+        );
+        filtered = sortRows(filtered, divergenceSort);
         document.getElementById('divCountBadge').innerText = filtered.length;
         tableBody.innerHTML = '';
         if (filtered.length === 0) {{
-            tableBody.innerHTML = `<tr class="empty-row"><td colspan="8">No divergence matching this pair &amp; type.</td></tr>`;
+            tableBody.innerHTML = `<tr class="empty-row"><td colspan="9">No divergence matching this pair, type &amp; recommendation.</td></tr>`;
             return;
         }}
         filtered.forEach(row => {{
             const badgeClass = getDivBadgeClass(row.type);
+            const recoClass = getRecoClass(row.recommendation);
             const tr = document.createElement('tr');
+            tr.title = row.remark || '';
             tr.innerHTML = `
                 <td class="sym">${{row.symbol}}</td>
                 <td><span class="pair-chip">${{row.pair}}</span></td>
@@ -780,6 +1151,7 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
                 <td style="font-weight:700; color:${{rsiColor(row.htf_rsi)}};">${{row.htf_rsi}}</td>
                 <td style="font-weight:700; color:${{rsiColor(row.ltf_rsi)}};">${{row.ltf_rsi}}</td>
                 <td><span class="badge ${{badgeClass}}">${{row.type}}</span></td>
+                <td><span class="badge ${{recoClass}}">${{row.recommendation}}</span></td>
             `;
             tableBody.appendChild(tr);
         }});
@@ -803,13 +1175,92 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
             tr.innerHTML = `<td><span class="badge ${{badgeClass}}">${{row['Divergence Type']}}</span></td><td>${{row['Interpretation']}}</td>`;
             divGuideBody.appendChild(tr);
         }});
+
+        const recoGuideBody = document.getElementById('recoGuideTableBody');
+        recoGuideBody.innerHTML = '';
+        recoGuideData.forEach(row => {{
+            const recoClass = getRecoClass(row['Recommendation']);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><span class="badge ${{recoClass}}">${{row['Recommendation']}}</span></td><td style="color:#cbd5e1;">${{row['Bucket']}}</td><td>${{row['Interpretation']}}</td>`;
+            recoGuideBody.appendChild(tr);
+        }});
+    }}
+
+    // ---------- POINT 5: MACD 360 FNO charts ----------
+    let macd360Charts = {{}};
+    function renderMacd360Charts() {{
+        if (!macd360Data || macd360Data.length === 0 || typeof Chart === 'undefined') return;
+        if (macd360Charts.rendered) return; // render once
+        macd360Charts.rendered = true;
+
+        const labels = macd360Data.map(d => d.date);
+        const commonOpts = {{
+            responsive: true,
+            interaction: {{ mode: 'index', intersect: false }},
+            plugins: {{ legend: {{ labels: {{ color: '#8892b0', font: {{ family: 'JetBrains Mono' }} }} }} }},
+            scales: {{
+                x: {{ ticks: {{ color: '#5b6584' }}, grid: {{ color: 'rgba(255,255,255,0.05)' }} }},
+                y: {{ ticks: {{ color: '#5b6584' }}, grid: {{ color: 'rgba(255,255,255,0.05)' }}, beginAtZero: true }}
+            }}
+        }};
+
+        new Chart(document.getElementById('chartZero'), {{
+            type: 'line',
+            data: {{
+                labels,
+                datasets: [
+                    {{ label: 'MACD > 0', data: macd360Data.map(d => d.above_zero), borderColor: '#00ffa3', backgroundColor: 'rgba(0,255,163,0.12)', tension: 0.3, fill: true }},
+                    {{ label: 'MACD < 0', data: macd360Data.map(d => d.below_zero), borderColor: '#ff4d5e', backgroundColor: 'rgba(255,77,94,0.12)', tension: 0.3, fill: true }}
+                ]
+            }},
+            options: commonOpts
+        }});
+
+        new Chart(document.getElementById('chartCross'), {{
+            type: 'line',
+            data: {{
+                labels,
+                datasets: [
+                    {{ label: 'PCO (MACD > Signal)', data: macd360Data.map(d => d.pco), borderColor: '#00e5ff', backgroundColor: 'rgba(0,229,255,0.12)', tension: 0.3, fill: true }},
+                    {{ label: 'NCO (MACD <= Signal)', data: macd360Data.map(d => d.nco), borderColor: '#ff3d81', backgroundColor: 'rgba(255,61,129,0.12)', tension: 0.3, fill: true }}
+                ]
+            }},
+            options: commonOpts
+        }});
+
+        new Chart(document.getElementById('chartAboveSplit'), {{
+            type: 'line',
+            data: {{
+                labels,
+                datasets: [
+                    {{ label: 'MACD > 0 & PCO', data: macd360Data.map(d => d.above_pco), borderColor: '#00ffa3', backgroundColor: 'rgba(0,255,163,0.12)', tension: 0.3, fill: true }},
+                    {{ label: 'MACD > 0 & NCO', data: macd360Data.map(d => d.above_nco), borderColor: '#ffb703', backgroundColor: 'rgba(255,183,3,0.12)', tension: 0.3, fill: true }}
+                ]
+            }},
+            options: commonOpts
+        }});
+
+        new Chart(document.getElementById('chartBelowSplit'), {{
+            type: 'line',
+            data: {{
+                labels,
+                datasets: [
+                    {{ label: 'MACD < 0 & PCO', data: macd360Data.map(d => d.below_pco), borderColor: '#00e5ff', backgroundColor: 'rgba(0,229,255,0.12)', tension: 0.3, fill: true }},
+                    {{ label: 'MACD < 0 & NCO', data: macd360Data.map(d => d.below_nco), borderColor: '#ff4d5e', backgroundColor: 'rgba(255,77,94,0.12)', tension: 0.3, fill: true }}
+                ]
+            }},
+            options: commonOpts
+        }});
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
+        bindSortableHeaders('screenerTable', () => screenerSort, (s) => {{ screenerSort = s; }}, filterData);
+        bindSortableHeaders('divergenceTable', () => divergenceSort, (s) => {{ divergenceSort = s; }}, filterDivergenceData);
         filterData();
         filterDivergenceData();
         populateGuide();
         updateHeaderStats();
+        updateDivergenceStats();
     }});
 </script>
 
@@ -818,11 +1269,12 @@ def build_html_dashboard(macd_results, divergence_results, date_str):
 """
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
-    print(f"Successfully generated index.html dashboard with {len(macd_results)} screener rows "
-          f"and {len(divergence_results)} divergence rows (Tab 1, Tab 2 & Tab 3)!")
+    print(f"Successfully generated index.html dashboard with {len(macd_results)} screener rows, "
+          f"{len(divergence_results)} divergence rows, and {len(macd360_data)} MACD-360 daily sessions "
+          f"(last update: {last_updated_str}).")
 
 if __name__ == '__main__':
-    import datetime
-    date_str = datetime.datetime.now().strftime("%d %b %Y")
-    macd_data, div_data = process_stock_data()
-    build_html_dashboard(macd_data, div_data, date_str)
+    date_str = datetime.datetime.now(IST).strftime("%d %b %Y")
+    macd_data, div_data, last_15m = process_stock_data()
+    macd360_data = compute_macd360_fno(MACD360_DAYS)
+    build_html_dashboard(macd_data, div_data, macd360_data, last_15m, date_str)
