@@ -1,6 +1,7 @@
 import os, time, socket, ssl, multiprocessing as mp
 from datetime import datetime
 from tvDatafeed import TvDatafeed, Interval
+import pyt
 
 # ==============================
 # TradingView Credentials
@@ -84,10 +85,24 @@ def fetch_save(args):
             )
 
             if df is not None and not df.empty:
-                # Format to JSON and save
+                # 1. Convert datetime index from UTC to IST
+                ist = pytz.timezone('Asia/Kolkata')
+                if df.index.tz is None:
+                    # If timezone naive, assume UTC and convert to IST
+                    df.index = df.index.tz_localize('UTC').tz_convert(ist)
+                else:
+                    # If already timezone aware, directly convert to IST
+                    df.index = df.index.tz_convert(ist)
+
+                # 2. Reset index so 'datetime' becomes a column and save to JSON
                 json_file_path = os.path.join(folder, f"{symbol}.json")
-                df.reset_index().to_json(json_file_path, orient="records", date_format="iso", indent=4)
-                
+                df.reset_index().to_json(
+                    json_file_path, 
+                    orient="records", 
+                    date_format="iso", 
+                    indent=4
+                )
+
                 log(f"[OK] {symbol} | TF:{tf_label}")
                 return
 
