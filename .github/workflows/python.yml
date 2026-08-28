@@ -1,16 +1,18 @@
 name: Fetch Data and Update MACD Dashboard
 
 on:
-  # Manual Run Trigger
   workflow_dispatch:
 
-  # Scheduled Runs (Times offset by ~7 mins to avoid GitHub queue delays)
   schedule:
-    # 09:07 AM IST (03:37 AM UTC)
+    # Monday-Friday
+    # 09:07 AM IST
     - cron: "37 3 * * 1-5"
-    # Every 30 minutes from 09:37 AM IST until 03:37 PM IST (04:07 - 10:07 UTC)
+
+    # Every 30 minutes
+    # 09:37 AM IST to 03:37 PM IST
     - cron: "7,37 4-9 * * 1-5"
-    # 04:07 PM IST (10:37 AM UTC)
+
+    # 04:07 PM IST
     - cron: "37 10 * * 1-5"
 
 permissions:
@@ -22,36 +24,32 @@ concurrency:
 
 jobs:
   update-stock-dashboard:
+
     name: Download Data and Build Dashboard
+
     runs-on: ubuntu-latest
+
     timeout-minutes: 55
 
     steps:
-      
-    
 
-    
-      # STEP 1: Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # STEP 2: Setup Python with Dependency Caching
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
-      # STEP 3: Install Dependencies
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pandas numpy requests pytz
 
-      # STEP 4: Run Data Downloader
       - name: Run Stock Data Downloader
         env:
           TV_USERNAME: ${{ secrets.TV_USERNAME }}
@@ -59,18 +57,15 @@ jobs:
         run: |
           python data_collector.py
 
-      # STEP 5: Generate Dashboard (Runs immediately after data collection)
       - name: Generate Dashboard HTML
         run: |
           python generate_dashboard.py
 
-      # STEP 6: Clean Up Temporary Log Files
       - name: Remove Runtime Log Files
         if: always()
         run: |
           rm -f download_log.txt error_symbols.txt
 
-      # STEP 7: Automated Commit & Push (Saves both stock data and HTML dashboard)
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
@@ -80,5 +75,11 @@ jobs:
           commit_user_email: "github-actions[bot]@users.noreply.github.com"
           author_name: "github-actions[bot]"
           author_email: "github-actions[bot]@users.noreply.github.com"
-          file_pattern: "stockdata_D/* stockdata_W/* stockdata_M/* stockdata_15/* stockdata_1H/* *.html index.html"
+          file_pattern: |
+            stockdata_D/**
+            stockdata_W/**
+            stockdata_M/**
+            stockdata_15/**
+            stockdata_1H/**
+            *.html
           skip_dirty_check: false
