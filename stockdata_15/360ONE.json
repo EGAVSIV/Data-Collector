@@ -1,59 +1,5 @@
 [
     {
-        "datetime":"2026-01-05T09:30:00.000Z",
-        "symbol":"NSE:360ONE",
-        "open":1201.2,
-        "high":1203.1,
-        "low":1197.8,
-        "close":1200.6,
-        "volume":26035.0
-    },
-    {
-        "datetime":"2026-01-05T09:45:00.000Z",
-        "symbol":"NSE:360ONE",
-        "open":1200.6,
-        "high":1201.9,
-        "low":1195.7,
-        "close":1197.0,
-        "volume":37454.0
-    },
-    {
-        "datetime":"2026-01-06T03:45:00.000Z",
-        "symbol":"NSE:360ONE",
-        "open":1198.0,
-        "high":1208.0,
-        "low":1195.1,
-        "close":1204.5,
-        "volume":25550.0
-    },
-    {
-        "datetime":"2026-01-06T04:00:00.000Z",
-        "symbol":"NSE:360ONE",
-        "open":1204.5,
-        "high":1206.4,
-        "low":1197.8,
-        "close":1202.1,
-        "volume":28000.0
-    },
-    {
-        "datetime":"2026-01-06T04:15:00.000Z",
-        "symbol":"NSE:360ONE",
-        "open":1202.7,
-        "high":1209.9,
-        "low":1202.1,
-        "close":1207.5,
-        "volume":19286.0
-    },
-    {
-        "datetime":"2026-01-06T04:30:00.000Z",
-        "symbol":"NSE:360ONE",
-        "open":1208.2,
-        "high":1209.4,
-        "low":1204.2,
-        "close":1205.2,
-        "volume":4714.0
-    },
-    {
         "datetime":"2026-01-06T04:45:00.000Z",
         "symbol":"NSE:360ONE",
         "open":1205.5,
@@ -35996,7 +35942,61 @@
         "open":1176.5,
         "high":1178.0,
         "low":1175.7,
+        "close":1176.5,
+        "volume":20926.0
+    },
+    {
+        "datetime":"2026-08-31T08:15:00.000Z",
+        "symbol":"NSE:360ONE",
+        "open":1176.3,
+        "high":1177.2,
+        "low":1171.2,
+        "close":1171.5,
+        "volume":48300.0
+    },
+    {
+        "datetime":"2026-08-31T08:30:00.000Z",
+        "symbol":"NSE:360ONE",
+        "open":1171.4,
+        "high":1177.3,
+        "low":1171.0,
         "close":1176.6,
-        "volume":18633.0
+        "volume":47620.0
+    },
+    {
+        "datetime":"2026-08-31T08:45:00.000Z",
+        "symbol":"NSE:360ONE",
+        "open":1177.3,
+        "high":1178.0,
+        "low":1174.2,
+        "close":1178.0,
+        "volume":39465.0
+    },
+    {
+        "datetime":"2026-08-31T09:00:00.000Z",
+        "symbol":"NSE:360ONE",
+        "open":1178.1,
+        "high":1180.6,
+        "low":1177.4,
+        "close":1179.2,
+        "volume":13575.0
+    },
+    {
+        "datetime":"2026-08-31T09:15:00.000Z",
+        "symbol":"NSE:360ONE",
+        "open":1179.2,
+        "high":1182.6,
+        "low":1175.3,
+        "close":1175.7,
+        "volume":111368.0
+    },
+    {
+        "datetime":"2026-08-31T09:30:00.000Z",
+        "symbol":"NSE:360ONE",
+        "open":1175.5,
+        "high":1177.8,
+        "low":1171.8,
+        "close":1171.8,
+        "volume":275406.0
     }
 ]

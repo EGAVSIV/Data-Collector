@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-07T04:45:00.000Z",
-        "symbol":"NSE:ABB",
-        "open":7010.55,
-        "high":7040.0,
-        "low":6864.65,
-        "close":6900.6,
-        "volume":79189.0
-    },
-    {
         "datetime":"2024-05-07T05:45:00.000Z",
         "symbol":"NSE:ABB",
         "open":6899.4,
@@ -35994,9 +35985,18 @@
         "datetime":"2026-08-31T07:45:00.000Z",
         "symbol":"NSE:ABB",
         "open":7375.5,
-        "high":7396.5,
+        "high":7414.5,
         "low":7370.0,
-        "close":7388.5,
-        "volume":4099.0
+        "close":7411.0,
+        "volume":18307.0
+    },
+    {
+        "datetime":"2026-08-31T08:45:00.000Z",
+        "symbol":"NSE:ABB",
+        "open":7408.5,
+        "high":7440.0,
+        "low":7405.0,
+        "close":7417.5,
+        "volume":37451.0
     }
 ]

@@ -1,14 +1,5 @@
 [
     {
-        "datetime":"2024-05-07T04:45:00.000Z",
-        "symbol":"NSE:PAYTM",
-        "open":333.85,
-        "high":333.85,
-        "low":333.85,
-        "close":333.85,
-        "volume":491447.0
-    },
-    {
         "datetime":"2024-05-07T05:45:00.000Z",
         "symbol":"NSE:PAYTM",
         "open":333.85,
@@ -35995,8 +35986,17 @@
         "symbol":"NSE:PAYTM",
         "open":1674.4,
         "high":1678.2,
-        "low":1668.5,
-        "close":1669.3,
-        "volume":124760.0
+        "low":1665.3,
+        "close":1667.5,
+        "volume":247915.0
+    },
+    {
+        "datetime":"2026-08-31T08:45:00.000Z",
+        "symbol":"NSE:PAYTM",
+        "open":1667.5,
+        "high":1677.9,
+        "low":1661.7,
+        "close":1677.1,
+        "volume":715501.0
     }
 ]
