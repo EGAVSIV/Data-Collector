@@ -112,9 +112,64 @@ def get_macd_state(macd_val, signal_val):
     elif is_pco and not is_above_zero:
         return 2, "PCO < 0"
     elif not is_pco and is_above_zero:
-        return 3, "NC > 0"
+        return 3, "NCO > 0"
     else:
-        return 4, "NC < 0"
+        return 4, "NCO < 0"
+
+
+# --- (new) score a MACD state text for the Stock Explorer recommendation --
+# PCO > 0  -> strongest bullish (momentum positive & rising)
+# NCO > 0  -> weak / fading bullish (still above zero, but momentum rolling over)
+# PCO < 0  -> weak / early bullish (momentum turning up, but still below zero)
+# NCO < 0  -> strongest bearish (momentum negative & falling)
+STATE_SCORES = {
+    "PCO > 0": 2,
+    "NCO > 0": 1,
+    "PCO < 0": -1,
+    "NCO < 0": -2,
+}
+
+def state_score(state_txt):
+    return STATE_SCORES.get(state_txt, 0)
+
+
+def compute_reco(tf_data, tf_keys, weights):
+    """
+    Generic Buy/Sell recommendation engine used by the Stock Explorer tab.
+    tf_keys / weights are matched positionally, e.g.
+      Trading:   tf_keys=['15','1H','D']   weights=[2, 1.5, 1]   (Entry, Trend, Confirmation)
+      Investing: tf_keys=['D','W','M']     weights=[2, 1.5, 1]   (Entry, Support, Confirmation)
+    Returns a dict with the numeric score, a label and a short human remark.
+    """
+    total_weight = 0.0
+    score = 0.0
+    parts = []
+    for key, w in zip(tf_keys, weights):
+        info = tf_data.get(key)
+        if not info or info.get('state') in (None, 'N/A'):
+            parts.append(f"{key}: N/A")
+            continue
+        s = state_score(info['state'])
+        score += s * w
+        total_weight += w
+        parts.append(f"{key}: {info['state']} ({info.get('rsi', 'N/A')})")
+
+    if total_weight == 0:
+        return {"label": "NO DATA", "score": 0, "remark": " | ".join(parts)}
+
+    norm = score / total_weight  # normalized to roughly [-2, 2]
+    if norm >= 1.3:
+        label = "STRONG BUY"
+    elif norm >= 0.4:
+        label = "BUY"
+    elif norm <= -1.3:
+        label = "STRONG SELL"
+    elif norm <= -0.4:
+        label = "SELL"
+    else:
+        label = "NEUTRAL"
+
+    return {"label": label, "score": round(norm, 2), "remark": " | ".join(parts)}
 
 def map_transition(ltf_prev, ltf_curr, htf_curr):
     if None in (ltf_prev, ltf_curr, htf_curr):
@@ -346,13 +401,17 @@ def compute_macd360_fno(days=MACD360_DAYS):
 # --- Main Data Processing Pipeline ---
 def process_stock_data():
     """
-    Returns (macd_results, divergence_results, last_15m_ts):
-      macd_results       -> Tab 1 (Stock Screener) rows
+    Returns (macd_results, divergence_results, explorer_results, last_15m_ts):
+      macd_results       -> Tab 1 (MACD Base Screener) rows
       divergence_results -> Tab 2 (Divergence Scanner) rows
+      explorer_results   -> Tab 5 (Stock Explorer) rows: one entry per symbol with
+                             MACD state + RSI on every timeframe, plus Trading &
+                             Investing Buy/Sell recommendations
       last_15m_ts        -> pandas Timestamp of the latest 15m candle seen (Point 1)
     """
     macd_results = []
     divergence_results = []
+    explorer_results = []
     last_15m_ts = None
 
     sample_folder = TF_FOLDERS['D']
@@ -402,6 +461,25 @@ def process_stock_data():
                 except Exception:
                     continue
 
+        # --- POINT 4: Stock Explorer entry (all timeframes, one row per symbol) ---
+        explorer_tf = {}
+        for tf in TF_FOLDERS:
+            info = tf_data.get(tf)
+            if info:
+                explorer_tf[tf] = {'state': info['macd_state_txt'], 'rsi': info['rsi']}
+            else:
+                explorer_tf[tf] = None
+
+        trading_reco = compute_reco(explorer_tf, ['15', '1H', 'D'], [2, 1.5, 1])
+        investing_reco = compute_reco(explorer_tf, ['D', 'W', 'M'], [2, 1.5, 1])
+
+        explorer_results.append({
+            'symbol': symbol,
+            'timeframes': explorer_tf,
+            'trading': trading_reco,
+            'investing': investing_reco
+        })
+
         # Process TF Pairs
         for ltf_key, htf_key, pair_label in TF_PAIRS:
             if ltf_key in tf_data and htf_key in tf_data:
@@ -442,6 +520,8 @@ def process_stock_data():
                         'ltf_divergence': ltf_div or "",
                         'htf_rsi': htf_info['rsi'],
                         'ltf_rsi': ltf_info['rsi'],
+                        'htf_macd_state': htf_info['macd_state_txt'],
+                        'ltf_macd_state': ltf_info['macd_state_txt'],
                         'type': div_type,
                         'bucket': bucket,
                         'remark': remark,
@@ -451,18 +531,20 @@ def process_stock_data():
     # POINT 4: keep everything grouped/sorted Timeframe-Pair wise by default
     macd_results.sort(key=lambda r: (PAIR_ORDER.get(r['pair'], 99), r['symbol']))
     divergence_results.sort(key=lambda r: (PAIR_ORDER.get(r['pair'], 99), r['symbol']))
+    explorer_results.sort(key=lambda r: r['symbol'])
 
-    return macd_results, divergence_results, last_15m_ts
+    return macd_results, divergence_results, explorer_results, last_15m_ts
 
 
 # --- Generate Embedded HTML Dashboard ---
-def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15m_ts, date_str):
+def build_html_dashboard(macd_results, divergence_results, explorer_results, macd360_data, last_15m_ts, date_str):
     json_data = json.dumps(macd_results)
     div_json_data = json.dumps(divergence_results)
     guide_json_data = json.dumps(MARKET_BIAS_GUIDE)
     div_guide_json_data = json.dumps(DIVERGENCE_GUIDE)
     reco_guide_json_data = json.dumps(RECOMMENDATION_GUIDE)
     macd360_json_data = json.dumps(macd360_data)
+    explorer_json_data = json.dumps(explorer_results)
     last_updated_str = format_ist(last_15m_ts) if last_15m_ts is not None else "N/A"
 
     html_content = f"""<!DOCTYPE html>
@@ -713,6 +795,8 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
             <p class="subtitle">Automated transition detection, MACD state mapping, RSI(14) correlation &amp; divergence scanning across four timeframe pairs.</p>
             <div class="last-updated">&#9201; Last Data Updated (15m candle, IST): <b id="lastUpdatedTime">{last_updated_str}</b></div>
         </div>
+        <div>
+            <div class="brand-eyebrow" style="margin-bottom:8px; justify-content:flex-end;">MACD BASE SCREENER</div>
         <div class="header-stats">
             <div class="mini-stat up" onclick="openBiasModal('bullish')">
                 <span class="k">Bullish Setups</span><span class="v" id="statBull">0</span>
@@ -727,13 +811,15 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
                 <span class="hint">tap to view all &rarr;</span>
             </div>
         </div>
+        </div>
     </header>
 
     <div class="tab-buttons">
-        <button class="tab-btn active" onclick="switchTab('tabScreener')">&#9889; Stock Screener</button>
+        <button class="tab-btn active" onclick="switchTab('tabScreener')">&#9889; MACD Base Screener</button>
         <button class="tab-btn" onclick="switchTab('tabDivergence')">&#127760; Divergence Scanner</button>
         <button class="tab-btn" onclick="switchTab('tabGuide')">&#128214; Market Bias Guide</button>
         <button class="tab-btn" onclick="switchTab('tabMacd360')">&#128207; MACD 360 FNO</button>
+        <button class="tab-btn" onclick="switchTab('tabExplorer')">&#128269; Stock Explorer</button>
     </div>
 
     <!-- TAB 1: SCREENER -->
@@ -794,12 +880,28 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
 
     <!-- TAB 2: DIVERGENCE SCANNER -->
     <div id="tabDivergence" class="tab-content">
+        <div class="brand-eyebrow" style="margin-bottom:10px;">DIVERGENCE SCREENER</div>
         <div class="stat-row">
-            <div class="mini-stat up"><span class="k">Strong Buy</span><span class="v" id="statStrongBuy">0</span></div>
-            <div class="mini-stat up"><span class="k">Buy</span><span class="v" id="statBuy">0</span></div>
-            <div class="mini-stat down"><span class="k">Sell</span><span class="v" id="statSell">0</span></div>
-            <div class="mini-stat down"><span class="k">Strong Sell</span><span class="v" id="statStrongSell">0</span></div>
-            <div class="mini-stat flat"><span class="k">Watch</span><span class="v" id="statWatch">0</span></div>
+            <div class="mini-stat up" onclick="openDivRecoModal('STRONG BUY')">
+                <span class="k">Strong Buy</span><span class="v" id="statStrongBuy">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat up" onclick="openDivRecoModal('BUY')">
+                <span class="k">Buy</span><span class="v" id="statBuy">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat down" onclick="openDivRecoModal('SELL')">
+                <span class="k">Sell</span><span class="v" id="statSell">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat down" onclick="openDivRecoModal('STRONG SELL')">
+                <span class="k">Strong Sell</span><span class="v" id="statStrongSell">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
+            <div class="mini-stat flat" onclick="openDivRecoModal('WATCH')">
+                <span class="k">Watch</span><span class="v" id="statWatch">0</span>
+                <span class="hint">tap to view all &rarr;</span>
+            </div>
         </div>
         <div class="controls">
             <div class="control-group">
@@ -844,6 +946,8 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
                         <th class="sortable" data-key="close">Close Price<span class="arrow">&#9650;&#9660;</span></th>
                         <th class="sortable" data-key="htf_divergence">HTF Divergence<span class="arrow">&#9650;&#9660;</span></th>
                         <th class="sortable" data-key="ltf_divergence">LTF Divergence<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="htf_macd_state">HTF MACD State<span class="arrow">&#9650;&#9660;</span></th>
+                        <th class="sortable" data-key="ltf_macd_state">LTF MACD State<span class="arrow">&#9650;&#9660;</span></th>
                         <th class="sortable" data-key="htf_rsi">HTF RSI (14)<span class="arrow">&#9650;&#9660;</span></th>
                         <th class="sortable" data-key="ltf_rsi">LTF RSI (14)<span class="arrow">&#9650;&#9660;</span></th>
                         <th class="sortable" data-key="type">Type<span class="arrow">&#9650;&#9660;</span></th>
@@ -917,6 +1021,49 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         </div>
     </div>
 
+    <!-- TAB 5: STOCK EXPLORER -->
+    <div id="tabExplorer" class="tab-content">
+        <p class="guide-intro">Stock Explorer</p>
+        <p class="guide-sub">Pick any symbol to see its MACD state (colour-coded, RSI in brackets) across every timeframe, plus a rules-based Trading &amp; Investing recommendation.</p>
+
+        <div class="controls" style="grid-template-columns: 1fr;">
+            <div class="control-group">
+                <label for="explorerSymbolSelect">Select Stock</label>
+                <select id="explorerSymbolSelect" onchange="renderExplorer()">
+                    <option value="">-- Choose a symbol --</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="explorerEmptyState" style="text-align:center; color: var(--text-faint); padding: 50px 20px; font-family: var(--font-body); font-size: 14px;">
+            Select a stock above to view its multi-timeframe MACD &amp; RSI snapshot and trading / investing recommendation.
+        </div>
+
+        <div id="explorerContent" style="display:none;">
+            <div class="table-wrap section-gap">
+                <table>
+                    <thead>
+                        <tr><th style="width:30%;">Timeframe</th><th style="width:70%;">MACD State (RSI)</th></tr>
+                    </thead>
+                    <tbody id="explorerTfTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="chart-grid section-gap">
+                <div class="chart-card">
+                    <h3>&#128200; Trading Recommendation</h3>
+                    <p>Entry: 15m &nbsp;&bull;&nbsp; Trend: 1H &nbsp;&bull;&nbsp; Confirmation: Daily</p>
+                    <div id="explorerTradingReco"></div>
+                </div>
+                <div class="chart-card">
+                    <h3>&#128181; Investing Recommendation</h3>
+                    <p>Entry: Daily &nbsp;&bull;&nbsp; Support: Weekly &nbsp;&bull;&nbsp; Confirmation: Monthly</p>
+                    <div id="explorerInvestingReco"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>MACD Master &middot; Multi-Timeframe Scanner &middot; {date_str} &middot; Powered by <a href="https://www.raosab.in" target="_blank" rel="noopener">RaoSab.in</a></footer>
 </div>
 
@@ -941,6 +1088,27 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
     </div>
 </div>
 
+<!-- DIVERGENCE SCREENER MODAL -->
+<div class="modal-overlay" id="divRecoModal" onclick="if(event.target===this) closeDivRecoModal()">
+    <div class="modal-panel">
+        <div class="modal-header">
+            <div class="modal-title" id="divModalTitle"></div>
+            <button class="modal-close" onclick="closeDivRecoModal()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Symbol</th><th>Timeframe Pair</th><th>HTF Divergence</th><th>LTF Divergence</th>
+                        <th>HTF MACD State</th><th>LTF MACD State</th><th>HTF RSI (14)</th><th>LTF RSI (14)</th>
+                    </tr>
+                </thead>
+                <tbody id="divModalTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <script>
     const stockData = {json_data};
     const guideData = {guide_json_data};
@@ -948,6 +1116,8 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
     const divGuideData = {div_guide_json_data};
     const recoGuideData = {reco_guide_json_data};
     const macd360Data = {macd360_json_data};
+    const explorerData = {explorer_json_data};
+    const TF_LABELS = {{'15': '15 Minute', '1H': '1 Hour', 'D': 'Daily', 'W': 'Weekly', 'M': 'Monthly'}};
 
     const PAIR_ORDER = {{"15m -> 1h": 0, "1h -> Daily": 1, "Daily -> Weekly": 2, "Weekly -> Monthly": 3}};
 
@@ -972,6 +1142,14 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
 
     function getDivBadgeClass(type) {{
         return type.includes('Bullish') ? 'bullish' : type.includes('Bearish') ? 'bearish' : 'neutral';
+    }}
+
+    // MACD state -> badge color. PCO > 0 is the strongest bullish state,
+    // NCO < 0 the strongest bearish state; the other two are "turning" / neutral.
+    function getStateClass(state) {{
+        if (state === 'PCO > 0') return 'bullish';
+        if (state === 'NCO < 0') return 'bearish';
+        return 'neutral';
     }}
 
     function getRecoClass(reco) {{
@@ -1057,7 +1235,50 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         document.getElementById('biasModal').classList.remove('active');
     }}
 
-    document.addEventListener('keydown', (e) => {{ if (e.key === 'Escape') closeBiasModal(); }});
+    // Point 3: Divergence Screener summary-card modal
+    function openDivRecoModal(reco) {{
+        const labels = {{
+            'STRONG BUY': 'Strong Buy', 'BUY': 'Buy', 'SELL': 'Sell',
+            'STRONG SELL': 'Strong Sell', 'WATCH': 'Watch'
+        }};
+        const recoClass = getRecoClass(reco);
+        const matches = divergenceData.filter(item => item.recommendation === reco);
+
+        document.getElementById('divModalTitle').innerHTML =
+            `${{labels[reco] || reco}} <span class="badge ${{recoClass}}">${{matches.length}} Stocks</span>`;
+
+        const body = document.getElementById('divModalTableBody');
+        body.innerHTML = '';
+
+        if (matches.length === 0) {{
+            body.innerHTML = `<tr class="empty-row"><td colspan="8">No stocks currently in this category.</td></tr>`;
+        }} else {{
+            matches
+                .slice()
+                .sort((a, b) => (PAIR_ORDER[a.pair] - PAIR_ORDER[b.pair]) || a.symbol.localeCompare(b.symbol))
+                .forEach(row => {{
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="sym">${{row.symbol}}</td>
+                    <td><span class="pair-chip">${{row.pair}}</span></td>
+                    <td style="color:#cbd5e1;">${{row.htf_divergence || '&mdash;'}}</td>
+                    <td style="color:#cbd5e1;">${{row.ltf_divergence || '&mdash;'}}</td>
+                    <td><span class="badge ${{getStateClass(row.htf_macd_state)}}">${{row.htf_macd_state || 'N/A'}}</span></td>
+                    <td><span class="badge ${{getStateClass(row.ltf_macd_state)}}">${{row.ltf_macd_state || 'N/A'}}</span></td>
+                    <td style="font-weight:700; color:${{rsiColor(row.htf_rsi)}};">${{row.htf_rsi}}</td>
+                    <td style="font-weight:700; color:${{rsiColor(row.ltf_rsi)}};">${{row.ltf_rsi}}</td>
+                `;
+                body.appendChild(tr);
+            }});
+        }}
+        document.getElementById('divRecoModal').classList.add('active');
+    }}
+
+    function closeDivRecoModal() {{
+        document.getElementById('divRecoModal').classList.remove('active');
+    }}
+
+    document.addEventListener('keydown', (e) => {{ if (e.key === 'Escape') {{ closeBiasModal(); closeDivRecoModal(); }} }});
 
     // ---------- POINT 4: generic sortable-table support ----------
     let screenerSort = {{ key: 'pair', asc: true }};
@@ -1134,7 +1355,7 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         document.getElementById('divCountBadge').innerText = filtered.length;
         tableBody.innerHTML = '';
         if (filtered.length === 0) {{
-            tableBody.innerHTML = `<tr class="empty-row"><td colspan="9">No divergence matching this pair, type &amp; recommendation.</td></tr>`;
+            tableBody.innerHTML = `<tr class="empty-row"><td colspan="11">No divergence matching this pair, type &amp; recommendation.</td></tr>`;
             return;
         }}
         filtered.forEach(row => {{
@@ -1148,6 +1369,8 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
                 <td>${{row.close !== undefined ? row.close.toFixed(2) : 'N/A'}}</td>
                 <td style="color:#cbd5e1;">${{row.htf_divergence || '&mdash;'}}</td>
                 <td style="color:#cbd5e1;">${{row.ltf_divergence || '&mdash;'}}</td>
+                <td><span class="badge ${{getStateClass(row.htf_macd_state)}}">${{row.htf_macd_state || 'N/A'}}</span></td>
+                <td><span class="badge ${{getStateClass(row.ltf_macd_state)}}">${{row.ltf_macd_state || 'N/A'}}</span></td>
                 <td style="font-weight:700; color:${{rsiColor(row.htf_rsi)}};">${{row.htf_rsi}}</td>
                 <td style="font-weight:700; color:${{rsiColor(row.ltf_rsi)}};">${{row.ltf_rsi}}</td>
                 <td><span class="badge ${{badgeClass}}">${{row.type}}</span></td>
@@ -1253,6 +1476,79 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         }});
     }}
 
+    // ---------- TAB 5: Stock Explorer ----------
+    function populateExplorerSelect() {{
+        const select = document.getElementById('explorerSymbolSelect');
+        explorerData
+            .slice()
+            .sort((a, b) => a.symbol.localeCompare(b.symbol))
+            .forEach(item => {{
+                const opt = document.createElement('option');
+                opt.value = item.symbol;
+                opt.textContent = item.symbol;
+                select.appendChild(opt);
+            }});
+    }}
+
+    function getRecoBoxClass(label) {{
+        switch (label) {{
+            case 'STRONG BUY': return 'reco-strongbuy';
+            case 'BUY': return 'reco-buy';
+            case 'SELL': return 'reco-sell';
+            case 'STRONG SELL': return 'reco-strongsell';
+            default: return 'reco-watch';
+        }}
+    }}
+
+    function renderRecoPanel(reco) {{
+        const boxClass = getRecoBoxClass(reco.label);
+        const parts = (reco.remark || '').split(' | ').map(p => `<div style="margin-top:6px; color: var(--text-dim); font-size:12.5px;">${{p}}</div>`).join('');
+        return `
+            <div class="badge ${{boxClass}}" style="font-size:16px; padding:9px 18px;">${{reco.label}}</div>
+            <div style="margin-top:10px; font-family: var(--font-mono); font-size:11.5px; color: var(--text-faint);">Score: ${{reco.score}}</div>
+            ${{parts}}
+        `;
+    }}
+
+    function renderExplorer() {{
+        const symbol = document.getElementById('explorerSymbolSelect').value;
+        const emptyState = document.getElementById('explorerEmptyState');
+        const content = document.getElementById('explorerContent');
+
+        if (!symbol) {{
+            emptyState.style.display = 'block';
+            content.style.display = 'none';
+            return;
+        }}
+
+        const item = explorerData.find(d => d.symbol === symbol);
+        if (!item) {{
+            emptyState.style.display = 'block';
+            content.style.display = 'none';
+            return;
+        }}
+
+        emptyState.style.display = 'none';
+        content.style.display = 'block';
+
+        const tfBody = document.getElementById('explorerTfTableBody');
+        tfBody.innerHTML = '';
+        ['15', '1H', 'D', 'W', 'M'].forEach(tf => {{
+            const info = item.timeframes[tf];
+            const tr = document.createElement('tr');
+            if (!info) {{
+                tr.innerHTML = `<td class="sym">${{TF_LABELS[tf]}}</td><td style="color: var(--text-faint);">N/A</td>`;
+            }} else {{
+                const cls = getStateClass(info.state);
+                tr.innerHTML = `<td class="sym">${{TF_LABELS[tf]}}</td><td><span class="badge ${{cls}}">${{info.state}} (${{info.rsi}})</span></td>`;
+            }}
+            tfBody.appendChild(tr);
+        }});
+
+        document.getElementById('explorerTradingReco').innerHTML = renderRecoPanel(item.trading);
+        document.getElementById('explorerInvestingReco').innerHTML = renderRecoPanel(item.investing);
+    }}
+
     document.addEventListener('DOMContentLoaded', () => {{
         bindSortableHeaders('screenerTable', () => screenerSort, (s) => {{ screenerSort = s; }}, filterData);
         bindSortableHeaders('divergenceTable', () => divergenceSort, (s) => {{ divergenceSort = s; }}, filterDivergenceData);
@@ -1261,6 +1557,7 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
         populateGuide();
         updateHeaderStats();
         updateDivergenceStats();
+        populateExplorerSelect();
     }});
 </script>
 
@@ -1270,11 +1567,11 @@ def build_html_dashboard(macd_results, divergence_results, macd360_data, last_15
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
     print(f"Successfully generated index.html dashboard with {len(macd_results)} screener rows, "
-          f"{len(divergence_results)} divergence rows, and {len(macd360_data)} MACD-360 daily sessions "
-          f"(last update: {last_updated_str}).")
+          f"{len(divergence_results)} divergence rows, {len(explorer_results)} explorer symbols, "
+          f"and {len(macd360_data)} MACD-360 daily sessions (last update: {last_updated_str}).")
 
 if __name__ == '__main__':
     date_str = datetime.datetime.now(IST).strftime("%d %b %Y")
-    macd_data, div_data, last_15m = process_stock_data()
+    macd_data, div_data, explorer_data, last_15m = process_stock_data()
     macd360_data = compute_macd360_fno(MACD360_DAYS)
-    build_html_dashboard(macd_data, div_data, macd360_data, last_15m, date_str)
+    build_html_dashboard(macd_data, div_data, explorer_data, macd360_data, last_15m, date_str)
