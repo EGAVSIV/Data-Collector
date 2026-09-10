@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Price &amp; Time Cycles Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0b0f17; --panel:#121826; --panel2:#182236; --border:#22304a;
+    --text:#e7edf7; --muted:#8fa2c2; --accent:#4fd1c5; --up:#3ecf8e; --down:#ff6b6b;
+    --gann:#f6ad55; --fft:#63b3ed; --fib:#d6a4ff; --stats:#4fd1c5;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  header{padding:20px 24px 10px;border-bottom:1px solid var(--border);}
+  header h1{margin:0 0 4px;font-size:22px;font-weight:700;letter-spacing:-.02em}
+  header p{margin:0;color:var(--muted);font-size:13px}
+  .layout{display:grid;grid-template-columns:280px 1fr;gap:0;min-height:calc(100vh - 76px)}
+  .sidebar{border-right:1px solid var(--border);padding:16px;background:var(--panel)}
+  .main{padding:16px 24px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+  select,input[type=text]{width:100%;padding:9px 10px;background:var(--panel2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:14px}
+  .method-list{display:flex;flex-direction:column;gap:8px}
+  .method-opt{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1px solid var(--border);border-radius:8px;background:var(--panel2);cursor:pointer;font-size:13px}
+  .method-opt input{accent-color:var(--accent)}
+  .method-opt .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+  .dot.gann{background:var(--gann)} .dot.fft{background:var(--fft)} .dot.fib{background:var(--fib)} .dot.stats{background:var(--stats)}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:16px}
+  .card h2{margin:0 0 10px;font-size:15px}
+  .stat-row{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:6px}
+  .stat{font-size:13px;color:var(--muted)}
+  .stat b{color:var(--text);font-weight:600}
+  canvas{max-width:100%}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--border)}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+  tr:hover td{background:rgba(255,255,255,.02)}
+  .badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:700;margin-right:4px;color:#0b0f17}
+  .badge.gann{background:var(--gann)} .badge.fft{background:var(--fft)} .badge.fib{background:var(--fib)} .badge.stats{background:var(--stats)}
+  .confl{display:inline-block;min-width:22px;text-align:center;padding:2px 6px;border-radius:6px;background:rgba(79,209,197,.15);color:var(--accent);font-weight:700;font-size:12px}
+  .empty{color:var(--muted);font-size:13px;padding:20px;text-align:center}
+  .pill{font-size:11px;color:var(--muted)}
+  a.rowlink{color:var(--text);text-decoration:none;font-weight:600}
+  a.rowlink:hover{color:var(--accent)}
+  .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+  .tab{padding:7px 13px;border-radius:8px;border:1px solid var(--border);background:var(--panel2);cursor:pointer;font-size:13px;color:var(--muted)}
+  .tab.active{background:var(--accent);color:#04211d;border-color:var(--accent);font-weight:600}
+  footer{padding:14px 24px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Price &amp; Time Cycles</h1>
+  <p>Gann time-counts &middot; FFT/statistical cycles &middot; Fibonacci time zones &middot; Swing-interval stats — across 15m / 1H / D / W / M</p>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="field">
+      <label>Stock</label>
+      <select id="symbolSelect"></select>
+    </div>
+    <div class="field">
+      <label>Timeframe</label>
+      <div class="tabs" id="tfTabs"></div>
+    </div>
+    <div class="field">
+      <label>Analysis method(s)</label>
+      <div class="method-list">
+        <label class="method-opt"><input type="checkbox" value="gann" checked><span class="dot gann"></span>Gann time cycles</label>
+        <label class="method-opt"><input type="checkbox" value="fft" checked><span class="dot fft"></span>FFT / statistical cycles</label>
+        <label class="method-opt"><input type="checkbox" value="fib" checked><span class="dot fib"></span>Fibonacci time zones</label>
+        <label class="method-opt"><input type="checkbox" value="stats" checked><span class="dot stats"></span>Swing-interval stats</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Watchlist horizon</label>
+      <select id="horizonSelect">
+        <option value="7">Next 7 days</option>
+        <option value="14">Next 14 days</option>
+        <option value="21" selected>Next 21 days</option>
+        <option value="45">Next 45 days</option>
+      </select>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="card">
+      <h2 id="chartTitle">Loading…</h2>
+      <div class="stat-row" id="statRow"></div>
+      <canvas id="priceChart" height="110"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>Upcoming projected turn dates — selected stock/timeframe</h2>
+      <table id="projTable">
+        <thead><tr><th>Date</th><th>Days ahead</th><th>Method</th><th>Detail</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty" id="projEmpty" style="display:none">No projections in range for the selected methods.</div>
+    </div>
+
+    <div class="card">
+      <h2>Watchlist — stocks with upcoming turns (confluence across methods)</h2>
+      <table id="watchTable">
+        <thead><tr><th>Stock</th><th>Timeframe</th><th>Last close</th><th>Confluence</th><th>Methods</th><th>Next turn window</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="empty" id="watchEmpty" style="display:none">No watchlist data yet — run analyze_cycles.py to generate cycles/data/watchlist.json.</div>
+    </div>
+  </main>
+</div>
+
+<footer>Generated by analyze_cycles.py. Educational price-time analysis, not investment advice.</footer>
+
+<script>
+const DATA_ROOT = "data";
+const TF_LABELS = {stockdata_15:"15m", stockdata_1H:"1H", stockdata_D:"Daily", stockdata_W:"Weekly", stockdata_M:"Monthly"};
+const METHOD_COLORS = {gann:"#f6ad55", fft:"#63b3ed", fib:"#d6a4ff", stats:"#4fd1c5"};
+
+let manifest = null, watchlist = null, currentTF = "stockdata_D", currentSymbol = null, chart = null;
+
+async function fetchJSON(path){
+  const res = await fetch(path);
+  if(!res.ok) throw new Error("Failed to load " + path);
+  return res.json();
+}
+
+async function init(){
+  try{
+    manifest = await fetchJSON(`${DATA_ROOT}/manifest.json`);
+  }catch(e){
+    document.getElementById('chartTitle').textContent = "No data found — run analyze_cycles.py first.";
+    return;
+  }
+  try{ watchlist = await fetchJSON(`${DATA_ROOT}/watchlist.json`); }catch(e){ watchlist = {stocks:[]}; }
+
+  const tfOrder = ["stockdata_15","stockdata_1H","stockdata_D","stockdata_W","stockdata_M"];
+  const tfTabs = document.getElementById('tfTabs');
+  tfOrder.forEach(tf=>{
+    if(!manifest[tf] || !manifest[tf].length) return;
+    const btn = document.createElement('div');
+    btn.className = 'tab' + (tf===currentTF?' active':'');
+    btn.textContent = TF_LABELS[tf];
+    btn.dataset.tf = tf;
+    btn.onclick = ()=>{ currentTF = tf; document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); populateSymbols(); };
+    tfTabs.appendChild(btn);
+  });
+  if(!manifest[currentTF] || !manifest[currentTF].length){
+    currentTF = tfOrder.find(tf=>manifest[tf] && manifest[tf].length);
+  }
+  populateSymbols();
+
+  document.getElementById('symbolSelect').onchange = (e)=>{ currentSymbol = e.target.value; loadStock(); };
+  document.querySelectorAll('.method-opt input').forEach(cb=> cb.onchange = ()=>{ renderProjections(window._lastResult); renderChart(window._lastResult); });
+  document.getElementById('horizonSelect').onchange = renderWatchlist;
+
+  renderWatchlist();
+}
+
+function populateSymbols(){
+  const sel = document.getElementById('symbolSelect');
+  sel.innerHTML = '';
+  (manifest[currentTF]||[]).forEach(sym=>{
+    const opt = document.createElement('option');
+    opt.value = sym; opt.textContent = sym;
+    sel.appendChild(opt);
+  });
+  currentSymbol = (manifest[currentTF]||[])[0];
+  if(currentSymbol) loadStock();
+}
+
+async function loadStock(){
+  document.getElementById('chartTitle').textContent = "Loading " + currentSymbol + "…";
+  try{
+    const result = await fetchJSON(`${DATA_ROOT}/${currentTF}/${currentSymbol}.json`);
+    window._lastResult = result;
+    document.getElementById('chartTitle').textContent = `${result.symbol} — ${TF_LABELS[currentTF]}`;
+    const statRow = document.getElementById('statRow');
+    statRow.innerHTML = `
+      <div class="stat">Last close <b>${result.last_close}</b></div>
+      <div class="stat">Last bar <b>${result.last_date.replace('T',' ').slice(0,16)}</b></div>
+      <div class="stat">Bars analyzed <b>${result.bars_count}</b></div>
+      <div class="stat">Swings found <b>${result.swings.length}</b></div>
+    `;
+    renderChart(result);
+    renderProjections(result);
+  }catch(e){
+    document.getElementById('chartTitle').textContent = "No data for " + currentSymbol;
+  }
+}
+
+function activeMethods(){
+  return Array.from(document.querySelectorAll('.method-opt input:checked')).map(i=>i.value);
+}
+
+function renderChart(result){
+  if(!result) return;
+  const methods = activeMethods();
+  const swings = result.swings;
+  const labels = swings.map(s=>s.date.slice(0,10));
+  const prices = swings.map(s=>s.price);
+
+  // vertical marker lines for projected dates within methods, drawn as extra points appended after the swing series on a shared category axis is tricky with Chart.js category scale.
+  // Simpler: show swing price path as the base line, and list projected dates as colored point annotations at the closest x position using a scatter overlay.
+  const datasets = [{
+    label: 'Swing price path',
+    data: prices,
+    borderColor: '#e7edf7',
+    backgroundColor: 'rgba(231,237,247,0.08)',
+    pointRadius: swings.map(s=> s.type==='high' ? 3 : 3),
+    pointBackgroundColor: swings.map(s=> s.type==='high' ? '#ff6b6b' : '#3ecf8e'),
+    tension: 0.15,
+    fill: true,
+  }];
+
+  if(chart) chart.destroy();
+  const ctx = document.getElementById('priceChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      plugins:{
+        legend:{ labels:{ color:'#8fa2c2' } },
+        tooltip:{ callbacks:{ label: (c)=> `${c.dataset.label}: ${c.formattedValue}` } }
+      },
+      scales:{
+        x:{ ticks:{ color:'#8fa2c2', maxRotation:60, minRotation:60 }, grid:{ color:'rgba(255,255,255,.04)' } },
+        y:{ ticks:{ color:'#8fa2c2' }, grid:{ color:'rgba(255,255,255,.04)' } }
+      }
+    }
+  });
+}
+
+function renderProjections(result){
+  const tbody = document.querySelector('#projTable tbody');
+  tbody.innerHTML = '';
+  if(!result){ return; }
+  const methods = activeMethods();
+  const rows = [];
+  const now = new Date();
+
+  if(methods.includes('gann') && result.methods.gann){
+    result.methods.gann.forEach(p=> rows.push({date:p.date, method:'gann', detail:`${p.angle}° from ${p.anchor_type} on ${p.anchor_date.slice(0,10)}`}));
+  }
+  if(methods.includes('fft') && result.methods.fft){
+    result.methods.fft.projections.forEach(p=> rows.push({date:p.date, method:'fft', detail:`dominant cycle ≈ ${result.methods.fft.dominant_period_bars} bars (${result.methods.fft.dominant_period_calendar_days}d)`}));
+  }
+  if(methods.includes('fib') && result.methods.fibonacci){
+    result.methods.fibonacci.forEach(p=> rows.push({date:p.date, method:'fib', detail:`${p.ratio}× base leg (${p.base_bars} bars)`}));
+  }
+  if(methods.includes('stats') && result.methods.stats){
+    const s = result.methods.stats;
+    rows.push({date:s.projection_mean, method:'stats', detail:`mean interval ${s.mean_bars_between_swings} bars (n=${s.sample_size})`});
+    rows.push({date:s.projection_median, method:'stats', detail:`median interval ${s.median_bars_between_swings} bars`});
+  }
+
+  rows.sort((a,b)=> new Date(a.date) - new Date(b.date));
+  const future = rows.filter(r=> new Date(r.date) >= now);
+
+  document.getElementById('projEmpty').style.display = future.length ? 'none':'block';
+  future.forEach(r=>{
+    const daysAhead = Math.round((new Date(r.date) - now)/86400000);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${r.date.slice(0,10)}</td><td>${daysAhead}d</td><td><span class="badge ${r.method}">${r.method}</span></td><td class="pill">${r.detail}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function renderWatchlist(){
+  const tbody = document.querySelector('#watchTable tbody');
+  tbody.innerHTML = '';
+  if(!watchlist || !watchlist.stocks || !watchlist.stocks.length){
+    document.getElementById('watchEmpty').style.display = 'block';
+    return;
+  }
+  const horizon = parseInt(document.getElementById('horizonSelect').value, 10);
+  const rows = watchlist.stocks.filter(s => s.upcoming_dates.some(d=>d.days_ahead <= horizon));
+  document.getElementById('watchEmpty').style.display = rows.length ? 'none':'block';
+  rows.forEach(s=>{
+    const next = s.upcoming_dates.find(d=>d.days_ahead <= horizon) || s.upcoming_dates[0];
+    const tr = document.createElement('tr');
+    const methodBadges = s.methods_hit.map(m=>`<span class="badge ${m}">${m}</span>`).join('');
+    tr.innerHTML = `
+      <td><a class="rowlink" href="#" data-sym="${s.symbol}" data-tf="${s.timeframe}">${s.symbol}</a></td>
+      <td>${TF_LABELS[s.timeframe]||s.timeframe}</td>
+      <td>${s.last_close}</td>
+      <td><span class="confl">${s.confluence_score}</span></td>
+      <td>${methodBadges}</td>
+      <td>${next.date} <span class="pill">(${next.days_ahead}d)</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  tbody.querySelectorAll('a.rowlink').forEach(a=>{
+    a.onclick = (e)=>{
+      e.preventDefault();
+      const tf = a.dataset.tf, sym = a.dataset.sym;
+      currentTF = tf;
+      document.querySelectorAll('.tab').forEach(t=> t.classList.toggle('active', t.dataset.tf===tf));
+      populateSymbols();
+      document.getElementById('symbolSelect').value = sym;
+      currentSymbol = sym;
+      loadStock();
+      window.scrollTo({top:0, behavior:'smooth'});
+    };
+  });
+}
+
+init();
+</script>
+</body>
+</html>
