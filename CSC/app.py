@@ -5,7 +5,12 @@ import plotly.graph_objects as go
 import streamlit as st
 
 # 1. Set the directory path where your JSON files reside
-DATA_DIR = "./Data"
+
+from pathlib import Path
+
+# Dynamically set the path relative to app.py
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "Data"
 
 st.set_page_config(page_title="Stock Timeframe Dashboard", layout="wide")
 st.title("📈 Multi-Timeframe Stock Chart Visualizer")
