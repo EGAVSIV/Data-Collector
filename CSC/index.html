@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Timeframe Quadrant Stock Dashboard</title>
+    <!-- Lightweight Charts Library -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #12141d;
+            color: #d1d4dc;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        header {
+            height: 50px;
+            background-color: #1e222d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #2a2e39;
+        }
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        select, input, button {
+            background-color: #2a2e39;
+            color: #d1d4dc;
+            border: 1px solid #363c4e;
+            padding: 6px 12px;
+            border-radius: 4px;
+            outline: none;
+            font-size: 14px;
+        }
+        select:focus, input:focus {
+            border-color: #2962ff;
+        }
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 4px;
+            flex-grow: 1;
+            padding: 4px;
+            background-color: #0b0e14;
+        }
+        .chart-card {
+            background-color: #131722;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #1e222d;
+        }
+        .chart-header {
+            height: 30px;
+            background: #1e222d;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #2962ff;
+            border-bottom: 1px solid #2a2e39;
+        }
+        .chart-container {
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .loading-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(19, 23, 34, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            font-size: 14px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Multi-Timeframe Quadrant Dashboard</h2>
+        <div class="controls">
+            <label for="symbolInput">Stock Symbol: </label>
+            <input type="text" id="symbolInput" value="AAPL" style="text-transform:uppercase;">
+            <button onclick="loadDashboardData()">Load Data</button>
+        </div>
+    </header>
+
+    <div class="dashboard-grid">
+        <!-- Monthly Chart Pane -->
+        <div class="chart-card">
+            <div class="chart-header"><span>MONTHLY (M)</span><span id="status-M"></span></div>
+            <div id="chart-M" class="chart-container"></div>
+        </div>
+        <!-- Weekly Chart Pane -->
+        <div class="chart-card">
+            <div class="chart-header"><span>WEEKLY (W)</span><span id="status-W"></span></div>
+            <div id="chart-W" class="chart-container"></div>
+        </div>
+        <!-- Daily Chart Pane -->
+        <div class="chart-card">
+            <div class="chart-header"><span>DAILY (D)</span><span id="status-D"></span></div>
+            <div id="chart-D" class="chart-container"></div>
+        </div>
+        <!-- Hourly Chart Pane -->
+        <div class="chart-card">
+            <div class="chart-header"><span>HOURLY (1H)</span><span id="status-1H"></span></div>
+            <div id="chart-1H" class="chart-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const timeframeMap = {
+            'M': '../stockdata_M',
+            'W': '../stockdata_W',
+            'D': '../stockdata_D',
+            '1H': '../stockdata_1H'
+        };
+
+        const charts = {};
+
+        // Indicator Math Calculations
+        function calculateEMA(data, period) {
+            let k = 2 / (period + 1);
+            let emaArray = [];
+            let ema = data[0];
+            emaArray.push(ema);
+            for (let i = 1; i < data.length; i++) {
+                ema = data[i] * k + ema * (1 - k);
+                emaArray.push(ema);
+            }
+            return emaArray;
+        }
+
+        function calculateMACD(data, fast = 12, slow = 26, signal = 9) {
+            let closes = data.map(d => d.close);
+            let fastEMA = calculateEMA(closes, fast);
+            let slowEMA = calculateEMA(closes, slow);
+            
+            let macdLine = [];
+            for(let i = 0; i < closes.length; i++) {
+                macdLine.push(fastEMA[i] - slowEMA[i]);
+            }
+            let signalLine = calculateEMA(macdLine, signal);
+            
+            let macdData = [];
+            let signalData = [];
+            let histData = [];
+
+            for(let i = 0; i < data.length; i++) {
+                let time = data[i].time;
+                let m = macdLine[i];
+                let s = signalLine[i];
+                let h = m - s;
+                macdData.push({ time, value: m });
+                signalData.push({ time, value: s });
+                histData.push({ 
+                    time, 
+                    value: h, 
+                    color: h >= 0 ? '#26a69a' : '#ef5350' 
+                });
+            }
+            return { macdData, signalData, histData };
+        }
+
+        function calculateRSI(data, period = 14) {
+            let rsiData = [];
+            let gains = 0, losses = 0;
+
+            for (let i = 1; i <= period; i++) {
+                let diff = data[i].close - data[i-1].close;
+                if (diff >= 0) gains += diff;
+                else losses -= diff;
+            }
+            let avgGain = gains / period;
+            let avgLoss = losses / period;
+
+            for (let i = period; i < data.length; i++) {
+                if (i > period) {
+                    let diff = data[i].close - data[i-1].close;
+                    if (diff >= 0) {
+                        avgGain = (avgGain * (period - 1) + diff) / period;
+                        avgLoss = (avgLoss * (period - 1)) / period;
+                    } else {
+                        avgGain = (avgGain * (period - 1)) / period;
+                        avgLoss = (avgLoss * (period - 1) - diff) / period;
+                    }
+                }
+                let rs = avgLoss === 0 ? 100 : avgGain / avgLoss;
+                let rsi = 100 - (100 / (1 + rs));
+                rsiData.push({ time: data[i].time, value: rsi });
+            }
+            return rsiData;
+        }
+
+        // Divergence Line Detection
+        function detectDivergence(priceData, indicatorData) {
+            let lines = [];
+            let lookback = 5;
+            let pivots = [];
+
+            // Detect Pivot Lows in Indicator
+            for (let i = lookback; i < indicatorData.length - lookback; i++) {
+                let isLow = true;
+                for (let j = i - lookback; j <= i + lookback; j++) {
+                    if (j !== i && indicatorData[j].value <= indicatorData[i].value) {
+                        isLow = false;
+                        break;
+                    }
+                }
+                if (isLow) pivots.push({ index: i, time: indicatorData[i].time, val: indicatorData[i].value });
+            }
+
+            // Regular Bullish Divergence Detection: Lower Low in Price, Higher Low in Indicator
+            for (let p = 1; p < pivots.length; p++) {
+                let currPivot = pivots[p];
+                let prevPivot = pivots[p-1];
+
+                // Match indices with Price Data
+                let priceCurrIndex = priceData.findIndex(d => d.time === currPivot.time);
+                let pricePrevIndex = priceData.findIndex(d => d.time === prevPivot.time);
+
+                if (priceCurrIndex !== -1 && pricePrevIndex !== -1) {
+                    let priceCurr = priceData[priceCurrIndex].low;
+                    let pricePrev = priceData[pricePrevIndex].low;
+
+                    if (priceCurr < pricePrev && currPivot.val > prevPivot.val) {
+                        lines.push({
+                            p1: { time: prevPivot.time, price: pricePrev },
+                            p2: { time: currPivot.time, price: priceCurr },
+                            type: 'bullish'
+                        });
+                    }
+                }
+            }
+            return lines;
+        }
+
+        // Render Chart Quad
+        function renderQuadrant(tf, candleData) {
+            const container = document.getElementById(`chart-${tf}`);
+            container.innerHTML = ''; // Reset container
+
+            if (!candleData || candleData.length === 0) return;
+
+            const chart = LightweightCharts.createChart(container, {
+                layout: { backgroundColor: '#131722', textColor: '#d1d4dc' },
+                grid: { vertLines: { color: '#1f2434' }, horzLines: { color: '#1f2434' } },
+                timeScale: { borderColor: '#2a2e39', timeVisible: true },
+            });
+
+            // 1. Candlestick Series (Pane 0 - Top 50% area)
+            const candleSeries = chart.addCandlestickSeries({
+                upColor: '#26a69a', downColor: '#ef5350',
+                borderVisible: false, wickUpColor: '#26a69a', wickDownColor: '#ef5350'
+            });
+            candleSeries.setData(candleData);
+
+            // Volume Series
+            const volumeSeries = chart.addHistogramSeries({
+                color: '#26a69a', priceFormat: { type: 'volume' }, priceScaleId: 'volume'
+            });
+            chart.priceScale('volume').applyOptions({
+                scaleMargins: { top: 0.7, bottom: 0 }
+            });
+            volumeSeries.setData(candleData.map(d => ({
+                time: d.time,
+                value: d.volume || 0,
+                color: d.close >= d.open ? 'rgba(38, 166, 154, 0.4)' : 'rgba(239, 83, 80, 0.4)'
+            })));
+
+            // 2. MACD Pane
+            const macd = calculateMACD(candleData);
+            const macdSeries = chart.addLineSeries({ color: '#2962ff', lineWidth: 1, priceScaleId: 'macd' });
+            const signalSeries = chart.addLineSeries({ color: '#ff6d00', lineWidth: 1, priceScaleId: 'macd' });
+            const histSeries = chart.addHistogramSeries({ priceScaleId: 'macd' });
+
+            chart.priceScale('macd').applyOptions({
+                scaleMargins: { top: 0.55, bottom: 0.25 }
+            });
+
+            macdSeries.setData(macd.macdData);
+            signalSeries.setData(macd.signalData);
+            histSeries.setData(macd.histData);
+
+            // 3. RSI Pane
+            const rsiData = calculateRSI(candleData);
+            const rsiSeries = chart.addLineSeries({ color: '#9c27b0', lineWidth: 1, priceScaleId: 'rsi' });
+            
+            chart.priceScale('rsi').applyOptions({
+                scaleMargins: { top: 0.8, bottom: 0 }
+            });
+            rsiSeries.setData(rsiData);
+
+            // 4. Divergence Lines Overlay Example
+            const divergences = detectDivergence(candleData, rsiData);
+            divergences.forEach(div => {
+                // Highlight price divergence points via markers
+                candleSeries.setMarkers([
+                    { time: div.p1.time, position: 'belowBar', color: '#2196F3', shape: 'arrowUp', text: 'Div Start' },
+                    { time: div.p2.time, position: 'belowBar', color: '#00E676', shape: 'arrowUp', text: 'Bull Div' }
+                ]);
+            });
+
+            chart.timeScale().fitContent();
+            charts[tf] = chart;
+        }
+
+        async function fetchTimeframeData(symbol, tf) {
+            const statusEl = document.getElementById(`status-${tf}`);
+            try {
+                statusEl.innerText = 'Loading...';
+                statusEl.style.color = '#ffb74d';
+                
+                // Fetch corresponding json file e.g., ../stockdata_D/AAPL.json
+                const response = await fetch(`${timeframeMap[tf]}/${symbol.toUpperCase()}.json`);
+                if (!response.ok) throw new Error('Data not found');
+                
+                const rawData = await response.json();
+                
+                // Formatting JSON data to Lightweight Charts standard format
+                const formatted = rawData.map(d => ({
+                    time: typeof d.time === 'number' ? d.time : (new Date(d.time).getTime() / 1000),
+                    open: parseFloat(d.open),
+                    high: parseFloat(d.high),
+                    low: parseFloat(d.low),
+                    close: parseFloat(d.close),
+                    volume: parseFloat(d.volume || 0)
+                })).sort((a,b) => a.time - b.time);
+
+                renderQuadrant(tf, formatted);
+                statusEl.innerText = 'OK';
+                statusEl.style.color = '#4caf50';
+            } catch (err) {
+                console.error(`Error loading ${tf}:`, err);
+                statusEl.innerText = 'No Data';
+                statusEl.style.color = '#f44336';
+            }
+        }
+
+        function loadDashboardData() {
+            const symbol = document.getElementById('symbolInput').value.trim();
+            if (!symbol) return;
+            ['M', 'W', 'D', '1H'].forEach(tf => fetchTimeframeData(symbol, tf));
+        }
+
+        // Initialize Auto Load
+        window.onload = () => loadDashboardData();
+
+        // Responsive handling
+        window.addEventListener('resize', () => {
+            Object.keys(charts).forEach(tf => {
+                const container = document.getElementById(`chart-${tf}`);
+                if (charts[tf] && container) {
+                    charts[tf].applyOptions({ width: container.clientWidth, height: container.clientHeight });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
