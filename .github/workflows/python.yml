@@ -1,99 +1,302 @@
 name: Fetch Data and Update MACD Dashboard
 
+# ============================================================
+# WORKFLOW TRIGGERS
+# ============================================================
+
 on:
+
+  # ----------------------------------------------------------
+  # MANUAL RUN
+  # ----------------------------------------------------------
   workflow_dispatch:
 
+  # ----------------------------------------------------------
+  # AUTOMATIC SCHEDULE
+  #
+  # IMPORTANT:
+  # GitHub supports timezone-aware schedules.
+  # All times below are INDIA STANDARD TIME.
+  #
+  # Monday-Friday
+  #
+  # 09:07
+  # 09:37
+  # 10:07
+  # 10:37
+  # 11:07
+  # 11:37
+  # 12:07
+  # 12:37
+  # 13:07
+  # 13:37
+  # 14:07
+  # 14:37
+  # 15:07
+  # 16:07
+  #
+  # ==========================================================
   schedule:
-    # Monday-Friday
 
-    # 09:07 AM IST
-    - cron: "37 3 * * 1-5"
+    # 09:07 AM to 03:07 PM IST
+    # Every hour at :07
+    - cron: "7 9-15 * * 1-5"
+      timezone: "Asia/Kolkata"
 
-    # Every 30 minutes
-    # 09:37 AM IST to 03:07 PM IST
-    - cron: "7,37 4-9 * * 1-5"
+    # 09:37 AM to 02:37 PM IST
+    # Every hour at :37
+    - cron: "37 9-14 * * 1-5"
+      timezone: "Asia/Kolkata"
 
     # 04:07 PM IST
-    - cron: "37 10 * * 1-5"
+    - cron: "7 16 * * 1-5"
+      timezone: "Asia/Kolkata"
 
+
+# ============================================================
+# RUN NAME
+# ============================================================
+
+run-name: >
+  Fetch MACD Data -
+  ${{ github.event_name }} -
+  ${{ github.event.schedule || 'Manual Run' }}
+
+
+# ============================================================
+# PERMISSIONS
+# ============================================================
 
 permissions:
   contents: write
 
+
+# ============================================================
+# CONCURRENCY
+#
+# Prevent two stock-data jobs from running simultaneously.
+#
+# cancel-in-progress: false
+# means an existing data download is allowed to finish.
+# ============================================================
 
 concurrency:
   group: stock-data-update
   cancel-in-progress: false
 
 
+# ============================================================
+# JOBS
+# ============================================================
+
 jobs:
+
   update-stock-dashboard:
 
     name: Download Data and Build Dashboard
 
     runs-on: ubuntu-latest
 
-    # Give enough margin for all 5 timeframes
+    # --------------------------------------------------------
+    # Maximum execution time
+    # --------------------------------------------------------
+
     timeout-minutes: 90
 
 
+    # ========================================================
+    # ENVIRONMENT
+    # ========================================================
+
+    env:
+
+      # Force Linux tools/Python to use India timezone
+      TZ: Asia/Kolkata
+
+      # Repository timezone
+      MARKET_TIMEZONE: Asia/Kolkata
+
+
+    # ========================================================
+    # STEPS
+    # ========================================================
+
     steps:
 
-      # ==========================================
-      # STEP 1: Checkout Repository
-      # ==========================================
+
+      # ======================================================
+      # STEP 1
+      # Checkout Repository
+      # ======================================================
 
       - name: Checkout Repository
+
         uses: actions/checkout@v4
+
         with:
           fetch-depth: 0
 
 
-      # ==========================================
-      # STEP 2: Setup Python
-      # ==========================================
+      # ======================================================
+      # STEP 2
+      # Setup Python
+      # ======================================================
 
       - name: Setup Python
+
         uses: actions/setup-python@v5
+
         with:
           python-version: "3.11"
           cache: "pip"
 
 
-      # ==========================================
-      # STEP 3: Install Dependencies
-      # ==========================================
+      # ======================================================
+      # STEP 3
+      # Install Dependencies
+      # ======================================================
 
       - name: Install Dependencies
+
         run: |
+
+          echo "======================================"
+          echo "INSTALLING PYTHON DEPENDENCIES"
+          echo "======================================"
+
+          python --version
+          python -m pip --version
+
           python -m pip install --upgrade pip
+
           pip install -r requirements.txt
 
+          echo "======================================"
+          echo "DEPENDENCIES INSTALLED"
+          echo "======================================"
 
-      # ==========================================
-      # STEP 4: Run Stock Data Downloader
-      # ==========================================
+
+      # ======================================================
+      # STEP 4
+      # Workflow Timing / Schedule Diagnostics
+      # ======================================================
+
+      - name: Show Workflow Schedule Information
+
+        run: |
+
+          echo "=============================================="
+          echo "MACD DASHBOARD WORKFLOW INFORMATION"
+          echo "=============================================="
+
+          echo "Workflow Name:"
+          echo "${{ github.workflow }}"
+
+          echo ""
+          echo "Workflow Event:"
+          echo "${{ github.event_name }}"
+
+          echo ""
+          echo "Scheduled Cron Expression:"
+          echo "${{ github.event.schedule || 'MANUAL RUN' }}"
+
+          echo ""
+          echo "Run Number:"
+          echo "${{ github.run_number }}"
+
+          echo ""
+          echo "Run ID:"
+          echo "${{ github.run_id }}"
+
+          echo ""
+          echo "Repository:"
+          echo "${{ github.repository }}"
+
+          echo ""
+          echo "Branch:"
+          echo "${{ github.ref_name }}"
+
+          echo ""
+          echo "UTC Time:"
+          date -u +"%Y-%m-%d %H:%M:%S UTC"
+
+          echo ""
+          echo "IST Time:"
+          TZ='Asia/Kolkata' date +"%Y-%m-%d %H:%M:%S IST"
+
+          echo ""
+          echo "=============================================="
+          echo "SCHEDULE DIAGNOSTICS COMPLETE"
+          echo "=============================================="
+
+
+      # ======================================================
+      # STEP 5
+      # Run Stock Data Downloader
+      # ======================================================
 
       - name: Run Stock Data Downloader
+
         env:
+
           TV_USERNAME: ${{ secrets.TV_USERNAME }}
           TV_PASSWORD: ${{ secrets.TV_PASSWORD }}
+
         run: |
+
+          START_TIME=$(TZ='Asia/Kolkata' date +"%Y-%m-%d %H:%M:%S IST")
+
+          echo "=============================================="
+          echo "STARTING STOCK DATA DOWNLOAD"
+          echo "=============================================="
+
+          echo "Start Time: $START_TIME"
+
+          echo ""
+          echo "Scheduled Cron:"
+          echo "${{ github.event.schedule || 'MANUAL RUN' }}"
+
+          echo ""
+          echo "=============================================="
+
           python data_collector.py
 
+          END_TIME=$(TZ='Asia/Kolkata' date +"%Y-%m-%d %H:%M:%S IST")
 
-      # ==========================================
-      # STEP 5: Update ALL Data Folder Timestamps
-      # ==========================================
+          echo ""
+          echo "=============================================="
+          echo "STOCK DATA DOWNLOAD COMPLETED"
+          echo "=============================================="
+
+          echo "Completed: $END_TIME"
+
+          echo "=============================================="
+
+
+      # ======================================================
+      # STEP 6
+      # Update ALL Data Folder Timestamps
+      # ======================================================
 
       - name: Update Data Folder Timestamps
+
         run: |
 
           RUN_TIME=$(TZ='Asia/Kolkata' date +"%Y-%m-%d %H:%M:%S IST")
 
-          echo "======================================"
-          echo "Workflow completed: $RUN_TIME"
-          echo "======================================"
+          UTC_TIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          SCHEDULED_CRON="${{ github.event.schedule || 'MANUAL RUN' }}"
+
+          echo "=============================================="
+          echo "UPDATING DATA FOLDER TIMESTAMPS"
+          echo "=============================================="
+
+          echo "UTC Time       : $UTC_TIME"
+          echo "IST Time       : $RUN_TIME"
+          echo "Scheduled Cron : $SCHEDULED_CRON"
+
+          echo "=============================================="
 
           for folder in \
             stockdata_D \
@@ -108,95 +311,251 @@ jobs:
             echo "Last successful workflow run: $RUN_TIME" \
               > "$folder/_last_update.txt"
 
+            echo "Workflow UTC time: $UTC_TIME" \
+              >> "$folder/_last_update.txt"
+
+            echo "Scheduled cron: $SCHEDULED_CRON" \
+              >> "$folder/_last_update.txt"
+
+            echo "Workflow run number: ${{ github.run_number }}" \
+              >> "$folder/_last_update.txt"
+
+            echo "Workflow run ID: ${{ github.run_id }}" \
+              >> "$folder/_last_update.txt"
+
             echo "Updated: $folder/_last_update.txt"
 
           done
 
+          echo ""
+          echo "=============================================="
+          echo "ALL TIMESTAMPS UPDATED"
+          echo "=============================================="
 
-      # ==========================================
-      # STEP 6: Generate Dashboard
-      # ==========================================
+
+      # ======================================================
+      # STEP 7
+      # Generate Dashboard
+      # ======================================================
 
       - name: Generate Dashboard HTML
+
         run: |
+
+          echo "=============================================="
+          echo "GENERATING MACD DASHBOARD"
+          echo "=============================================="
+
           python generate_dashboard.py
 
+          echo ""
+          echo "=============================================="
+          echo "DASHBOARD GENERATION COMPLETED"
+          echo "=============================================="
 
-      # ==========================================
-      # STEP 7: Remove Runtime Files
-      # ==========================================
+
+      # ======================================================
+      # STEP 8
+      # Clean Runtime Files
+      #
+      # Always execute this step even if a previous step fails.
+      # ======================================================
 
       - name: Clean Runtime Logs
+
         if: always()
+
         run: |
+
+          echo "=============================================="
+          echo "CLEANING RUNTIME FILES"
+          echo "=============================================="
+
           rm -f download_log.txt
           rm -f error_symbols.txt
 
+          echo "Runtime logs removed."
 
-      # ==========================================
-      # STEP 8: Show ALL Changed Files
-      # ==========================================
+          echo "=============================================="
+
+
+      # ======================================================
+      # STEP 9
+      # Show Changed Files
+      # ======================================================
 
       - name: Show Changed Files
+
         run: |
-          echo "======================================"
+
+          echo "=============================================="
           echo "FILES CHANGED BY THIS WORKFLOW"
-          echo "======================================"
+          echo "=============================================="
 
           git status --short
 
-          echo "======================================"
+          echo ""
+          echo "=============================================="
+          echo "CHANGED FILE COUNT"
+          echo "=============================================="
+
+          git status --short | wc -l
+
+          echo ""
+          echo "=============================================="
 
 
-      # ==========================================
-      # STEP 9: Configure Git
-      # ==========================================
+      # ======================================================
+      # STEP 10
+      # Configure Git
+      # ======================================================
 
       - name: Configure Git
+
         run: |
+
+          echo "=============================================="
+          echo "CONFIGURING GIT"
+          echo "=============================================="
+
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git config user.email \
+            "github-actions[bot]@users.noreply.github.com"
+
+          git config pull.rebase true
+
+          echo "Git configuration completed."
 
 
-      # ==========================================
-      # STEP 10: Stage ALL Changes
-      # ==========================================
+      # ======================================================
+      # STEP 11
+      # Stage ALL Changes
+      # ======================================================
 
       - name: Stage All Updated Files
+
         run: |
+
+          echo "=============================================="
+          echo "STAGING ALL CHANGES"
+          echo "=============================================="
 
           git add -A
 
-          echo "======================================"
+          echo ""
+          echo "=============================================="
           echo "STAGED FILES"
-          echo "======================================"
+          echo "=============================================="
 
           git diff --cached --name-status
 
-          echo "======================================"
+          echo ""
+          echo "=============================================="
 
 
-      # ==========================================
-      # STEP 11: Commit and Push
-      # ==========================================
+      # ======================================================
+      # STEP 12
+      # Commit and Push
+      # ======================================================
 
       - name: Commit and Push Changes
+
         run: |
+
+          echo "=============================================="
+          echo "CHECKING FOR CHANGES"
+          echo "=============================================="
 
           if git diff --cached --quiet
           then
 
-            echo "No changes detected. Nothing to commit."
+            echo "No changes detected."
+            echo "Nothing to commit."
 
           else
+
+            RUN_TIME=$(TZ='Asia/Kolkata' \
+              date +"%Y-%m-%d %H:%M:%S IST")
+
+            echo "Changes detected."
+
+            echo ""
+            echo "Commit Time:"
+            echo "$RUN_TIME"
+
+            echo ""
+            echo "Creating commit..."
 
             git commit \
               -m "Auto-update stock data and MACD dashboard [skip ci]"
 
+            echo ""
+            echo "=============================================="
+            echo "PUSHING CHANGES TO MAIN"
+            echo "=============================================="
+
             git push origin main
 
-            echo "======================================"
+            echo ""
+            echo "=============================================="
             echo "SUCCESSFULLY PUSHED ALL CHANGES"
-            echo "======================================"
+            echo "=============================================="
+
+            echo "Push Time:"
+            TZ='Asia/Kolkata' date +"%Y-%m-%d %H:%M:%S IST"
 
           fi
+
+
+      # ======================================================
+      # STEP 13
+      # Final Workflow Summary
+      # ======================================================
+
+      - name: Workflow Completion Summary
+
+        if: always()
+
+        run: |
+
+          FINAL_TIME=$(TZ='Asia/Kolkata' \
+            date +"%Y-%m-%d %H:%M:%S IST")
+
+          echo ""
+          echo "================================================"
+          echo "       MACD DASHBOARD WORKFLOW SUMMARY"
+          echo "================================================"
+
+          echo ""
+          echo "Workflow:"
+          echo "${{ github.workflow }}"
+
+          echo ""
+          echo "Run Number:"
+          echo "${{ github.run_number }}"
+
+          echo ""
+          echo "Event:"
+          echo "${{ github.event_name }}"
+
+          echo ""
+          echo "Scheduled Cron:"
+          echo "${{ github.event.schedule || 'MANUAL RUN' }}"
+
+          echo ""
+          echo "Final Time:"
+          echo "$FINAL_TIME"
+
+          echo ""
+          echo "Repository:"
+          echo "${{ github.repository }}"
+
+          echo ""
+          echo "Branch:"
+          echo "${{ github.ref_name }}"
+
+          echo ""
+          echo "================================================"
+          echo "             WORKFLOW FINISHED"
+          echo "================================================"
