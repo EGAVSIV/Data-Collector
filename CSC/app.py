@@ -8,8 +8,24 @@ from pathlib import Path
 st.set_page_config(page_title="Multi-Timeframe Stock Visualizer", layout="wide")
 st.title("📈 Multi-Timeframe Stock Chart Visualizer")
 
-# 1. Define base directory and timeframe directory mappings
-BASE_DIR = Path(__file__).resolve().parent.parent if (Path(__file__).resolve().parent / "stockdata_D").exists() else Path(__file__).resolve().parent
+# 1. Multi-level fallback to accurately discover repo root
+def locate_repo_root():
+    current_file = Path(__file__).resolve()
+    candidates = [
+        current_file.parent,           # /mount/src/data-collector/CSC
+        current_file.parent.parent,    # /mount/src/data-collector (Repo Root)
+        Path.cwd(),                    # Current working directory
+        Path.cwd().parent              # Parent of CWD
+    ]
+    
+    for candidate in candidates:
+        if (candidate / "stockdata_D").exists():
+            return candidate
+            
+    # Default to parent.parent if folder isn't found yet
+    return current_file.parent.parent
+
+BASE_DIR = locate_repo_root()
 
 TIMEFRAME_FOLDERS = {
     "15-Min": BASE_DIR / "stockdata_15",
@@ -19,53 +35,54 @@ TIMEFRAME_FOLDERS = {
     "Monthly": BASE_DIR / "stockdata_M",
 }
 
-# 2. Get available stock symbols across all timeframe directories
+# Debug section (expandable to inspect active directory paths)
+with st.sidebar.expander("🔍 Directory Diagnostics"):
+    st.write(f"**Repo Root Detected:** `{BASE_DIR}`")
+    for name, path in TIMEFRAME_FOLDERS.items():
+        st.write(f"**{name}:** `{path}` (Exists: `{path.exists()}`)")
+
+# 2. Extract stock symbols from all valid timeframe directories
 @st.cache_data
 def get_available_symbols(folders):
     symbols = set()
     for tf_name, folder_path in folders.items():
         if folder_path.exists():
             for file in folder_path.glob("*.json"):
-                # Extract stock symbol name (e.g., ABB.json -> ABB)
                 symbols.add(file.stem.upper())
     return sorted(list(symbols))
 
 symbols = get_available_symbols(TIMEFRAME_FOLDERS)
 
 if not symbols:
-    st.error("No JSON stock files found in the stockdata folders. Please verify your folder locations.")
+    st.error(f"No JSON stock files found in `{BASE_DIR}`. Open 'Directory Diagnostics' in the sidebar to check folder path locations.")
     st.stop()
 
-# 3. Dropdown Selection for Stock Symbol
+# 3. Dropdown selection for stock symbol
 selected_symbol = st.selectbox("Select Stock Symbol:", symbols)
 
-# 4. Fetch JSON data across all available timeframe folders for the selected symbol
+# 4. Load timeframe datasets for selected symbol
 def load_symbol_timeframes(folders, symbol):
     timeframe_data = {}
     
     for tf_name, folder_path in folders.items():
-        # Match case-insensitively for the symbol
-        file_path = folder_path / f"{symbol}.json"
-        if not file_path.exists():
-            # Fallback search if capitalization differs
-            matches = list(folder_path.glob(f"{symbol}.json")) or list(folder_path.glob(f"{symbol.lower()}.json"))
-            if matches:
-                file_path = matches[0]
-
-        if file_path.exists():
+        if not folder_path.exists():
+            continue
+            
+        # Match case-insensitively for JSON files
+        matches = list(folder_path.glob(f"{symbol}.json")) or list(folder_path.glob(f"{symbol.lower()}.json"))
+        
+        if matches:
+            file_path = matches[0]
             try:
                 with open(file_path, "r") as f:
                     data = json.load(f)
                     
-                    # Convert list or dictionary JSON payload to DataFrame
                     if isinstance(data, dict):
-                        # Handle payloads wrapped under keys like "data" or "candles"
                         data = data.get("data", data.get("candles", data))
                         
                     df = pd.DataFrame(data)
                     df.columns = [col.lower() for col in df.columns]
                     
-                    # Standardize datetime column
                     time_col = next((col for col in ['datetime', 'date', 'time', 'timestamp'] if col in df.columns), None)
                     if time_col:
                         df['datetime'] = pd.to_datetime(df[time_col])
@@ -78,7 +95,7 @@ def load_symbol_timeframes(folders, symbol):
 
 all_timeframes = load_symbol_timeframes(TIMEFRAME_FOLDERS, selected_symbol)
 
-# 5. Display Candlestick Charts in Timeframe Tabs
+# 5. Render charts
 if all_timeframes:
     tf_tabs = st.tabs(list(all_timeframes.keys()))
     
@@ -109,4 +126,4 @@ if all_timeframes:
             with st.expander("View Raw Data"):
                 st.dataframe(df)
 else:
-    st.warning(f"No JSON data found for '{selected_symbol}' across the stockdata folders.")
+    st.warning(f"No JSON data found for symbol '{selected_symbol}'.")
