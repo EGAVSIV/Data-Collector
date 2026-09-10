@@ -3,93 +3,89 @@ import json
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-
-# 1. Set the directory path where your JSON files reside
-
 from pathlib import Path
 
-# Dynamically set the path relative to app.py
-BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "Data"
-
-st.set_page_config(page_title="Stock Timeframe Dashboard", layout="wide")
+st.set_page_config(page_title="Multi-Timeframe Stock Visualizer", layout="wide")
 st.title("📈 Multi-Timeframe Stock Chart Visualizer")
 
-# 2. Get available stock symbols from the Data directory
-def get_available_symbols(directory):
-    if not os.path.exists(directory):
-        return []
-    
-    files = os.listdir(directory)
-    # Extract unique symbol names (assuming filenames like ABB_1D.json, ABB_1H.json, or ABB.json)
+# 1. Define base directory and timeframe directory mappings
+BASE_DIR = Path(__file__).resolve().parent.parent if (Path(__file__).resolve().parent / "stockdata_D").exists() else Path(__file__).resolve().parent
+
+TIMEFRAME_FOLDERS = {
+    "15-Min": BASE_DIR / "stockdata_15",
+    "1-Hour": BASE_DIR / "stockdata_1H",
+    "Daily": BASE_DIR / "stockdata_D",
+    "Weekly": BASE_DIR / "stockdata_W",
+    "Monthly": BASE_DIR / "stockdata_M",
+}
+
+# 2. Get available stock symbols across all timeframe directories
+@st.cache_data
+def get_available_symbols(folders):
     symbols = set()
-    for f in files:
-        if f.endswith('.json'):
-            # Strip extension and split timeframe if present (e.g., ABB_1D -> ABB)
-            symbol_name = f.replace('.json', '').split('_')[0]
-            symbols.add(symbol_name)
-            
+    for tf_name, folder_path in folders.items():
+        if folder_path.exists():
+            for file in folder_path.glob("*.json"):
+                # Extract stock symbol name (e.g., ABB.json -> ABB)
+                symbols.add(file.stem.upper())
     return sorted(list(symbols))
 
-symbols = get_available_symbols(DATA_DIR)
+symbols = get_available_symbols(TIMEFRAME_FOLDERS)
 
 if not symbols:
-    st.error(f"No JSON stock files found in '{DATA_DIR}' directory. Please verify your folder location.")
+    st.error("No JSON stock files found in the stockdata folders. Please verify your folder locations.")
     st.stop()
 
 # 3. Dropdown Selection for Stock Symbol
 selected_symbol = st.selectbox("Select Stock Symbol:", symbols)
 
-# 4. Find all timeframe JSON files related to the selected symbol
-def load_symbol_timeframes(directory, symbol):
+# 4. Fetch JSON data across all available timeframe folders for the selected symbol
+def load_symbol_timeframes(folders, symbol):
     timeframe_data = {}
     
-    for filename in os.listdir(directory):
-        if filename.startswith(symbol) and filename.endswith('.json'):
-            file_path = os.path.join(directory, filename)
-            
-            # Extract timeframe label (e.g., ABB_1D.json -> 1D, ABB.json -> Default)
-            parts = filename.replace('.json', '').split('_')
-            timeframe_label = parts[1] if len(parts) > 1 else "Default"
-            
+    for tf_name, folder_path in folders.items():
+        # Match case-insensitively for the symbol
+        file_path = folder_path / f"{symbol}.json"
+        if not file_path.exists():
+            # Fallback search if capitalization differs
+            matches = list(folder_path.glob(f"{symbol}.json")) or list(folder_path.glob(f"{symbol.lower()}.json"))
+            if matches:
+                file_path = matches[0]
+
+        if file_path.exists():
             try:
-                with open(file_path, 'r') as f:
+                with open(file_path, "r") as f:
                     data = json.load(f)
                     
-                    # Convert JSON to pandas DataFrame
+                    # Convert list or dictionary JSON payload to DataFrame
+                    if isinstance(data, dict):
+                        # Handle payloads wrapped under keys like "data" or "candles"
+                        data = data.get("data", data.get("candles", data))
+                        
                     df = pd.DataFrame(data)
-                    
-                    # Standardize column names (lowercase)
                     df.columns = [col.lower() for col in df.columns]
                     
-                    # Ensure datetime formatting
-                    if 'date' in df.columns:
-                        df['datetime'] = pd.to_datetime(df['date'])
-                    elif 'time' in df.columns:
-                        df['datetime'] = pd.to_datetime(df['time'])
-                    elif 'timestamp' in df.columns:
-                        df['datetime'] = pd.to_datetime(df['timestamp'])
-                        
-                    df = df.sort_values('datetime')
-                    timeframe_data[timeframe_label] = df
+                    # Standardize datetime column
+                    time_col = next((col for col in ['datetime', 'date', 'time', 'timestamp'] if col in df.columns), None)
+                    if time_col:
+                        df['datetime'] = pd.to_datetime(df[time_col])
+                        df = df.sort_values('datetime')
+                        timeframe_data[tf_name] = df
             except Exception as e:
-                st.warning(f"Could not load {filename}: {e}")
+                st.warning(f"Error loading {tf_name} data for {symbol}: {e}")
                 
     return timeframe_data
 
-# Fetch data for selected stock symbol
-all_timeframes = load_symbol_timeframes(DATA_DIR, selected_symbol)
+all_timeframes = load_symbol_timeframes(TIMEFRAME_FOLDERS, selected_symbol)
 
-# 5. Display Charts for Each Timeframe
+# 5. Display Candlestick Charts in Timeframe Tabs
 if all_timeframes:
-    # Allow user to pick which timeframe to view, or show all
     tf_tabs = st.tabs(list(all_timeframes.keys()))
     
     for tab, (tf_name, df) in zip(tf_tabs, all_timeframes.items()):
         with tab:
-            st.subheader(f"{selected_symbol} — {tf_name} Timeframe")
+            st.subheader(f"{selected_symbol} — {tf_name}")
             
-            # Plot Interactive Candlestick Chart
             fig = go.Figure(data=[go.Candlestick(
                 x=df['datetime'],
                 open=df['open'],
@@ -100,8 +96,8 @@ if all_timeframes:
             )])
 
             fig.update_layout(
-                title=f"{selected_symbol} Price Chart ({tf_name})",
-                yaxis_title="Stock Price",
+                title=f"{selected_symbol} ({tf_name})",
+                yaxis_title="Price",
                 xaxis_title="Date / Time",
                 template="plotly_dark",
                 xaxis_rangeslider_visible=False,
@@ -110,8 +106,7 @@ if all_timeframes:
 
             st.plotly_chart(fig, use_container_width=True)
             
-            # Show Raw Data Table optionally
             with st.expander("View Raw Data"):
                 st.dataframe(df)
 else:
-    st.warning(f"No valid JSON data found for symbol '{selected_symbol}'.")
+    st.warning(f"No JSON data found for '{selected_symbol}' across the stockdata folders.")
