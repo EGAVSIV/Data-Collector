@@ -5,10 +5,11 @@ import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
+import streamlit.components.v1 as components
 from pathlib import Path
 
-st.set_page_config(page_title="Multi-Timeframe Stock Visualizer", layout="wide")
-st.title("📈 Multi-Timeframe Quadrant Visualizer (EMA, RSI, MACD & Divergence)")
+st.set_page_config(page_title="Multi-Timeframe Quadrant Analysis", layout="wide")
+st.title("📈 Advanced Multi-Timeframe Quadrant Visualizer")
 
 # 1. Directory Locator
 def locate_repo_root():
@@ -51,10 +52,10 @@ if not symbols:
 
 selected_symbol = st.selectbox("Select Stock Symbol:", symbols)
 
-# 3. Technical Indicator & Divergence Calculations
-def compute_indicators(df):
-    if len(df) < 50:
-        return df
+# 3. Technical Indicators & Normal/Hidden Divergence Detection
+def compute_indicators_and_divergences(df):
+    if len(df) < 30:
+        return df, []
     
     # Calculate EMAs
     df['ema_20'] = df['close'].ewm(span=20, adjust=False).mean()
@@ -74,26 +75,42 @@ def compute_indicators(df):
     df['macd_signal'] = df['macd'].ewm(span=9, adjust=False).mean()
     df['macd_hist'] = df['macd'] - df['macd_signal']
 
-    # Simple Divergence Detection (RSI)
-    df['bullish_div'] = False
-    df['bearish_div'] = False
+    # Divergence Identification Logic (Pivot points comparison)
+    divergences = []
+    window = 5
     
-    for i in range(14, len(df)):
-        # Regular Bullish Divergence: Price making Lower Lows, RSI making Higher Lows
-        if df['close'].iloc[i] < df['close'].iloc[i-5] and df['rsi'].iloc[i] > df['rsi'].iloc[i-5]:
-            if df['rsi'].iloc[i] < 40: # Near oversold condition
-                df.iloc[i, df.columns.get_loc('bullish_div')] = True
-                
-        # Regular Bearish Divergence: Price making Higher Highs, RSI making Lower Highs
-        if df['close'].iloc[i] > df['close'].iloc[i-5] and df['rsi'].iloc[i] < df['rsi'].iloc[i-5]:
-            if df['rsi'].iloc[i] > 60: # Near overbought condition
-                df.iloc[i, df.columns.get_loc('bearish_div')] = True
-                
-    return df
+    for i in range(window * 2, len(df) - window):
+        p1, p2 = i - window, i
+        
+        # Price Lows & RSI Lows
+        price_low_1, price_low_2 = df['low'].iloc[p1], df['low'].iloc[p2]
+        rsi_low_1, rsi_low_2 = df['rsi'].iloc[p1], df['rsi'].iloc[p2]
+        
+        # Price Highs & RSI Highs
+        price_high_1, price_high_2 = df['high'].iloc[p1], df['high'].iloc[p2]
+        rsi_high_1, rsi_high_2 = df['rsi'].iloc[p1], df['rsi'].iloc[p2]
+        
+        # 1. Normal Bullish Divergence (Lower Low in Price, Higher Low in RSI)
+        if price_low_2 < price_low_1 and rsi_low_2 > rsi_low_1:
+            divergences.append({"type": "Normal Bullish", "p1": p1, "p2": p2, "color": "#00FF00"})
+            
+        # 2. Hidden Bullish Divergence (Higher Low in Price, Lower Low in RSI)
+        elif price_low_2 > price_low_1 and rsi_low_2 < rsi_low_1:
+            divergences.append({"type": "Hidden Bullish", "p1": p1, "p2": p2, "color": "#32CD32"})
+            
+        # 3. Normal Bearish Divergence (Higher High in Price, Lower High in RSI)
+        if price_high_2 > price_high_1 and rsi_high_2 < rsi_high_1:
+            divergences.append({"type": "Normal Bearish", "p1": p1, "p2": p2, "color": "#FF0000"})
+            
+        # 4. Hidden Bearish Divergence (Lower High in Price, Higher High in RSI)
+        elif price_high_2 < price_high_1 and rsi_high_2 > rsi_high_1:
+            divergences.append({"type": "Hidden Bearish", "p1": p1, "p2": p2, "color": "#FF6347"})
+            
+    return df, divergences
 
-# 4. Load Data across 4 Timeframes
-def load_quadrant_data(folders, symbol):
-    timeframe_data = {}
+# 4. Data Fetcher
+def load_data(folders, symbol):
+    data_dict = {}
     for tf_name in ["1-Hour", "Daily", "Weekly", "Monthly"]:
         folder_path = folders.get(tf_name)
         if folder_path and folder_path.exists():
@@ -101,94 +118,125 @@ def load_quadrant_data(folders, symbol):
             if matches:
                 try:
                     with open(matches[0], "r") as f:
-                        data = json.load(f)
-                    if isinstance(data, dict):
-                        data = data.get("data", data.get("candles", data))
-                    df = pd.DataFrame(data)
-                    df.columns = [col.lower() for col in df.columns]
+                        raw = json.load(f)
+                    if isinstance(raw, dict):
+                        raw = raw.get("data", raw.get("candles", raw))
+                    df = pd.DataFrame(raw)
+                    df.columns = [c.lower() for c in df.columns]
                     time_col = next((c for c in ['datetime', 'date', 'time', 'timestamp'] if c in df.columns), None)
                     if time_col:
                         df['datetime'] = pd.to_datetime(df[time_col])
                         df = df.sort_values('datetime').reset_index(drop=True)
-                        timeframe_data[tf_name] = compute_indicators(df)
+                        df, divs = compute_indicators_and_divergences(df)
+                        data_dict[tf_name] = (df, divs)
                 except Exception as e:
                     st.warning(f"Error loading {tf_name} for {symbol}: {e}")
-    return timeframe_data
+    return data_dict
 
-quad_data = load_quadrant_data(TIMEFRAME_FOLDERS, selected_symbol)
+data_map = load_data(TIMEFRAME_FOLDERS, selected_symbol)
 
-# 5. Render 4-Panel Quadrant Subplots
-if quad_data:
-    # 2x2 Grid Layout Specs (Each Quadrant has 3 sub-rows: Price, RSI, MACD)
+# 5. Build Quadrant Grid with Individual Subplots for Price, RSI, MACD
+if data_map:
+    # 2x2 Quadrant structure where each Quadrant contains 3 stacked sub-plots:
+    # Subplots layout: 6 rows total, 2 columns
     fig = make_subplots(
-        rows=2, cols=2,
-        subplot_titles=("1-Hour Timeframe", "Daily Timeframe", "Weekly Timeframe", "Monthly Timeframe"),
-        vertical_spacing=0.08,
-        horizontal_spacing=0.05
+        rows=6, cols=2,
+        shared_xaxes=False,
+        vertical_spacing=0.03,
+        horizontal_spacing=0.06,
+        row_heights=[0.22, 0.08, 0.08, 0.22, 0.08, 0.08],
+        subplot_titles=(
+            f"{selected_symbol} - 1-Hour Price", f"{selected_symbol} - Daily Price",
+            "", "", "", "",
+            f"{selected_symbol} - Weekly Price", f"{selected_symbol} - Monthly Price",
+            "", "", "", ""
+        )
     )
-    
-    positions = {
-        "1-Hour": (1, 1),
-        "Daily": (1, 2),
-        "Weekly": (2, 1),
-        "Monthly": (2, 2)
+
+    quad_positions = {
+        "1-Hour":  {"price": 1, "rsi": 2, "macd": 3, "col": 1},
+        "Daily":   {"price": 1, "rsi": 2, "macd": 3, "col": 2},
+        "Weekly":  {"price": 4, "rsi": 5, "macd": 6, "col": 1},
+        "Monthly": {"price": 4, "rsi": 5, "macd": 6, "col": 2},
     }
 
-    for tf_name, (row, col) in positions.items():
-        if tf_name in quad_data:
-            df = quad_data[tf_name]
-            
-            # Candlestick Chart
+    for tf_name, cfg in quad_positions.items():
+        if tf_name in data_map:
+            df, divs = data_map[tf_name]
+            col = cfg["col"]
+            p_row, r_row, m_row = cfg["price"], cfg["rsi"], cfg["macd"]
+
+            # --- Price Chart ---
             fig.add_trace(go.Candlestick(
                 x=df['datetime'], open=df['open'], high=df['high'],
-                low=df['low'], close=df['close'], name=f"{tf_name} Price",
-                showlegend=False
-            ), row=row, col=col)
-            
-            # EMA 20
-            if 'ema_20' in df:
-                fig.add_trace(go.Scatter(
-                    x=df['datetime'], y=df['ema_20'],
-                    line=dict(color='yellow', width=1), name="EMA 20", showlegend=False
-                ), row=row, col=col)
-                
-            # EMA 50
-            if 'ema_50' in df:
-                fig.add_trace(go.Scatter(
-                    x=df['datetime'], y=df['ema_50'],
-                    line=dict(color='cyan', width=1), name="EMA 50", showlegend=False
-                ), row=row, col=col)
-                
-            # Divergence Markers
-            if 'bullish_div' in df and df['bullish_div'].any():
-                bull_df = df[df['bullish_div']]
-                fig.add_trace(go.Scatter(
-                    x=bull_df['datetime'], y=bull_df['low'] * 0.98,
-                    mode='markers', marker=dict(symbol='triangle-up', size=10, color='green'),
-                    name='Bullish Div', showlegend=False
-                ), row=row, col=col)
+                low=df['low'], close=df['close'], name=f"{tf_name} Price", showlegend=False
+            ), row=p_row, col=col)
 
-            if 'bearish_div' in df and df['bearish_div'].any():
-                bear_df = df[df['bearish_div']]
+            # EMAs
+            fig.add_trace(go.Scatter(x=df['datetime'], y=df['ema_20'], line=dict(color='yellow', width=1), name="EMA 20", showlegend=False), row=p_row, col=col)
+            fig.add_trace(go.Scatter(x=df['datetime'], y=df['ema_50'], line=dict(color='cyan', width=1), name="EMA 50", showlegend=False), row=p_row, col=col)
+
+            # --- RSI Subchart ---
+            fig.add_trace(go.Scatter(x=df['datetime'], y=df['rsi'], line=dict(color='purple', width=1.5), name="RSI 14", showlegend=False), row=r_row, col=col)
+            # RSI Overbought/Oversold thresholds
+            fig.add_hline(y=70, line_dash="dash", line_color="red", row=r_row, col=col)
+            fig.add_hline(y=30, line_dash="dash", line_color="green", row=r_row, col=col)
+
+            # --- MACD Subchart ---
+            fig.add_trace(go.Scatter(x=df['datetime'], y=df['macd'], line=dict(color='blue', width=1.2), name="MACD", showlegend=False), row=m_row, col=col)
+            fig.add_trace(go.Scatter(x=df['datetime'], y=df['macd_signal'], line=dict(color='orange', width=1.2), name="Signal", showlegend=False), row=m_row, col=col)
+            
+            # Color MACD Histogram
+            colors = ['green' if val >= 0 else 'red' for val in df['macd_hist']]
+            fig.add_trace(go.Bar(x=df['datetime'], y=df['macd_hist'], marker_color=colors, name="Hist", showlegend=False), row=m_row, col=col)
+
+            # --- Divergence Trendlines (Connecting Price & RSI) ---
+            for div in divs[-8:]: # Display recent detected divergences
+                p1, p2 = div["p1"], div["p2"]
+                c = div["color"]
+                
+                # Draw line on Price Chart
                 fig.add_trace(go.Scatter(
-                    x=bear_df['datetime'], y=bear_df['high'] * 1.02,
-                    mode='markers', marker=dict(symbol='triangle-down', size=10, color='red'),
-                    name='Bearish Div', showlegend=False
-                ), row=row, col=col)
+                    x=[df['datetime'].iloc[p1], df['datetime'].iloc[p2]],
+                    y=[df['close'].iloc[p1], df['close'].iloc[p2]],
+                    mode='lines+markers', line=dict(color=c, width=2, dash='dot'), showlegend=False
+                ), row=p_row, col=col)
+
+                # Draw line on RSI Subchart
+                fig.add_trace(go.Scatter(
+                    x=[df['datetime'].iloc[p1], df['datetime'].iloc[p2]],
+                    y=[df['rsi'].iloc[p1], df['rsi'].iloc[p2]],
+                    mode='lines+markers', line=dict(color=c, width=2, dash='dot'), showlegend=False
+                ), row=r_row, col=col)
 
     fig.update_layout(
-        title=f"Quadrant Technical Analysis: {selected_symbol}",
         template="plotly_dark",
-        height=900,
+        height=1400,
+        margin=dict(l=20, r=20, t=50, b=20),
         xaxis_rangeslider_visible=False,
-        xaxis2_rangeslider_visible=False,
-        xaxis3_rangeslider_visible=False,
-        xaxis4_rangeslider_visible=False
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    # Disable rangesliders across all subplots
+    for i in range(1, 13):
+        fig.update_xaxes(rangeslider_visible=False, row=(i-1)//2 + 1, col=(i-1)%2 + 1)
+
+    # 6. Render as Interactive HTML to enable full Zoom/Pan toolbar controls
+    html_content = fig.to_html(
+        include_plotlyjs="cdn",
+        full_html=False,
+        config={
+            "scrollZoom": True,
+            "displayModeBar": True,
+            "modeBarButtonsToAdd": ["drawline", "eraseshape"],
+            "displaylogo": False
+        }
+    )
+
+    st.subheader("Interactive Quadrant Dashboard (Zoom In / Zoom Out Controls Enabled)")
+    st.info("💡 **Divergence Line Key:** 🟩 **Normal Bullish** | 🟢 **Hidden Bullish** | 🟥 **Normal Bearish** | 🔴 **Hidden Bearish**")
     
-    # Legend Reference
-    st.info("💡 **Chart Indicators Key:** 🟨 **EMA 20** | 🟦 **EMA 50** | 🟢 **Bullish Divergence (Triangle Up)** | 🔴 **Bearish Divergence (Triangle Down)**")
+    # Display HTML Plotly canvas
+    components.html(html_content, height=1450, scrolling=True)
+
 else:
-    st.warning("No quadrant timeframe data found for selected stock.")
+    st.warning("No data found for selected symbol.")
